@@ -347,7 +347,7 @@ function ServiceCard({ icon, title, desc }: { icon: React.ReactNode, title: stri
   return (
     <div className="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgb(0,0,0,0.03)] border border-gray-100 flex flex-col items-start hover:-translate-y-1 hover:shadow-[0_8px_20px_rgb(0,0,0,0.06)] transition-all duration-300 group">
       <div className="w-12 h-12 bg-purple-50 text-purple-700 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-700 group-hover:text-white transition-colors duration-300">
-        {React.cloneElement(icon as React.ReactElement, { size: 24 })}
+        {React.cloneElement(icon as React.ReactElement<{ size: number }>, { size: 24 })}
       </div>
       <h3 className="text-lg font-bold text-[#222] mb-2">{title}</h3>
       <p className="text-gray-600 leading-relaxed text-sm">{desc}</p>
