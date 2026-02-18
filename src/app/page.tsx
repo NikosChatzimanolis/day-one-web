@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { 
   Monitor, 
@@ -19,21 +19,11 @@ import {
 } from 'lucide-react';
 
 export default function DayOneAgencyPage() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  // Smart sticky header scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Handle Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,80 +54,62 @@ export default function DayOneAgencyPage() {
   return (
     <div className="relative min-h-screen text-[#222] font-inter font-normal overflow-x-hidden selection:bg-purple-200 pb-12">
       
-      {/* GLOBAL SMOOTH SCROLLING INJECTION */}
-      <style dangerouslySetInnerHTML={{ __html: `html { scroll-behavior: smooth; }` }} />
+      {/* GLOBAL SMOOTH SCROLLING & SWOOSH ANIMATION INJECTION */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        html { scroll-behavior: smooth; }
+        @keyframes swooshFade {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-swoosh {
+          animation: swooshFade 0.3s ease-out 0.2s forwards;
+          opacity: 0;
+        }
+      ` }} />
 
       {/* ========================================== */}
-      {/* GLOBAL BACKGROUND (Repeating Pattern)      */}
+      {/* GLOBAL BACKGROUND (Faint Diagonal Gradient)  */}
       {/* ========================================== */}
-      <div 
-        className="absolute inset-0 z-[-1] bg-[url('/bg.webp')] bg-repeat bg-auto opacity-100"
-      ></div>
-
-      {/* ========================================== */}
-      {/* FULL WIDTH SMART HEADER (Half Size)        */}
-      {/* ========================================== */}
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-          isScrolled 
-            ? "bg-white/85 backdrop-blur-xl border-b border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] py-1.5 md:py-2" 
-            : "bg-transparent border-transparent shadow-none py-3"
-        }`}
-      >
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between max-w-[1200px]">
-          
-          {/* Logo Area (Always Visible) */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="relative w-7 h-7 group-hover:scale-105 transition-transform duration-300 ease-out">
-              <Image 
-                src="/logo.webp" 
-                alt="Logo" 
-                fill 
-                unoptimized
-                className="object-contain" 
-              />
-            </div>
-          </a>
-
-          {/* Nav & CTA Area (Visible ONLY on scroll) */}
-          <div 
-            className={`flex items-center transition-all duration-500 ease-out ${
-              isScrolled 
-                ? "opacity-100 translate-y-0 pointer-events-auto" 
-                : "opacity-0 -translate-y-1 pointer-events-none"
-            }`}
-          >
-            {/* Nav Links (Desktop) */}
-            <nav className="hidden md:flex items-center gap-4 mr-4">
-              <a href="#services" className="text-xs font-inter font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 ease-out">Services</a>
-              <a href="#work" className="text-xs font-inter font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 ease-out">Work</a>
-              <a href="#contact" className="text-xs font-inter font-medium text-gray-700 hover:text-purple-700 transition-colors duration-300 ease-out">Contact</a>
-            </nav>
-
-            {/* Single Primary CTA */}
-            <a 
-              href="#contact" 
-              className="bg-gradient-to-r from-purple-700 to-purple-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-poppins font-semibold text-xs shadow-[0_4px_14px_rgba(109,40,217,0.15)] hover:shadow-[0_6px_20px_rgba(109,40,217,0.25)] hover:brightness-110 hover:-translate-y-[1px] transition-all duration-300 ease-out whitespace-nowrap"
-            >
-              Get a free mockup
-            </a>
-          </div>
-        </div>
-      </header>
+      <div className="fixed inset-0 z-[-2] bg-gradient-to-br from-[#F7F7FA] to-[#EEE9FF]"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-purple-500/15 rounded-full blur-[120px] pointer-events-none z-[-1]"></div>
 
       {/* Main Container */}
-      <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-24 lg:pt-32 flex flex-col gap-12 lg:gap-16 max-w-[1200px]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-12 lg:pt-20 flex flex-col gap-12 lg:gap-16 max-w-[1200px]">
 
         {/* ========================================== */}
         {/* 1. HERO SECTION                            */}
         {/* ========================================== */}
         <section className="bg-white/85 backdrop-blur-xl rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-8 lg:p-16 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             
             {/* Left Text */}
             <div className="w-full lg:w-1/2">
               <h1 className="text-[32px] md:text-5xl lg:text-[64px] font-poppins font-semibold text-[#222] leading-[1.1] mb-6 tracking-tight">
-                Everything your business needs online.
+                Everything your business needs{' '}
+                <span className="relative inline-block">
+                  online
+                  {/* Subtle Gradient Swoosh Underline */}
+                  <svg 
+                    className="absolute left-0 -bottom-1 md:-bottom-2 w-full h-[10px] md:h-[14px] animate-swoosh" 
+                    viewBox="0 0 200 20" 
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <linearGradient id="swooshGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#9333ea" /> {/* Purple */}
+                        <stop offset="100%" stopColor="#3b82f6" /> {/* Secondary Blue */}
+                      </linearGradient>
+                    </defs>
+                    <path 
+                      d="M 4 15 Q 100 2 196 15" 
+                      fill="none" 
+                      stroke="url(#swooshGradient)" 
+                      strokeWidth="5" 
+                      strokeLinecap="round" 
+                    />
+                  </svg>
+                </span>.
               </h1>
               <p className="text-gray-700 text-lg mb-4 max-w-md leading-relaxed font-inter font-normal">
                 Websites, social media, branding, and content creation — all in one place.
@@ -149,7 +121,7 @@ export default function DayOneAgencyPage() {
               <div className="flex flex-col items-start gap-3">
                 <a 
                   href="#contact" 
-                  className="w-full sm:w-auto text-center bg-gradient-to-r from-purple-700 to-purple-600 text-white px-8 py-4 rounded-[12px] font-poppins font-semibold text-[16px] shadow-[0_4px_14px_rgba(109,40,217,0.15)] hover:shadow-[0_6px_20px_rgba(109,40,217,0.25)] hover:brightness-110 hover:-translate-y-[2px] transition-all duration-300 ease-out"
+                  className="w-full sm:w-auto text-center bg-gradient-to-r from-purple-700 to-purple-600 text-white px-8 py-4 rounded-[12px] font-poppins font-semibold text-[16px] shadow-[0_4px_14px_rgba(109,40,217,0.15)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.25)] hover:from-purple-600 hover:to-[#3b82f6] hover:-translate-y-[2px] transition-all duration-300 ease-out"
                 >
                   Request a free mockup
                 </a>
@@ -159,9 +131,9 @@ export default function DayOneAgencyPage() {
               </div>
             </div>
 
-            {/* Right Hero Image - Shifted slightly to the right */}
-            <div className="w-full lg:w-1/2 relative h-[350px] lg:h-[450px] flex items-center justify-center lg:justify-end">
-              <div className="relative w-full max-w-md aspect-square rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-[6px] border-white/80 bg-white lg:translate-x-4">
+            {/* Right Hero Image */}
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
+              <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] aspect-[4/5] rounded-[32px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border-[8px] border-white/80 bg-white lg:translate-x-4">
                  <Image 
                    src="/hero.webp" 
                    alt="Digital Presence" 
@@ -242,7 +214,7 @@ export default function DayOneAgencyPage() {
                    unoptimized 
                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
                  />
-                 <div className="absolute inset-0 bg-purple-900/0 group-hover:bg-purple-900/10 transition-colors duration-500 ease-out flex items-center justify-center">
+                 <div className="absolute inset-0 bg-[#3b82f6]/0 group-hover:bg-[#3b82f6]/10 transition-colors duration-500 ease-out flex items-center justify-center">
                     <Search className="text-white opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-500 ease-out" size={28} />
                  </div>
               </div>
@@ -250,7 +222,7 @@ export default function DayOneAgencyPage() {
                 <span className="text-[12px] font-inter font-semibold text-gray-400 uppercase tracking-wide block mb-2">
                   Website
                 </span>
-                <h3 className="text-[18px] md:text-[20px] font-poppins font-semibold text-[#222] mb-2">
+                <h3 className="text-[18px] md:text-[20px] font-poppins font-semibold text-[#222] mb-2 group-hover:text-[#3b82f6] transition-colors duration-300">
                   Project 1
                 </h3>
                 <p className="text-gray-600 font-inter font-normal text-[15px] leading-[1.6]">
@@ -269,7 +241,7 @@ export default function DayOneAgencyPage() {
                    unoptimized 
                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
                  />
-                 <div className="absolute inset-0 bg-purple-900/0 group-hover:bg-purple-900/10 transition-colors duration-500 ease-out flex items-center justify-center">
+                 <div className="absolute inset-0 bg-[#3b82f6]/0 group-hover:bg-[#3b82f6]/10 transition-colors duration-500 ease-out flex items-center justify-center">
                     <Search className="text-white opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-500 ease-out" size={28} />
                  </div>
               </div>
@@ -277,7 +249,7 @@ export default function DayOneAgencyPage() {
                 <span className="text-[12px] font-inter font-semibold text-gray-400 uppercase tracking-wide block mb-2">
                   Website & Branding
                 </span>
-                <h3 className="text-[18px] md:text-[20px] font-poppins font-semibold text-[#222] mb-2">
+                <h3 className="text-[18px] md:text-[20px] font-poppins font-semibold text-[#222] mb-2 group-hover:text-[#3b82f6] transition-colors duration-300">
                   Project 2
                 </h3>
                 <p className="text-gray-600 font-inter font-normal text-[15px] leading-[1.6]">
@@ -300,9 +272,21 @@ export default function DayOneAgencyPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl mx-auto relative">
             <div className="hidden md:block absolute top-8 left-1/6 right-1/6 h-px bg-gray-200 -z-10"></div>
             
-            <ProcessStep num="1" title="Understand your business" desc="We discuss your goals, target audience, and current digital footprint." />
-            <ProcessStep num="2" title="Design your presence" desc="We create your free mockup, followed by full development and setup." />
-            <ProcessStep num="3" title="Launch and support" desc="Your business goes live, and we stay on board to manage and grow it." />
+            <ProcessStep 
+              num="1" 
+              title="Deeply understand your vision" 
+              desc="We take the time to understand your goals, audience, positioning, and long-term vision — building a clear foundation before any work begins." 
+            />
+            <ProcessStep 
+              num="2" 
+              title="Develop a tailored strategy" 
+              desc="We design a structured plan and digital presence tailored specifically to your business — aligning brand, messaging, and growth objectives." 
+            />
+            <ProcessStep 
+              num="3" 
+              title="Build, launch, and grow with you" 
+              desc="We bring your strategy to life with precision, launch confidently, and remain available for ongoing support and optimization." 
+            />
           </div>
         </section>
 
@@ -400,18 +384,18 @@ export default function DayOneAgencyPage() {
               </ul>
               
               <div className="hidden lg:flex flex-col gap-6 mt-12">
-                 <div className="flex items-center gap-4 group">
-                   <div className="bg-purple-100 p-3.5 rounded-2xl text-purple-700 group-hover:scale-110 transition-transform duration-300 ease-out"><Phone size={20} /></div>
+                 <div className="flex items-center gap-4 group cursor-pointer">
+                   <div className="bg-purple-100 p-3.5 rounded-2xl text-purple-700 group-hover:text-[#3b82f6] group-hover:bg-blue-50 group-hover:scale-110 transition-all duration-300 ease-out"><Phone size={20} /></div>
                    <div>
                      <p className="text-[14px] text-gray-500 font-medium mb-1">Call us</p>
-                     <a href="tel:+35796254148" className="text-[18px] font-inter font-semibold text-[#222] hover:text-purple-700 transition-colors duration-300 ease-out">+357 96254148</a>
+                     <a href="tel:+35796254148" className="text-[18px] font-inter font-semibold text-[#222] group-hover:text-[#3b82f6] transition-colors duration-300 ease-out">+357 96254148</a>
                    </div>
                  </div>
-                 <div className="flex items-center gap-4 group">
-                   <div className="bg-purple-100 p-3.5 rounded-2xl text-purple-700 group-hover:scale-110 transition-transform duration-300 ease-out"><Mail size={20} /></div>
+                 <div className="flex items-center gap-4 group cursor-pointer">
+                   <div className="bg-purple-100 p-3.5 rounded-2xl text-purple-700 group-hover:text-[#3b82f6] group-hover:bg-blue-50 group-hover:scale-110 transition-all duration-300 ease-out"><Mail size={20} /></div>
                    <div>
                      <p className="text-[14px] text-gray-500 font-medium mb-1">Email us</p>
-                     <a href="mailto:hello@dayone.agency" className="text-[18px] font-inter font-semibold text-[#222] hover:text-purple-700 transition-colors duration-300 ease-out">hello@dayone.agency</a>
+                     <a href="mailto:contact@dayone-web.com" className="text-[18px] font-inter font-semibold text-[#222] group-hover:text-[#3b82f6] transition-colors duration-300 ease-out">contact@dayone-web.com</a>
                    </div>
                  </div>
               </div>
@@ -430,7 +414,7 @@ export default function DayOneAgencyPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       disabled={formStatus === 'loading'}
-                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-purple-600 focus:border-purple-600 outline-none transition-all duration-300 ease-out disabled:opacity-50" 
+                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] outline-none transition-all duration-300 ease-out disabled:opacity-50" 
                       required 
                     />
                   </div>
@@ -441,7 +425,7 @@ export default function DayOneAgencyPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       disabled={formStatus === 'loading'}
-                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-purple-600 focus:border-purple-600 outline-none transition-all duration-300 ease-out disabled:opacity-50" 
+                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] outline-none transition-all duration-300 ease-out disabled:opacity-50" 
                       required 
                     />
                   </div>
@@ -452,7 +436,7 @@ export default function DayOneAgencyPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       disabled={formStatus === 'loading'}
-                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-purple-600 focus:border-purple-600 outline-none transition-all duration-300 ease-out resize-none disabled:opacity-50" 
+                      className="w-full font-inter border border-gray-200 bg-gray-50 p-3.5 rounded-[12px] focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] outline-none transition-all duration-300 ease-out resize-none disabled:opacity-50" 
                       required
                     ></textarea>
                   </div>
@@ -460,8 +444,8 @@ export default function DayOneAgencyPage() {
                   <button 
                     type="submit" 
                     disabled={formStatus === 'loading' || formStatus === 'success'}
-                    className={`w-full text-white font-poppins font-semibold py-4 rounded-[12px] shadow-[0_4px_14px_rgba(109,40,217,0.15)] hover:shadow-[0_6px_20px_rgba(109,40,217,0.25)] transition-all duration-300 ease-out text-[16px] mt-2 flex items-center justify-center gap-2
-                      ${formStatus === 'success' ? 'bg-green-500 hover:bg-green-500' : 'bg-gradient-to-r from-purple-700 to-purple-600 hover:brightness-110 hover:-translate-y-[2px]'}
+                    className={`w-full text-white font-poppins font-semibold py-4 rounded-[12px] shadow-[0_4px_14px_rgba(109,40,217,0.15)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.25)] transition-all duration-300 ease-out text-[16px] mt-2 flex items-center justify-center gap-2
+                      ${formStatus === 'success' ? 'bg-green-500 hover:bg-green-500' : 'bg-gradient-to-r from-purple-700 to-purple-600 hover:from-purple-600 hover:to-[#3b82f6] hover:-translate-y-[2px]'}
                       ${formStatus === 'error' ? 'bg-red-500 hover:bg-red-500 from-red-500 to-red-500' : ''}
                       ${formStatus === 'loading' ? 'opacity-70 cursor-not-allowed hover:-translate-y-0' : ''}
                     `}
@@ -488,13 +472,13 @@ export default function DayOneAgencyPage() {
 
               {/* Mobile Only Direct Contact */}
               <div className="lg:hidden flex flex-col gap-4 mt-6 border-t border-gray-200 pt-6">
-                 <a href="tel:+35796254148" className="flex items-center gap-4 text-[16px] font-inter font-semibold text-[#222]">
+                 <a href="tel:+35796254148" className="flex items-center gap-4 text-[16px] font-inter font-semibold text-[#222] hover:text-[#3b82f6] transition-colors duration-300 ease-out">
                    <div className="bg-purple-100 p-2.5 rounded-full text-purple-700"><Phone size={18} /></div>
                    +357 96254148
                  </a>
-                 <a href="mailto:hello@dayone.agency" className="flex items-center gap-4 text-[16px] font-inter font-semibold text-[#222]">
+                 <a href="mailto:contact@dayone-web.com" className="flex items-center gap-4 text-[16px] font-inter font-semibold text-[#222] hover:text-[#3b82f6] transition-colors duration-300 ease-out">
                    <div className="bg-purple-100 p-2.5 rounded-full text-purple-700"><Mail size={18} /></div>
-                   hello@dayone.agency
+                   contact@dayone-web.com
                  </a>
               </div>
 
@@ -505,9 +489,9 @@ export default function DayOneAgencyPage() {
         {/* ========================================== */}
         {/* SMALL FLOATING FOOTER                      */}
         {/* ========================================== */}
-        <footer className="bg-white/85 backdrop-blur-xl rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-white/60 py-6 px-8 sm:px-12 relative z-10 text-center flex flex-col items-center max-w-fit mx-auto mt-4 mb-8 transition-transform duration-500 ease-out hover:-translate-y-1">
-          <div className="flex items-center justify-center mb-2">
-            <div className="relative w-10 h-10 md:w-12 md:h-12">
+        <footer className="bg-white/85 backdrop-blur-xl rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-white/60 py-8 px-8 sm:px-12 relative z-10 text-center flex flex-col items-center max-w-fit mx-auto mt-4 mb-8 transition-transform duration-500 ease-out hover:-translate-y-1">
+          <div className="flex items-center justify-center mb-4">
+            <div className="relative w-12 h-12 md:w-30 md:h-14">
               <Image 
                 src="/logo.webp" 
                 alt="Logo" 
@@ -517,11 +501,11 @@ export default function DayOneAgencyPage() {
               />
             </div>
           </div>
-          <p className="text-gray-500 font-inter font-normal text-[13px] mb-1">Everything your business needs online.</p>
-          <p className="text-gray-400 font-inter font-medium text-[12px] mb-4">Currently serving clients in Cyprus and Greece.</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 text-[13px] font-inter font-semibold text-gray-700">
-            <a href="mailto:hello@dayone.agency" className="hover:text-purple-700 transition-colors duration-300 ease-out">hello@dayone.agency</a>
-            <a href="tel:+35796254148" className="hover:text-purple-700 transition-colors duration-300 ease-out">+357 96254148</a>
+          <p className="text-gray-500 font-inter font-normal text-[15px] md:text-[16px] mb-2">Everything your business needs online.</p>
+          <p className="text-gray-400 font-inter font-medium text-[14px] md:text-[15px] mb-6">Currently serving clients in Cyprus and Greece.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 text-[15px] md:text-[16px] font-inter font-semibold text-gray-700">
+            <a href="mailto:contact@dayone-web.com" className="hover:text-[#3b82f6] transition-colors duration-300 ease-out">contact@dayone-web.com</a>
+            <a href="tel:+35796254148" className="hover:text-[#3b82f6] transition-colors duration-300 ease-out">+357 96254148</a>
           </div>
         </footer>
 
@@ -538,7 +522,7 @@ export default function DayOneAgencyPage() {
           <div className="relative w-full max-w-5xl aspect-[4/3] md:aspect-video rounded-[24px] overflow-hidden shadow-2xl cursor-default bg-white scale-100 transition-transform duration-300 ease-out" onClick={e => e.stopPropagation()}>
             <Image src={modalImage} alt="Portfolio Enlarge" fill unoptimized className="object-contain" />
             <button 
-              className="absolute top-4 right-4 bg-gray-900/50 hover:bg-gray-900 p-2 rounded-full text-white transition-colors duration-300 ease-out"
+              className="absolute top-4 right-4 bg-gray-900/50 hover:bg-[#3b82f6] p-2 rounded-full text-white transition-colors duration-300 ease-out"
               onClick={() => setModalImage(null)}
             >
               <X size={20} />
@@ -557,13 +541,13 @@ function ServiceCard({ icon, title, desc, highlight = false }: { icon: React.Rea
   return (
     <div className={`rounded-[20px] p-8 flex flex-col items-start transition-all duration-300 ease-out group ${
       highlight 
-        ? "bg-gradient-to-br from-purple-50/90 to-[#f5f0ff]/90 border border-purple-200 shadow-[0_8px_30px_rgba(109,40,217,0.12)] hover:-translate-y-[4px] hover:shadow-[0_12px_40px_rgba(109,40,217,0.22)] ring-1 ring-purple-100" 
-        : "bg-white border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:-translate-y-[4px] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]"
+        ? "bg-gradient-to-br from-purple-50/90 to-[#f5f0ff]/90 border border-purple-200 shadow-[0_8px_30px_rgba(109,40,217,0.12)] hover:-translate-y-[4px] hover:shadow-[0_12px_40px_rgba(59,130,246,0.15)] ring-1 ring-purple-100" 
+        : "bg-white border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:-translate-y-[4px] hover:shadow-[0_12px_32px_rgba(59,130,246,0.08)]"
     }`}>
-      <div className={`w-12 h-12 rounded-[12px] flex items-center justify-center mb-5 transition-colors duration-300 ease-out ${
+      <div className={`w-12 h-12 rounded-[12px] flex items-center justify-center mb-5 transition-all duration-300 ease-out ${
         highlight
-          ? "bg-gradient-to-br from-purple-600 to-purple-400 text-white shadow-inner"
-          : "bg-purple-50 text-purple-700 group-hover:bg-purple-700 group-hover:text-white"
+          ? "bg-gradient-to-br from-purple-600 to-[#3b82f6] text-white shadow-inner"
+          : "bg-purple-50 text-purple-700 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-[#3b82f6] group-hover:text-white group-hover:shadow-[0_4px_12px_rgba(59,130,246,0.25)]"
       }`}>
         {React.cloneElement(icon as React.ReactElement<{ size: number }>, { size: 24 })}
       </div>
