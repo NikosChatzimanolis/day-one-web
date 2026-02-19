@@ -231,12 +231,14 @@ export default function DayOneAgencyPage() {
         <div className="container mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between max-w-[1200px]">
           
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="relative w-9 h-9 md:w-10 md:h-10 group-hover:scale-105 transition-transform duration-300 ease-out">
+          <a href="#" className="flex items-center gap-2 group shrink-0">
+            <div className="relative group-hover:scale-105 transition-transform duration-300 ease-out">
               <img 
                 src="/logo.webp" 
                 alt="Day One Logo" 
-                className="w-full h-full object-contain" 
+                /* 👇 BYPASSING TAILWIND: Forcing exact pixel width here 👇 */
+                style={{ width: '125px', height: 'auto' }} 
+                className="object-contain" 
               />
             </div>
           </a>
@@ -574,8 +576,13 @@ export default function DayOneAgencyPage() {
         {/* ========================================== */}
         <footer className="bg-white/85 backdrop-blur-xl rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-white/60 py-8 px-8 sm:px-12 relative z-10 text-center flex flex-col items-center max-w-fit mx-auto mt-4 mb-8 transition-transform duration-500 ease-out hover:-translate-y-1">
           <div className="flex items-center justify-center mb-4">
-            <div className="relative w-12 h-12 md:w-30 md:h-14">
-              <img src="/logo.webp" alt="Logo" className="w-full h-full object-contain" />
+            <div className="relative w-40 sm:w-48 md:w-64 group-hover:scale-105 transition-transform duration-300 ease-out">
+              <img 
+                src="/logo.webp" 
+                alt="Day One Logo" 
+                /* Changed h-full to h-auto */
+                className="w-auto h-auto object-contain" 
+              />
             </div>
           </div>
           <p className="text-gray-500 font-inter font-normal text-[15px] md:text-[16px] mb-2">{txt.footer.p1}</p>
