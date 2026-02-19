@@ -576,7 +576,7 @@ export default function DayOneAgencyPage() {
         {/* ========================================== */}
         <footer className="bg-white/85 backdrop-blur-xl rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-white/60 py-8 px-8 sm:px-12 relative z-10 text-center flex flex-col items-center max-w-fit mx-auto mt-4 mb-8 transition-transform duration-500 ease-out hover:-translate-y-1">
           <div className="flex items-center justify-center mb-4">
-            <div className="relative w-40 sm:w-48 md:w-64 group-hover:scale-105 transition-transform duration-300 ease-out">
+            <div className="relative w-40 sm:w-24 md:w-32 group-hover:scale-105 transition-transform duration-300 ease-out">
               <img 
                 src="/logo.webp" 
                 alt="Day One Logo" 
