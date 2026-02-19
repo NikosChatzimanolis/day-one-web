@@ -327,13 +327,14 @@ export default function DayOneAgencyPage() {
               </div>
             </div>
 
-            {/* Right Hero Image */}
-            <div className="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
-              <div className="relative w-full max-w-[380px] sm:max-w-[450px] lg:max-w-[500px] aspect-[4/3] lg:translate-x-4">
+            {/* Right Hero Image - INCREASED SIZE */}
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-end mt-8 lg:mt-0 lg:pl-10">
+              {/* 👇 ADDED lg:translate-x-12 TO THIS LINE 👇 */}
+              <div className="relative w-full max-w-[450px] sm:max-w-[550px] lg:max-w-[650px] lg:translate-x-12">
                  <img 
                    src="/hero.webp" 
                    alt="Digital Presence" 
-                   className="w-full h-full object-contain"
+                   className="w-full h-auto object-contain scale-110 md:scale-125 lg:scale-[1.7] lg:origin-right transition-transform duration-500"
                  />
               </div>
             </div>
