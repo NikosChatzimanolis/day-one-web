@@ -73,8 +73,36 @@ export default function DayOneAgencyPage() {
       <div className="fixed inset-0 z-[-2] bg-gradient-to-br from-[#F7F7FA] to-[#EEE9FF]"></div>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-purple-500/15 rounded-full blur-[120px] pointer-events-none z-[-1]"></div>
 
+      {/* ========================================== */}
+      {/* STATIC HEADER                              */}
+      {/* ========================================== */}
+      <header className="w-full pt-6 pb-2 relative z-50">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between max-w-[1200px]">
+          
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="relative w-9 h-9 md:w-20 md:h-10 group-hover:scale-105 transition-transform duration-300 ease-out">
+              <Image 
+                src="/logo.webp" 
+                alt="Day One Logo" 
+                fill 
+                unoptimized
+                className="object-contain" 
+              />
+            </div>
+          </a>
+
+          {/* Navigation */}
+          <nav className="flex items-center gap-5 md:gap-8">
+            <a href="#services" className="text-[14px] md:text-[15px] font-inter font-medium text-gray-600 hover:text-[#3b82f6] transition-colors duration-300 ease-out">Services</a>
+            <a href="#work" className="text-[14px] md:text-[15px] font-inter font-medium text-gray-600 hover:text-[#3b82f6] transition-colors duration-300 ease-out">Work</a>
+            <a href="#contact" className="text-[14px] md:text-[15px] font-inter font-medium text-gray-600 hover:text-[#3b82f6] transition-colors duration-300 ease-out">Contact</a>
+          </nav>
+        </div>
+      </header>
+
       {/* Main Container */}
-      <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-12 lg:pt-20 flex flex-col gap-12 lg:gap-16 max-w-[1200px]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 pt-6 lg:pt-10 flex flex-col gap-12 lg:gap-16 max-w-[1200px]">
 
         {/* ========================================== */}
         {/* 1. HERO SECTION                            */}
@@ -131,15 +159,15 @@ export default function DayOneAgencyPage() {
               </div>
             </div>
 
-            {/* Right Hero Image */}
+            {/* Right Hero Image - No border, no background, just the clean image */}
             <div className="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
-              <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] aspect-[4/5] rounded-[32px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border-[8px] border-white/80 bg-white lg:translate-x-4">
+              <div className="relative w-full max-w-[380px] sm:max-w-[450px] lg:max-w-[500px] aspect-[4/4] lg:translate-x-4">
                  <Image 
                    src="/hero.webp" 
                    alt="Digital Presence" 
                    fill
                    unoptimized
-                   className="object-cover"
+                   className="object-contain"
                  />
               </div>
             </div>
