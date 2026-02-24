@@ -24,28 +24,54 @@ const t = {
   en: {
     nav: { services: "Services", work: "Work", contact: "Contact" },
     hero: {
-      title1: "Everything your business needs ",
+      title1: "A clear, modern website for your business ",
       titleHighlight: "online",
       title2: ".",
-      desc: "Websites, social media, branding, and content creation — all in one place.",
-      sub: "Start small. Grow when you're ready.",
+      desc: "We design and build simple, fast websites for small businesses in Cyprus and Greece, then connect them with the tools you already use.",
+      sub: "A small team that handles design, build, and updates with you, step by step.",
       cta: "Request a free mockup",
-      note: "We’ll contact you to discuss your project and prepare a free preview."
+      note: "We’ll ask a few questions, put together a simple mockup, and send you a preview before you decide anything."
     },
     services: {
-      sectionTitle: "What we do",
-      s1: { title: "Website Development", desc: "Modern, high-performance websites built to convert and grow with your business." },
-      s2: { title: "Social Media Management", desc: "Strategic content and management to grow your audience and strengthen your presence." },
-      s3: { title: "Google Presence", desc: "Optimization to improve local visibility and attract the right customers." },
-      s4: { title: "Photography & Editing", desc: "Our in-house photographer provides professional visuals and editing tailored to your brand." },
-      s5: { title: "Brand Strategy", desc: "Clear positioning and brand identity built for long-term impact." },
-      s6: { title: "Designed for Your Brand", desc: "We take the time to understand your business and shape every detail around your goals. The result is a polished, professional presence that feels premium and built specifically for you." }
+      sectionTitle: "What we can take off your plate",
+      s1: {
+        title: "Website Development",
+        desc: "Small, fast websites with clear sections: who you are, what you do, proof of work, and a simple way to contact you."
+      },
+      s2: {
+        title: "Social Media Management",
+        desc: "We plan your monthly posts, write the captions, and send everything to you for approval before publishing."
+      },
+      s3: {
+        title: "Google Presence",
+        desc: "We set up or fix your Google Business profile, add photos, basic SEO, and make sure people can actually find you."
+      },
+      s4: {
+        title: "Photography & Editing",
+        desc: "On-location photos of your space, team, or products, edited to look clean and consistent across your website and socials."
+      },
+      s5: {
+        title: "Brand Strategy",
+        desc: "We help you pick a tone, colors, and simple rules so your website, posts, and messages feel like they come from the same place."
+      },
+      s6: {
+        title: "Designed around your day-to-day",
+        desc: "We start from how you actually work — calls, WhatsApp, email — and design your online presence around that, not the other way round."
+      }
     },
     work: {
       sectionTitle: "Current projects",
       note: "(showcased with the permission of the client)",
-      p1: { tag: "Website", title: "Opostofantastikes.gr", desc: "A modern landing page presenting the client’s services, portfolio, and contact details, designed to showcase their work and make it easy for potential customers to get in touch." },
-      p2: { tag: "Website & Branding", title: "Idees kai Luseis", desc: "A modern website presenting the client’s renovation services and completed work, combined with full social media and branding support to strengthen and elevate the business’s online presence." }
+      p1: {
+        tag: "Website",
+        title: "Opostofantastikes.gr",
+        desc: "In-progress website for an event planner focused mainly on weddings. The goal is a simple one-page site with an 'about me' section, a clear list of services, and an easy way to get in touch, so potential clients can quickly understand her style and send an enquiry."
+      },
+      p2: {
+        tag: "Website & Branding",
+        title: "Idees kai Luseis",
+        desc: "Ongoing website and light rebrand for a renovation company in Greece. We’re structuring their services into clear packages, planning a before-and-after gallery, and aligning the website with their social media so everything feels consistent as they grow."
+      }
     },
     process: {
       sectionTitle: "How it works",
@@ -58,15 +84,15 @@ const t = {
       p1: { title: "Website projects", desc: "Starting from " },
       p2: { title: "Social media & branding", desc: "Pricing provided after consultation" },
       p3: { title: "Ongoing support / retainers", desc: "Available upon request" },
-      note: "Every project is different. Final pricing is confirmed after a short consultation."
+      note: "Most one-page websites with 4–6 sections, mobile-friendly design, and a simple contact form start from €350 and adjust based on content and extra features."
     },
     about: {
       badge: "Turning ideas into real digital products.",
       title: "About Day One",
-      p1: "Websites, branding, and social media — done for you.",
-      p2: "We help businesses build a professional online presence without the usual stress or high upfront costs. Whether you're starting from scratch or improving what you already have, we focus on solutions that deliver real, practical results.",
-      p3: "We don’t just design — we bring ideas to life. From rough concepts to a finished website or brand, we turn ideas into tools your business can actually use and grow with.",
-      p4: "Our approach is simple: we handle the technical and creative work, so you can focus on running your business. We aim to be a reliable, single point of contact for everything digital, starting small and scaling when you're ready."
+      p1: "Day One is a small studio that designs and builds websites for small businesses in Cyprus and Greece.",
+      p2: "Most of our projects start from something unfinished: a half‑built Wix or WordPress site, a logo in a folder somewhere, and a few screenshots of what you like. That’s usually enough. We help you turn that into a clear, complete website and a simple plan for your online presence.",
+      p3: "We prefer short calls, clear examples, and early drafts instead of long documents. You see work in progress quickly, give feedback, and we adjust together.",
+      p4: "We’re not trying to be a big agency. We focus on a small number of projects at a time, stay reachable on WhatsApp and email, and aim for websites you’re happy to share and can actually keep up to date."
     },
     contact: {
       title: "Let’s talk about your project",
@@ -95,28 +121,54 @@ const t = {
   el: {
     nav: { services: "Υπηρεσίες", work: "Έργα", contact: "Επικοινωνία" },
     hero: {
-      title1: "Όλα όσα χρειάζεται η επιχείρησή σας ",
+      title1: "Μια καθαρή, σύγχρονη ιστοσελίδα για την επιχείρησή σας ",
       titleHighlight: "online",
       title2: ".",
-      desc: "Ιστοσελίδες, social media, branding και δημιουργία περιεχομένου — όλα σε ένα μέρος.",
-      sub: "Ξεκινήστε έξυπνα. Αναπτυχθείτε σταδιακά.",
+      desc: "Σχεδιάζουμε και υλοποιούμε απλές, γρήγορες ιστοσελίδες για μικρές επιχειρήσεις σε Κύπρο και Ελλάδα, συνδεδεμένες με τα εργαλεία που ήδη χρησιμοποιείτε.",
+      sub: "Μια μικρή ομάδα που αναλαμβάνει σχεδιασμό, υλοποίηση και ενημερώσεις μαζί σας, βήμα‑βήμα.",
       cta: "Ζητήστε δωρεάν προσχέδιο",
-      note: "Θα επικοινωνήσουμε μαζί σας για να συζητήσουμε το έργο σας και να ετοιμάσουμε ένα δωρεάν προσχέδιο προσαρμοσμένο στις ανάγκες της επιχείρησής σας."
+      note: "Θα σας κάνουμε μερικές βασικές ερωτήσεις, θα ετοιμάσουμε ένα απλό προσχέδιο και θα σας το στείλουμε πριν χρειαστεί να αποφασίσετε οτιδήποτε."
     },
     services: {
-      sectionTitle: "Τι κάνουμε",
-      s1: { title: "Κατασκευή Ιστοσελίδων", desc: "Σύγχρονες, γρήγορες και αποδοτικές ιστοσελίδες, σχεδιασμένες να φέρνουν αποτελέσματα και να εξελίσσονται μαζί με την επιχείρησή σας." },
-      s2: { title: "Διαχείριση Social Media", desc: "Στρατηγικό περιεχόμενο και διαχείριση για να αυξήσετε το κοινό σας και να ενισχύσετε την παρουσία σας." },
-      s3: { title: "Παρουσία στη Google", desc: "Βελτιστοποίηση για μεγαλύτερη τοπική προβολή και προσέλκυση των σωστών πελατών." },
-      s4: { title: "Φωτογράφιση & Επεξεργασία", desc: "Επαγγελματικές φωτογραφίες και επεξεργασία προσαρμοσμένες στο brand σας." },
-      s5: { title: "Στρατηγική Brand", desc: "Ξεκάθαρη τοποθέτηση και ταυτότητα σχεδιασμένη για μακροχρόνια ανάπτυξη." },
-      s6: { title: "Σχεδιασμένο για την επιχείρησή σας", desc: "Αφιερώνουμε χρόνο για να κατανοήσουμε την επιχείρησή σας και διαμορφώνουμε κάθε λεπτομέρεια γύρω από τους στόχους σας. Το αποτέλεσμα είναι μια προσεγμένη, επαγγελματική παρουσία, σχεδιασμένη αποκλειστικά για εσάς." }
+      sectionTitle: "Τι μπορούμε να αναλάβουμε για εσάς",
+      s1: {
+        title: "Κατασκευή Ιστοσελίδων",
+        desc: "Μικρές, γρήγορες ιστοσελίδες με ξεκάθαρες ενότητες: ποιοι είστε, τι προσφέρετε, δείγματα δουλειάς και ένας απλός τρόπος επικοινωνίας."
+      },
+      s2: {
+        title: "Διαχείριση Social Media",
+        desc: "Σχεδιάζουμε το μηνιαίο περιεχόμενο, γράφουμε τα κείμενα και σας τα στέλνουμε για έγκριση πριν δημοσιευτούν."
+      },
+      s3: {
+        title: "Παρουσία στη Google",
+        desc: "Στήνουμε ή διορθώνουμε το Google Business προφίλ σας, προσθέτουμε φωτογραφίες, βασικό SEO και φροντίζουμε να μπορούν να σας βρουν εύκολα."
+      },
+      s4: {
+        title: "Φωτογράφιση & Επεξεργασία",
+        desc: "Φωτογραφίσεις στον χώρο σας ή των προϊόντων σας, επεξεργασμένες ώστε να φαίνονται καθαρές και σταθερές σε ιστοσελίδα και social media."
+      },
+      s5: {
+        title: "Στρατηγική Brand",
+        desc: "Βοηθάμε να ορίσετε ύφος, χρώματα και απλούς κανόνες ώστε ιστοσελίδα, αναρτήσεις και μηνύματα να μοιάζουν ότι προέρχονται από το ίδιο brand."
+      },
+      s6: {
+        title: "Σχεδιασμένο γύρω από την καθημερινότητά σας",
+        desc: "Ξεκινάμε από τον τρόπο που ήδη δουλεύετε — κλήσεις, WhatsApp, email — και προσαρμόζουμε την online παρουσία σας σε αυτό, όχι το αντίθετο."
+      }
     },
     work: {
       sectionTitle: "Τρέχοντα έργα",
       note: "(παρουσιάζονται με την άδεια του πελάτη)",
-      p1: { tag: "Ιστοσελίδα", title: "Opostofantastikes.gr", desc: "Μια σύγχρονη landing page που παρουσιάζει τις υπηρεσίες, το portfolio και τα στοιχεία επικοινωνίας του πελάτη, σχεδιασμένη ώστε να αναδεικνύει τη δουλειά του και να διευκολύνει την επικοινωνία με νέους πελάτες." },
-      p2: { tag: "Ιστοσελίδα & Branding", title: "Idees kai Luseis", desc: "Σύγχρονη ιστοσελίδα για υπηρεσίες ανακαινίσεων και ολοκληρωμένα έργα, σε συνδυασμό με πλήρη υποστήριξη social media και branding, με στόχο την ενίσχυση και αναβάθμιση της online παρουσίας της επιχείρησης." }
+      p1: {
+        tag: "Ιστοσελίδα",
+        title: "Opostofantastikes.gr",
+        desc: "Υπό κατασκευή ιστοσελίδα για event planner με κύρια εστίαση σε γάμους. Στόχος είναι μια απλή μονοσέλιδη ιστοσελίδα με ενότητες 'σχετικά με εμένα', ξεκάθαρες υπηρεσίες και εύκολο τρόπο επικοινωνίας, ώστε οι ενδιαφερόμενοι να καταλαβαίνουν γρήγορα το στυλ της και να στέλνουν αίτημα."
+      },
+      p2: {
+        tag: "Ιστοσελίδα & Branding",
+        title: "Idees kai Luseis",
+        desc: "Σε εξέλιξη ιστοσελίδα και ελαφρύ rebrand για εταιρεία ανακαινίσεων στην Ελλάδα. Δομούμε τις υπηρεσίες σε ξεκάθαρα πακέτα, σχεδιάζουμε gallery με before‑after φωτογραφίες και φροντίζουμε η εικόνα της επιχείρησης σε ιστοσελίδα και social media να είναι ενιαία καθώς αναπτύσσεται."
+      }
     },
     process: {
       sectionTitle: "Πώς λειτουργεί",
@@ -129,15 +181,15 @@ const t = {
       p1: { title: "Κατασκευή ιστοσελίδας", desc: "Από " },
       p2: { title: "Social media & branding", desc: "Τιμή κατόπιν συνεννόησης" },
       p3: { title: "Συνεχής υποστήριξη / συνεργασίες", desc: "Διαθέσιμα κατόπιν αιτήματος" },
-      note: "Κάθε έργο είναι διαφορετικό. Η τελική τιμή επιβεβαιώνεται μετά από μια σύντομη συζήτηση."
+      note: "Οι περισσότερες μονοσέλιδες ιστοσελίδες με 4–6 ενότητες, mobile‑friendly σχεδιασμό και φόρμα επικοινωνίας ξεκινούν από €350 και προσαρμόζονται ανάλογα με το περιεχόμενο και τις επιπλέον ανάγκες."
     },
     about: {
       badge: "Μετατρέπουμε ιδέες σε πραγματικά ψηφιακά προϊόντα.",
       title: "Σχετικά με το Day One",
-      p1: "Ιστοσελίδες, branding και social media — αναλαμβάνονται από εμάς.",
-      p2: "Βοηθάμε επιχειρήσεις να δημιουργήσουν μια επαγγελματική online παρουσία χωρίς περιττό άγχος ή υψηλό αρχικό κόστος. Είτε ξεκινάτε από την αρχή είτε αναβαθμίζετε ό,τι ήδη έχετε, εστιάζουμε σε λύσεις που φέρνουν ουσιαστικά και πρακτικά αποτελέσματα.",
-      p3: "Δεν σχεδιάζουμε απλώς — δίνουμε ζωή στις ιδέες. Από ένα αρχικό concept μέχρι ένα ολοκληρωμένο website ή brand, μετατρέπουμε τις ιδέες σε εργαλεία που η επιχείρησή σας μπορεί να αξιοποιήσει και να εξελίξει.",
-      p4: "Η προσέγγισή μας είναι απλή: αναλαμβάνουμε το τεχνικό και δημιουργικό κομμάτι, ώστε εσείς να επικεντρώνεστε στην ανάπτυξη της επιχείρησής σας. Στόχος μας είναι να αποτελούμε ένα αξιόπιστο, ενιαίο σημείο αναφοράς για οτιδήποτε αφορά την ψηφιακή σας παρουσία."
+      p1: "Το Day One είναι ένα μικρό στούντιο που σχεδιάζει και υλοποιεί ιστοσελίδες για μικρές επιχειρήσεις σε Κύπρο και Ελλάδα.",
+      p2: "Τα περισσότερα έργα ξεκινούν από κάτι μισοτελειωμένο: μια ημιτελή ιστοσελίδα σε Wix ή WordPress, ένα λογότυπο κάπου σε έναν φάκελο και μερικά screenshots με ιδέες. Αυτό συνήθως είναι αρκετό. Βοηθάμε να το μετατρέψετε σε μια καθαρή, ολοκληρωμένη ιστοσελίδα και ένα απλό πλάνο για την online παρουσία σας.",
+      p3: "Προτιμάμε σύντομες κλήσεις, ξεκάθαρα παραδείγματα και πρώιμα προσχέδια αντί για μεγάλα έγγραφα. Βλέπετε τη δουλειά σε εξέλιξη νωρίς, δίνετε σχόλια και προσαρμοζόμαστε μαζί.",
+      p4: "Δεν προσπαθούμε να γίνουμε μεγάλο agency. Εστιάζουμε σε λίγα έργα κάθε φορά, μένουμε διαθέσιμοι σε WhatsApp και email και στοχεύουμε σε ιστοσελίδες που θα χαίρεστε να δείχνετε και μπορείτε πραγματικά να διατηρείτε ενημερωμένες."
     },
     contact: {
       title: "Ας μιλήσουμε για το έργο σας",
@@ -436,7 +488,7 @@ export default function DayOneAgencyPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 max-w-5xl mx-auto md:divide-x divide-gray-200 mb-8">
              <div className="flex flex-col items-center justify-start text-center px-4 md:px-8">
                <h3 className="text-[18px] font-poppins font-semibold text-[#222] mb-2">{txt.pricing.p1.title}</h3>
-               <p className="text-gray-600 font-inter font-normal text-[15px]">{txt.pricing.p1.desc}<span className="font-inter font-semibold text-purple-700">€250</span></p>
+               <p className="text-gray-600 font-inter font-normal text-[15px]">{txt.pricing.p1.desc}<span className="font-inter font-semibold text-purple-700">€350</span></p>
              </div>
              <div className="flex flex-col items-center justify-start text-center px-4 md:px-8">
                <h3 className="text-[18px] font-poppins font-semibold text-[#222] mb-2">{txt.pricing.p2.title}</h3>
