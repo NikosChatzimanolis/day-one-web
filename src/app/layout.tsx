@@ -15,7 +15,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Day One Agency",
+  title: "Day One",
   description: "Everything your business needs online.",
   icons: {
     icon: "/favicon.ico",
