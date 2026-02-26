@@ -17,6 +17,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Day One Agency",
   description: "Everything your business needs online.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
