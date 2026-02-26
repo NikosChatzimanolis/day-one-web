@@ -314,11 +314,51 @@ const t = {
   }
 };
 
+const LANG_STORAGE_KEY = 'dayone-lang';
+type Lang = 'en' | 'el' | 'ru';
+
+function getDetectedLang(): Lang {
+  if (typeof window === 'undefined') return 'en';
+  const preferred = navigator.languages?.[0] ?? navigator.language ?? '';
+  if (preferred.startsWith('el')) return 'el';
+  if (preferred.startsWith('ru')) return 'ru';
+  return 'en';
+}
+
+function getStoredLang(): Lang | null {
+  if (typeof window === 'undefined') return null;
+  const stored = localStorage.getItem(LANG_STORAGE_KEY);
+  if (stored === 'en' || stored === 'el' || stored === 'ru') return stored;
+  return null;
+}
+
 export default function DayOneAgencyPage() {
   const [modalImage, setModalImage] = useState<string | null>(null);
   
-  // Language State
-  const [lang, setLang] = useState<'en' | 'el' | 'ru'>('en');
+  // Language State: prefer saved choice, else browser language, else en
+  const [lang, setLangState] = useState<Lang>(() => {
+    if (typeof window === 'undefined') return 'en';
+    const stored = getStoredLang();
+    if (stored) return stored;
+    return getDetectedLang();
+  });
+
+  // Persist language when user switches, and sync initial from storage/detection (for SSR → client hydration)
+  React.useEffect(() => {
+    const stored = getStoredLang();
+    if (stored) {
+      setLangState(stored);
+      return;
+    }
+    const detected = getDetectedLang();
+    setLangState(detected);
+  }, []);
+
+  const setLang = (next: Lang) => {
+    setLangState(next);
+    if (typeof window !== 'undefined') localStorage.setItem(LANG_STORAGE_KEY, next);
+  };
+
   const txt = t[lang]; // Active translation dictionary
 
   // Form State
@@ -532,10 +572,10 @@ export default function DayOneAgencyPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             
-            {/* Project 1 */}
-            <div className="flex flex-col gap-5 group cursor-pointer" onClick={() => setModalImage('/1.webp')}>
-              <div className="relative aspect-[4/3] rounded-[16px] overflow-hidden shadow-[0_4px_14px_rgba(0,0,0,0.05)] border border-gray-100 group-hover:-translate-y-2 transition-all duration-500 ease-out">
-                 <img src="/1.webp" alt="Project 1" className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+            {/* Project 1 - Live site embed + link */}
+            <a href="https://opostofantastikes.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-5 group cursor-pointer block">
+              <div className="relative aspect-[4/3] rounded-[16px] overflow-hidden shadow-[0_4px_14px_rgba(0,0,0,0.05)] border border-gray-100 group-hover:-translate-y-2 transition-all duration-500 ease-out bg-gray-50">
+                 <iframe src="https://opostofantastikes.vercel.app/" title={txt.work.p1.title} className="w-full h-full min-h-[240px] pointer-events-none border-0" />
                  <div className="absolute inset-0 bg-[#3b82f6]/0 group-hover:bg-[#3b82f6]/10 transition-colors duration-500 ease-out flex items-center justify-center">
                     <Search className="text-white opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-500 ease-out" size={28} />
                  </div>
@@ -545,7 +585,7 @@ export default function DayOneAgencyPage() {
                 <h3 className="text-[18px] md:text-[20px] font-poppins font-semibold text-[#222] mb-2 group-hover:text-[#3b82f6] transition-colors duration-300">{txt.work.p1.title}</h3>
                 <p className="text-gray-600 font-inter font-normal text-[15px] leading-[1.6]">{txt.work.p1.desc}</p>
               </div>
-            </div>
+            </a>
 
             {/* Project 2 */}
             <div className="flex flex-col gap-5 group cursor-pointer" onClick={() => setModalImage('/2.webp')}>
