@@ -380,7 +380,7 @@ function GeometricPhotoPlaceholder() {
 // ─── Panel content components ─────────────────────────────────────────────────
 
 function HeroLeft() {
-  const { unlock, goTo } = useScrollContext()
+  const { goTo } = useScrollContext()
   const shouldReduceMotion = useReducedMotion()
 
   const headline = 'Your first great website.'
@@ -473,10 +473,7 @@ function HeroLeft() {
           href="#contact"
           onClick={(e) => {
             e.preventDefault()
-            unlock()
-            requestAnimationFrame(() =>
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-            )
+            goTo(4)
           }}
           className="inline-flex items-center justify-center px-6 py-3 font-body font-[500] text-sm text-white bg-accent rounded-sm hover:bg-accent-dark transition-colors duration-250"
         >

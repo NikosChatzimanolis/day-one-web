@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import type { ProcessStep } from '@/types'
 import SectionWrapper from '@/components/ui/SectionWrapper'
+import { useScrollContext } from '@/context/ScrollContext'
 
 const steps: ProcessStep[] = [
   {
@@ -52,6 +53,7 @@ const stepVariants: Variants = {
 
 export default function HowItWorks() {
   const shouldReduceMotion = useReducedMotion()
+  const { goTo } = useScrollContext()
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-80px' })
 
@@ -137,7 +139,7 @@ export default function HowItWorks() {
               className="inline-flex items-center gap-2 px-7 py-3.5 font-body font-[500] text-sm bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250 flex-shrink-0"
               onClick={(e) => {
                 e.preventDefault()
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+                goTo(4)
               }}
             >
               Get a free mockup

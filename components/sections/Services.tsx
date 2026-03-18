@@ -7,6 +7,7 @@ import { Globe, Search, Palette, Camera, Share2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Service } from '@/types'
 import SectionWrapper from '@/components/ui/SectionWrapper'
+import { useScrollContext } from '@/context/ScrollContext'
 
 const services: Service[] = [
   {
@@ -80,6 +81,7 @@ const cardVariants: Variants = {
 
 function ServiceCard({ service }: { service: Service }) {
   const shouldReduceMotion = useReducedMotion()
+  const { goTo } = useScrollContext()
   const IconComponent = iconMap[service.icon as keyof typeof iconMap]
 
   if (service.featured) {
@@ -135,7 +137,7 @@ function ServiceCard({ service }: { service: Service }) {
             className="inline-flex items-center gap-2 font-body text-sm font-[500] text-accent hover:gap-3 transition-all duration-200"
             onClick={(e) => {
               e.preventDefault()
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+              goTo(4)
             }}
           >
             Start a project

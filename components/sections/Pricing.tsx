@@ -7,6 +7,7 @@ import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { PricingTier } from '@/types'
 import SectionWrapper from '@/components/ui/SectionWrapper'
+import { useScrollContext } from '@/context/ScrollContext'
 
 const tiers: PricingTier[] = [
   {
@@ -81,10 +82,11 @@ const cardVariants: Variants = {
 
 function PricingCard({ tier }: { tier: PricingTier }) {
   const shouldReduceMotion = useReducedMotion()
+  const { goTo } = useScrollContext()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+    goTo(4)
   }
 
   return (
@@ -201,6 +203,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
 
 export default function Pricing() {
   const shouldReduceMotion = useReducedMotion()
+  const { goTo } = useScrollContext()
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-80px' })
 
@@ -248,7 +251,7 @@ export default function Pricing() {
               className="text-accent hover:underline"
               onClick={(e) => {
                 e.preventDefault()
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+                goTo(4)
               }}
             >
               Questions? Just ask.

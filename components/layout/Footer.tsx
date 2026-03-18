@@ -18,24 +18,17 @@ const footerLinks = [
 const NAV_INDEX: Record<string, number> = {
   '#services': 1,
   '#pricing':  3,
+  '#contact':  4,
 }
 
 export default function Footer() {
   const [activeLang, setActiveLang] = useState<Language>('EN')
-  const { goTo, unlock } = useScrollContext()
+  const { goTo } = useScrollContext()
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault()
-    if (href === '#contact') {
-      unlock()
-      // Scroll to contact section after unlock removes scroll-locked class
-      requestAnimationFrame(() =>
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-      )
-    } else {
-      const idx = NAV_INDEX[href]
-      if (idx !== undefined) goTo(idx)
-    }
+    const idx = NAV_INDEX[href]
+    if (idx !== undefined) goTo(idx)
   }
 
   return (
