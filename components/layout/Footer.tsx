@@ -27,8 +27,14 @@ export default function Footer() {
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault()
-    const idx = NAV_INDEX[href]
-    if (idx !== undefined) goTo(idx)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+    if (isMobile) {
+      const id = href === '#contact' ? 'about' : href.slice(1)
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      const idx = NAV_INDEX[href]
+      if (idx !== undefined) goTo(idx)
+    }
   }
 
   return (

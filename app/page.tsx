@@ -497,7 +497,7 @@ function HeroLeft() {
 
 function HeroRight() {
   return (
-    <div className="relative flex items-center justify-center min-h-full bg-bg overflow-hidden">
+    <div className="relative hidden md:flex items-center justify-center min-h-full bg-bg overflow-hidden">
       {/* Gradient mesh */}
       <div
         className="absolute inset-0 gradient-mesh"

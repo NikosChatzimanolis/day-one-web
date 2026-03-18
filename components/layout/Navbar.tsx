@@ -57,8 +57,14 @@ function NavLinkItem({
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     onClose?.()
-    const idx = NAV_INDEX[link.href]
-    if (idx !== undefined) goTo(idx)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+    if (isMobile) {
+      const id = link.href === '#contact' ? 'about' : link.href.slice(1)
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      const idx = NAV_INDEX[link.href]
+      if (idx !== undefined) goTo(idx)
+    }
   }
 
   return (
@@ -149,7 +155,12 @@ export default function Navbar() {
                 className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
                 onClick={(e) => {
                   e.preventDefault()
-                  goTo(4)
+                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+                  if (isMobile) {
+                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+                  } else {
+                    goTo(4)
+                  }
                 }}
               >
                 Free mockup
@@ -217,8 +228,14 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault()
                         setIsOpen(false)
-                        const idx = NAV_INDEX[link.href]
-                        if (idx !== undefined) goTo(idx)
+                        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+                        if (isMobile) {
+                          const id = link.href === '#contact' ? 'about' : link.href.slice(1)
+                          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+                        } else {
+                          const idx = NAV_INDEX[link.href]
+                          if (idx !== undefined) goTo(idx)
+                        }
                       }}
                     >
                       {link.label}
@@ -241,7 +258,12 @@ export default function Navbar() {
                     onClick={(e) => {
                       e.preventDefault()
                       setIsOpen(false)
-                      goTo(4)
+                      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+                      if (isMobile) {
+                        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+                      } else {
+                        goTo(4)
+                      }
                     }}
                   >
                     Get a free mockup
