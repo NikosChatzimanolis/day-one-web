@@ -20,6 +20,7 @@ const NAV_INDEX: Record<string, number> = {
   '#services': 1,
   '#pricing':  3,
   '#about':    4,
+  '#contact':  4,
 }
 
 const drawerVariants: Variants = {
@@ -48,25 +49,16 @@ function NavLinkItem({
   link,
   onClose,
   goTo,
-  unlock,
 }: {
   link: NavLink
   onClose?: () => void
   goTo: (i: number) => void
-  unlock: () => void
 }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     onClose?.()
-    if (link.href === '#contact') {
-      unlock()
-      requestAnimationFrame(() =>
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-      )
-    } else {
-      const idx = NAV_INDEX[link.href]
-      if (idx !== undefined) goTo(idx)
-    }
+    const idx = NAV_INDEX[link.href]
+    if (idx !== undefined) goTo(idx)
   }
 
   return (
@@ -90,7 +82,7 @@ function NavLinkItem({
 export default function Navbar() {
   const shouldReduceMotion = useReducedMotion()
   const [isOpen, setIsOpen] = useState(false)
-  const { currentIndex, goTo, unlock } = useScrollContext()
+  const { currentIndex, goTo } = useScrollContext()
 
   // scrolled = any section beyond Hero
   const scrolled = currentIndex > 0
@@ -146,7 +138,7 @@ export default function Navbar() {
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
               {navLinks.map((link) => (
-                <NavLinkItem key={link.href} link={link} goTo={goTo} unlock={unlock} />
+                <NavLinkItem key={link.href} link={link} goTo={goTo} />
               ))}
             </nav>
 
@@ -157,10 +149,7 @@ export default function Navbar() {
                 className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
                 onClick={(e) => {
                   e.preventDefault()
-                  unlock()
-                  requestAnimationFrame(() =>
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                  )
+                  goTo(4)
                 }}
               >
                 Free mockup
@@ -228,15 +217,8 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault()
                         setIsOpen(false)
-                        if (link.href === '#contact') {
-                          unlock()
-                          requestAnimationFrame(() =>
-                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                          )
-                        } else {
-                          const idx = NAV_INDEX[link.href]
-                          if (idx !== undefined) goTo(idx)
-                        }
+                        const idx = NAV_INDEX[link.href]
+                        if (idx !== undefined) goTo(idx)
                       }}
                     >
                       {link.label}
@@ -259,10 +241,7 @@ export default function Navbar() {
                     onClick={(e) => {
                       e.preventDefault()
                       setIsOpen(false)
-                      unlock()
-                      requestAnimationFrame(() =>
-                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                      )
+                      goTo(4)
                     }}
                   >
                     Get a free mockup
