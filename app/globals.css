@@ -1,0 +1,364 @@
+/* ── app/globals.css ── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   Design Token System — CSS Custom Properties
+───────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg: #F7F4EF;
+  --color-surface: #F0EBE3;
+  --color-text: #1A1A18;
+  --color-text-secondary: #6B6660;
+  --color-accent: #C4522A;
+  --color-accent-dark: #9C3D1C;
+  --color-border: #E0D9D0;
+  --color-dark: #1A1A18;
+  --color-dark-surface: #242420;
+  --color-dark-border: #333330;
+  --color-dark-text-secondary: #9C9790;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* Border radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Section spacing */
+  --section-padding-y: 7rem;
+  --section-padding-x: 1.5rem;
+}
+
+/* ─────────────────────────────────────────
+   Base Styles
+───────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────
+   Custom Scrollbar
+───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: background var(--duration-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg);
+}
+
+/* ─────────────────────────────────────────
+   Typography Base
+───────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────
+   Hero Clip-Path — Diagonal cut at bottom
+───────────────────────────────────────── */
+.hero-clip {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+/* On mobile, softer cut */
+@media (max-width: 768px) {
+  .hero-clip {
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+  }
+}
+
+/* ─────────────────────────────────────────
+   Section Label Style
+───────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ─────────────────────────────────────────
+   Dark Section
+───────────────────────────────────────── */
+.section-dark {
+  background-color: var(--color-dark);
+  color: #F7F4EF;
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+  color: #F7F4EF;
+}
+
+.section-dark p {
+  color: var(--color-dark-text-secondary);
+}
+
+/* ─────────────────────────────────────────
+   Animated Gradient Mesh (Hero background)
+───────────────────────────────────────── */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(196, 82, 42, 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(196, 82, 42, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(240, 235, 227, 0.4) 0%, transparent 70%);
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────
+   CSS Grid Subgrid support for services
+───────────────────────────────────────── */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+
+  .services-grid > *:nth-child(1) {
+    grid-column: 1 / 7;
+    grid-row: 1 / 3;
+  }
+
+  .services-grid > *:nth-child(2) {
+    grid-column: 7 / 10;
+  }
+
+  .services-grid > *:nth-child(3) {
+    grid-column: 10 / 13;
+  }
+
+  .services-grid > *:nth-child(4) {
+    grid-column: 7 / 10;
+  }
+
+  .services-grid > *:nth-child(5) {
+    grid-column: 10 / 13;
+  }
+}
+
+/* ─────────────────────────────────────────
+   Browser Frame Mockup (Portfolio)
+───────────────────────────────────────── */
+.browser-frame {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(26, 26, 24, 0.12);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.browser-frame-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.browser-frame-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.browser-frame-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-border);
+  margin-left: 8px;
+}
+
+/* ─────────────────────────────────────────
+   Focus Styles
+───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─────────────────────────────────────────
+   Selection
+───────────────────────────────────────── */
+::selection {
+  background-color: rgba(196, 82, 42, 0.15);
+  color: var(--color-text);
+}
+
+/* ─────────────────────────────────────────
+   Smooth scroll polyfill for nav links
+───────────────────────────────────────── */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* ─────────────────────────────────────────
+   Utility classes
+───────────────────────────────────────── */
+.container-wide {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--section-padding-x);
+}
+
+@media (min-width: 640px) {
+  .container-wide {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-wide {
+    padding-inline: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-wide {
+    padding-inline: 4rem;
+  }
+}
+
+.section-py {
+  padding-block: var(--section-padding-y);
+}
+
+/* ─────────────────────────────────────────
+   Print styles
+───────────────────────────────────────── */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ─────────────────────────────────────────
+   Scroll-Locked Split Panel Layout
+───────────────────────────────────────── */
+html.scroll-locked,
+html.scroll-locked body,
+html.scroll-locked main {
+  overflow: hidden;
+  height: 100svh;
+}
+
+.panel-half {
+  position: relative;
+  width: 100%;
+  height: 50svh;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .panel-half {
+    height: 100%;
+    flex: 0 0 var(--panel-width, 50%);
+    width: var(--panel-width, 50%);
+  }
+}
