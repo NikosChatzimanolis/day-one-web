@@ -32,6 +32,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Day One Studio', url: 'https://dayone-web.com' }],
   creator: 'Day One Studio',
+  alternates: {
+    canonical: 'https://dayone-web.com',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
       'Fast, professional websites for small businesses in Cyprus and Greece. Free mockup before you decide. From €350.',
     images: [
       {
-        url: 'https://dayone-web.com/og-image.jpg',
+        url: 'https://dayone-web.com/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Day One — Website Studio',
@@ -53,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Day One — Website Studio for Cyprus & Greece',
     description: 'Fast, professional websites for small businesses. Free mockup before you decide.',
-    images: ['https://dayone-web.com/og-image.jpg'],
+    images: ['https://dayone-web.com/opengraph-image'],
   },
   robots: {
     index: true,

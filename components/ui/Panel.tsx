@@ -51,6 +51,7 @@ export default function Panel({
   if (isFull) {
     return (
       <motion.div
+        id={section?.id}
         className="absolute inset-0"
         style={{ background: section?.bg }}
         initial={shouldReduceMotion ? undefined : { y: fromY }}
@@ -68,7 +69,7 @@ export default function Panel({
   // Split panel — each half slides in from its own edge.
   // onSettled is attached to the RIGHT half — it has a 0.15s stagger so it settles last.
   return (
-    <div className="absolute inset-0 flex flex-col md:flex-row">
+    <div id={section?.id} className="absolute inset-0 flex flex-col md:flex-row">
       {/* Left half — enters from left edge, exits to left edge */}
       <motion.div
         className="panel-half"
