@@ -2,6 +2,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import { Globe, Search, Palette, Camera, Share2, ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -473,7 +474,12 @@ function HeroLeft() {
           href="#contact"
           onClick={(e) => {
             e.preventDefault()
-            goTo(4)
+            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+            if (isMobile) {
+              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+            } else {
+              goTo(5)
+            }
           }}
           className="inline-flex items-center justify-center px-6 py-3 font-body font-[500] text-sm text-white bg-accent rounded-sm hover:bg-accent-dark transition-colors duration-250"
         >
@@ -616,70 +622,66 @@ function WorkLeft() {
         Recent work
       </motion.p>
       <motion.h2
-        className="font-display text-3xl md:text-4xl font-[400] text-text-primary leading-tight mb-5"
+        className="font-display text-3xl md:text-4xl font-[400] text-text-primary leading-tight mb-4"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        Sites we&apos;ve built
+        Ta Pinakia
       </motion.h2>
       <motion.p
         className="font-body text-sm text-text-secondary leading-relaxed mb-8 max-w-xs"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        Small teams, real businesses, live and working.
+        A modern restaurant website with online reservations, bilingual menu, and mobile-first design — built in two weeks.
       </motion.p>
-
-      <motion.ul className="flex flex-col gap-5" variants={shouldReduceMotion ? undefined : containerVariants}>
-        {projects.map((project, i) => (
-          <motion.li
-            key={project.id}
-            className="flex flex-col gap-1.5"
-            variants={shouldReduceMotion ? undefined : itemVariants}
-          >
-            <div className="flex items-center gap-2">
-              <span className="font-body text-xs text-text-secondary/50 font-[500]">0{i + 1}</span>
-              <a
-                href={project.url !== '#' ? project.url : undefined}
-                target={project.url !== '#' ? '_blank' : undefined}
-                rel={project.url !== '#' ? 'noopener noreferrer' : undefined}
-                className={cn(
-                  'font-display text-lg font-[400] text-text-primary leading-tight',
-                  project.url !== '#' ? 'hover:text-accent transition-colors duration-200' : ''
-                )}
-              >
-                {project.name}
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-1.5 ml-5">
-              {project.tags.map((tag) => (
-                <span key={tag} className="inline-flex px-2 py-0.5 rounded-sm bg-surface border border-border font-body text-xs text-text-secondary">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.li>
+      <motion.div className="flex flex-wrap gap-2 mb-10" variants={shouldReduceMotion ? undefined : itemVariants}>
+        {['Next.js 14', 'Tailwind CSS', 'Framer Motion'].map(tag => (
+          <span key={tag} className="inline-block px-3 py-1 text-xs border border-border text-text-secondary rounded-full">
+            {tag}
+          </span>
         ))}
-      </motion.ul>
+      </motion.div>
+      <motion.div variants={shouldReduceMotion ? undefined : itemVariants}>
+        <Link
+          href="/work/tapinakia"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-sm rounded-sm hover:bg-accent-dark transition-colors duration-250"
+        >
+          View project →
+        </Link>
+      </motion.div>
     </motion.div>
   )
 }
 
 function WorkRight() {
-  const shouldReduceMotion = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
-
   return (
-    <div ref={ref} className="min-h-full bg-surface overflow-hidden px-5 pt-24 pb-10">
-      <motion.div
-        className="flex flex-col gap-5"
-        variants={shouldReduceMotion ? undefined : containerVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </motion.div>
+    <div className="relative flex items-center justify-center min-h-full bg-surface overflow-hidden px-8 pt-16 pb-10">
+      {/* Browser chrome mockup with live scaled iframe */}
+      <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-2xl border border-border">
+        {/* Title bar */}
+        <div className="bg-[#E8E3DC] px-4 py-2.5 flex items-center gap-2 flex-shrink-0">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+            <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+            <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+          </div>
+          <div className="flex-1 mx-3 bg-white/60 rounded px-3 py-1 text-xs text-text-secondary truncate font-mono">
+            dayone-web.com/work/tapinakia
+          </div>
+        </div>
+        {/* Live scaled iframe — 900px viewport scaled to ~360px display */}
+        <Link href="/work/tapinakia" className="block relative overflow-hidden" style={{ height: 240 }}>
+          <div style={{ width: 900, height: 600, transform: 'scale(0.4)', transformOrigin: 'top left', pointerEvents: 'none' }}>
+            <iframe
+              src="/preview/tapinakia/index.html"
+              style={{ width: '100%', height: '100%', border: 0 }}
+              title="Ta Pinakia preview"
+              tabIndex={-1}
+            />
+          </div>
+          {/* Clickable overlay */}
+          <div className="absolute inset-0 cursor-pointer hover:bg-accent/5 transition-colors" />
+        </Link>
+      </div>
     </div>
   )
 }
@@ -780,6 +782,7 @@ const PANELS = [
   { left: <HeroLeft />,     right: <HeroRight /> },
   { left: <ServicesLeft />, right: <ServicesRight /> },
   { children: <HowItWorks /> },
+  { left: <WorkLeft />,     right: <WorkRight /> },
   { children: <Pricing /> },
   { left: <AboutLeft />,    right: <AboutRight /> },
 ]

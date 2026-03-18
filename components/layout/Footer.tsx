@@ -10,6 +10,7 @@ type Language = typeof languages[number]
 
 const footerLinks = [
   { label: 'Services', href: '#services' },
+  { label: 'Work',     href: '#work' },
   { label: 'Pricing',  href: '#pricing' },
   { label: 'Contact',  href: '#contact' },
 ]
@@ -17,8 +18,9 @@ const footerLinks = [
 // Map hrefs to panel indices — mirrors Navbar's NAV_INDEX
 const NAV_INDEX: Record<string, number> = {
   '#services': 1,
-  '#pricing':  3,
-  '#contact':  4,
+  '#work':     3,
+  '#pricing':  4,
+  '#contact':  5,
 }
 
 export default function Footer() {

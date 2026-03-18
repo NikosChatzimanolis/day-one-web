@@ -15,6 +15,7 @@ export const SECTIONS: SectionDef[] = [
   { id: 'hero',          label: 'Hero',          type: 'split', bg: '#F7F4EF', splitRatio: [55, 45] },
   { id: 'services',      label: 'Services',      type: 'split', bg: '#F7F4EF', splitRatio: [40, 60] },
   { id: 'how-it-works',  label: 'How it works',  type: 'full',  bg: '#1A1A18' },
+  { id: 'work',          label: 'Work',          type: 'split', bg: '#F7F4EF', splitRatio: [50, 50] },
   { id: 'pricing',       label: 'Pricing',       type: 'full',  bg: '#F0EBE3' },
   { id: 'about',         label: 'About',         type: 'split', bg: '#F7F4EF', splitRatio: [45, 55] },
 ]

@@ -10,6 +10,7 @@ import { useScrollContext } from '@/context/ScrollContext'
 
 const navLinks: NavLink[] = [
   { label: 'Services', href: '#services' },
+  { label: 'Work',     href: '#work' },
   { label: 'Pricing',  href: '#pricing' },
   { label: 'About',    href: '#about' },
   { label: 'Contact',  href: '#contact' },
@@ -18,9 +19,10 @@ const navLinks: NavLink[] = [
 // Map nav hrefs to section indices in the scroll system
 const NAV_INDEX: Record<string, number> = {
   '#services': 1,
-  '#pricing':  3,
-  '#about':    4,
-  '#contact':  4,
+  '#work':     3,
+  '#pricing':  4,
+  '#about':    5,
+  '#contact':  5,
 }
 
 const drawerVariants: Variants = {
@@ -159,7 +161,7 @@ export default function Navbar() {
                   if (isMobile) {
                     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
                   } else {
-                    goTo(4)
+                    goTo(5)
                   }
                 }}
               >
@@ -262,7 +264,7 @@ export default function Navbar() {
                       if (isMobile) {
                         document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
                       } else {
-                        goTo(4)
+                        goTo(5)
                       }
                     }}
                   >
