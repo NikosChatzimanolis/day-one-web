@@ -23,7 +23,7 @@ export default function SplitLayout({ panels, after }: SplitLayoutProps) {
 
   const setRef = useCallback(
     (index: number) => (el: HTMLElement | null) => {
-      sectionRefs.current[index] = el
+      if (sectionRefs.current) sectionRefs.current[index] = el
     },
     [sectionRefs]
   )
