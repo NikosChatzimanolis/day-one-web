@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useScrollContext } from '@/context/ScrollContext'
+import Logo from '@/components/ui/Logo'
 
 const languages = ['EN', 'EL', 'RU'] as const
 type Language = typeof languages[number]
@@ -15,7 +16,6 @@ const footerLinks = [
   { label: 'Contact',  href: '#contact' },
 ]
 
-// Map hrefs to panel indices — mirrors Navbar's NAV_INDEX
 const NAV_INDEX: Record<string, number> = {
   '#services': 1,
   '#work':     3,
@@ -25,18 +25,12 @@ const NAV_INDEX: Record<string, number> = {
 
 export default function Footer() {
   const [activeLang, setActiveLang] = useState<Language>('EN')
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault()
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-    if (isMobile) {
-      const id = href === '#contact' ? 'about' : href.slice(1)
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      const idx = NAV_INDEX[href]
-      if (idx !== undefined) goTo(idx)
-    }
+    const idx = NAV_INDEX[href]
+    if (idx !== undefined) scrollToSection(idx)
   }
 
   return (
@@ -47,13 +41,13 @@ export default function Footer() {
           <div className="md:col-span-1">
             <a
               href="#"
-              className="inline-block font-display text-2xl font-[600] text-[#F7F4EF] mb-3 hover:text-accent transition-colors duration-250"
+              className="inline-block mb-3 hover:opacity-80 transition-opacity duration-250"
               onClick={(e) => {
                 e.preventDefault()
-                goTo(0)
+                scrollToSection(0)
               }}
             >
-              Day One
+              <Logo variant="dark" size="sm" showTagline={false} />
             </a>
             <p className="font-body text-sm text-[#9C9790] leading-relaxed max-w-[220px]">
               Everything your business needs online.
@@ -108,7 +102,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-body text-xs text-[#6B6660]">
-            © 2025 Day One. Cyprus.
+            © 2026 Day One. Cyprus.
           </p>
 
           {/* Language switcher */}

@@ -5,9 +5,7 @@ import { motion } from 'framer-motion'
 import { useScrollContext, SECTIONS } from '@/context/ScrollContext'
 
 export default function ProgressIndicator() {
-  const { currentIndex, contactUnlocked, goTo } = useScrollContext()
-
-  if (contactUnlocked) return null
+  const { currentIndex, scrollToSection } = useScrollContext()
 
   return (
     <>
@@ -16,7 +14,7 @@ export default function ProgressIndicator() {
         {SECTIONS.map((section, i) => (
           <div key={section.id} className="flex items-center justify-end">
             <button
-              onClick={() => goTo(i)}
+              onClick={() => scrollToSection(i)}
               aria-label={`Go to ${section.label}`}
               className="flex items-center justify-center w-5 h-5"
             >
@@ -40,7 +38,7 @@ export default function ProgressIndicator() {
         {SECTIONS.map((section, i) => (
           <button
             key={section.id}
-            onClick={() => goTo(i)}
+            onClick={() => scrollToSection(i)}
             aria-label={`Go to ${section.label}`}
             className="flex items-center justify-center w-5 h-5"
           >

@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { NavLink } from '@/types'
 import { useScrollContext } from '@/context/ScrollContext'
+import Logo from '@/components/ui/Logo'
 
 const navLinks: NavLink[] = [
   { label: 'Services', href: '#services' },
@@ -16,7 +17,7 @@ const navLinks: NavLink[] = [
   { label: 'Contact',  href: '#contact' },
 ]
 
-// Map nav hrefs to section indices in the scroll system
+// Map nav hrefs to section indices
 const NAV_INDEX: Record<string, number> = {
   '#services': 1,
   '#work':     3,
@@ -50,23 +51,17 @@ const drawerItemVariants: Variants = {
 function NavLinkItem({
   link,
   onClose,
-  goTo,
+  scrollToSection,
 }: {
   link: NavLink
   onClose?: () => void
-  goTo: (i: number) => void
+  scrollToSection: (i: number) => void
 }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     onClose?.()
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-    if (isMobile) {
-      const id = link.href === '#contact' ? 'about' : link.href.slice(1)
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      const idx = NAV_INDEX[link.href]
-      if (idx !== undefined) goTo(idx)
-    }
+    const idx = NAV_INDEX[link.href]
+    if (idx !== undefined) scrollToSection(idx)
   }
 
   return (
@@ -90,7 +85,7 @@ function NavLinkItem({
 export default function Navbar() {
   const shouldReduceMotion = useReducedMotion()
   const [isOpen, setIsOpen] = useState(false)
-  const { currentIndex, goTo } = useScrollContext()
+  const { currentIndex, scrollToSection } = useScrollContext()
 
   // scrolled = any section beyond Hero
   const scrolled = currentIndex > 0
@@ -104,7 +99,7 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Prevent body scroll when drawer open (body, not html — no conflict with SplitLayout)
+  // Prevent body scroll when drawer open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -134,19 +129,19 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href="#"
-              className="font-display text-xl font-[600] text-text-primary tracking-wide hover:text-accent transition-colors duration-250"
+              className="hover:opacity-80 transition-opacity duration-250"
               onClick={(e) => {
                 e.preventDefault()
-                goTo(0)
+                scrollToSection(0)
               }}
             >
-              Day One
+              <Logo variant="primary" size="sm" showTagline={false} />
             </a>
 
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
               {navLinks.map((link) => (
-                <NavLinkItem key={link.href} link={link} goTo={goTo} />
+                <NavLinkItem key={link.href} link={link} scrollToSection={scrollToSection} />
               ))}
             </nav>
 
@@ -157,12 +152,7 @@ export default function Navbar() {
                 className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
                 onClick={(e) => {
                   e.preventDefault()
-                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-                  if (isMobile) {
-                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-                  } else {
-                    goTo(5)
-                  }
+                  scrollToSection(5)
                 }}
               >
                 Free mockup
@@ -204,7 +194,7 @@ export default function Navbar() {
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between px-6 h-[72px] border-b border-border">
-                <span className="font-display text-xl font-[600] text-text-primary">Day One</span>
+                <Logo variant="primary" size="sm" showTagline={false} />
                 <button
                   className="flex items-center justify-center w-10 h-10 text-text-secondary hover:text-text-primary transition-colors"
                   onClick={() => setIsOpen(false)}
@@ -230,14 +220,8 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault()
                         setIsOpen(false)
-                        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-                        if (isMobile) {
-                          const id = link.href === '#contact' ? 'about' : link.href.slice(1)
-                          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-                        } else {
-                          const idx = NAV_INDEX[link.href]
-                          if (idx !== undefined) goTo(idx)
-                        }
+                        const idx = NAV_INDEX[link.href]
+                        if (idx !== undefined) scrollToSection(idx)
                       }}
                     >
                       {link.label}
@@ -260,12 +244,7 @@ export default function Navbar() {
                     onClick={(e) => {
                       e.preventDefault()
                       setIsOpen(false)
-                      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-                      if (isMobile) {
-                        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-                      } else {
-                        goTo(5)
-                      }
+                      scrollToSection(5)
                     }}
                   >
                     Get a free mockup

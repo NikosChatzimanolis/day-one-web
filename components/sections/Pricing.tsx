@@ -82,11 +82,11 @@ const cardVariants: Variants = {
 
 function PricingCard({ tier }: { tier: PricingTier }) {
   const shouldReduceMotion = useReducedMotion()
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    goTo(4)
+    scrollToSection(5)
   }
 
   return (
@@ -138,7 +138,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
         <div className="flex items-baseline gap-2">
           <span
             className={cn(
-              'font-display text-4xl font-[600]',
+              'font-display text-4xl font-[500]',
               tier.highlighted ? 'text-[#F7F4EF]' : 'text-text-primary'
             )}
           >
@@ -203,7 +203,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
 
 export default function Pricing() {
   const shouldReduceMotion = useReducedMotion()
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-80px' })
 
@@ -251,7 +251,7 @@ export default function Pricing() {
               className="text-accent hover:underline"
               onClick={(e) => {
                 e.preventDefault()
-                goTo(4)
+                scrollToSection(5)
               }}
             >
               Questions? Just ask.

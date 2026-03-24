@@ -21,7 +21,7 @@
   --color-dark-text-secondary: #9C9790;
 
   /* Typography */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Jost', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
   /* Spacing scale */
@@ -112,8 +112,9 @@ body {
 ───────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--color-text);
 }
 
@@ -338,27 +339,27 @@ html {
 }
 
 /* ─────────────────────────────────────────
-   Scroll-Locked Split Panel Layout
+   Scroll-Snap Layout
 ───────────────────────────────────────── */
-html.scroll-locked,
-html.scroll-locked body,
-html.scroll-locked main {
-  overflow: hidden;
+.snap-container {
   height: 100svh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-.panel-half {
-  position: relative;
-  width: 100%;
-  height: 50svh;
-  flex-shrink: 0;
-  overflow: hidden;
+.snap-section {
+  height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-@media (min-width: 768px) {
-  .panel-half {
-    height: 100%;
-    flex: 0 0 var(--panel-width, 50%);
-    width: var(--panel-width, 50%);
+.snap-section-end {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snap-container {
+    scroll-snap-type: y proximity;
   }
 }

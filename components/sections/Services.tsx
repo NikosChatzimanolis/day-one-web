@@ -81,7 +81,7 @@ const cardVariants: Variants = {
 
 function ServiceCard({ service }: { service: Service }) {
   const shouldReduceMotion = useReducedMotion()
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
   const IconComponent = iconMap[service.icon as keyof typeof iconMap]
 
   if (service.featured) {
@@ -137,7 +137,7 @@ function ServiceCard({ service }: { service: Service }) {
             className="inline-flex items-center gap-2 font-body text-sm font-[500] text-accent hover:gap-3 transition-all duration-200"
             onClick={(e) => {
               e.preventDefault()
-              goTo(4)
+              scrollToSection(5)
             }}
           >
             Start a project
@@ -154,7 +154,7 @@ function ServiceCard({ service }: { service: Service }) {
         'relative flex flex-col justify-between',
         'p-6 rounded-md border border-border bg-bg',
         'overflow-hidden group',
-        service.id === 'social' ? 'opacity-80' : ''
+        ''
       )}
       variants={cardVariants}
       whileHover={

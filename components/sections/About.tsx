@@ -75,26 +75,38 @@ function GeometricPhotoPlaceholder() {
 
         {/* Studio name text */}
         <text
-          x="95"
-          y="138"
+          x="75"
+          y="140"
           textAnchor="middle"
-          fontFamily="Georgia, serif"
-          fontSize="13"
-          fill="rgba(196,82,42,0.6)"
-          fontStyle="italic"
+          fontFamily="'Alex Brush', cursive"
+          fontSize="18"
+          fill="rgba(192,76,42,0.6)"
         >
-          Day One
+          Day
         </text>
         <text
-          x="95"
-          y="155"
+          x="120"
+          y="138"
           textAnchor="middle"
-          fontFamily="system-ui, sans-serif"
-          fontSize="7"
-          fill="rgba(26,26,24,0.3)"
+          fontFamily="'Jost', sans-serif"
+          fontSize="10"
+          fontWeight="200"
+          fill="rgba(26,26,24,0.35)"
           letterSpacing="2"
         >
-          STUDIO · CYPRUS
+          ONE
+        </text>
+        <text
+          x="120"
+          y="152"
+          textAnchor="middle"
+          fontFamily="'Jost', sans-serif"
+          fontSize="5"
+          fontWeight="300"
+          fill="rgba(26,26,24,0.25)"
+          letterSpacing="2"
+        >
+          WEB STUDIO
         </text>
 
         {/* Dot accent */}
@@ -165,19 +177,19 @@ export default function About() {
               variants={shouldReduceMotion ? undefined : itemVariants}
             >
               <div>
-                <p className="font-display text-3xl font-[600] text-text-primary">Cyprus</p>
+                <p className="font-display text-3xl font-[500] text-text-primary">Cyprus</p>
                 <p className="font-body text-sm text-text-secondary mt-1">Based in Limassol</p>
               </div>
               <div>
-                <p className="font-display text-3xl font-[600] text-text-primary">Remote-first</p>
+                <p className="font-display text-3xl font-[500] text-text-primary">Remote-first</p>
                 <p className="font-body text-sm text-text-secondary mt-1">Work with clients across EU</p>
               </div>
               <div>
-                <p className="font-display text-3xl font-[600] text-text-primary">~2 weeks</p>
+                <p className="font-display text-3xl font-[500] text-text-primary">~2 weeks</p>
                 <p className="font-body text-sm text-text-secondary mt-1">Average delivery time</p>
               </div>
               <div>
-                <p className="font-display text-3xl font-[600] text-accent">WhatsApp</p>
+                <p className="font-display text-3xl font-[500] text-accent">WhatsApp</p>
                 <p className="font-body text-sm text-text-secondary mt-1">Always reachable</p>
               </div>
             </motion.div>

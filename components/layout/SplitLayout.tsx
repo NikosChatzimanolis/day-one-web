@@ -1,98 +1,88 @@
 // ── components/layout/SplitLayout.tsx ──
 'use client'
 
-import { useEffect, useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { useCallback } from 'react'
 import { useScrollContext, SECTIONS } from '@/context/ScrollContext'
-import { useScrollController } from '@/hooks/useScrollController'
-import Panel, { type PanelContent } from '@/components/ui/Panel'
 import ProgressIndicator from '@/components/ui/ProgressIndicator'
 import ScrollHint from '@/components/ui/ScrollHint'
 
-interface SplitLayoutProps {
-  panels: PanelContent[]
+export interface PanelContent {
+  left?: React.ReactNode
+  right?: React.ReactNode
+  children?: React.ReactNode
 }
 
-// ── Desktop: scroll-locked panel system (unchanged) ───────────────────────────
-function DesktopPanels({ panels }: SplitLayoutProps) {
-  const { currentIndex, clearTransition } = useScrollContext()
+interface SplitLayoutProps {
+  panels: PanelContent[]
+  /** Content rendered after snap sections (Contact, Footer, etc.) — no snap alignment */
+  after?: React.ReactNode
+}
 
-  // Register all scroll/touch/keyboard event listeners
-  useScrollController()
+export default function SplitLayout({ panels, after }: SplitLayoutProps) {
+  const { sectionRefs } = useScrollContext()
 
-  // Lock scroll on mount, unlock on unmount
-  useEffect(() => {
-    document.documentElement.classList.add('scroll-locked')
-    return () => {
-      document.documentElement.classList.remove('scroll-locked')
-    }
-  }, [])
+  const setRef = useCallback(
+    (index: number) => (el: HTMLElement | null) => {
+      sectionRefs.current[index] = el
+    },
+    [sectionRefs]
+  )
 
   return (
-    <div className="relative w-full h-[100svh] overflow-hidden overscroll-none">
-      <AnimatePresence mode="sync" initial={false}>
-        <Panel
-          key={currentIndex}
-          index={currentIndex}
-          content={panels[currentIndex] ?? {}}
-          onSettled={clearTransition}
-        />
-      </AnimatePresence>
+    <div className="snap-container">
+      {SECTIONS.map((section, i) => {
+        const content = panels[i] ?? {}
+
+        if (section.type === 'full') {
+          return (
+            <section
+              key={section.id}
+              id={section.id}
+              ref={setRef(i)}
+              className="snap-section"
+              style={{ backgroundColor: section.bg }}
+            >
+              <div className="h-full overflow-y-auto">
+                {content.children}
+              </div>
+            </section>
+          )
+        }
+
+        // Split layout — side by side on desktop, stacked on mobile
+        const [leftPct, rightPct] = section.splitRatio ?? [50, 50]
+
+        return (
+          <section
+            key={section.id}
+            id={section.id}
+            ref={setRef(i)}
+            className="snap-section"
+            style={{ backgroundColor: section.bg }}
+          >
+            <div className="h-full flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+              <div
+                className="w-full md:h-full md:overflow-y-auto"
+                style={{ flex: `0 0 ${leftPct}%` }}
+              >
+                {content.left}
+              </div>
+              <div
+                className="w-full md:h-full md:overflow-y-auto"
+                style={{ flex: `0 0 ${rightPct}%` }}
+              >
+                {content.right}
+              </div>
+            </div>
+          </section>
+        )
+      })}
+
+      {/* Contact / Footer — rendered directly, each can snap independently */}
+      {after}
+
       <ProgressIndicator />
       <ScrollHint />
     </div>
   )
-}
-
-// ── Mobile: native-scroll stacked layout ──────────────────────────────────────
-function MobileStack({ panels }: SplitLayoutProps) {
-  return (
-    <div className="w-full">
-      {SECTIONS.map((section, i) => {
-        const content = panels[i] ?? {}
-        const isHero = i === 0
-
-        if (section.type === 'full') {
-          return (
-            <div
-              key={section.id}
-              id={section.id}
-              style={{ background: section.bg }}
-            >
-              {content.children}
-            </div>
-          )
-        }
-
-        // Split panel — stack left then right vertically on mobile
-        return (
-          <div
-            key={section.id}
-            id={section.id}
-            className={isHero ? 'min-h-svh' : undefined}
-            style={{ background: section.bg }}
-          >
-            {content.left && <div className="w-full">{content.left}</div>}
-            {content.right && <div className="w-full">{content.right}</div>}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-// ── Orchestrator: detects viewport, renders correct layout ─────────────────────
-export default function SplitLayout({ panels }: SplitLayoutProps) {
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false
-  )
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  if (isMobile) return <MobileStack panels={panels} />
-  return <DesktopPanels panels={panels} />
 }

@@ -14,6 +14,7 @@ import HowItWorks from '@/components/sections/HowItWorks'
 import Pricing from '@/components/sections/Pricing'
 import Contact, { ContactFormCard } from '@/components/sections/Contact'
 import type { Service, Project, Stat } from '@/types'
+import Logo from '@/components/ui/Logo'
 
 // ─── Shared data ──────────────────────────────────────────────────────────────
 
@@ -65,14 +66,6 @@ const projects: Project[] = [
     url: 'https://opostofantastikes.vercel.app/',
     tags: ['Website Development'],
     accentColor: '#C4522A',
-  },
-  {
-    id: 'idees-kai-luseis',
-    name: 'Idees kai Luseis',
-    description: 'Renovation company in Greece. Website with a light rebrand, structured service packages, and a before-and-after gallery.',
-    url: '#',
-    tags: ['Website Development', 'Branding'],
-    accentColor: '#6B6660',
   },
 ]
 
@@ -164,7 +157,7 @@ function StatCounter({ stat, delay = 0 }: { stat: Stat; delay?: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: delay / 1000 + 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <span className="font-display text-3xl md:text-4xl font-[600] text-text-primary leading-none">
+      <span className="font-display text-3xl md:text-4xl font-[500] text-text-primary leading-none">
         {displayValue}
       </span>
       <span className="font-body text-sm text-text-secondary mt-1">{stat.label}</span>
@@ -214,7 +207,7 @@ function ServiceCard({ service }: { service: Service }) {
     <motion.article
       className={cn(
         'relative flex flex-col justify-between p-5 rounded-md border border-border bg-bg overflow-hidden group',
-        service.id === 'social' ? 'opacity-80' : ''
+        ''
       )}
       variants={cardVariants}
       whileHover={shouldReduceMotion ? {} : { y: -4, boxShadow: '0 6px 24px 0 rgba(26,26,24,0.1)', borderColor: 'var(--color-accent)' }}
@@ -303,18 +296,17 @@ function ProjectCard({ project }: { project: Project }) {
             <h3 className="font-display text-xl font-[400] text-text-primary leading-tight">
               {project.name}
             </h3>
-            <a
-              href={project.url}
-              target={project.url !== '#' ? '_blank' : undefined}
-              rel={project.url !== '#' ? 'noopener noreferrer' : undefined}
-              className={cn(
-                'flex items-center justify-center w-8 h-8 rounded-sm border border-border text-text-secondary hover:text-accent hover:border-accent transition-colors duration-200 flex-shrink-0 mt-0.5',
-                project.url === '#' ? 'opacity-40 pointer-events-none' : ''
-              )}
-              aria-label={`View ${project.name}`}
-            >
-              <ArrowUpRight size={14} />
-            </a>
+            {project.url !== '#' && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 rounded-sm border border-border text-text-secondary hover:text-accent hover:border-accent transition-colors duration-200 flex-shrink-0 mt-0.5"
+                aria-label={`View ${project.name}`}
+              >
+                <ArrowUpRight size={14} />
+              </a>
+            )}
           </div>
           <p className="font-body text-sm text-text-secondary leading-relaxed mb-3">
             {project.description}
@@ -365,14 +357,15 @@ function GeometricPhotoPlaceholder() {
         <rect x="320" y="155" width="42" height="42" rx="2" fill="var(--color-border)" opacity="0.6" />
         <rect x="272" y="203" width="42" height="22" rx="2" fill="var(--color-border)" opacity="0.4" />
         <rect x="320" y="203" width="42" height="22" rx="2" fill="rgba(196,82,42,0.1)" />
-        <text x="95" y="138" textAnchor="middle" fontFamily="Georgia, serif" fontSize="13" fill="rgba(196,82,42,0.6)" fontStyle="italic">Day One</text>
-        <text x="95" y="155" textAnchor="middle" fontFamily="system-ui, sans-serif" fontSize="7" fill="rgba(26,26,24,0.3)" letterSpacing="2">STUDIO · CYPRUS</text>
+        <text x="75" y="140" textAnchor="middle" fontFamily="'Alex Brush', cursive" fontSize="18" fill="rgba(192,76,42,0.6)">Day</text>
+        <text x="120" y="138" textAnchor="middle" fontFamily="'Jost', sans-serif" fontSize="10" fontWeight="200" fill="rgba(26,26,24,0.35)" letterSpacing="2">ONE</text>
+        <text x="120" y="152" textAnchor="middle" fontFamily="'Jost', sans-serif" fontSize="5" fontWeight="300" fill="rgba(26,26,24,0.25)" letterSpacing="2">WEB STUDIO</text>
         <circle cx="40" cy="60" r="4" fill="var(--color-accent)" opacity="0.5" />
         <circle cx="150" cy="60" r="3" fill="var(--color-border)" />
         <circle cx="150" cy="205" r="3" fill="var(--color-accent)" opacity="0.3" />
       </svg>
       <div className="absolute bottom-4 left-4">
-        <p className="font-body text-xs text-text-secondary/50 tracking-label">TEAM PHOTO · COMING SOON</p>
+        <p className="font-body text-xs text-text-secondary/40 tracking-label">DAY ONE · LIMASSOL</p>
       </div>
     </div>
   )
@@ -381,7 +374,7 @@ function GeometricPhotoPlaceholder() {
 // ─── Panel content components ─────────────────────────────────────────────────
 
 function HeroLeft() {
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
   const shouldReduceMotion = useReducedMotion()
 
   const headline = 'Your first great website.'
@@ -474,12 +467,7 @@ function HeroLeft() {
           href="#contact"
           onClick={(e) => {
             e.preventDefault()
-            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-            if (isMobile) {
-              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-            } else {
-              goTo(5)
-            }
+            scrollToSection(5)
           }}
           className="inline-flex items-center justify-center px-6 py-3 font-body font-[500] text-sm text-white bg-accent rounded-sm hover:bg-accent-dark transition-colors duration-250"
         >
@@ -518,14 +506,9 @@ function HeroRight() {
         }}
         aria-hidden="true"
       />
-      {/* Large decorative display text */}
-      <div className="relative z-10 text-center select-none pointer-events-none" aria-hidden="true">
-        <p
-          className="font-display leading-none text-text-primary"
-          style={{ fontSize: 'clamp(6rem, 14vw, 11rem)', opacity: 0.05, fontWeight: 400 }}
-        >
-          Day<br />One
-        </p>
+      {/* Hero logo */}
+      <div className="relative z-10 select-none pointer-events-none" aria-hidden="true">
+        <Logo variant="primary" size="2xl" />
       </div>
     </div>
   )
@@ -721,19 +704,19 @@ function AboutLeft() {
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
         <div>
-          <p className="font-display text-2xl font-[600] text-text-primary">Cyprus</p>
+          <p className="font-display text-2xl font-[500] text-text-primary">Cyprus</p>
           <p className="font-body text-xs text-text-secondary mt-0.5">Based in Limassol</p>
         </div>
         <div>
-          <p className="font-display text-2xl font-[600] text-text-primary">Remote-first</p>
+          <p className="font-display text-2xl font-[500] text-text-primary">Remote-first</p>
           <p className="font-body text-xs text-text-secondary mt-0.5">Work with clients across EU</p>
         </div>
         <div>
-          <p className="font-display text-2xl font-[600] text-text-primary">~2 weeks</p>
+          <p className="font-display text-2xl font-[500] text-text-primary">~2 weeks</p>
           <p className="font-body text-xs text-text-secondary mt-0.5">Average delivery time</p>
         </div>
         <div>
-          <p className="font-display text-2xl font-[600] text-accent">WhatsApp</p>
+          <p className="font-display text-2xl font-[500] text-accent">WhatsApp</p>
           <p className="font-body text-xs text-text-secondary mt-0.5">Always reachable</p>
         </div>
       </motion.div>
@@ -764,10 +747,11 @@ function AboutRight() {
 // ─── Back to top (shown below Contact) ────────────────────────────────────────
 
 function BackToTop() {
+  const { scrollToSection } = useScrollContext()
   return (
     <div className="text-center py-6 bg-surface border-t border-border">
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => scrollToSection(0)}
         className="font-body text-sm text-text-secondary/60 hover:text-text-secondary transition-colors duration-200"
       >
         ↑ Back to top
@@ -794,13 +778,21 @@ export default function HomePage() {
     <ScrollProvider>
       <Navbar />
       <main>
-        <SplitLayout panels={PANELS} />
-        <div id="contact">
-          <Contact />
-        </div>
-        <BackToTop />
+        <SplitLayout
+          panels={PANELS}
+          after={
+            <>
+              <div id="contact" className="snap-section-end">
+                <Contact />
+                <BackToTop />
+              </div>
+              <div className="snap-section-end">
+                <Footer />
+              </div>
+            </>
+          }
+        />
       </main>
-      <Footer />
     </ScrollProvider>
   )
 }

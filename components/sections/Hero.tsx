@@ -72,7 +72,7 @@ function StatCounter({ stat, delay = 0 }: { stat: Stat; delay?: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: delay / 1000 + 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <span className="font-display text-3xl md:text-4xl font-[600] text-text-primary leading-none">
+      <span className="font-display text-3xl md:text-4xl font-[500] text-text-primary leading-none">
         {displayValue}
       </span>
       <span className="font-body text-sm text-text-secondary mt-1">{stat.label}</span>

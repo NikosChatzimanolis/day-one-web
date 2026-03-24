@@ -53,7 +53,7 @@ const stepVariants: Variants = {
 
 export default function HowItWorks() {
   const shouldReduceMotion = useReducedMotion()
-  const { goTo } = useScrollContext()
+  const { scrollToSection } = useScrollContext()
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-80px' })
 
@@ -106,7 +106,7 @@ export default function HowItWorks() {
                 {/* Step number */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-sm border border-[#333330] flex items-center justify-center flex-shrink-0">
-                    <span className="font-display text-2xl font-[600] text-accent leading-none">
+                    <span className="font-display text-2xl font-[500] text-accent leading-none">
                       {step.number}
                     </span>
                   </div>
@@ -139,7 +139,7 @@ export default function HowItWorks() {
               className="inline-flex items-center gap-2 px-7 py-3.5 font-body font-[500] text-sm bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250 flex-shrink-0"
               onClick={(e) => {
                 e.preventDefault()
-                goTo(4)
+                scrollToSection(5)
               }}
             >
               Get a free mockup

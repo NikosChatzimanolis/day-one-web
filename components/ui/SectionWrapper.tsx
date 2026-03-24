@@ -2,11 +2,20 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 
 interface SectionWrapperProps {
   children: React.ReactNode
   className?: string
+}
+
+const wrapperVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
 }
 
 export default function SectionWrapper({
@@ -15,24 +24,10 @@ export default function SectionWrapper({
 }: SectionWrapperProps) {
   const shouldReduceMotion = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-    // 0 = section top reaches viewport bottom (entering from below)
-    // 1 = section bottom reaches viewport top (fully exited top)
+  const isInView = useInView(ref as React.RefObject<Element>, {
+    once: true,
+    margin: '-60px',
   })
-
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.85, 1],
-    [0, 1, 1, 0]
-  )
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.85, 1],
-    [60, 0, 0, -50]
-  )
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>
@@ -42,7 +37,9 @@ export default function SectionWrapper({
     <motion.div
       ref={ref}
       className={className}
-      style={{ opacity, y }}
+      variants={wrapperVariants}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
     >
       {children}
     </motion.div>

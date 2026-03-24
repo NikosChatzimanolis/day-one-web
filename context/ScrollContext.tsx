@@ -1,7 +1,16 @@
 // ── context/ScrollContext.tsx ──
 'use client'
 
-import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  type ReactNode,
+  type RefObject,
+} from 'react'
 
 export interface SectionDef {
   id: string
@@ -22,83 +31,58 @@ export const SECTIONS: SectionDef[] = [
 
 interface ScrollContextValue {
   currentIndex: number
-  direction: 'up' | 'down'
-  isTransitioning: boolean
-  contactUnlocked: boolean
-  totalSections: number
-  goTo: (index: number) => boolean
-  unlock: () => void
-  resetContact: () => void
-  clearTransition: () => void
+  scrollToSection: (index: number) => void
+  sectionRefs: RefObject<(HTMLElement | null)[]>
 }
 
 const ScrollContext = createContext<ScrollContextValue | null>(null)
 
 export function ScrollProvider({ children }: { children: ReactNode }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState<'up' | 'down'>('down')
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [contactUnlocked, setContactUnlocked] = useState(false)
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
 
-  // Internal refs so goTo is stable (empty deps) and avoids stale closures
-  const currentIndexRef    = useRef(0)
-  const isTransitioningRef = useRef(false)
-  const safetyTimerRef     = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // IntersectionObserver to track which section is most visible
+  useEffect(() => {
+    const refs = sectionRefs.current
+    if (!refs.length) return
 
-  // Fallback duration covering longest animation path:
-  // 600ms CUBIC (full panels) or spring + 150ms right-half delay (split panels)
-  const TRANSITION_MS = 750
+    // Debounce to avoid flicker during scroll-snap transitions
+    let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
-  // Called by Panel.onAnimationComplete (primary) or safety timer (fallback for reduced motion)
-  const clearTransition = useCallback(() => {
-    if (safetyTimerRef.current) {
-      clearTimeout(safetyTimerRef.current)
-      safetyTimerRef.current = null
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            const idx = refs.indexOf(entry.target as HTMLElement)
+            if (idx !== -1) {
+              if (debounceTimer) clearTimeout(debounceTimer)
+              debounceTimer = setTimeout(() => setCurrentIndex(idx), 50)
+            }
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    refs.forEach((el) => {
+      if (el) observer.observe(el)
+    })
+
+    return () => {
+      observer.disconnect()
+      if (debounceTimer) clearTimeout(debounceTimer)
     }
-    isTransitioningRef.current = false
-    setIsTransitioning(false)
   }, [])
 
-  const goTo = useCallback((nextIndex: number): boolean => {
-    if (nextIndex === currentIndexRef.current) return false
-    if (isTransitioningRef.current) return false
-    const newDirection: 'up' | 'down' = nextIndex > currentIndexRef.current ? 'down' : 'up'
-    currentIndexRef.current = nextIndex
-    isTransitioningRef.current = true
-    // React 18 batches these three setState calls in a single render
-    setDirection(newDirection)
-    setCurrentIndex(nextIndex)
-    setIsTransitioning(true)
-    // Safety fallback — cleared early if Panel signals onAnimationComplete
-    safetyTimerRef.current = setTimeout(clearTransition, TRANSITION_MS)
-    return true
-  }, [clearTransition])
-
-  const unlock = useCallback(() => {
-    setContactUnlocked(true)
-    document.documentElement.classList.remove('scroll-locked')
-  }, [])
-
-  const resetContact = useCallback(() => {
-    setContactUnlocked(false)
-    document.documentElement.classList.add('scroll-locked')
-    window.scrollTo({ top: 0 })
+  const scrollToSection = useCallback((index: number) => {
+    const el = sectionRefs.current[index]
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
   }, [])
 
   return (
-    <ScrollContext.Provider
-      value={{
-        currentIndex,
-        direction,
-        isTransitioning,
-        contactUnlocked,
-        totalSections: SECTIONS.length,
-        goTo,
-        unlock,
-        resetContact,
-        clearTransition,
-      }}
-    >
+    <ScrollContext.Provider value={{ currentIndex, scrollToSection, sectionRefs }}>
       {children}
     </ScrollContext.Provider>
   )
