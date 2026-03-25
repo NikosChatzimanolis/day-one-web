@@ -57,7 +57,8 @@ function HeroLeft() {
   }
 
   return (
-    <div className="relative flex flex-col justify-center min-h-full px-6 lg:px-14 pt-24 pb-10 bg-bg overflow-hidden">
+    <div className="relative flex-1 flex flex-col bg-bg overflow-hidden">
+      {/* Gradient mesh — covers the full snap section height */}
       <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -68,6 +69,8 @@ function HeroLeft() {
         aria-hidden="true"
       />
 
+      {/* Content — centered within */}
+      <div className="relative z-10 flex flex-col justify-start md:justify-center flex-1 px-6 lg:px-14 pt-28 md:pt-24 pb-10">
       <motion.p
         className="relative z-10 section-label mb-6"
         initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
@@ -146,6 +149,7 @@ function HeroLeft() {
       >
         {t('hero.note', lang)}
       </motion.p>
+      </div>
     </div>
   )
 }

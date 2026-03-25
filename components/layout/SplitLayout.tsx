@@ -42,14 +42,17 @@ export default function SplitLayout({ panels, after }: SplitLayoutProps) {
               className="snap-section"
               style={{ backgroundColor: section.bg }}
             >
-              <div className="min-h-full md:h-full overflow-y-auto">
+              <div className="flex-1 md:h-full md:overflow-y-auto">
                 {content.children}
               </div>
             </section>
           )
         }
 
-        // Split layout — side by side on desktop, stacked on mobile
+        // Split layout — side by side on desktop, stacked on mobile.
+        // --md-flex is picked up by the media query rule in globals.css
+        // so the fixed split ratio only applies on md+ (side-by-side).
+        // On mobile, panels stack and size naturally via flex-1 / auto.
         const [leftPct, rightPct] = section.splitRatio ?? [50, 50]
 
         return (
@@ -60,16 +63,16 @@ export default function SplitLayout({ panels, after }: SplitLayoutProps) {
             className="snap-section"
             style={{ backgroundColor: section.bg }}
           >
-            <div className="min-h-full flex flex-col md:flex-row md:h-full overflow-y-auto md:overflow-hidden">
+            <div className="flex-1 flex flex-col md:flex-row md:h-full md:overflow-hidden">
               <div
-                className="w-full md:h-full md:overflow-y-auto"
-                style={{ flex: `0 0 ${leftPct}%` }}
+                className="flex-1 flex flex-col w-full md:flex-none md:h-full md:overflow-y-auto"
+                style={{ ['--md-flex' as string]: `0 0 ${leftPct}%` }}
               >
                 {content.left}
               </div>
               <div
                 className="w-full md:h-full md:overflow-y-auto"
-                style={{ flex: `0 0 ${rightPct}%` }}
+                style={{ ['--md-flex' as string]: `0 0 ${rightPct}%` }}
               >
                 {content.right}
               </div>

@@ -107,8 +107,8 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
             whileHover={shouldReduceMotion ? {} : { y: -4, boxShadow: '0 12px 40px rgba(26, 26, 24, 0.08)' }}
             transition={{ duration: 0.3 }}
           >
-            {/* Step number watermark */}
-            <span className="absolute -top-2 -right-2 font-display text-[8rem] font-[200] text-accent/[0.04] leading-none select-none pointer-events-none">
+            {/* Step number watermark — hidden on mobile to avoid overlapping text */}
+            <span className="absolute -top-2 -right-2 font-display text-[5rem] md:text-[8rem] font-[200] text-accent/[0.04] leading-none select-none pointer-events-none hidden md:block">
               {step.number}
             </span>
 

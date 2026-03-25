@@ -194,6 +194,19 @@ a {
   animation: gradientShift 12s ease-in-out infinite;
 }
 
+/* On mobile the container is taller and narrower — use larger, more spread-out
+   gradients so the mesh covers the full viewport without leaving bare patches. */
+@media (max-width: 767px) {
+  .gradient-mesh {
+    background:
+      radial-gradient(ellipse 120% 40% at 10% 15%, rgba(196, 82, 42, 0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 100% 35% at 85% 55%, rgba(196, 82, 42, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 110% 30% at 50% 85%, rgba(196, 82, 42, 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(240, 235, 227, 0.35) 0%, transparent 70%);
+    background-size: 100% 100%;
+  }
+}
+
 /* ─────────────────────────────────────────
    CSS Grid Subgrid support for services
 ───────────────────────────────────────── */
@@ -346,16 +359,27 @@ html {
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
 }
 
 .snap-section {
   height: 100svh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
 }
 
 .snap-section-end {
   scroll-snap-align: start;
+}
+
+/* Split panel: apply flex basis only on md+ (desktop side-by-side) */
+@media (min-width: 768px) {
+  [style*="--md-flex"] {
+    flex: var(--md-flex) !important;
+  }
 }
 
 /* On mobile, use proximity snap so users can scroll freely within tall sections */
