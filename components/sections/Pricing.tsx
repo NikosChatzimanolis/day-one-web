@@ -48,11 +48,13 @@ const tiers: TierDef[] = [
   {
     id: 'growth',
     nameKey: 'pricing.growth',
-    price: '€199/mo',
+    price: '€350/mo',
     priceNoteKey: 'pricing.ongoingManagement',
     setupPriceKey: 'pricing.growth.setup',
     featureKeys: [
-      'pricing.growth.f1', 'pricing.growth.f2', 'pricing.growth.f3',
+      'pricing.advanced.f1', 'pricing.advanced.f2', 'pricing.advanced.f3', 'pricing.advanced.f4',
+      'pricing.advanced.f5', 'pricing.advanced.f6', 'pricing.advanced.f7', 'pricing.advanced.f8',
+      'pricing.growth.f2', 'pricing.growth.f3',
       'pricing.growth.f4', 'pricing.growth.f5', 'pricing.growth.f6',
     ],
     highlighted: true,
@@ -157,12 +159,14 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
           </span>
         </div>
         {tier.setupPriceKey && (
-          <p className={cn(
-            'font-body text-sm mt-2',
-            tier.highlighted ? 'text-[#9C9790]' : 'text-text-secondary'
+          <div className={cn(
+            'mt-3 inline-flex items-center gap-1.5 rounded-sm px-3 py-1.5 font-body text-sm font-[500]',
+            tier.highlighted
+              ? 'bg-accent/15 text-accent'
+              : 'bg-accent/10 text-accent'
           )}>
             {t(tier.setupPriceKey, lang)}
-          </p>
+          </div>
         )}
         {tier.noteKey && (
           <p className="font-body text-xs text-text-secondary mt-2">
