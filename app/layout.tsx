@@ -34,9 +34,9 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'Day One — Website Studio for Small Businesses in Cyprus & Greece',
+  title: 'Day One — Website Studio in Cyprus & Greece',
   description:
-    'We design and build fast, professional websites for small businesses in Cyprus and Greece — then stay available as you grow. From €350. Free mockup before you decide.',
+    'We design and build websites that elevate your presence online — in Cyprus and Greece. Then we stay available as you grow. From €350. Free mockup before you decide.',
   keywords: [
     'website design Cyprus',
     'website development Greece',
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://dayone-web.com',
     siteName: 'Day One',
-    title: 'Day One — Website Studio for Small Businesses in Cyprus & Greece',
+    title: 'Day One — Website Studio in Cyprus & Greece',
     description:
-      'Fast, professional websites for small businesses in Cyprus and Greece. Free mockup before you decide. From €350.',
+      'Elevate your presence online. We design and build websites in Cyprus and Greece. Free mockup before you decide. From €350.',
     images: [
       {
         url: 'https://dayone-web.com/opengraph-image',
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Day One — Website Studio for Cyprus & Greece',
-    description: 'Fast, professional websites for small businesses. Free mockup before you decide.',
+    title: 'Day One — Website Studio in Cyprus & Greece',
+    description: 'Elevate your presence online. Free mockup before you decide.',
     images: ['https://dayone-web.com/opengraph-image'],
   },
   robots: {
