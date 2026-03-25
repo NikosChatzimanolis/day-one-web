@@ -47,7 +47,7 @@ const tiers: TierDef[] = [
   {
     id: 'growth',
     nameKey: 'pricing.growth',
-    price: '€550 + €199/mo',
+    price: '€950 + €199/mo',
     priceNoteKey: 'pricing.ongoingManagement',
     featureKeys: [
       'pricing.growth.f1', 'pricing.growth.f2', 'pricing.growth.f3',
