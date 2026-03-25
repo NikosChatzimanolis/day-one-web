@@ -123,7 +123,7 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
 
       <div
         className={cn(
-          'px-6 pt-7 pb-5 border-b',
+          'px-4 pt-5 pb-4 md:px-6 md:pt-7 md:pb-5 border-b',
           tier.highlighted ? 'border-[#333330]' : 'border-border'
         )}
       >
@@ -175,7 +175,7 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
         )}
       </div>
 
-      <div className="flex flex-col flex-1 px-6 py-5">
+      <div className="flex flex-col flex-1 px-4 py-4 md:px-6 md:py-5">
         <ul className="flex flex-col gap-2.5 flex-1">
           {tier.featureKeys.map((fk) => (
             <li key={fk} className="flex items-start gap-2.5">
@@ -228,11 +228,11 @@ export default function Offer() {
       aria-label="Pricing"
     >
       <div className="container-wide">
-        <SectionWrapper className="mb-14 md:mb-16">
+        <SectionWrapper className="mb-8 md:mb-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <p className="section-label mb-4">{t('pricing.label', lang)}</p>
-              <h2 className="font-display text-4xl md:text-5xl font-[300] text-text-primary leading-tight">
+              <h2 className="font-display text-3xl md:text-5xl font-[300] text-text-primary leading-tight">
                 {t('pricing.heading', lang)}
               </h2>
             </div>

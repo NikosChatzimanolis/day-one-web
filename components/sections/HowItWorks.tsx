@@ -54,10 +54,10 @@ export default function Process() {
     >
       <div className="container-wide">
         {/* Section header */}
-        <SectionWrapper className="mb-16 md:mb-20">
+        <SectionWrapper className="mb-10 md:mb-20">
           <div className="max-w-xl">
             <p className="section-label text-accent mb-4">{t('process.label', lang)}</p>
-            <h2 className="font-display text-4xl md:text-5xl font-[300] text-[#F7F4EF] leading-tight">
+            <h2 className="font-display text-3xl md:text-5xl font-[300] text-[#F7F4EF] leading-tight">
               {t('process.heading', lang)}
             </h2>
             <p className="font-body text-base text-[#9C9790] mt-4 leading-relaxed max-w-md">
@@ -91,11 +91,11 @@ export default function Process() {
                   </h3>
                 </div>
 
-                <p className="font-body text-[0.9375rem] text-[#9C9790] leading-relaxed pl-[calc(3.5rem+1rem)]">
+                <p className="font-body text-sm md:text-[0.9375rem] text-[#9C9790] leading-relaxed pl-0 md:pl-[calc(3.5rem+1rem)]">
                   {t(step.description, lang)}
                 </p>
 
-                <p className="font-body text-xs text-accent/70 mt-3 pl-[calc(3.5rem+1rem)]">
+                <p className="font-body text-xs text-accent/70 mt-3 pl-0 md:pl-[calc(3.5rem+1rem)]">
                   {t(step.part, lang)}
                 </p>
               </div>

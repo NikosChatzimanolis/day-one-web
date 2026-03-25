@@ -86,7 +86,7 @@ export default function Navbar() {
         )}
         initial={shouldReduceMotion ? false : { y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="container-wide">
           <div className="flex items-center justify-between h-[72px]">

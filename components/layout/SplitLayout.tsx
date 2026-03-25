@@ -42,7 +42,7 @@ export default function SplitLayout({ panels, after }: SplitLayoutProps) {
               className="snap-section"
               style={{ backgroundColor: section.bg }}
             >
-              <div className="h-full overflow-y-auto">
+              <div className="min-h-full md:h-full overflow-y-auto">
                 {content.children}
               </div>
             </section>
@@ -60,7 +60,7 @@ export default function SplitLayout({ panels, after }: SplitLayoutProps) {
             className="snap-section"
             style={{ backgroundColor: section.bg }}
           >
-            <div className="h-full flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
+            <div className="min-h-full flex flex-col md:flex-row md:h-full overflow-y-auto md:overflow-hidden">
               <div
                 className="w-full md:h-full md:overflow-y-auto"
                 style={{ flex: `0 0 ${leftPct}%` }}

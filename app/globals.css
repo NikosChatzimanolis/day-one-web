@@ -358,6 +358,19 @@ html {
   scroll-snap-align: start;
 }
 
+/* On mobile, use proximity snap so users can scroll freely within tall sections */
+@media (max-width: 767px) {
+  .snap-container {
+    scroll-snap-type: y proximity;
+  }
+
+  .snap-section {
+    min-height: 100svh;
+    height: auto;
+    scroll-snap-stop: normal;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .snap-container {
     scroll-snap-type: y proximity;

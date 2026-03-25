@@ -18,9 +18,9 @@ const translations = {
   'hero.headline1': { EN: 'Customers are already', EL: 'Οι πελάτες ήδη', RU: 'Клиенты уже' },
   'hero.headline2': { EN: 'searching for you.', EL: 'σας ψάχνουν.', RU: 'ищут вас.' },
   'hero.description': {
-    EN: "We build the system that catches them — a website designed to convert, visible on Google, and ready in days. If you don\u2019t love the preview, you don\u2019t pay.",
-    EL: 'Φτιάχνουμε το σύστημα που τους βρίσκει — ένα site σχεδιασμένο να μετατρέπει, ορατό στο Google, έτοιμο σε λίγες μέρες. Αν δεν σας αρέσει η προεπισκόπηση, δεν πληρώνετε.',
-    RU: 'Мы создаём систему, которая их находит — сайт, созданный для конверсии, видимый в Google и готовый за дни. Если предпросмотр не понравится — вы не платите.',
+    EN: 'We build the system that catches them — a website designed to convert, visible on Google, and ready in days.',
+    EL: 'Φτιάχνουμε το σύστημα που τους βρίσκει — ένα site σχεδιασμένο να μετατρέπει, ορατό στο Google, έτοιμο σε λίγες μέρες.',
+    RU: 'Мы создаём систему, которая их находит — сайт, созданный для конверсии, видимый в Google и готовый за дни.',
   },
   'hero.cta': { EN: 'Get your free preview', EL: 'Δωρεάν προεπισκόπηση', RU: 'Бесплатный предпросмотр' },
   'hero.note': {

@@ -65,19 +65,16 @@ export default function Image() {
           Fast, professional websites for small businesses
         </div>
 
-        {/* Price anchor */}
+        {/* Accent line */}
         <div
           style={{
-            color: '#C4522A',
-            fontSize: 22,
-            fontWeight: 500,
+            width: 60,
+            height: 3,
+            background: '#C4522A',
             marginTop: 52,
-            fontFamily: 'sans-serif',
-            letterSpacing: '0.02em',
+            borderRadius: 2,
           }}
-        >
-          From €350 · Free mockup before you decide
-        </div>
+        />
       </div>
     ),
     { ...size }
