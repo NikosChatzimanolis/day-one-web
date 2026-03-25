@@ -243,7 +243,7 @@ export function ContactFormCard() {
                   value={formData.message}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="I run a small restaurant in Limassol and need a website to show our menu and take bookings..."
+                  placeholder="I run a small restaurant in Limassol and need a website to attract more customers and take bookings."
                   rows={4}
                   maxLength={2000}
                   className={cn(inputClass('message'), 'resize-none')}
@@ -294,13 +294,13 @@ export function ContactFormCard() {
                     Sending...
                   </>
                 ) : (
-                  'Send message'
+                  'Get my preview'
                 )}
               </span>
             </motion.button>
 
             <p className="font-body text-xs text-text-secondary/60 text-center">
-              No commitment. We&apos;ll reply with a free visual mockup.
+              No commitment — we&apos;ll send you a custom preview first
             </p>
           </motion.form>
         )}

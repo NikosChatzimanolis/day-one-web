@@ -10,17 +10,17 @@ const languages = ['EN', 'EL', 'RU'] as const
 type Language = typeof languages[number]
 
 const footerLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Work',     href: '#work' },
-  { label: 'Pricing',  href: '#pricing' },
+  { label: 'Process',  href: '#process' },
+  { label: 'Work',     href: '#demo' },
+  { label: 'Pricing',  href: '#offer' },
   { label: 'Contact',  href: '#contact' },
 ]
 
 const NAV_INDEX: Record<string, number> = {
-  '#services': 1,
-  '#work':     3,
-  '#pricing':  4,
-  '#contact':  5,
+  '#process': 2,
+  '#demo':    3,
+  '#offer':   4,
+  '#contact': 5,
 }
 
 export default function Footer() {
@@ -50,7 +50,7 @@ export default function Footer() {
               <Logo variant="dark" size="sm" showTagline={false} />
             </a>
             <p className="font-body text-sm text-[#9C9790] leading-relaxed max-w-[220px]">
-              Everything your business needs online.
+              Systems that bring customers to your business.
             </p>
           </div>
 

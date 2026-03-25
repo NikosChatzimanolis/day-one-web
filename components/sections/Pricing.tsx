@@ -1,4 +1,4 @@
-// ── components/sections/Pricing.tsx ──
+// ── components/sections/Pricing.tsx — Offer Section ──
 'use client'
 
 import { useRef } from 'react'
@@ -11,49 +11,52 @@ import { useScrollContext } from '@/context/ScrollContext'
 
 const tiers: PricingTier[] = [
   {
-    id: 'one-page',
-    name: 'One-page website',
-    price: 'from €350',
+    id: 'launch',
+    name: 'Launch',
+    price: '€550',
     priceNote: 'one-time',
     features: [
-      'Mobile-first design',
-      '4–6 sections',
-      'Contact form',
-      'Basic SEO setup',
-      'Fast load time',
-      'Delivered in ~2 weeks',
+      'Custom website (built for your business)',
+      'Mobile-first, fast-loading design',
+      'Conversion-focused structure',
+      'Contact system (forms, WhatsApp, calls)',
+      'Google Business setup + basic visibility setup',
+      'Free preview before you pay',
+      '30 days of post-launch adjustments',
     ],
-    cta: 'Get started',
+    cta: 'Get your preview',
   },
   {
-    id: 'multi-page',
-    name: 'Multi-page website',
-    price: 'from €650',
+    id: 'advanced',
+    name: 'Advanced',
+    price: '€950',
     priceNote: 'one-time',
     features: [
-      'Everything in one-page',
-      'Multiple pages',
-      'CMS option (easy editing)',
-      'Advanced SEO',
-      'Google Analytics setup',
+      'Everything in Launch',
+      'Multi-page website (up to 5 pages)',
+      'Advanced SEO + structured data',
+      'Google Analytics + conversion tracking',
+      'CMS integration (easy content editing)',
+      'Custom animations + interactions',
       'Priority delivery',
     ],
-    highlighted: true,
-    cta: 'Get started',
+    cta: 'Get your preview',
   },
   {
-    id: 'branding',
-    name: 'Branding & social',
-    price: 'On request',
+    id: 'growth',
+    name: 'Growth',
+    price: '€550 + €199/mo',
+    priceNote: 'ongoing system management',
     features: [
-      'Brand strategy session',
-      'Visual identity',
-      'Colour & font system',
-      'Content planning',
-      'Monthly caption writing',
-      'Review before posting',
+      'Everything in Launch',
+      'Continuous improvements and optimisation',
+      'Content updates and changes handled for you',
+      'Conversion tracking + performance insights',
+      'Ongoing visibility improvements (Google & local)',
+      'Priority support and fast updates',
     ],
-    cta: 'Let\'s talk',
+    highlighted: true,
+    cta: 'Start growing',
   },
 ]
 
@@ -115,21 +118,20 @@ function PricingCard({ tier }: { tier: PricingTier }) {
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" />
       )}
 
-      {/* Card header */}
       <div
         className={cn(
-          'px-7 pt-8 pb-6 border-b',
+          'px-6 pt-7 pb-5 border-b',
           tier.highlighted ? 'border-[#333330]' : 'border-border'
         )}
       >
         {tier.highlighted && (
           <span className="inline-flex items-center px-2.5 py-1 rounded-sm bg-accent/15 text-accent font-body text-xs font-[500] mb-4">
-            Most popular
+            Recommended
           </span>
         )}
         <h3
           className={cn(
-            'font-display text-2xl font-[400] leading-tight mb-3',
+            'font-display text-2xl font-[300] leading-tight mb-3',
             tier.highlighted ? 'text-[#F7F4EF]' : 'text-text-primary'
           )}
         >
@@ -138,7 +140,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
         <div className="flex items-baseline gap-2">
           <span
             className={cn(
-              'font-display text-4xl font-[500]',
+              'font-display text-3xl font-[500]',
               tier.highlighted ? 'text-[#F7F4EF]' : 'text-text-primary'
             )}
           >
@@ -147,7 +149,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
           {tier.priceNote && (
             <span
               className={cn(
-                'font-body text-sm',
+                'font-body text-xs',
                 tier.highlighted ? 'text-[#9C9790]' : 'text-text-secondary'
               )}
             >
@@ -155,19 +157,20 @@ function PricingCard({ tier }: { tier: PricingTier }) {
             </span>
           )}
         </div>
+        {tier.id === 'growth' && (
+          <p className="font-body text-xs text-text-secondary mt-2">
+            A website alone is not enough — this is how you actually grow.
+          </p>
+        )}
       </div>
 
-      {/* Features */}
-      <div className="flex flex-col flex-1 px-7 py-6">
-        <ul className="flex flex-col gap-3 flex-1">
+      <div className="flex flex-col flex-1 px-6 py-5">
+        <ul className="flex flex-col gap-2.5 flex-1">
           {tier.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3">
+            <li key={feature} className="flex items-start gap-2.5">
               <Check
-                size={15}
-                className={cn(
-                  'mt-0.5 flex-shrink-0',
-                  tier.highlighted ? 'text-accent' : 'text-accent'
-                )}
+                size={14}
+                className="mt-0.5 flex-shrink-0 text-accent"
               />
               <span
                 className={cn(
@@ -181,8 +184,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
           ))}
         </ul>
 
-        {/* CTA */}
-        <div className="mt-8">
+        <div className="mt-6">
           <a
             href="#contact"
             onClick={handleClick}
@@ -201,7 +203,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
   )
 }
 
-export default function Pricing() {
+export default function Offer() {
   const shouldReduceMotion = useReducedMotion()
   const { scrollToSection } = useScrollContext()
   const ref = useRef<HTMLElement>(null)
@@ -210,27 +212,24 @@ export default function Pricing() {
   return (
     <section
       ref={ref}
-      id="pricing"
       className="section-py bg-surface"
       aria-label="Pricing"
     >
       <div className="container-wide">
-        {/* Section header */}
         <SectionWrapper className="mb-14 md:mb-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <p className="section-label mb-4">Transparent pricing</p>
-              <h2 className="font-display text-4xl md:text-5xl font-[400] text-text-primary leading-tight">
-                Simple, honest prices
+              <p className="section-label mb-4">What you get</p>
+              <h2 className="font-display text-4xl md:text-5xl font-[300] text-text-primary leading-tight">
+                Clear pricing. No surprises.
               </h2>
             </div>
-            <p className="font-body text-sm text-text-secondary max-w-[260px] leading-relaxed">
-              Most projects are scoped on a free call. No surprises.
+            <p className="font-body text-sm text-text-secondary max-w-[300px] leading-relaxed">
+              Start simple. Scale when you&apos;re ready. No hidden costs, no confusion.
             </p>
           </div>
         </SectionWrapper>
 
-        {/* Pricing grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4"
           variants={shouldReduceMotion ? undefined : containerVariants}
@@ -242,7 +241,6 @@ export default function Pricing() {
           ))}
         </motion.div>
 
-        {/* Fine print */}
         <SectionWrapper className="mt-10 text-center">
           <p className="font-body text-sm text-text-secondary">
             All prices exclude VAT where applicable. Hosting and domain costs are separate.{' '}

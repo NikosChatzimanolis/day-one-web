@@ -10,20 +10,18 @@ import { useScrollContext } from '@/context/ScrollContext'
 import Logo from '@/components/ui/Logo'
 
 const navLinks: NavLink[] = [
-  { label: 'Services', href: '#services' },
-  { label: 'Work',     href: '#work' },
-  { label: 'Pricing',  href: '#pricing' },
-  { label: 'About',    href: '#about' },
+  { label: 'Process',  href: '#process' },
+  { label: 'Work',     href: '#demo' },
+  { label: 'Pricing',  href: '#offer' },
   { label: 'Contact',  href: '#contact' },
 ]
 
 // Map nav hrefs to section indices
 const NAV_INDEX: Record<string, number> = {
-  '#services': 1,
-  '#work':     3,
-  '#pricing':  4,
-  '#about':    5,
-  '#contact':  5,
+  '#process': 2,
+  '#demo':    3,
+  '#offer':   4,
+  '#contact': 5,
 }
 
 const drawerVariants: Variants = {
@@ -155,7 +153,7 @@ export default function Navbar() {
                   scrollToSection(5)
                 }}
               >
-                Free mockup
+                Get your free preview
               </a>
 
               <button
@@ -247,7 +245,7 @@ export default function Navbar() {
                       scrollToSection(5)
                     }}
                   >
-                    Get a free mockup
+                    Get your free preview
                   </a>
                 </motion.div>
               </div>
