@@ -19,6 +19,7 @@ interface TierDef {
   ctaKey: TranslationKey
   highlighted?: boolean
   noteKey?: TranslationKey
+  setupPriceKey?: TranslationKey
 }
 
 const tiers: TierDef[] = [
@@ -47,8 +48,9 @@ const tiers: TierDef[] = [
   {
     id: 'growth',
     nameKey: 'pricing.growth',
-    price: '€950 + €199/mo',
+    price: '€199/mo',
     priceNoteKey: 'pricing.ongoingManagement',
+    setupPriceKey: 'pricing.growth.setup',
     featureKeys: [
       'pricing.growth.f1', 'pricing.growth.f2', 'pricing.growth.f3',
       'pricing.growth.f4', 'pricing.growth.f5', 'pricing.growth.f6',
@@ -154,6 +156,14 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
             {t(tier.priceNoteKey, lang)}
           </span>
         </div>
+        {tier.setupPriceKey && (
+          <p className={cn(
+            'font-body text-sm mt-2',
+            tier.highlighted ? 'text-[#9C9790]' : 'text-text-secondary'
+          )}>
+            {t(tier.setupPriceKey, lang)}
+          </p>
+        )}
         {tier.noteKey && (
           <p className="font-body text-xs text-text-secondary mt-2">
             {t(tier.noteKey, lang)}

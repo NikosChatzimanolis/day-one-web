@@ -117,6 +117,7 @@ const translations = {
   'pricing.advanced.f6': { EN: 'CMS integration (easy content editing)', EL: 'CMS integration (εύκολη επεξεργασία)', RU: 'Интеграция CMS (простое редактирование)' },
   'pricing.advanced.f7': { EN: 'Custom animations + interactions', EL: 'Custom animations + interactions', RU: 'Пользовательские анимации и взаимодействия' },
   'pricing.advanced.f8': { EN: 'Priority delivery', EL: 'Προτεραιότητα παράδοσης', RU: 'Приоритетная доставка' },
+  'pricing.growth.setup': { EN: '+ €550 one-time setup (Advanced website included)', EL: '+ €550 εφάπαξ setup (περιλαμβάνει Advanced website)', RU: '+ €550 единоразовая настройка (включает сайт Расширенный)' },
   'pricing.growth.f1': { EN: 'Everything in Advanced', EL: 'Ό,τι περιλαμβάνει το Advanced', RU: 'Всё из тарифа Расширенный' },
   'pricing.growth.f2': { EN: 'Continuous improvements and optimisation', EL: 'Συνεχείς βελτιώσεις και βελτιστοποίηση', RU: 'Постоянные улучшения и оптимизация' },
   'pricing.growth.f3': { EN: 'Social media coverage — strategy & posting', EL: 'Social media — στρατηγική & δημοσιεύσεις', RU: 'Соцсети — стратегия и публикации' },
