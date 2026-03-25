@@ -5,71 +5,51 @@ import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { ArrowRight, MessageSquare, Palette, Globe, TrendingUp, ArrowLeft, Home } from 'lucide-react'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { useLanguage } from '@/context/LanguageContext'
+import { t, languages, type TranslationKey } from '@/lib/translations'
 import Logo from '@/components/ui/Logo'
+import Footer from '@/components/layout/Footer'
+import ScrollProvider from '@/context/ScrollContext'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const steps = [
   {
     number: '01',
-    title: 'Understand & Position',
-    subtitle: 'Your part: a short call',
-    description:
-      'We start with a quick call to understand your business, your customers, and what actually drives results. Then we define how your website should convert visitors into calls, bookings, or messages — not just exist online.',
-    details: [
-      'Quick discovery call (15–20 minutes)',
-      'We research your market and competitors',
-      'Define your conversion strategy',
-      'Agree on structure, messaging, and goals',
-    ],
+    titleKey: 'hww.step1.title' as TranslationKey,
+    subtitleKey: 'hww.step1.subtitle' as TranslationKey,
+    descriptionKey: 'hww.step1.description' as TranslationKey,
+    detailKeys: ['hww.step1.d1', 'hww.step1.d2', 'hww.step1.d3', 'hww.step1.d4'] as TranslationKey[],
     icon: MessageSquare,
-    duration: '1–2 days',
+    durationKey: 'hww.step1.duration' as TranslationKey,
   },
   {
     number: '02',
-    title: 'Design, Build & Optimise',
-    subtitle: 'Your part: review and approve',
-    description:
-      'We build your full online presence — structure, design, and messaging. Mobile-first, fast, and focused on conversion. Everything is set up to turn visitors into real customers.',
-    details: [
-      'Custom design — no templates',
-      'Mobile-first, fast-loading build',
-      'Conversion-focused layout and copy',
-      'Contact systems (forms, WhatsApp, calls)',
-      'You get a free preview before paying',
-    ],
+    titleKey: 'hww.step2.title' as TranslationKey,
+    subtitleKey: 'hww.step2.subtitle' as TranslationKey,
+    descriptionKey: 'hww.step2.description' as TranslationKey,
+    detailKeys: ['hww.step2.d1', 'hww.step2.d2', 'hww.step2.d3', 'hww.step2.d4', 'hww.step2.d5'] as TranslationKey[],
     icon: Palette,
-    duration: '3–5 days',
+    durationKey: 'hww.step2.duration' as TranslationKey,
   },
   {
     number: '03',
-    title: 'Activate Visibility',
-    subtitle: 'Your part: nothing — we handle it',
-    description:
-      'A website alone isn\'t enough. We set up your Google presence, structure your visibility, and guide how customers will actually find you. Everything is aligned to bring traffic that converts.',
-    details: [
-      'Google Business profile setup',
-      'Basic SEO + structured data',
-      'Local visibility optimisation',
-      'Analytics and conversion tracking',
-    ],
+    titleKey: 'hww.step3.title' as TranslationKey,
+    subtitleKey: 'hww.step3.subtitle' as TranslationKey,
+    descriptionKey: 'hww.step3.description' as TranslationKey,
+    detailKeys: ['hww.step3.d1', 'hww.step3.d2', 'hww.step3.d3', 'hww.step3.d4', 'hww.step3.d5'] as TranslationKey[],
     icon: Globe,
-    duration: '1–2 days',
+    durationKey: 'hww.step3.duration' as TranslationKey,
   },
   {
     number: '04',
-    title: 'Ongoing Growth',
-    subtitle: 'Your part: optional — for businesses that want to grow',
-    description:
-      'We continuously improve your system — updates, content, optimisation, and expansion. Your online presence evolves instead of becoming outdated.',
-    details: [
-      'Continuous improvements and optimisation',
-      'Content updates handled for you',
-      'Performance insights and reporting',
-      'Priority support and fast updates',
-    ],
+    titleKey: 'hww.step4.title' as TranslationKey,
+    subtitleKey: 'hww.step4.subtitle' as TranslationKey,
+    descriptionKey: 'hww.step4.description' as TranslationKey,
+    detailKeys: ['hww.step4.d1', 'hww.step4.d2', 'hww.step4.d3', 'hww.step4.d4', 'hww.step4.d5'] as TranslationKey[],
     icon: TrendingUp,
-    duration: 'Ongoing',
+    durationKey: 'hww.step4.duration' as TranslationKey,
   },
 ]
 
@@ -105,6 +85,7 @@ const detailItem: Variants = {
 
 function StepSection({ step, index }: { step: typeof steps[0]; index: number }) {
   const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: '-100px' })
   const isEven = index % 2 === 0
@@ -113,11 +94,6 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
 
   return (
     <div ref={ref} className="relative">
-      {/* Connecting line */}
-      {index < steps.length - 1 && (
-        <div className="absolute left-1/2 -translate-x-px top-full w-0.5 h-24 md:h-32 bg-gradient-to-b from-accent/30 to-transparent" />
-      )}
-
       <motion.div
         className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center`}
         variants={shouldReduceMotion ? undefined : fadeUp}
@@ -143,21 +119,21 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
                 </div>
                 <div>
                   <span className="font-body text-xs font-[500] text-accent uppercase tracking-wider">
-                    Step {step.number}
+                    {t('hww.step', lang)} {step.number}
                   </span>
                   <h3 className="font-display text-2xl md:text-3xl font-[300] text-text-primary leading-tight">
-                    {step.title}
+                    {t(step.titleKey, lang)}
                   </h3>
                 </div>
               </div>
 
               <p className="font-body text-sm text-text-secondary leading-relaxed mb-6">
-                {step.description}
+                {t(step.descriptionKey, lang)}
               </p>
 
               <div className="flex items-center gap-3 px-4 py-2.5 rounded-sm bg-accent/[0.06] border border-accent/10">
-                <span className="font-body text-xs text-accent font-[500]">{step.subtitle}</span>
-                <span className="ml-auto font-body text-xs text-text-secondary/60">{step.duration}</span>
+                <span className="font-body text-xs text-accent font-[500]">{t(step.subtitleKey, lang)}</span>
+                <span className="ml-auto font-body text-xs text-text-secondary/60">{t(step.durationKey, lang)}</span>
               </div>
             </div>
           </motion.div>
@@ -171,9 +147,9 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
           >
-            {step.details.map((detail, i) => (
+            {step.detailKeys.map((dk, i) => (
               <motion.li
-                key={i}
+                key={dk}
                 className="flex items-start gap-3"
                 variants={shouldReduceMotion ? undefined : detailItem}
               >
@@ -181,7 +157,7 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
                   <span className="font-body text-xs font-[600] text-accent">{i + 1}</span>
                 </div>
                 <p className="font-body text-sm text-text-secondary leading-relaxed">
-                  {detail}
+                  {t(dk, lang)}
                 </p>
               </motion.li>
             ))}
@@ -192,31 +168,64 @@ function StepSection({ step, index }: { step: typeof steps[0]; index: number }) 
   )
 }
 
-// ─── Timeline progress ───────────────────────────────────────────────────────
+// ─── Page header ─────────────────────────────────────────────────────────────
 
-function TimelineProgress() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
+function PageHeader() {
+  const { lang, setLang } = useLanguage()
 
   return (
-    <div ref={ref} className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px -translate-x-px hidden md:block pointer-events-none">
-      <div className="absolute inset-0 bg-border" />
-      <motion.div
-        className="absolute top-0 left-0 right-0 bg-accent origin-top"
-        style={{ scaleY, height: '100%' }}
-      />
-    </div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[rgba(247,244,239,0.95)] backdrop-blur-md border-b border-border">
+      <div className="container-wide">
+        <div className="flex items-center justify-between h-[72px]">
+          <Link href="/" className="hover:opacity-80 transition-opacity duration-250">
+            <Logo variant="primary" size="sm" showTagline={false} />
+          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="hidden md:inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-body font-[400] text-text-secondary hover:text-accent transition-colors duration-250"
+            >
+              <ArrowLeft size={14} />
+              {t('hww.home', lang)}
+            </Link>
+
+            {/* Language switcher */}
+            <div className="hidden md:flex items-center gap-0.5" aria-label="Language switcher">
+              {languages.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={cn(
+                    'px-2 py-1 font-body text-xs rounded-sm transition-all duration-200',
+                    lang === l
+                      ? 'bg-accent/10 text-accent font-[500]'
+                      : 'text-text-secondary hover:text-text-primary'
+                  )}
+                  aria-label={`Switch to ${l}`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+
+            <Link
+              href="/#contact"
+              className="inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250 max-sm:text-xs max-sm:px-3 max-sm:py-2"
+            >
+              {t('hww.cta.preview', lang)}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+// ─── Floating home button ────────────────────────────────────────────────────
 
 function FloatingHomeButton() {
   const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0])
 
@@ -230,70 +239,44 @@ function FloatingHomeButton() {
         className="group flex items-center gap-2.5 pl-3.5 pr-5 py-2.5 bg-dark/90 backdrop-blur-sm text-[#F7F4EF] rounded-full shadow-lg hover:bg-accent transition-colors duration-300"
       >
         <Home size={14} className="text-accent group-hover:text-white transition-colors" />
-        <span className="font-body text-xs font-[500]">Back to home</span>
+        <span className="font-body text-xs font-[500]">{t('hww.backHome', lang)}</span>
       </Link>
     </motion.div>
   )
 }
 
-export default function HowWeWorkPage() {
-  const shouldReduceMotion = useReducedMotion()
-  const heroRef = useRef<HTMLDivElement>(null)
-  const heroInView = useInView(heroRef as React.RefObject<Element>, { once: true })
+// ─── Page ────────────────────────────────────────────────────────────────────
 
+function HowWeWorkContent() {
+  const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
   return (
     <div className="min-h-screen bg-bg">
-      {/* Floating home button */}
       <FloatingHomeButton />
-
-      {/* Nav */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[rgba(247,244,239,0.95)] backdrop-blur-md border-b border-border">
-        <div className="container-wide">
-          <div className="flex items-center justify-between h-[72px]">
-            <Link href="/" className="hover:opacity-80 transition-opacity duration-250">
-              <Logo variant="primary" size="sm" showTagline={false} />
-            </Link>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/"
-                className="hidden md:inline-flex items-center gap-1.5 px-4 py-2.5 text-sm font-body font-[400] text-text-secondary hover:text-accent transition-colors duration-250"
-              >
-                <ArrowLeft size={14} />
-                Home
-              </Link>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
-              >
-                Get your free preview
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <PageHeader />
 
       {/* Hero */}
-      <section ref={heroRef} className="pt-[72px]">
+      <section className="pt-[72px]">
         <div className="container-wide py-20 md:py-28">
           <motion.div
             className="max-w-2xl"
-            variants={shouldReduceMotion ? undefined : fadeUp}
-            initial="hidden"
-            animate={heroInView ? 'visible' : 'hidden'}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link
               href="/"
               className="inline-flex items-center gap-2 font-body text-sm text-text-secondary hover:text-accent transition-colors mb-8 md:hidden"
             >
               <ArrowLeft size={14} />
-              Back to home
+              {t('hww.backHome', lang)}
             </Link>
-            <p className="section-label mb-4">How we work</p>
+            <p className="section-label mb-4">{t('hww.label', lang)}</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-[300] text-text-primary leading-[1.1] mb-6">
-              From first call to live website — in days, not months
+              {t('hww.heading', lang)}
             </h1>
             <p className="font-body text-base md:text-lg text-text-secondary leading-relaxed max-w-lg">
-              We keep it simple. Four clear steps, full transparency, and you see a free preview before you pay anything.
+              {t('hww.description', lang)}
             </p>
           </motion.div>
         </div>
@@ -321,17 +304,17 @@ export default function HowWeWorkPage() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="font-display text-3xl md:text-4xl font-[300] text-[#F7F4EF] leading-tight mb-5">
-              Ready to get started?
+              {t('hww.cta.heading', lang)}
             </h2>
             <p className="font-body text-base text-[#9C9790] leading-relaxed mb-8">
-              It starts with a short conversation. Tell us about your business and we&apos;ll show you what we can build — for free.
+              {t('hww.cta.description', lang)}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/#contact"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body font-[500] text-sm bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
               >
-                Get your free preview
+                {t('hww.cta.preview', lang)}
                 <ArrowRight size={16} />
               </Link>
               <a
@@ -341,33 +324,23 @@ export default function HowWeWorkPage() {
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body font-[500] text-sm border border-[#333330] text-[#F7F4EF] rounded-sm hover:border-accent hover:text-accent transition-colors duration-250"
               >
                 <MessageSquare size={16} />
-                WhatsApp us
+                {t('hww.cta.whatsapp', lang)}
               </a>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-dark border-t border-[#333330]">
-        <div className="container-wide py-8 flex items-center justify-between">
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            <Logo variant="dark" size="sm" showTagline={false} />
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/"
-              className="font-body text-xs text-[#9C9790] hover:text-[#F7F4EF] transition-colors flex items-center gap-1.5"
-            >
-              <ArrowLeft size={12} />
-              Back to home
-            </Link>
-            <p className="font-body text-xs text-[#6B6660]">
-              &copy; 2026 Day One. Cyprus.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Shared Footer */}
+      <Footer />
     </div>
+  )
+}
+
+export default function HowWeWorkPage() {
+  return (
+    <ScrollProvider>
+      <HowWeWorkContent />
+    </ScrollProvider>
   )
 }

@@ -5,6 +5,8 @@ import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import ScrollProvider, { useScrollContext } from '@/context/ScrollContext'
+import { useLanguage } from '@/context/LanguageContext'
+import { t } from '@/lib/translations'
 import SplitLayout from '@/components/layout/SplitLayout'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -36,10 +38,11 @@ const itemVariants: Variants = {
 
 function HeroLeft() {
   const { scrollToSection } = useScrollContext()
+  const { lang } = useLanguage()
   const shouldReduceMotion = useReducedMotion()
 
-  const headline = 'Customers are already'
-  const headline2 = 'searching for you.'
+  const headline = t('hero.headline1', lang)
+  const headline2 = t('hero.headline2', lang)
   const words1 = headline.split(' ')
   const words2 = headline2.split(' ')
 
@@ -71,7 +74,7 @@ function HeroLeft() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        Web studio — Cyprus &amp; Greece
+        {t('hero.label', lang)}
       </motion.p>
 
       <h1
@@ -114,7 +117,7 @@ function HeroLeft() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        We build the system that catches them — a website designed to convert, visible on Google, and ready in days. If you don&apos;t love the preview, you don&apos;t pay.
+        {t('hero.description', lang)}
       </motion.p>
 
       <motion.div
@@ -127,11 +130,11 @@ function HeroLeft() {
           href="#contact"
           onClick={(e) => {
             e.preventDefault()
-            scrollToSection(5)
+            scrollToSection(3)
           }}
           className="inline-flex items-center justify-center px-6 py-3 font-body font-[500] text-sm text-white bg-accent rounded-sm hover:bg-accent-dark transition-colors duration-250"
         >
-          Get your free preview
+          {t('hero.cta', lang)}
         </a>
       </motion.div>
 
@@ -141,7 +144,7 @@ function HeroLeft() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3, duration: 0.4 }}
       >
-        No commitment — we build your preview before you pay anything
+        {t('hero.note', lang)}
       </motion.p>
     </div>
   )
@@ -166,84 +169,12 @@ function HeroRight() {
   )
 }
 
-// ─── Problem ──────────────────────────────────────────────────────────────────
-
-function ProblemLeft() {
-  const shouldReduceMotion = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col justify-center min-h-full px-6 lg:px-12 pt-24 pb-10 bg-bg"
-      variants={shouldReduceMotion ? undefined : containerVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      <motion.p className="section-label mb-5" variants={shouldReduceMotion ? undefined : itemVariants}>
-        The real problem
-      </motion.p>
-      <motion.h2
-        className="font-display text-3xl md:text-4xl font-[300] text-text-primary leading-tight mb-6"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        You&apos;re losing customers you don&apos;t even know about
-      </motion.h2>
-      <motion.div className="flex flex-col gap-4" variants={shouldReduceMotion ? undefined : itemVariants}>
-        <p className="font-body text-sm text-text-secondary leading-relaxed">
-          Right now, someone near you is searching for exactly what you offer. They check Google, see your competitor&apos;s website, and book with them — because they showed up and you didn&apos;t.
-        </p>
-        <p className="font-body text-sm text-text-secondary leading-relaxed">
-          No website, a slow one, or a page that looks like it was built in 2016 — it all says the same thing: &ldquo;this business might not be serious.&rdquo;
-        </p>
-        <p className="font-body text-sm text-text-primary font-[500] mt-2">
-          You don&apos;t just need a website. You need a system that brings people in and makes them act.
-        </p>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-function ProblemRight() {
-  const shouldReduceMotion = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col justify-center min-h-full px-6 lg:px-12 pt-24 pb-10 bg-surface"
-      variants={shouldReduceMotion ? undefined : containerVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      <motion.div className="flex flex-col gap-6" variants={shouldReduceMotion ? undefined : itemVariants}>
-        {/* Pain points as visual blocks */}
-        {[
-          { stat: '46%', label: 'of Google searches are looking for a local business' },
-          { stat: '75%', label: 'of people judge a business by its website' },
-          { stat: '3s', label: 'First impression — happens in seconds, not minutes' },
-        ].map((item, i) => (
-          <div key={i} className="flex items-start gap-4 p-5 rounded-md border border-border bg-bg">
-            <span className="font-display text-3xl font-[500] text-accent leading-none shrink-0">
-              {item.stat}
-            </span>
-            <p className="font-body text-sm text-text-secondary leading-relaxed pt-1">
-              {item.label}
-            </p>
-          </div>
-        ))}
-      </motion.div>
-    </motion.div>
-  )
-}
-
 // ─── Demo (placeholder) ───────────────────────────────────────────────────────
 
 function DemoLeft() {
   const shouldReduceMotion = useReducedMotion()
   const { scrollToSection } = useScrollContext()
+  const { lang } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
 
@@ -256,30 +187,30 @@ function DemoLeft() {
       animate={isInView ? 'visible' : 'hidden'}
     >
       <motion.p className="section-label mb-5" variants={shouldReduceMotion ? undefined : itemVariants}>
-        See it in action
+        {t('demo.label', lang)}
       </motion.p>
       <motion.h2
         className="font-display text-3xl md:text-4xl font-[300] text-text-primary leading-tight mb-5"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        Real businesses. Real builds.
+        {t('demo.heading', lang)}
       </motion.h2>
       <motion.p
         className="font-body text-sm text-text-secondary leading-relaxed mb-8 max-w-xs"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        These aren&apos;t templates. Every site is built from scratch for the business it represents. Browse real examples and see the quality for yourself.
+        {t('demo.description', lang)}
       </motion.p>
       <motion.div variants={shouldReduceMotion ? undefined : itemVariants}>
         <a
           href="#contact"
           onClick={(e) => {
             e.preventDefault()
-            scrollToSection(5)
+            scrollToSection(3)
           }}
           className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-sm rounded-sm hover:bg-accent-dark transition-colors duration-250"
         >
-          Want this for your business? <span aria-hidden="true">→</span>
+          {t('demo.cta', lang)} <span aria-hidden="true">→</span>
         </a>
       </motion.div>
     </motion.div>
@@ -287,9 +218,10 @@ function DemoLeft() {
 }
 
 function DemoRight() {
+  const { lang } = useLanguage()
+
   return (
     <div className="relative flex items-center justify-center min-h-full bg-surface overflow-hidden px-8 pt-16 pb-10">
-      {/* Placeholder — user will add live demos here */}
       <div className="w-full max-w-lg">
         <div className="rounded-xl overflow-hidden border border-border bg-bg shadow-lg">
           {/* Browser chrome */}
@@ -309,10 +241,10 @@ function DemoRight() {
               <span className="text-accent text-lg">▶</span>
             </div>
             <p className="font-display text-xl font-[300] text-text-primary mb-2">
-              Live demos coming soon
+              {t('demo.placeholder.title', lang)}
             </p>
             <p className="font-body text-sm text-text-secondary max-w-xs">
-              We&apos;re preparing interactive previews of real client builds. Check back shortly.
+              {t('demo.placeholder.text', lang)}
             </p>
           </div>
         </div>
@@ -325,6 +257,7 @@ function DemoRight() {
 
 function ContactLeft() {
   const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
 
@@ -337,19 +270,19 @@ function ContactLeft() {
       animate={isInView ? 'visible' : 'hidden'}
     >
       <motion.p className="section-label mb-5" variants={shouldReduceMotion ? undefined : itemVariants}>
-        Get in touch
+        {t('contact.label', lang)}
       </motion.p>
       <motion.h2
         className="font-display text-3xl md:text-4xl font-[300] text-text-primary leading-tight mb-6"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        Let&apos;s build something that brings customers in
+        {t('contact.heading', lang)}
       </motion.h2>
       <motion.p
         className="font-body text-sm text-text-secondary leading-relaxed mb-8"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        Tell us about your business. We&apos;ll put together a free visual preview — before you commit to anything.
+        {t('contact.description', lang)}
       </motion.p>
 
       {/* Trust elements */}
@@ -358,9 +291,9 @@ function ContactLeft() {
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
         {[
-          { icon: '💬', label: 'WhatsApp', value: '+357 96 254 148' },
-          { icon: '✉', label: 'Email', value: 'contact@dayone-web.com' },
-          { icon: '📍', label: 'Based in', value: 'Limassol, Cyprus' },
+          { icon: '💬', label: t('contact.whatsapp', lang), value: '+357 96 254 148' },
+          { icon: '✉', label: t('contact.email', lang), value: 'contact@dayone-web.com' },
+          { icon: '📍', label: t('contact.basedIn', lang), value: t('contact.location', lang) },
         ].map((item) => (
           <div key={item.label} className="flex items-center gap-3">
             <span className="text-lg" aria-hidden="true">{item.icon}</span>
@@ -376,7 +309,7 @@ function ContactLeft() {
         className="font-body text-xs text-text-secondary/60 italic"
         variants={shouldReduceMotion ? undefined : itemVariants}
       >
-        We usually respond within 2 hours on WhatsApp.
+        {t('contact.responseTime', lang)}
       </motion.p>
     </motion.div>
   )
@@ -396,13 +329,14 @@ function ContactRight() {
 
 function BackToTop() {
   const { scrollToSection } = useScrollContext()
+  const { lang } = useLanguage()
   return (
     <div className="text-center py-6 bg-surface border-t border-border">
       <button
         onClick={() => scrollToSection(0)}
         className="font-body text-sm text-text-secondary/60 hover:text-text-secondary transition-colors duration-200"
       >
-        ↑ Back to top
+        {t('backToTop', lang)}
       </button>
     </div>
   )
@@ -412,11 +346,9 @@ function BackToTop() {
 
 const PANELS = [
   { left: <HeroLeft />,     right: <HeroRight /> },      // 0: hero
-  { left: <ProblemLeft />,   right: <ProblemRight /> },   // 1: problem
-  { children: <Process /> },                               // 2: process (full)
-  { left: <DemoLeft />,      right: <DemoRight /> },      // 3: demo
-  { children: <Offer /> },                                 // 4: offer (full)
-  { left: <ContactLeft />,   right: <ContactRight /> },   // 5: contact
+  { children: <Process /> },                               // 1: process (full)
+  { children: <Offer /> },                                 // 2: offer (full)
+  { left: <ContactLeft />,   right: <ContactRight /> },   // 3: contact
 ]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────

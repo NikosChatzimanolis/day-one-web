@@ -137,7 +137,7 @@ function ServiceCard({ service }: { service: Service }) {
             className="inline-flex items-center gap-2 font-body text-sm font-[500] text-accent hover:gap-3 transition-all duration-200"
             onClick={(e) => {
               e.preventDefault()
-              scrollToSection(5)
+              scrollToSection(3)
             }}
           >
             Start a project

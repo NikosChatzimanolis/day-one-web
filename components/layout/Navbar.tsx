@@ -5,23 +5,22 @@ import { useState, useEffect } from 'react'
 import { motion, useReducedMotion, AnimatePresence, type Variants } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import type { NavLink } from '@/types'
 import { useScrollContext } from '@/context/ScrollContext'
+import { useLanguage } from '@/context/LanguageContext'
+import { t, languages } from '@/lib/translations'
 import Logo from '@/components/ui/Logo'
 
-const navLinks: NavLink[] = [
-  { label: 'Process',  href: '#process' },
-  { label: 'Work',     href: '#demo' },
-  { label: 'Pricing',  href: '#offer' },
-  { label: 'Contact',  href: '#contact' },
+const navKeys = [
+  { key: 'nav.process' as const, href: '#process' },
+  { key: 'nav.pricing' as const, href: '#offer' },
+  { key: 'nav.contact' as const, href: '#contact' },
 ]
 
 // Map nav hrefs to section indices
 const NAV_INDEX: Record<string, number> = {
-  '#process': 2,
-  '#demo':    3,
-  '#offer':   4,
-  '#contact': 5,
+  '#process': 1,
+  '#offer':   2,
+  '#contact': 3,
 }
 
 const drawerVariants: Variants = {
@@ -46,44 +45,11 @@ const drawerItemVariants: Variants = {
   }),
 }
 
-function NavLinkItem({
-  link,
-  onClose,
-  scrollToSection,
-}: {
-  link: NavLink
-  onClose?: () => void
-  scrollToSection: (i: number) => void
-}) {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    onClose?.()
-    const idx = NAV_INDEX[link.href]
-    if (idx !== undefined) scrollToSection(idx)
-  }
-
-  return (
-    <a
-      href={link.href}
-      onClick={handleClick}
-      className="relative group text-sm font-body font-[400] text-text-primary hover:text-accent transition-colors duration-250"
-    >
-      {link.label}
-      <motion.span
-        className="absolute -bottom-0.5 left-0 h-px bg-accent origin-left"
-        initial={{ scaleX: 0 }}
-        whileHover={{ scaleX: 1 }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        style={{ width: '100%' }}
-      />
-    </a>
-  )
-}
-
 export default function Navbar() {
   const shouldReduceMotion = useReducedMotion()
   const [isOpen, setIsOpen] = useState(false)
   const { currentIndex, scrollToSection } = useScrollContext()
+  const { lang, setLang } = useLanguage()
 
   // scrolled = any section beyond Hero
   const scrolled = currentIndex > 0
@@ -138,28 +104,65 @@ export default function Navbar() {
 
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-              {navLinks.map((link) => (
-                <NavLinkItem key={link.href} link={link} scrollToSection={scrollToSection} />
+              {navKeys.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const idx = NAV_INDEX[item.href]
+                    if (idx !== undefined) scrollToSection(idx)
+                  }}
+                  className="relative group text-sm font-body font-[400] text-text-primary hover:text-accent transition-colors duration-250"
+                >
+                  {t(item.key, lang)}
+                  <motion.span
+                    className="absolute -bottom-0.5 left-0 h-px bg-accent origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ width: '100%' }}
+                  />
+                </a>
               ))}
             </nav>
 
-            {/* CTA + Mobile toggle */}
+            {/* Language + CTA + Mobile toggle */}
             <div className="flex items-center gap-4">
+              {/* Language switcher */}
+              <div className="hidden md:flex items-center gap-0.5" aria-label="Language switcher">
+                {languages.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className={cn(
+                      'px-2 py-1 font-body text-xs rounded-sm transition-all duration-200',
+                      lang === l
+                        ? 'bg-accent/10 text-accent font-[500]'
+                        : 'text-text-secondary hover:text-text-primary'
+                    )}
+                    aria-label={`Switch to ${l}`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+
               <a
                 href="#contact"
                 className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
                 onClick={(e) => {
                   e.preventDefault()
-                  scrollToSection(5)
+                  scrollToSection(3)
                 }}
               >
-                Get your free preview
+                {t('nav.cta', lang)}
               </a>
 
               <button
                 className="md:hidden flex items-center justify-center w-10 h-10 text-text-primary"
                 onClick={() => setIsOpen(true)}
-                aria-label="Open menu"
+                aria-label={t('nav.openMenu', lang)}
               >
                 <Menu size={22} />
               </button>
@@ -196,7 +199,7 @@ export default function Navbar() {
                 <button
                   className="flex items-center justify-center w-10 h-10 text-text-secondary hover:text-text-primary transition-colors"
                   onClick={() => setIsOpen(false)}
-                  aria-label="Close menu"
+                  aria-label={t('nav.closeMenu', lang)}
                 >
                   <X size={22} />
                 </button>
@@ -204,34 +207,55 @@ export default function Navbar() {
 
               {/* Drawer nav */}
               <nav className="flex flex-col px-6 py-8 gap-1" aria-label="Mobile navigation">
-                {navLinks.map((link, i) => (
+                {navKeys.map((item, i) => (
                   <motion.div
-                    key={link.href}
+                    key={item.href}
                     custom={i}
                     variants={shouldReduceMotion ? undefined : drawerItemVariants}
                     initial="closed"
                     animate="open"
                   >
                     <a
-                      href={link.href}
+                      href={item.href}
                       className="flex items-center py-3 font-body text-lg font-[400] text-text-primary hover:text-accent transition-colors duration-200 border-b border-border/50"
                       onClick={(e) => {
                         e.preventDefault()
                         setIsOpen(false)
-                        const idx = NAV_INDEX[link.href]
+                        const idx = NAV_INDEX[item.href]
                         if (idx !== undefined) scrollToSection(idx)
                       }}
                     >
-                      {link.label}
+                      {t(item.key, lang)}
                     </a>
                   </motion.div>
                 ))}
               </nav>
 
+              {/* Drawer language switcher */}
+              <div className="px-6 pb-4">
+                <div className="flex items-center gap-1" aria-label="Language switcher">
+                  {languages.map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => setLang(l)}
+                      className={cn(
+                        'px-2.5 py-1.5 font-body text-xs rounded-sm transition-all duration-200',
+                        lang === l
+                          ? 'bg-accent/10 text-accent font-[500]'
+                          : 'text-text-secondary hover:text-text-primary'
+                      )}
+                      aria-label={`Switch to ${l}`}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Drawer CTA */}
               <div className="mt-auto px-6 pb-10">
                 <motion.div
-                  custom={navLinks.length}
+                  custom={navKeys.length}
                   variants={shouldReduceMotion ? undefined : drawerItemVariants}
                   initial="closed"
                   animate="open"
@@ -242,10 +266,10 @@ export default function Navbar() {
                     onClick={(e) => {
                       e.preventDefault()
                       setIsOpen(false)
-                      scrollToSection(5)
+                      scrollToSection(3)
                     }}
                   >
-                    Get your free preview
+                    {t('nav.cta', lang)}
                   </a>
                 </motion.div>
               </div>

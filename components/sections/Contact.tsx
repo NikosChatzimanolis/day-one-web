@@ -7,6 +7,8 @@ import { MessageSquare, Mail, Phone, CheckCircle, AlertCircle, Loader2 } from 'l
 import { cn } from '@/lib/utils'
 import type { ContactFormData, FormStatus } from '@/types'
 import SectionWrapper from '@/components/ui/SectionWrapper'
+import { useLanguage } from '@/context/LanguageContext'
+import { t } from '@/lib/translations'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -14,21 +16,6 @@ interface FieldError {
   name?: string
   email?: string
   message?: string
-}
-
-function validate(data: ContactFormData): FieldError {
-  const errors: FieldError = {}
-  if (!data.name.trim()) errors.name = 'Name is required.'
-  else if (data.name.trim().length < 2) errors.name = 'Name must be at least 2 characters.'
-
-  if (!data.email.trim()) errors.email = 'Email is required.'
-  else if (!EMAIL_REGEX.test(data.email)) errors.email = 'Please enter a valid email address.'
-
-  if (!data.message.trim()) errors.message = 'Message is required.'
-  else if (data.message.trim().length < 10) errors.message = 'Message must be at least 10 characters.'
-  else if (data.message.length > 2000) errors.message = 'Message must be under 2000 characters.'
-
-  return errors
 }
 
 const errorVariants: Variants = {
@@ -100,6 +87,7 @@ function FormField({
 // ── Standalone form card — reusable in any context ──────────────────────────
 export function ContactFormCard() {
   const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
 
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
@@ -110,6 +98,21 @@ export function ContactFormCard() {
   const [touched, setTouched] = useState<Partial<Record<keyof ContactFormData, boolean>>>({})
   const [status, setStatus] = useState<FormStatus>('idle')
   const [serverError, setServerError] = useState<string>('')
+
+  function validate(data: ContactFormData): FieldError {
+    const errs: FieldError = {}
+    if (!data.name.trim()) errs.name = t('form.nameRequired', lang)
+    else if (data.name.trim().length < 2) errs.name = t('form.nameMin', lang)
+
+    if (!data.email.trim()) errs.email = t('form.emailRequired', lang)
+    else if (!EMAIL_REGEX.test(data.email)) errs.email = t('form.emailInvalid', lang)
+
+    if (!data.message.trim()) errs.message = t('form.messageRequired', lang)
+    else if (data.message.trim().length < 10) errs.message = t('form.messageMin', lang)
+    else if (data.message.length > 2000) errs.message = t('form.messageMax', lang)
+
+    return errs
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -184,16 +187,16 @@ export function ContactFormCard() {
               <CheckCircle size={24} className="text-green-600" />
             </div>
             <h3 className="font-display text-2xl font-[400] text-text-primary mb-2">
-              Message sent
+              {t('form.successTitle', lang)}
             </h3>
             <p className="font-body text-sm text-text-secondary leading-relaxed max-w-xs">
-              We&apos;ll review it and get back to you within 24 hours. Keep an eye on your inbox.
+              {t('form.successText', lang)}
             </p>
             <button
               onClick={() => setStatus('idle')}
               className="mt-6 font-body text-sm text-accent hover:underline"
             >
-              Send another message
+              {t('form.sendAnother', lang)}
             </button>
           </motion.div>
         ) : (
@@ -205,7 +208,7 @@ export function ContactFormCard() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FormField label="Your name" id="name" error={touched.name ? errors.name : undefined}>
+            <FormField label={t('form.name', lang)} id="name" error={touched.name ? errors.name : undefined}>
               <input
                 type="text"
                 id="name"
@@ -213,14 +216,14 @@ export function ContactFormCard() {
                 value={formData.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="Nikos Papadopoulos"
+                placeholder={t('form.namePlaceholder', lang)}
                 className={inputClass('name')}
                 autoComplete="name"
                 aria-invalid={!!errors.name && touched.name}
               />
             </FormField>
 
-            <FormField label="Email address" id="email" error={touched.email ? errors.email : undefined}>
+            <FormField label={t('form.email', lang)} id="email" error={touched.email ? errors.email : undefined}>
               <input
                 type="email"
                 id="email"
@@ -228,14 +231,14 @@ export function ContactFormCard() {
                 value={formData.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="nikos@yourbusiness.com"
+                placeholder={t('form.emailPlaceholder', lang)}
                 className={inputClass('email')}
                 autoComplete="email"
                 aria-invalid={!!errors.email && touched.email}
               />
             </FormField>
 
-            <FormField label="Tell us about your project" id="message" error={touched.message ? errors.message : undefined}>
+            <FormField label={t('form.message', lang)} id="message" error={touched.message ? errors.message : undefined}>
               <div className="relative">
                 <textarea
                   id="message"
@@ -243,7 +246,7 @@ export function ContactFormCard() {
                   value={formData.message}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="I run a small restaurant in Limassol and need a website to attract more customers and take bookings."
+                  placeholder={t('form.messagePlaceholder', lang)}
                   rows={4}
                   maxLength={2000}
                   className={cn(inputClass('message'), 'resize-none')}
@@ -291,16 +294,16 @@ export function ContactFormCard() {
                 {status === 'loading' ? (
                   <>
                     <Loader2 size={15} className="animate-spin" />
-                    Sending...
+                    {t('form.sending', lang)}
                   </>
                 ) : (
-                  'Get my preview'
+                  t('form.submit', lang)
                 )}
               </span>
             </motion.button>
 
             <p className="font-body text-xs text-text-secondary/60 text-center">
-              No commitment — we&apos;ll send you a custom preview first
+              {t('form.note', lang)}
             </p>
           </motion.form>
         )}
@@ -311,6 +314,7 @@ export function ContactFormCard() {
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null)
+  const { lang } = useLanguage()
 
   return (
     <section
@@ -323,12 +327,12 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left column — info */}
           <SectionWrapper>
-            <p className="section-label mb-6">Get in touch</p>
+            <p className="section-label mb-6">{t('contact.label', lang)}</p>
             <h2 className="font-display text-4xl md:text-5xl font-[400] text-text-primary leading-tight mb-6">
-              Let&apos;s build something worth visiting
+              {t('contact.heading', lang)}
             </h2>
             <p className="font-body text-base text-text-secondary leading-relaxed mb-10 max-w-sm">
-              Tell us about your business and what you need. We&apos;ll put together a free visual mockup before you commit to anything.
+              {t('contact.description', lang)}
             </p>
 
             <div className="flex flex-col gap-5">
@@ -342,7 +346,7 @@ export default function Contact() {
                   <MessageSquare size={16} className="text-text-secondary group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">WhatsApp</p>
+                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">{t('contact.whatsapp', lang)}</p>
                   <p className="font-body text-sm font-[500] text-text-primary group-hover:text-accent transition-colors">+357 96 254 148</p>
                 </div>
               </a>
@@ -352,7 +356,7 @@ export default function Contact() {
                   <Mail size={16} className="text-text-secondary group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">Email</p>
+                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">{t('contact.email', lang)}</p>
                   <p className="font-body text-sm font-[500] text-text-primary group-hover:text-accent transition-colors">contact@dayone-web.com</p>
                 </div>
               </a>
@@ -362,14 +366,14 @@ export default function Contact() {
                   <Phone size={16} className="text-text-secondary group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">Phone</p>
-                  <p className="font-body text-sm font-[500] text-text-primary group-hover:text-accent transition-colors">+357 96 254 148</p>
+                  <p className="font-body text-xs text-text-secondary/60 mb-0.5">{t('contact.basedIn', lang)}</p>
+                  <p className="font-body text-sm font-[500] text-text-primary group-hover:text-accent transition-colors">{t('contact.location', lang)}</p>
                 </div>
               </a>
             </div>
 
             <p className="font-body text-xs text-text-secondary/60 mt-8 italic">
-              We usually respond within 24 hours.
+              {t('contact.responseTime', lang)}
             </p>
           </SectionWrapper>
 

@@ -22,9 +22,7 @@ export interface SectionDef {
 
 export const SECTIONS: SectionDef[] = [
   { id: 'hero',    label: 'Hero',    type: 'split', bg: '#F7F4EF', splitRatio: [55, 45] },
-  { id: 'problem', label: 'Problem', type: 'split', bg: '#F7F4EF', splitRatio: [50, 50] },
   { id: 'process', label: 'Process', type: 'full',  bg: '#1A1A18' },
-  { id: 'demo',    label: 'Work',    type: 'split', bg: '#F7F4EF', splitRatio: [50, 50] },
   { id: 'offer',   label: 'Pricing', type: 'full',  bg: '#F0EBE3' },
   { id: 'contact', label: 'Contact', type: 'split', bg: '#F7F4EF', splitRatio: [45, 55] },
 ]

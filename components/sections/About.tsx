@@ -178,7 +178,7 @@ export default function About() {
             >
               <div>
                 <p className="font-display text-3xl font-[500] text-text-primary">Cyprus</p>
-                <p className="font-body text-sm text-text-secondary mt-1">Based in Limassol</p>
+                <p className="font-body text-sm text-text-secondary mt-1">Based in Paphos</p>
               </div>
               <div>
                 <p className="font-display text-3xl font-[500] text-text-primary">Remote-first</p>

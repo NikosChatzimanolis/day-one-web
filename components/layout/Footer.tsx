@@ -1,31 +1,27 @@
 // ── components/layout/Footer.tsx ──
 'use client'
 
-import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useScrollContext } from '@/context/ScrollContext'
+import { useLanguage } from '@/context/LanguageContext'
+import { t, languages } from '@/lib/translations'
 import Logo from '@/components/ui/Logo'
 
-const languages = ['EN', 'EL', 'RU'] as const
-type Language = typeof languages[number]
-
-const footerLinks = [
-  { label: 'Process',  href: '#process' },
-  { label: 'Work',     href: '#demo' },
-  { label: 'Pricing',  href: '#offer' },
-  { label: 'Contact',  href: '#contact' },
+const navKeys = [
+  { key: 'nav.process' as const, href: '#process' },
+  { key: 'nav.pricing' as const, href: '#offer' },
+  { key: 'nav.contact' as const, href: '#contact' },
 ]
 
 const NAV_INDEX: Record<string, number> = {
-  '#process': 2,
-  '#demo':    3,
-  '#offer':   4,
-  '#contact': 5,
+  '#process': 1,
+  '#offer':   2,
+  '#contact': 3,
 }
 
 export default function Footer() {
-  const [activeLang, setActiveLang] = useState<Language>('EN')
   const { scrollToSection } = useScrollContext()
+  const { lang, setLang } = useLanguage()
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault()
@@ -50,22 +46,22 @@ export default function Footer() {
               <Logo variant="dark" size="sm" showTagline={false} />
             </a>
             <p className="font-body text-sm text-[#9C9790] leading-relaxed max-w-[220px]">
-              Systems that bring customers to your business.
+              {t('footer.tagline', lang)}
             </p>
           </div>
 
           {/* Nav column */}
           <div className="md:col-span-1">
-            <p className="section-label mb-5">Navigation</p>
+            <p className="section-label mb-5">{t('footer.navigation', lang)}</p>
             <nav className="flex flex-col gap-3" aria-label="Footer navigation">
-              {footerLinks.map((link) => (
+              {navKeys.map((item) => (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={item.href}
+                  href={item.href}
                   className="font-body text-sm text-[#9C9790] hover:text-[#F7F4EF] transition-colors duration-200 w-fit"
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
-                  {link.label}
+                  {t(item.key, lang)}
                 </a>
               ))}
             </nav>
@@ -73,7 +69,7 @@ export default function Footer() {
 
           {/* Contact column */}
           <div className="md:col-span-1">
-            <p className="section-label mb-5">Get in touch</p>
+            <p className="section-label mb-5">{t('footer.getInTouch', lang)}</p>
             <div className="flex flex-col gap-3">
               <a
                 href="mailto:contact@dayone-web.com"
@@ -102,24 +98,24 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-body text-xs text-[#6B6660]">
-            © 2026 Day One. Cyprus.
+            {t('footer.copyright', lang)}
           </p>
 
           {/* Language switcher */}
           <div className="flex items-center gap-1" aria-label="Language switcher">
-            {languages.map((lang) => (
+            {languages.map((l) => (
               <button
-                key={lang}
-                onClick={() => setActiveLang(lang)}
+                key={l}
+                onClick={() => setLang(l)}
                 className={cn(
                   'px-2.5 py-1 font-body text-xs rounded-sm transition-all duration-200',
-                  activeLang === lang
+                  lang === l
                     ? 'bg-accent text-white'
                     : 'text-[#6B6660] hover:text-[#9C9790]'
                 )}
-                aria-label={`Switch to ${lang}`}
+                aria-label={`Switch to ${l}`}
               >
-                {lang}
+                {l}
               </button>
             ))}
           </div>
