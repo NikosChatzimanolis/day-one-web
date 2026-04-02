@@ -1,9 +1,9 @@
-// ── app/how-we-work/page.tsx — Step-by-step walkthrough ──
+// ── app/how-we-work/page.tsx — How We Work — redesigned ──
 'use client'
 
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
-import { ArrowRight, MessageSquare, Palette, Globe, TrendingUp, ArrowLeft, Home } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Home } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { useLanguage } from '@/context/LanguageContext'
@@ -14,43 +14,13 @@ import ScrollProvider from '@/context/ScrollContext'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const steps = [
-  {
-    number: '01',
-    titleKey: 'hww.step1.title' as TranslationKey,
-    subtitleKey: 'hww.step1.subtitle' as TranslationKey,
-    descriptionKey: 'hww.step1.description' as TranslationKey,
-    detailKeys: ['hww.step1.d1', 'hww.step1.d2', 'hww.step1.d3', 'hww.step1.d4'] as TranslationKey[],
-    icon: MessageSquare,
-    durationKey: 'hww.step1.duration' as TranslationKey,
-  },
-  {
-    number: '02',
-    titleKey: 'hww.step2.title' as TranslationKey,
-    subtitleKey: 'hww.step2.subtitle' as TranslationKey,
-    descriptionKey: 'hww.step2.description' as TranslationKey,
-    detailKeys: ['hww.step2.d1', 'hww.step2.d2', 'hww.step2.d3', 'hww.step2.d4', 'hww.step2.d5'] as TranslationKey[],
-    icon: Palette,
-    durationKey: 'hww.step2.duration' as TranslationKey,
-  },
-  {
-    number: '03',
-    titleKey: 'hww.step3.title' as TranslationKey,
-    subtitleKey: 'hww.step3.subtitle' as TranslationKey,
-    descriptionKey: 'hww.step3.description' as TranslationKey,
-    detailKeys: ['hww.step3.d1', 'hww.step3.d2', 'hww.step3.d3', 'hww.step3.d4', 'hww.step3.d5'] as TranslationKey[],
-    icon: Globe,
-    durationKey: 'hww.step3.duration' as TranslationKey,
-  },
-  {
-    number: '04',
-    titleKey: 'hww.step4.title' as TranslationKey,
-    subtitleKey: 'hww.step4.subtitle' as TranslationKey,
-    descriptionKey: 'hww.step4.description' as TranslationKey,
-    detailKeys: ['hww.step4.d1', 'hww.step4.d2', 'hww.step4.d3', 'hww.step4.d4', 'hww.step4.d5'] as TranslationKey[],
-    icon: TrendingUp,
-    durationKey: 'hww.step4.duration' as TranslationKey,
-  },
+const steps: { number: string; titleKey: TranslationKey; descriptionKey: TranslationKey }[] = [
+  { number: '01', titleKey: 'hww.step1.title', descriptionKey: 'hww.step1.description' },
+  { number: '02', titleKey: 'hww.step2.title', descriptionKey: 'hww.step2.description' },
+  { number: '03', titleKey: 'hww.step3.title', descriptionKey: 'hww.step3.description' },
+  { number: '04', titleKey: 'hww.step4.title', descriptionKey: 'hww.step4.description' },
+  { number: '05', titleKey: 'hww.step5.title', descriptionKey: 'hww.step5.description' },
+  { number: '06', titleKey: 'hww.step6.title', descriptionKey: 'hww.step6.description' },
 ]
 
 // ─── Animation variants ──────────────────────────────────────────────────────
@@ -68,103 +38,94 @@ const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 }
 
-const detailItem: Variants = {
-  hidden: { opacity: 0, x: -20 },
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 // ─── Step component ──────────────────────────────────────────────────────────
 
-function StepSection({ step, index }: { step: typeof steps[0]; index: number }) {
+function StepItem({ step }: { step: typeof steps[0] }) {
+  const shouldReduceMotion = useReducedMotion()
+  const { lang } = useLanguage()
+
+  return (
+    <motion.div
+      className="group relative grid grid-cols-[auto_1fr] gap-6 md:gap-10"
+      variants={shouldReduceMotion ? undefined : staggerItem}
+    >
+      {/* Step number */}
+      <div className="flex flex-col items-center">
+        <span className="font-display text-4xl md:text-5xl lg:text-6xl font-[300] text-accent leading-none select-none">
+          {step.number}
+        </span>
+        {/* Timeline connector */}
+        <div className="w-px flex-1 bg-border mt-4 group-last:hidden" />
+      </div>
+
+      {/* Content */}
+      <div className="pb-14 md:pb-20 group-last:pb-0">
+        <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-[300] text-text-primary leading-tight mb-3">
+          {t(step.titleKey, lang)}
+        </h3>
+        <p className="font-body text-sm md:text-base text-text-secondary leading-relaxed max-w-xl">
+          {t(step.descriptionKey, lang)}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Social media clarity block ──────────────────────────────────────────────
+
+function SocialMediaBlock() {
   const shouldReduceMotion = useReducedMotion()
   const { lang } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: '-100px' })
-  const isEven = index % 2 === 0
+  const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: '-80px' })
 
-  const Icon = step.icon
+  const blocks: { labelKey: TranslationKey; label: string }[] = [
+    { labelKey: 'hww.social.setup', label: 'Setup' },
+    { labelKey: 'hww.social.ongoing', label: 'Ongoing' },
+    { labelKey: 'hww.social.content', label: 'Content Production' },
+  ]
 
   return (
-    <div ref={ref} className="relative">
-      <motion.div
-        className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center`}
-        variants={shouldReduceMotion ? undefined : fadeUp}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        {/* Visual side */}
-        <div className="flex-1 w-full">
-          <motion.div
-            className="relative bg-bg border border-border rounded-md p-8 md:p-10 overflow-hidden"
-            whileHover={shouldReduceMotion ? {} : { y: -4, boxShadow: '0 12px 40px rgba(26, 26, 24, 0.08)' }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Step number watermark — hidden on mobile to avoid overlapping text */}
-            <span className="absolute -top-2 -right-2 font-display text-[5rem] md:text-[8rem] font-[200] text-accent/[0.04] leading-none select-none pointer-events-none hidden md:block">
-              {step.number}
-            </span>
+    <section ref={ref} className="bg-surface">
+      <div className="container-wide section-py">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          variants={shouldReduceMotion ? undefined : fadeUp}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+        >
+          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-[300] text-text-primary leading-tight mb-4">
+            {t('hww.social.heading', lang)}
+          </h2>
+          <p className="font-body text-sm md:text-base text-text-secondary leading-relaxed mb-10 md:mb-14">
+            {t('hww.social.intro', lang)}
+          </p>
 
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-md bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <Icon size={24} className="text-accent" />
-                </div>
-                <div>
-                  <span className="font-body text-xs font-[500] text-accent uppercase tracking-wider">
-                    {t('hww.step', lang)} {step.number}
-                  </span>
-                  <h3 className="font-display text-2xl md:text-3xl font-[300] text-text-primary leading-tight">
-                    {t(step.titleKey, lang)}
-                  </h3>
-                </div>
-              </div>
-
-              <p className="font-body text-sm text-text-secondary leading-relaxed mb-6">
-                {t(step.descriptionKey, lang)}
-              </p>
-
-              <div className="flex items-center gap-3 px-4 py-2.5 rounded-sm bg-accent/[0.06] border border-accent/10">
-                <span className="font-body text-xs text-accent font-[500]">{t(step.subtitleKey, lang)}</span>
-                <span className="ml-auto font-body text-xs text-text-secondary/60">{t(step.durationKey, lang)}</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Details side */}
-        <div className="flex-1 w-full">
-          <motion.ul
-            className="flex flex-col gap-4"
-            variants={shouldReduceMotion ? undefined : staggerContainer}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {step.detailKeys.map((dk, i) => (
-              <motion.li
-                key={dk}
-                className="flex items-start gap-3"
-                variants={shouldReduceMotion ? undefined : detailItem}
-              >
-                <div className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="font-body text-xs font-[600] text-accent">{i + 1}</span>
-                </div>
-                <p className="font-body text-sm text-text-secondary leading-relaxed">
-                  {t(dk, lang)}
+          <div className="flex flex-col gap-8 md:gap-10">
+            {blocks.map((block) => (
+              <div key={block.label}>
+                <p className="font-body text-sm md:text-base text-text-secondary leading-relaxed">
+                  {t(block.labelKey, lang)}
                 </p>
-              </motion.li>
+              </div>
             ))}
-          </motion.ul>
-        </div>
-      </motion.div>
-    </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   )
 }
 
@@ -212,7 +173,7 @@ function PageHeader() {
               href="/#contact"
               className="inline-flex items-center px-5 py-2.5 text-sm font-body font-[500] bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250 max-sm:text-xs max-sm:px-3 max-sm:py-2"
             >
-              {t('hww.cta.preview', lang)}
+              {t('hww.cta.button', lang)}
             </Link>
           </div>
         </div>
@@ -250,6 +211,9 @@ function FloatingHomeButton() {
 function HowWeWorkContent() {
   const shouldReduceMotion = useReducedMotion()
   const { lang } = useLanguage()
+  const stepsRef = useRef<HTMLDivElement>(null)
+  const stepsInView = useInView(stepsRef as React.RefObject<Element>, { once: true, margin: '-60px' })
+
   return (
     <div className="min-h-screen bg-bg">
       <FloatingHomeButton />
@@ -257,7 +221,7 @@ function HowWeWorkContent() {
 
       {/* Hero */}
       <section className="pt-[72px]">
-        <div className="container-wide py-20 md:py-28">
+        <div className="container-wide py-20 md:py-28 lg:py-36">
           <motion.div
             className="max-w-2xl"
             initial={shouldReduceMotion ? false : { opacity: 0, y: 40 }}
@@ -272,30 +236,42 @@ function HowWeWorkContent() {
               {t('hww.backHome', lang)}
             </Link>
             <p className="section-label mb-4">{t('hww.label', lang)}</p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-[300] text-text-primary leading-[1.1] mb-6">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-[300] text-text-primary leading-[1.1] mb-5">
               {t('hww.heading', lang)}
             </h1>
-            <p className="font-body text-base md:text-lg text-text-secondary leading-relaxed max-w-lg">
-              {t('hww.description', lang)}
+            <p className="font-display text-lg md:text-xl lg:text-2xl font-[300] text-accent leading-snug mb-6">
+              {t('hww.subheading', lang)}
+            </p>
+            <p className="font-body text-sm md:text-base text-text-secondary leading-relaxed max-w-xl">
+              {t('hww.intro', lang)}
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="relative pb-20 md:pb-32">
-        <div className="container-wide">
-          <div className="flex flex-col gap-24 md:gap-32 relative">
-            {steps.map((step, i) => (
-              <StepSection key={step.number} step={step} index={i} />
+      {/* Process Steps */}
+      <section className="pb-0">
+        <div className="container-wide pb-20 md:pb-32">
+          <motion.div
+            ref={stepsRef}
+            className="max-w-2xl ml-0 md:ml-16 lg:ml-24"
+            variants={shouldReduceMotion ? undefined : staggerContainer}
+            initial="hidden"
+            animate={stepsInView ? 'visible' : 'hidden'}
+          >
+            {steps.map((step) => (
+              <StepItem key={step.number} step={step} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Social Media Clarity Block */}
+      <SocialMediaBlock />
+
+      {/* Closing + CTA */}
       <section className="section-dark">
-        <div className="container-wide py-20 md:py-28">
+        <div className="container-wide py-20 md:py-28 lg:py-36">
           <motion.div
             className="text-center max-w-xl mx-auto"
             initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
@@ -303,35 +279,20 @@ function HowWeWorkContent() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-[300] text-[#F7F4EF] leading-tight mb-5">
-              {t('hww.cta.heading', lang)}
-            </h2>
-            <p className="font-body text-base text-[#9C9790] leading-relaxed mb-8">
-              {t('hww.cta.description', lang)}
+            <p className="font-body text-base md:text-lg text-[#9C9790] leading-relaxed mb-10">
+              {t('hww.closing', lang)}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body font-[500] text-sm bg-accent text-white rounded-sm hover:bg-accent-dark transition-colors duration-250"
-              >
-                {t('hww.cta.preview', lang)}
-                <ArrowRight size={16} />
-              </Link>
-              <a
-                href="https://wa.me/35796254148"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body font-[500] text-sm border border-[#333330] text-[#F7F4EF] rounded-sm hover:border-accent hover:text-accent transition-colors duration-250"
-              >
-                <MessageSquare size={16} />
-                {t('hww.cta.whatsapp', lang)}
-              </a>
-            </div>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 font-body font-[500] text-sm md:text-base bg-accent text-white rounded-sm hover:bg-[#A33D20] transition-colors duration-250"
+            >
+              {t('hww.cta.button', lang)}
+              <ArrowRight size={16} />
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Shared Footer */}
       <Footer />
     </div>
   )
