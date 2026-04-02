@@ -3,7 +3,9 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Ta Pinakia — Day One',
+  title: 'Ta Pinakia — Web Development Case Study | Day One',
+  description:
+    'See how Day One built a custom website for Ta Pinakia — a real business in Cyprus. Web development, design, and ongoing support.',
 }
 
 export default function TaPinakiaViewer() {

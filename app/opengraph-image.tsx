@@ -3,7 +3,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Day One — Website Studio'
+export const alt = 'Day One — Web Development, Maintenance & Social Media'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -56,7 +56,7 @@ export default async function Image() {
             fontWeight: 300,
           }}
         >
-          WEB STUDIO · CYPRUS & GREECE
+          WEB DEVELOPMENT · MAINTENANCE · SOCIAL MEDIA
         </div>
 
         {/* Logo wordmark */}
@@ -136,7 +136,7 @@ export default async function Image() {
             fontFamily: 'Jost',
           }}
         >
-          Elevate your presence online
+          We build, maintain & grow your online presence
         </div>
 
         {/* Accent line */}

@@ -34,16 +34,25 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'Day One — Website Studio in Cyprus & Greece',
+  title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
   description:
-    'We design and build websites that elevate your presence online — in Cyprus and Greece. Then we stay available as you grow. From €350. Free mockup before you decide.',
+    'Web development, website maintenance, and social media management for businesses in Cyprus and Greece. We build, maintain, and grow your online presence. Live in days, not months.',
   keywords: [
+    'web development Cyprus',
+    'web development Greece',
+    'website maintenance Cyprus',
+    'website maintenance Greece',
+    'social media management Cyprus',
+    'social media management Greece',
     'website design Cyprus',
-    'website development Greece',
-    'small business website',
-    'web studio Cyprus',
-    'professional website Cyprus',
-    'website Cyprus',
+    'small business website Cyprus',
+    'web agency Cyprus',
+    'social media marketing Cyprus',
+    'website support Cyprus',
+    'ongoing website maintenance',
+    'digital marketing Cyprus',
+    'web development Paphos',
+    'social media Paphos',
   ],
   authors: [{ name: 'Day One Studio', url: 'https://dayone-web.com' }],
   creator: 'Day One Studio',
@@ -55,22 +64,22 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://dayone-web.com',
     siteName: 'Day One',
-    title: 'Day One — Website Studio in Cyprus & Greece',
+    title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
     description:
-      'Elevate your presence online. We design and build websites in Cyprus and Greece. Free mockup before you decide. From €350.',
+      'Web development, website maintenance, and social media management in Cyprus and Greece. We build, maintain, and grow your online presence. Live in days, not months.',
     images: [
       {
         url: 'https://dayone-web.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Day One — Website Studio',
+        alt: 'Day One — Web Development, Maintenance & Social Media',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Day One — Website Studio in Cyprus & Greece',
-    description: 'Elevate your presence online. Free mockup before you decide.',
+    title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
+    description: 'Web development, website maintenance, and social media management in Cyprus & Greece. Live in days, not months.',
     images: ['https://dayone-web.com/opengraph-image'],
   },
   robots: {
