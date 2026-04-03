@@ -14,6 +14,7 @@ import Process from '@/components/sections/HowItWorks'
 import Offer from '@/components/sections/Pricing'
 import { ContactFormCard } from '@/components/sections/Contact'
 import Logo from '@/components/ui/Logo'
+import { JsonLd } from './jsonld'
 
 // ─── Shared animation variants ────────────────────────────────────────────────
 
@@ -360,6 +361,25 @@ const PANELS = [
 export default function HomePage() {
   return (
     <ScrollProvider>
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        name: 'Day One Web Studio',
+        url: 'https://dayone-web.com',
+        description: 'Web development, website maintenance, and social media management for businesses in Cyprus and Greece.',
+        email: 'contact@dayone-web.com',
+        telephone: '+35796254148',
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'CY',
+        },
+        areaServed: [
+          { '@type': 'Country', name: 'Cyprus' },
+          { '@type': 'Country', name: 'Greece' },
+        ],
+        serviceType: ['Web Development', 'Website Maintenance', 'Social Media Management'],
+        priceRange: '$$',
+      }} />
       <Navbar />
       <main>
         <SplitLayout

@@ -33,10 +33,12 @@ const jost = Jost({
   display: 'swap',
 })
 
+const siteDescription =
+  'Web development, website maintenance, and social media management for businesses in Cyprus and Greece. We build, maintain, and grow your online presence.'
+
 export const metadata: Metadata = {
-  title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
-  description:
-    'Web development, website maintenance, and social media management for businesses in Cyprus and Greece. We build, maintain, and grow your online presence. Live in days, not months.',
+  title: 'Day One — Web Development & Maintenance | Cyprus',
+  description: siteDescription,
   keywords: [
     'web development Cyprus',
     'web development Greece',
@@ -58,28 +60,31 @@ export const metadata: Metadata = {
   creator: 'Day One Studio',
   alternates: {
     canonical: 'https://dayone-web.com',
+    languages: {
+      'en': 'https://dayone-web.com',
+      'x-default': 'https://dayone-web.com',
+    },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://dayone-web.com',
     siteName: 'Day One',
-    title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
-    description:
-      'Web development, website maintenance, and social media management in Cyprus and Greece. We build, maintain, and grow your online presence. Live in days, not months.',
+    title: 'Day One — Web Development & Maintenance | Cyprus',
+    description: siteDescription,
     images: [
       {
         url: 'https://dayone-web.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Day One — Web Development, Maintenance & Social Media',
+        alt: 'Day One — Web Development & Maintenance',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Day One — Web Development, Maintenance & Social Media | Cyprus & Greece',
-    description: 'Web development, website maintenance, and social media management in Cyprus & Greece. Live in days, not months.',
+    title: 'Day One — Web Development & Maintenance | Cyprus',
+    description: siteDescription,
     images: ['https://dayone-web.com/opengraph-image'],
   },
   robots: {

@@ -11,6 +11,7 @@ import { t, languages, type TranslationKey } from '@/lib/translations'
 import Logo from '@/components/ui/Logo'
 import Footer from '@/components/layout/Footer'
 import ScrollProvider from '@/context/ScrollContext'
+import { JsonLd } from '../jsonld'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -216,6 +217,30 @@ function HowWeWorkContent() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'How We Work',
+        url: 'https://dayone-web.com/how-we-work',
+        description: 'Our web development process: from strategy to ongoing maintenance and social media management.',
+        breadcrumb: {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: 'https://dayone-web.com',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'How We Work',
+              item: 'https://dayone-web.com/how-we-work',
+            },
+          ],
+        },
+      }} />
       <FloatingHomeButton />
       <PageHeader />
 
