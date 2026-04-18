@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion, type Variants } from 'framer-motio
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import SectionWrapper from '@/components/ui/SectionWrapper'
+import GrowthDetails from '@/components/sections/GrowthDetails'
 import { useScrollContext } from '@/context/ScrollContext'
 import { useLanguage } from '@/context/LanguageContext'
 import { t, type Language, type TranslationKey } from '@/lib/translations'
@@ -13,13 +14,17 @@ import { t, type Language, type TranslationKey } from '@/lib/translations'
 interface TierDef {
   id: string
   nameKey: TranslationKey
+  subtitleKey?: TranslationKey
   price: string
   priceNoteKey: TranslationKey
   featureKeys: TranslationKey[]
   ctaKey: TranslationKey
   highlighted?: boolean
+  badgeKey?: TranslationKey
   noteKey?: TranslationKey
   setupPriceKey?: TranslationKey
+  secondaryCtaKey?: TranslationKey
+  secondaryAnchor?: string
 }
 
 const tiers: TierDef[] = [
@@ -48,18 +53,23 @@ const tiers: TierDef[] = [
   {
     id: 'growth',
     nameKey: 'pricing.growth',
+    subtitleKey: 'pricing.growth.subtitle',
     price: '€350/mo',
-    priceNoteKey: 'pricing.ongoingManagement',
+    priceNoteKey: 'pricing.growth.priceNote',
     setupPriceKey: 'pricing.growth.setup',
     featureKeys: [
-      'pricing.advanced.f1', 'pricing.advanced.f2', 'pricing.advanced.f3', 'pricing.advanced.f4',
-      'pricing.advanced.f5', 'pricing.advanced.f6', 'pricing.advanced.f7', 'pricing.advanced.f8',
-      'pricing.growth.f2', 'pricing.growth.f3',
-      'pricing.growth.f4', 'pricing.growth.f5', 'pricing.growth.f6',
+      'pricing.growth.c1',
+      'pricing.growth.c2',
+      'pricing.growth.c3',
+      'pricing.growth.c4',
+      'pricing.growth.c5',
     ],
     highlighted: true,
-    ctaKey: 'pricing.startGrowing',
-    noteKey: 'pricing.growth.note',
+    badgeKey: 'pricing.growth.badge',
+    ctaKey: 'pricing.growth.cta',
+    noteKey: 'pricing.growth.minimum',
+    secondaryCtaKey: 'pricing.growth.learnMore',
+    secondaryAnchor: '#growth-details',
   },
 ]
 
@@ -93,6 +103,13 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     scrollToSection(3)
+  }
+
+  const handleSecondary = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!tier.secondaryAnchor) return
+    e.preventDefault()
+    const el = document.querySelector(tier.secondaryAnchor)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
@@ -129,17 +146,28 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
       >
         {tier.highlighted && (
           <span className="inline-flex items-center px-2.5 py-1 rounded-sm bg-accent/15 text-accent font-body text-xs font-[500] mb-4">
-            {t('pricing.recommended', lang)}
+            {t(tier.badgeKey ?? 'pricing.recommended', lang)}
           </span>
         )}
         <h3
           className={cn(
-            'font-display text-2xl font-[300] leading-tight mb-3',
+            'font-display text-2xl font-[300] leading-tight',
+            tier.subtitleKey ? 'mb-1.5' : 'mb-3',
             tier.highlighted ? 'text-[#F7F4EF]' : 'text-text-primary'
           )}
         >
           {t(tier.nameKey, lang)}
         </h3>
+        {tier.subtitleKey && (
+          <p
+            className={cn(
+              'font-body text-sm font-[500] mb-3',
+              tier.highlighted ? 'text-accent' : 'text-text-secondary'
+            )}
+          >
+            {t(tier.subtitleKey, lang)}
+          </p>
+        )}
         <div className="flex items-baseline gap-2">
           <span
             className={cn(
@@ -195,7 +223,7 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
           ))}
         </ul>
 
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col gap-3">
           <a
             href="#contact"
             onClick={handleClick}
@@ -208,6 +236,18 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
           >
             {t(tier.ctaKey, lang)}
           </a>
+          {tier.secondaryCtaKey && tier.secondaryAnchor && (
+            <a
+              href={tier.secondaryAnchor}
+              onClick={handleSecondary}
+              className={cn(
+                'self-center font-body text-xs font-[500] underline-offset-4 hover:underline transition-colors duration-200',
+                tier.highlighted ? 'text-[#C9C4BC] hover:text-accent' : 'text-text-secondary hover:text-accent'
+              )}
+            >
+              {t(tier.secondaryCtaKey, lang)}
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -252,7 +292,11 @@ export default function Offer() {
             <PricingCard key={tier.id} tier={tier} lang={lang} />
           ))}
         </motion.div>
+      </div>
 
+      <GrowthDetails />
+
+      <div className="container-wide">
         <SectionWrapper className="mt-10 text-center">
           <p className="font-body text-sm text-text-secondary">
             {t('pricing.vatNote', lang)}{' '}
