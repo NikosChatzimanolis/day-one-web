@@ -366,7 +366,7 @@ export default function HomePage() {
         '@type': 'ProfessionalService',
         name: 'Day One Web Studio',
         url: 'https://dayone-web.com',
-        description: 'Web development, website maintenance, and social media management for businesses in Cyprus and Greece.',
+        description: 'Day One builds your website and becomes your marketing team. Websites, Google presence, social media, and monthly reporting for small businesses in Cyprus and Greece.',
         email: 'contact@dayone-web.com',
         telephone: '+35796254148',
         address: {
@@ -377,7 +377,7 @@ export default function HomePage() {
           { '@type': 'Country', name: 'Cyprus' },
           { '@type': 'Country', name: 'Greece' },
         ],
-        serviceType: ['Web Development', 'Website Maintenance', 'Social Media Management'],
+        serviceType: ['Web Development', 'Marketing Team Service', 'Social Media Management', 'Website Maintenance'],
         priceRange: '$$',
       }} />
       <Navbar />

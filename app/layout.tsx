@@ -33,15 +33,18 @@ const jost = Jost({
   display: 'swap',
 })
 
+const siteTitle = 'Day One — Websites & Your Marketing Team | Cyprus & Greece'
 const siteDescription =
-  'Web development, website maintenance, and social media management for businesses in Cyprus and Greece. We build, maintain, and grow your online presence.'
+  'Day One builds your website and becomes your marketing team. We run your Google presence, manage your social, track what works, and improve every month. Built for small businesses in Cyprus and Greece. From €550 one-time, or €350/mo for your full marketing team.'
 
 export const metadata: Metadata = {
-  title: 'Day One — Web Development & Maintenance | Cyprus',
+  title: siteTitle,
   description: siteDescription,
   keywords: [
     'web development Cyprus',
     'web development Greece',
+    'marketing team Cyprus',
+    'marketing team Greece',
     'website maintenance Cyprus',
     'website maintenance Greece',
     'social media management Cyprus',
@@ -70,20 +73,20 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://dayone-web.com',
     siteName: 'Day One',
-    title: 'Day One — Web Development & Maintenance | Cyprus',
+    title: siteTitle,
     description: siteDescription,
     images: [
       {
         url: 'https://dayone-web.com/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Day One — Web Development & Maintenance',
+        alt: 'Day One — Websites & Your Marketing Team',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Day One — Web Development & Maintenance | Cyprus',
+    title: siteTitle,
     description: siteDescription,
     images: ['https://dayone-web.com/opengraph-image'],
   },
