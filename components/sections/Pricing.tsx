@@ -4,9 +4,9 @@
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import { Check } from 'lucide-react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import SectionWrapper from '@/components/ui/SectionWrapper'
-import GrowthDetails from '@/components/sections/GrowthDetails'
 import { useScrollContext } from '@/context/ScrollContext'
 import { useLanguage } from '@/context/LanguageContext'
 import { t, type Language, type TranslationKey } from '@/lib/translations'
@@ -69,7 +69,7 @@ const tiers: TierDef[] = [
     ctaKey: 'pricing.growth.cta',
     noteKey: 'pricing.growth.minimum',
     secondaryCtaKey: 'pricing.growth.learnMore',
-    secondaryAnchor: '#growth-details',
+    secondaryAnchor: '/growth',
   },
 ]
 
@@ -103,13 +103,6 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     scrollToSection(3)
-  }
-
-  const handleSecondary = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!tier.secondaryAnchor) return
-    e.preventDefault()
-    const el = document.querySelector(tier.secondaryAnchor)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
@@ -237,16 +230,15 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
             {t(tier.ctaKey, lang)}
           </a>
           {tier.secondaryCtaKey && tier.secondaryAnchor && (
-            <a
+            <Link
               href={tier.secondaryAnchor}
-              onClick={handleSecondary}
               className={cn(
                 'self-center font-body text-xs font-[500] underline-offset-4 hover:underline transition-colors duration-200',
                 tier.highlighted ? 'text-[#C9C4BC] hover:text-accent' : 'text-text-secondary hover:text-accent'
               )}
             >
               {t(tier.secondaryCtaKey, lang)}
-            </a>
+            </Link>
           )}
         </div>
       </div>
@@ -292,11 +284,7 @@ export default function Offer() {
             <PricingCard key={tier.id} tier={tier} lang={lang} />
           ))}
         </motion.div>
-      </div>
 
-      <GrowthDetails />
-
-      <div className="container-wide">
         <SectionWrapper className="mt-10 text-center">
           <p className="font-body text-sm text-text-secondary">
             {t('pricing.vatNote', lang)}{' '}
