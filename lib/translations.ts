@@ -117,17 +117,260 @@ const translations = {
   'pricing.advanced.f6': { EN: 'CMS integration (easy content editing)', EL: 'Σύστημα διαχείρισης περιεχομένου (εύκολη επεξεργασία)', RU: 'Интеграция CMS (простое редактирование)' },
   'pricing.advanced.f7': { EN: 'Custom animations + interactions', EL: 'Εξατομικευμένα animations & εφέ', RU: 'Пользовательские анимации и взаимодействия' },
   'pricing.advanced.f8': { EN: 'Priority delivery', EL: 'Παράδοση κατά προτεραιότητα', RU: 'Приоритетная доставка' },
-  'pricing.growth.setup': { EN: '+ €550 one-time setup (Advanced website included)', EL: '+ €550 εφάπαξ (περιλαμβάνει Advanced site)', RU: '+ €550 единоразовая настройка (включает сайт Расширенный)' },
-  'pricing.growth.f1': { EN: 'Everything in Advanced', EL: 'Ό,τι έχει το Advanced', RU: 'Всё из тарифа Расширенный' },
-  'pricing.growth.f2': { EN: 'Continuous improvements and optimisation', EL: 'Συνεχείς βελτιώσεις και βελτιστοποίηση', RU: 'Постоянные улучшения и оптимизация' },
-  'pricing.growth.f3': { EN: 'Social media coverage — strategy & posting', EL: 'Social media — στρατηγική & δημοσιεύσεις', RU: 'Соцсети — стратегия и публикации' },
-  'pricing.growth.f4': { EN: 'Conversion tracking + performance insights', EL: 'Παρακολούθηση αποτελεσμάτων & αναφορές', RU: 'Отслеживание конверсий + аналитика' },
-  'pricing.growth.f5': { EN: 'Ongoing visibility improvements (Google & local)', EL: 'Συνεχής βελτίωση ορατότητας (Google & τοπικά)', RU: 'Постоянное улучшение видимости (Google и локально)' },
-  'pricing.growth.f6': { EN: 'Priority support and fast updates', EL: 'Άμεση υποστήριξη και γρήγορες αλλαγές', RU: 'Приоритетная поддержка и быстрые обновления' },
-  'pricing.growth.note': {
-    EN: 'A website alone is not enough — this is how you actually grow. Social media coverage includes strategy and posting, not content creation. Minimum 3-month contract.',
-    EL: 'Ένα site από μόνο του δεν αρκεί — έτσι αναπτύσσεστε στα αλήθεια. Τα social media περιλαμβάνουν στρατηγική και δημοσιεύσεις, όχι δημιουργία περιεχομένου. Ελάχιστη διάρκεια 3 μήνες.',
-    RU: 'Одного сайта недостаточно — так вы действительно растёте. Покрытие соцсетей включает стратегию и публикации, но не создание контента. Минимальный контракт — 3 месяца.',
+  // Growth — compact card (team positioning)
+  'pricing.growth.badge': {
+    EN: 'Recommended · Your Marketing Team',
+    EL: 'Προτεινόμενο · Η Ομάδα Marketing σας',
+    RU: 'Рекомендуем · Ваша команда маркетинга',
+  },
+  'pricing.growth.subtitle': {
+    EN: 'Your marketing team.',
+    EL: 'Η ομάδα marketing σας.',
+    RU: 'Ваша команда маркетинга.',
+  },
+  'pricing.growth.priceNote': {
+    EN: 'your marketing team, monthly',
+    EL: 'η ομάδα σας, μηνιαία',
+    RU: 'ваша команда маркетинга, ежемесячно',
+  },
+  'pricing.growth.setup': {
+    EN: '+ €550 one-time setup',
+    EL: '+ €550 εφάπαξ setup',
+    RU: '+ €550 единоразовая настройка',
+  },
+  'pricing.growth.minimum': {
+    EN: 'Minimum 3 months',
+    EL: 'Ελάχιστη διάρκεια 3 μήνες',
+    RU: 'Минимум 3 месяца',
+  },
+  'pricing.growth.c1': {
+    EN: 'We build your website',
+    EL: 'Φτιάχνουμε το website σας',
+    RU: 'Делаем ваш сайт',
+  },
+  'pricing.growth.c2': {
+    EN: 'We get you found on Google',
+    EL: 'Σας βρίσκει ο κόσμος στη Google',
+    RU: 'Находят вас в Google',
+  },
+  'pricing.growth.c3': {
+    EN: 'We run your social',
+    EL: 'Τρέχουμε τα social σας',
+    RU: 'Ведём ваши соцсети',
+  },
+  'pricing.growth.c4': {
+    EN: "We track what's working",
+    EL: 'Μετράμε τι δουλεύει',
+    RU: 'Отслеживаем, что работает',
+  },
+  'pricing.growth.c5': {
+    EN: "We're always on call",
+    EL: 'Είμαστε πάντα διαθέσιμοι',
+    RU: 'Всегда на связи',
+  },
+  'pricing.growth.cta': {
+    EN: 'Get your team',
+    EL: 'Απόκτησε την ομάδα σου',
+    RU: 'Получить команду',
+  },
+  'pricing.growth.learnMore': {
+    EN: 'Learn more about Growth →',
+    EL: 'Μάθε περισσότερα για το Growth →',
+    RU: 'Подробнее о Growth →',
+  },
+
+  // Growth — expanded section
+  'growthDetails.heading': {
+    EN: 'Growth — Your marketing team.',
+    EL: 'Growth — Η ομάδα marketing σας.',
+    RU: 'Growth — Ваша команда маркетинга.',
+  },
+  'growthDetails.subheading': {
+    EN: 'Not a service. Not a subscription. A team.',
+    EL: 'Όχι υπηρεσία. Όχι συνδρομή. Ομάδα.',
+    RU: 'Не услуга. Не подписка. Команда.',
+  },
+  'growthDetails.description': {
+    EN: "Most small businesses don't have a marketing team. They have a website that sits there, a social account nobody posts on, and a Google listing somebody set up once. Growth changes that. We become your marketing team — building your website, running your Google presence, handling your social, tracking what works, and improving every month. You run the business. We run the marketing.",
+    EL: 'Οι περισσότερες μικρές επιχειρήσεις δεν έχουν ομάδα marketing. Έχουν ένα website που κάθεται, ένα social που κανείς δεν ενημερώνει, και ένα Google listing που κάποιος έστησε μια φορά. Το Growth το αλλάζει αυτό. Γινόμαστε η ομάδα marketing σας — φτιάχνουμε το website, τρέχουμε την παρουσία στη Google, διαχειριζόμαστε τα social, μετράμε τι δουλεύει, και βελτιώνουμε κάθε μήνα. Εσείς τρέχετε την επιχείρηση. Εμείς τρέχουμε το marketing.',
+    RU: 'У большинства малых бизнесов нет команды маркетинга. Есть сайт, который просто стоит, соцсеть, куда никто не пишет, и Google-профиль, который кто-то настроил когда-то. Growth меняет это. Мы становимся вашей командой маркетинга — строим ваш сайт, ведём присутствие в Google, управляем соцсетями, отслеживаем результаты и улучшаем каждый месяц. Вы управляете бизнесом. Мы управляем маркетингом.',
+  },
+
+  // Group 1 — website
+  'growthDetails.g1.heading': {
+    EN: 'We build your website',
+    EL: 'Φτιάχνουμε το website σας',
+    RU: 'Делаем ваш сайт',
+  },
+  'growthDetails.g1.outcome': {
+    EN: 'The foundation your team needs to work with. Multi-page, mobile-first, fast. Built in the first two weeks, then kept current every month.',
+    EL: 'Το θεμέλιο που χρειάζεται η ομάδα σας για να δουλέψει. Πολυσέλιδο, mobile-first, γρήγορο. Έτοιμο σε δύο εβδομάδες, ενημερωμένο κάθε μήνα μετά.',
+    RU: 'Фундамент, с которым работает ваша команда. Многостраничный, mobile-first, быстрый. Готов за две недели, и поддерживается каждый месяц.',
+  },
+  'growthDetails.g1.s1': {
+    EN: 'Up to 5 pages, custom-built for your business',
+    EL: 'Μέχρι 5 σελίδες, φτιαγμένες για την επιχείρησή σας',
+    RU: 'До 5 страниц, создано специально для вашего бизнеса',
+  },
+  'growthDetails.g1.s2': {
+    EN: 'Mobile-optimised, conversion-focused structure',
+    EL: 'Mobile-optimised, δομή που μετατρέπει επισκέπτες σε πελάτες',
+    RU: 'Mobile-optimised, структура для конверсий',
+  },
+  'growthDetails.g1.s3': {
+    EN: "CMS you can edit yourself (or leave to us — we're your team)",
+    EL: 'CMS που μπορείτε να επεξεργάζεστε (ή αφήστε το σε εμάς — είμαστε η ομάδα σας)',
+    RU: 'CMS, который можно редактировать самим (или оставьте нам — мы ваша команда)',
+  },
+  'growthDetails.g1.s4': {
+    EN: 'Custom animations and brand-appropriate interactions',
+    EL: 'Custom animations και interactions στο στυλ της μάρκας σας',
+    RU: 'Авторские анимации и взаимодействия в духе бренда',
+  },
+  'growthDetails.g1.s5': {
+    EN: 'Hosting and maintenance included',
+    EL: 'Hosting και συντήρηση περιλαμβάνονται',
+    RU: 'Хостинг и поддержка включены',
+  },
+
+  // Group 2 — Google
+  'growthDetails.g2.heading': {
+    EN: 'We get you found on Google',
+    EL: 'Σας βρίσκει ο κόσμος στη Google',
+    RU: 'Находят вас в Google',
+  },
+  'growthDetails.g2.outcome': {
+    EN: "When someone searches for what you do in your area, you're the business they find. Your team makes sure of it.",
+    EL: 'Όταν κάποιος ψάχνει αυτό που κάνετε στην περιοχή σας, εσείς είστε η επιχείρηση που βρίσκει. Η ομάδα σας το εξασφαλίζει.',
+    RU: 'Когда кто-то ищет то, что вы делаете, в вашем районе — вы та компания, которую он находит. Ваша команда это обеспечивает.',
+  },
+  'growthDetails.g2.s1': {
+    EN: 'Advanced SEO setup and ongoing optimisation',
+    EL: 'Advanced SEO setup και συνεχής optimisation',
+    RU: 'Продвинутая настройка SEO и постоянная оптимизация',
+  },
+  'growthDetails.g2.s2': {
+    EN: 'Google Business profile managed and kept current',
+    EL: 'Google Business profile, διαχείριση και ενημέρωση',
+    RU: 'Google Business профиль — управление и актуализация',
+  },
+  'growthDetails.g2.s3': {
+    EN: 'Local visibility improvements every month',
+    EL: 'Βελτιώσεις τοπικής προβολής κάθε μήνα',
+    RU: 'Улучшения локальной видимости каждый месяц',
+  },
+  'growthDetails.g2.s4': {
+    EN: 'Structured data and search optimisation',
+    EL: 'Structured data και search optimisation',
+    RU: 'Structured data и поисковая оптимизация',
+  },
+
+  // Group 3 — social
+  'growthDetails.g3.heading': {
+    EN: 'We run your social',
+    EL: 'Τρέχουμε τα social σας',
+    RU: 'Ведём ваши соцсети',
+  },
+  'growthDetails.g3.outcome': {
+    EN: 'A consistent, professional presence on Instagram and Facebook — because when customers check you out before visiting, you want them to want to come.',
+    EL: 'Σταθερή, επαγγελματική παρουσία σε Instagram και Facebook — γιατί όταν ο κόσμος σας ψάχνει πριν έρθει, θέλετε να θέλει να έρθει.',
+    RU: 'Стабильное, профессиональное присутствие в Instagram и Facebook — потому что когда клиенты вас проверяют перед визитом, вы хотите, чтобы они захотели прийти.',
+  },
+  'growthDetails.g3.s1': {
+    EN: 'Profile setup and optimisation',
+    EL: 'Profile setup και optimisation',
+    RU: 'Настройка и оптимизация профилей',
+  },
+  'growthDetails.g3.s2': {
+    EN: 'Monthly posting strategy built around your business',
+    EL: 'Μηνιαία στρατηγική posts βασισμένη στην επιχείρησή σας',
+    RU: 'Ежемесячная стратегия постов под ваш бизнес',
+  },
+  'growthDetails.g3.s3': {
+    EN: 'Consistent posting cadence — your team handles it',
+    EL: 'Σταθερός ρυθμός posts — η ομάδα σας το χειρίζεται',
+    RU: 'Стабильный ритм публикаций — ваша команда это делает',
+  },
+  'growthDetails.g3.s4': {
+    EN: 'Content framework (you supply photos, we handle the rest)',
+    EL: 'Content framework (δίνετε φωτογραφίες, εμείς κάνουμε τα υπόλοιπα)',
+    RU: 'Контент-фреймворк (вы даёте фото, мы делаем остальное)',
+  },
+
+  // Group 4 — tracking
+  'growthDetails.g4.heading': {
+    EN: "We track what's working",
+    EL: 'Μετράμε τι δουλεύει',
+    RU: 'Отслеживаем, что работает',
+  },
+  'growthDetails.g4.outcome': {
+    EN: "Every month, your team reports back on exactly what changed, what's driving results, and what's next. No guessing, no fog.",
+    EL: 'Κάθε μήνα, η ομάδα σας αναφέρει τι άλλαξε, τι φέρνει αποτελέσματα, και τι είναι επόμενο. Χωρίς μαντεψιές, χωρίς ομίχλη.',
+    RU: 'Каждый месяц ваша команда отчитывается: что изменилось, что приносит результат и что дальше. Без догадок, без тумана.',
+  },
+  'growthDetails.g4.s1': {
+    EN: 'Google Analytics + conversion tracking set up',
+    EL: 'Google Analytics + conversion tracking ρυθμισμένα',
+    RU: 'Google Analytics + отслеживание конверсий настроены',
+  },
+  'growthDetails.g4.s2': {
+    EN: 'Monthly performance report — plain language, no jargon',
+    EL: 'Μηνιαία αναφορά απόδοσης — απλή γλώσσα, χωρίς jargon',
+    RU: 'Ежемесячный отчёт по результатам — простым языком, без жаргона',
+  },
+  'growthDetails.g4.s3': {
+    EN: 'Traffic sources, best-performing pages, what to double down on',
+    EL: 'Πηγές επισκεψιμότητας, σελίδες που αποδίδουν, πού να εστιάσετε',
+    RU: 'Источники трафика, лучшие страницы, на чём сосредоточиться',
+  },
+  'growthDetails.g4.s4': {
+    EN: 'Real numbers, not vanity metrics',
+    EL: 'Πραγματικοί αριθμοί, όχι επιφανειακά νούμερα',
+    RU: 'Реальные цифры, а не метрики тщеславия',
+  },
+
+  // Group 5 — always on call
+  'growthDetails.g5.heading': {
+    EN: "We're always on call",
+    EL: 'Είμαστε πάντα διαθέσιμοι',
+    RU: 'Всегда на связи',
+  },
+  'growthDetails.g5.outcome': {
+    EN: 'You have our direct line. 2-hour WhatsApp response during working hours. You talk to the team that built your site and runs your marketing — not a ticket system, not an account manager.',
+    EL: 'Έχετε την άμεση γραμμή μας. Απάντηση 2 ωρών σε WhatsApp τις εργάσιμες ώρες. Μιλάτε με την ομάδα που έφτιαξε το site σας και τρέχει το marketing — όχι με ticket σύστημα, όχι με account manager.',
+    RU: 'У вас есть прямая линия к нам. Ответ в WhatsApp за 2 часа в рабочее время. Вы общаетесь с командой, которая сделала сайт и ведёт маркетинг — не с ticket-системой, не с account manager-ом.',
+  },
+  'growthDetails.g5.s1': {
+    EN: 'Direct WhatsApp support (no tickets, no queues)',
+    EL: 'Άμεση WhatsApp υποστήριξη (χωρίς tickets, χωρίς ουρές)',
+    RU: 'Прямая поддержка в WhatsApp (без тикетов, без очередей)',
+  },
+  'growthDetails.g5.s2': {
+    EN: 'Priority on updates and changes',
+    EL: 'Προτεραιότητα σε ενημερώσεις και αλλαγές',
+    RU: 'Приоритет на обновления и изменения',
+  },
+  'growthDetails.g5.s3': {
+    EN: '2-hour response during business hours',
+    EL: 'Απάντηση 2 ωρών σε εργάσιμες ώρες',
+    RU: 'Ответ за 2 часа в рабочее время',
+  },
+  'growthDetails.g5.s4': {
+    EN: 'The same team from day one to year three',
+    EL: 'Η ίδια ομάδα από την πρώτη μέρα μέχρι τον τρίτο χρόνο',
+    RU: 'Та же команда с первого дня до третьего года',
+  },
+
+  // Closing statement + CTA
+  'growthDetails.closing': {
+    EN: "Day One Growth is not a service you buy. It's a team you have.",
+    EL: 'Το Day One Growth δεν είναι υπηρεσία που αγοράζετε. Είναι ομάδα που έχετε.',
+    RU: 'Day One Growth — это не услуга, которую вы покупаете. Это команда, которая у вас есть.',
+  },
+  'growthDetails.cta': {
+    EN: 'Get your team',
+    EL: 'Απόκτησε την ομάδα σου',
+    RU: 'Получить команду',
   },
   'pricing.vatNote': {
     EN: 'All prices exclude VAT where applicable. Hosting and domain costs are separate.',
