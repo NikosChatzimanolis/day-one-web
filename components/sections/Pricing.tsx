@@ -54,9 +54,8 @@ const tiers: TierDef[] = [
     id: 'growth',
     nameKey: 'pricing.growth',
     subtitleKey: 'pricing.growth.subtitle',
-    price: '€350/mo',
+    price: 'From €1,000',
     priceNoteKey: 'pricing.growth.priceNote',
-    setupPriceKey: 'pricing.growth.setup',
     featureKeys: [
       'pricing.growth.c1',
       'pricing.growth.c2',
@@ -151,7 +150,7 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
         >
           {t(tier.nameKey, lang)}
         </h3>
-        {tier.subtitleKey && (
+        {tier.subtitleKey && t(tier.subtitleKey, lang) && (
           <p
             className={cn(
               'font-body text-sm font-[500] mb-3',
@@ -170,14 +169,16 @@ function PricingCard({ tier, lang }: { tier: TierDef; lang: Language }) {
           >
             {tier.price}
           </span>
-          <span
-            className={cn(
-              'font-body text-xs',
-              tier.highlighted ? 'text-[#9C9790]' : 'text-text-secondary'
-            )}
-          >
-            {t(tier.priceNoteKey, lang)}
-          </span>
+          {t(tier.priceNoteKey, lang) && (
+            <span
+              className={cn(
+                'font-body text-xs',
+                tier.highlighted ? 'text-[#9C9790]' : 'text-text-secondary'
+              )}
+            >
+              {t(tier.priceNoteKey, lang)}
+            </span>
+          )}
         </div>
         {tier.setupPriceKey && (
           <div className={cn(
