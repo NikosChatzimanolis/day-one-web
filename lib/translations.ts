@@ -545,6 +545,126 @@ const translations = {
 
   // ─── Scroll hint ───
   'scroll': { EN: 'SCROLL', EL: 'SCROLL', RU: 'SCROLL' },
+
+  // ─── Review submission page ───
+  'review.label': { EN: 'Your feedback', EL: 'Η γνώμη σας', RU: 'Ваш отзыв' },
+  'review.heading': {
+    EN: 'How was working with Day One?',
+    EL: 'Πώς ήταν η συνεργασία με τη Day One;',
+    RU: 'Каково было работать с Day One?',
+  },
+  'review.intro': {
+    EN: 'A couple of minutes from you helps us improve — and helps the next business owner decide. Be honest; we read every word.',
+    EL: 'Δυο λεπτά από εσάς μας βοηθούν να γίνουμε καλύτεροι — και βοηθούν τον επόμενο επιχειρηματία να αποφασίσει. Πείτε μας ειλικρινά τη γνώμη σας.',
+    RU: 'Пара минут вашего времени помогает нам стать лучше — и помогает следующему предпринимателю принять решение. Будьте честны, мы читаем каждое слово.',
+  },
+  'review.back': { EN: 'Back to site', EL: 'Πίσω στο site', RU: 'На сайт' },
+
+  // Rating questions
+  'review.q1': {
+    EN: 'Overall, how happy are you with the final website?',
+    EL: 'Συνολικά, πόσο ικανοποιημένοι είστε με την τελική ιστοσελίδα;',
+    RU: 'В целом, насколько вы довольны готовым сайтом?',
+  },
+  'review.q2': {
+    EN: 'Does it represent your business the way you wanted?',
+    EL: 'Αντιπροσωπεύει την επιχείρησή σας όπως θέλατε;',
+    RU: 'Представляет ли он ваш бизнес так, как вы хотели?',
+  },
+  'review.q3': {
+    EN: 'Has it helped bring in enquiries / calls / customers?',
+    EL: 'Σας έφερε ερωτήματα / κλήσεις / πελάτες;',
+    RU: 'Помог ли он привлечь заявки / звонки / клиентов?',
+  },
+  'review.q4': {
+    EN: 'How was communication throughout the project?',
+    EL: 'Πώς ήταν η επικοινωνία καθ’ όλη τη διάρκεια;',
+    RU: 'Как было общение на протяжении проекта?',
+  },
+  'review.q5': {
+    EN: 'How was delivery speed?',
+    EL: 'Πώς ήταν η ταχύτητα παράδοσης;',
+    RU: 'Какой была скорость выполнения?',
+  },
+  'review.q6': {
+    EN: 'How likely are you to refer us to another business owner?',
+    EL: 'Πόσο πιθανό είναι να μας συστήσετε σε κάποιον άλλο;',
+    RU: 'Насколько вероятно, что вы порекомендуете нас другому владельцу бизнеса?',
+  },
+
+  // Rating anchors (low / high)
+  'review.anchorLow': { EN: 'Not at all', EL: 'Καθόλου', RU: 'Совсем нет' },
+  'review.anchorHigh': { EN: 'Absolutely', EL: 'Απόλυτα', RU: 'Безусловно' },
+
+  // Business name
+  'review.businessName': { EN: 'Business name', EL: 'Όνομα επιχείρησης', RU: 'Название бизнеса' },
+  'review.businessNameOptional': { EN: 'optional', EL: 'προαιρετικό', RU: 'необязательно' },
+  'review.businessNamePlaceholder': {
+    EN: 'So we know who replied',
+    EL: 'Για να ξέρουμε ποιος απάντησε',
+    RU: 'Чтобы мы знали, кто ответил',
+  },
+
+  // Permission
+  'review.permission': {
+    EN: 'Can we use your feedback publicly?',
+    EL: 'Μπορούμε να χρησιμοποιήσουμε τη γνώμη σας δημόσια;',
+    RU: 'Можем ли мы использовать ваш отзыв публично?',
+  },
+  'review.permissionNamed': {
+    EN: 'Yes — name + business',
+    EL: 'Ναι — όνομα + επιχείρηση',
+    RU: 'Да — имя и бизнес',
+  },
+  'review.permissionAnonymous': {
+    EN: 'Yes — anonymous',
+    EL: 'Ναι — ανώνυμα',
+    RU: 'Да — анонимно',
+  },
+  'review.permissionPrivate': {
+    EN: 'No — private only',
+    EL: 'Όχι — μόνο ιδιωτικά',
+    RU: 'Нет — только конфиденциально',
+  },
+
+  // One-liner
+  'review.oneLiner': {
+    EN: 'One line you’d use to describe working with Day One:',
+    EL: 'Μια φράση που θα χρησιμοποιούσατε για τη συνεργασία με τη Day One:',
+    RU: 'Одна фраза, которой вы описали бы работу с Day One:',
+  },
+  'review.oneLinerPlaceholder': {
+    EN: 'Say it in your own words…',
+    EL: 'Πείτε το με δικά σας λόγια…',
+    RU: 'Скажите своими словами…',
+  },
+
+  // Submit + states
+  'review.submit': { EN: 'Send Review', EL: 'Αποστολή', RU: 'Отправить отзыв' },
+  'review.sending': { EN: 'Sending…', EL: 'Αποστολή…', RU: 'Отправка…' },
+  'review.successTitle': { EN: 'Thank you!', EL: 'Ευχαριστούμε!', RU: 'Спасибо!' },
+  'review.successText': {
+    EN: 'Your review means a lot — it helps us get better and helps others decide.',
+    EL: 'Η γνώμη σας μετράει πολύ — μας βοηθά να γινόμαστε καλύτεροι και βοηθά κι άλλους να αποφασίσουν.',
+    RU: 'Ваш отзыв очень важен — он помогает нам становиться лучше и помогает другим принять решение.',
+  },
+
+  // Validation
+  'review.ratingsRequired': {
+    EN: 'Please answer all six rating questions.',
+    EL: 'Παρακαλώ απαντήστε και στις έξι ερωτήσεις βαθμολογίας.',
+    RU: 'Пожалуйста, ответьте на все шесть вопросов с оценкой.',
+  },
+  'review.permissionRequired': {
+    EN: 'Please choose a permission option.',
+    EL: 'Παρακαλώ επιλέξτε μια επιλογή αδειοδότησης.',
+    RU: 'Пожалуйста, выберите вариант разрешения.',
+  },
+  'review.error': {
+    EN: 'Something went wrong. Please try again.',
+    EL: 'Κάτι πήγε στραβά. Δοκιμάστε ξανά.',
+    RU: 'Что-то пошло не так. Попробуйте снова.',
+  },
 } as const
 
 export type TranslationKey = keyof typeof translations
