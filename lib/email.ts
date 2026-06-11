@@ -19,6 +19,7 @@ function getResend() {
 
 export async function sendDayOneEmail(opts: {
   form: EmailForm
+  to?: string | string[]
   subject: string
   text: string
   html: string
@@ -28,7 +29,7 @@ export async function sendDayOneEmail(opts: {
 
   return getResend().emails.send({
     from,
-    to: CONTACT_TO,
+    to: opts.to ?? CONTACT_TO,
     subject: opts.subject,
     text: opts.text,
     html: opts.html,

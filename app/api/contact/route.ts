@@ -1,6 +1,7 @@
 // ── app/api/contact/route.ts ──
 import { NextRequest, NextResponse } from 'next/server'
-import { sendDayOneEmail } from '@/lib/email'
+import { sendDayOneEmail, CONTACT_TO } from '@/lib/email'
+import { buildContactAutoReply } from '@/lib/email-templates'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -111,6 +112,20 @@ Sent via dayone-web.com
         { error: 'Failed to send message. Please try again or contact us directly.' },
         { status: 500 }
       )
+    }
+
+    const autoReply = buildContactAutoReply(name)
+    const { error: autoReplyError } = await sendDayOneEmail({
+      form: 'contact',
+      to: email,
+      replyTo: CONTACT_TO,
+      subject: 'We got your message — Day One',
+      text: autoReply.text,
+      html: autoReply.html,
+    })
+
+    if (autoReplyError) {
+      console.error('[contact/route] Auto-reply error:', autoReplyError)
     }
 
     return NextResponse.json({ success: true }, { status: 200 })
