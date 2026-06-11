@@ -1,6 +1,6 @@
 // ── app/api/contact/route.ts ──
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { sendDayOneEmail } from '@/lib/email'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -39,22 +39,8 @@ export async function POST(req: NextRequest) {
     const email = (body.email as string).trim()
     const message = (body.message as string).trim()
 
-    // Build transporter — Gmail SMTP with app password
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    })
-
-    const toAddress = 'contact@dayone-web.com'
-
-    await transporter.sendMail({
-      from: `"Day One Website" <${process.env.EMAIL_USER}>`,
-      to: toAddress,
+    const { error } = await sendDayOneEmail({
+      form: 'contact',
       replyTo: email,
       subject: `New enquiry from ${name} — Day One`,
       text: `
@@ -118,6 +104,14 @@ Sent via dayone-web.com
 </html>
       `.trim(),
     })
+
+    if (error) {
+      console.error('[contact/route] Resend error:', error)
+      return NextResponse.json(
+        { error: 'Failed to send message. Please try again or contact us directly.' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (err) {

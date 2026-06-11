@@ -1,6 +1,6 @@
 // ── app/api/review/route.ts ──
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { sendDayOneEmail } from '@/lib/email'
 
 const RATING_KEYS = ['overall', 'represents', 'enquiries', 'communication', 'speed', 'refer'] as const
 type RatingKey = (typeof RATING_KEYS)[number]
@@ -84,18 +84,6 @@ export async function POST(req: NextRequest) {
     const { ratings, businessName, permission, oneLiner } = parsed
     const fromName = businessName || 'a client'
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    })
-
-    const toAddress = 'contact@dayone-web.com'
-
     const ratingsText = RATING_KEYS.map(
       (k) => `${RATING_LABELS[k]}: ${ratings[k]}/5`
     ).join('\n')
@@ -108,9 +96,8 @@ export async function POST(req: NextRequest) {
       </tr>`
     ).join('')
 
-    await transporter.sendMail({
-      from: `"Day One Website" <${process.env.EMAIL_USER}>`,
-      to: toAddress,
+    const { error: sendError } = await sendDayOneEmail({
+      form: 'feedback',
       subject: `New review from ${fromName} — Day One`,
       text: `
 New client review from Day One website
@@ -180,6 +167,14 @@ Sent via dayone-web.com
 </html>
       `.trim(),
     })
+
+    if (sendError) {
+      console.error('[review/route] Resend error:', sendError)
+      return NextResponse.json(
+        { error: 'Failed to send review. Please try again or contact us directly.' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (err) {
