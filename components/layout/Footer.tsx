@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useScrollContext } from '@/context/ScrollContext'
 import { useLanguage } from '@/context/LanguageContext'
 import { t, languages } from '@/lib/translations'
+import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 
 const navKeys = [
@@ -64,6 +65,12 @@ export default function Footer() {
                   {t(item.key, lang)}
                 </a>
               ))}
+              <Link
+                href="/review"
+                className="font-body text-sm text-[#9C9790] hover:text-[#F7F4EF] transition-colors duration-200 w-fit"
+              >
+                {t('footer.leaveReview', lang)}
+              </Link>
             </nav>
           </div>
 

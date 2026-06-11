@@ -446,6 +446,7 @@ const translations = {
   'footer.navigation': { EN: 'Navigation', EL: 'Πλοήγηση', RU: 'Навигация' },
   'footer.getInTouch': { EN: 'Get in touch', EL: 'Επικοινωνία', RU: 'Связаться' },
   'footer.copyright': { EN: '© 2026 Day One. Cyprus.', EL: '© 2026 Day One. Κύπρος.', RU: '© 2026 Day One. Кипр.' },
+  'footer.leaveReview': { EN: 'Leave a review', EL: 'Αφήστε μια κριτική', RU: 'Оставить отзыв' },
 
   // ─── How We Work page ───
   'hww.label': { EN: 'How we work', EL: 'Πώς δουλεύουμε', RU: 'Как мы работаем' },
