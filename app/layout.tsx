@@ -1,23 +1,13 @@
 // ── app/layout.tsx ──
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans, Alex_Brush, Jost } from 'next/font/google'
+import { Alex_Brush, Jost, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/ui/CustomCursor'
-import LanguageProvider from '@/context/LanguageContext'
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '600'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-body',
-  display: 'swap',
-})
+import ReactiveGrid from '@/components/ui/ReactiveGrid'
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import { JsonLd } from './jsonld'
+import { site } from '@/lib/site'
 
 const alexBrush = Alex_Brush({
   subsets: ['latin'],
@@ -28,59 +18,60 @@ const alexBrush = Alex_Brush({
 
 const jost = Jost({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600'],
+  weight: ['200', '300', '400', '500'],
   variable: '--font-jost',
   display: 'swap',
 })
 
-const siteTitle = 'Day One — Websites & Your Marketing Team | Cyprus & Greece'
+// Astrala Advisory's own brand serif — used ONLY inside the Astrala case-study
+// brand mockup so it reads as their real system, not Day One's. preload:false
+// keeps it off every other route (it's only needed on /work).
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+  preload: false,
+})
+
+const siteTitle = 'Day One — A technical partner that ships like a founder'
 const siteDescription =
-  'Day One builds your website and becomes your marketing team. We run your Google presence, manage your social, track what works, and improve every month. Built for small businesses in Cyprus and Greece. From €550 one-time, or €350/mo for your full marketing team.'
+  'Day One builds the systems funded startups and scale-ups run on. One team, from build to scale to maintain. We stay past launch.'
 
 export const metadata: Metadata = {
-  title: siteTitle,
+  metadataBase: new URL(site.url),
+  title: {
+    default: siteTitle,
+    template: '%s — Day One',
+  },
   description: siteDescription,
   keywords: [
-    'web development Cyprus',
-    'web development Greece',
-    'marketing team Cyprus',
-    'marketing team Greece',
-    'website maintenance Cyprus',
-    'website maintenance Greece',
-    'social media management Cyprus',
-    'social media management Greece',
-    'website design Cyprus',
-    'small business website Cyprus',
-    'web agency Cyprus',
-    'social media marketing Cyprus',
-    'website support Cyprus',
-    'ongoing website maintenance',
-    'digital marketing Cyprus',
-    'web development Paphos',
-    'social media Paphos',
+    'technical partner for startups',
+    'custom software development',
+    'web platforms',
+    'product engineering studio',
+    'startup development partner',
+    'scale-up engineering',
+    'Next.js development studio',
+    'Cyprus software studio',
   ],
-  authors: [{ name: 'Day One Studio', url: 'https://dayone-web.com' }],
-  creator: 'Day One Studio',
-  alternates: {
-    canonical: 'https://dayone-web.com',
-    languages: {
-      'en': 'https://dayone-web.com',
-      'x-default': 'https://dayone-web.com',
-    },
-  },
+  authors: [{ name: 'Day One Web Studio', url: site.url }],
+  creator: 'Day One Web Studio',
+  alternates: { canonical: site.url },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://dayone-web.com',
+    url: site.url,
     siteName: 'Day One',
     title: siteTitle,
     description: siteDescription,
     images: [
       {
-        url: 'https://dayone-web.com/opengraph-image',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Day One — Websites & Your Marketing Team',
+        alt: 'Day One — A technical partner that ships like a founder',
       },
     ],
   },
@@ -88,36 +79,41 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteTitle,
     description: siteDescription,
-    images: ['https://dayone-web.com/opengraph-image'],
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} ${alexBrush.variable} ${jost.variable}`}
+      className={`${alexBrush.variable} ${jost.variable} ${cormorant.variable}`}
     >
       <body className="font-body bg-bg text-text-primary antialiased">
-        <LanguageProvider>
-          <CustomCursor />
-          {children}
-        </LanguageProvider>
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'ProfessionalService',
+            name: 'Day One Web Studio',
+            url: site.url,
+            description: siteDescription,
+            email: site.email,
+            telephone: site.phoneHref,
+            address: { '@type': 'PostalAddress', addressLocality: 'Paphos', addressCountry: 'CY' },
+            founder: { '@type': 'Person', name: 'Nikolaos Chatzimanolis' },
+            serviceType: ['Custom Software Development', 'Web Platforms', 'Product Engineering', 'Growth Partnership'],
+          }}
+        />
+        <ReactiveGrid />
+        <CustomCursor />
+        <Navbar />
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   )
