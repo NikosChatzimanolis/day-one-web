@@ -43,11 +43,13 @@
   --color-dark-text-secondary: #B8AEA1;
   --color-dark-text-tertiary: #9A8F82;
 
-  /* Fonts — Jost only (+ Alex Brush script). Fraunces/DM Sans removed. */
+  /* Fonts — Jost only (+ Alex Brush script). Fraunces/DM Sans removed.
+     Note: do NOT redefine --font-script here — next/font sets it on <html>
+     to the Alex Brush family. Re-declaring it as var(--font-script) is a
+     self-reference, which is invalid and silently breaks the logo script. */
   --font-serif: var(--font-jost), system-ui, sans-serif;
   --font-display: var(--font-jost), system-ui, sans-serif;
   --font-body: var(--font-jost), system-ui, sans-serif;
-  --font-script: var(--font-script), cursive;
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
