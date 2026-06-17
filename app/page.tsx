@@ -1,399 +1,242 @@
-// ── app/page.tsx ──
-'use client'
-
-import { useRef } from 'react'
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import ScrollProvider, { useScrollContext } from '@/context/ScrollContext'
-import { useLanguage } from '@/context/LanguageContext'
-import { t } from '@/lib/translations'
-import SplitLayout from '@/components/layout/SplitLayout'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import Process from '@/components/sections/HowItWorks'
-import Offer from '@/components/sections/Pricing'
-import { ContactFormCard } from '@/components/sections/Contact'
+// ── app/page.tsx — Home ──
+import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
-import { JsonLd } from './jsonld'
+import BookCall from '@/components/ui/BookCall'
+import { Button } from '@/components/ui/Button'
+import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import TextReveal from '@/components/ui/TextReveal'
+import Magnetic from '@/components/ui/Magnetic'
+import HorizonRows from '@/components/sections/HorizonRows'
+import CtaSection from '@/components/sections/CtaSection'
+import ScrollCue from '@/components/ui/ScrollCue'
 
-// ─── Shared animation variants ────────────────────────────────────────────────
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+const tracks = [
+  {
+    no: '01',
+    name: 'Build',
+    line: 'The concrete system your business runs on, built for your exact need — from first idea to something real in the world.',
   },
-}
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  {
+    no: '02',
+    name: 'Scale',
+    line: 'It grows as you do. New surface, more load, the next thing you need — shaped by the team that already knows it.',
   },
-}
-
-// ─── Hero ─────────────────────────────────────────────────────────────────────
-
-function HeroLeft() {
-  const { scrollToSection } = useScrollContext()
-  const { lang } = useLanguage()
-  const shouldReduceMotion = useReducedMotion()
-
-  const headline = t('hero.headline1', lang)
-  const headline2 = t('hero.headline2', lang)
-  const words1 = headline.split(' ')
-  const words2 = headline2.split(' ')
-
-  const wordVariants: Variants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(6px)' },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: { delay: 0.2 + i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-    }),
-  }
-
-  return (
-    <div className="relative flex-1 flex flex-col bg-bg overflow-hidden">
-      {/* Gradient mesh — covers the full snap section height */}
-      <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(var(--color-text) 1px, transparent 1px), linear-gradient(90deg, var(--color-text) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Content — centered within */}
-      <div className="relative z-10 flex flex-col justify-start md:justify-center flex-1 px-6 lg:px-14 pt-28 md:pt-24 pb-10">
-      <motion.p
-        className="relative z-10 section-label mb-6"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-      >
-        {t('hero.label', lang)}
-      </motion.p>
-
-      <h1
-        className="relative z-10 font-display text-4xl md:text-5xl lg:text-6xl font-[300] text-text-primary leading-[1.1] mb-6"
-        aria-label={`${headline} ${headline2}`}
-      >
-        <span className="block" aria-hidden="true">
-          {words1.map((word, i) => (
-            <motion.span
-              key={`h1-${i}`}
-              className="inline-block mr-[0.2em] last:mr-0"
-              custom={i}
-              variants={shouldReduceMotion ? undefined : wordVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </span>
-        <span className="block text-accent" aria-hidden="true">
-          {words2.map((word, i) => (
-            <motion.span
-              key={`h2-${i}`}
-              className="inline-block mr-[0.2em] last:mr-0"
-              custom={words1.length + i}
-              variants={shouldReduceMotion ? undefined : wordVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </span>
-      </h1>
-
-      <motion.p
-        className="relative z-10 font-body text-base md:text-lg text-text-secondary leading-relaxed max-w-md mb-8"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {t('hero.description', lang)}
-      </motion.p>
-
-      <motion.div
-        className="relative z-10 flex flex-col sm:flex-row gap-3"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault()
-            scrollToSection(3)
-          }}
-          className="inline-flex items-center justify-center px-6 py-3 font-body font-[500] text-sm text-white bg-accent rounded-sm hover:bg-accent-dark transition-colors duration-250"
-        >
-          {t('hero.cta', lang)}
-        </a>
-      </motion.div>
-
-      <motion.p
-        className="relative z-10 mt-5 font-body text-xs text-text-secondary/60"
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.3, duration: 0.4 }}
-      >
-        {t('hero.note', lang)}
-      </motion.p>
-      </div>
-    </div>
-  )
-}
-
-function HeroRight() {
-  return (
-    <div className="relative hidden md:flex items-center justify-center min-h-full bg-bg overflow-hidden">
-      <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(var(--color-text) 1px, transparent 1px), linear-gradient(90deg, var(--color-text) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-        aria-hidden="true"
-      />
-      <div className="relative z-10 select-none pointer-events-none" aria-hidden="true">
-        <Logo variant="primary" size="2xl" />
-      </div>
-    </div>
-  )
-}
-
-// ─── Demo (placeholder) ───────────────────────────────────────────────────────
-
-function DemoLeft() {
-  const shouldReduceMotion = useReducedMotion()
-  const { scrollToSection } = useScrollContext()
-  const { lang } = useLanguage()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col justify-center min-h-full px-6 lg:px-12 pt-24 pb-10 bg-bg"
-      variants={shouldReduceMotion ? undefined : containerVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      <motion.p className="section-label mb-5" variants={shouldReduceMotion ? undefined : itemVariants}>
-        {t('demo.label', lang)}
-      </motion.p>
-      <motion.h2
-        className="font-display text-3xl md:text-4xl font-[300] text-text-primary leading-tight mb-5"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {t('demo.heading', lang)}
-      </motion.h2>
-      <motion.p
-        className="font-body text-sm text-text-secondary leading-relaxed mb-8 max-w-xs"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {t('demo.description', lang)}
-      </motion.p>
-      <motion.div variants={shouldReduceMotion ? undefined : itemVariants}>
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault()
-            scrollToSection(3)
-          }}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-sm rounded-sm hover:bg-accent-dark transition-colors duration-250"
-        >
-          {t('demo.cta', lang)} <span aria-hidden="true">→</span>
-        </a>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-function DemoRight() {
-  const { lang } = useLanguage()
-
-  return (
-    <div className="relative flex items-center justify-center min-h-full bg-surface overflow-hidden px-8 pt-16 pb-10">
-      <div className="w-full max-w-lg">
-        <div className="rounded-xl overflow-hidden border border-border bg-bg shadow-lg">
-          {/* Browser chrome */}
-          <div className="bg-[#E8E3DC] px-4 py-2.5 flex items-center gap-2 flex-shrink-0">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-              <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-              <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-            </div>
-            <div className="flex-1 mx-3 bg-white/60 rounded px-3 py-1 text-xs text-text-secondary truncate font-mono">
-              your-business.com
-            </div>
-          </div>
-          {/* Placeholder content */}
-          <div className="p-8 flex flex-col items-center justify-center min-h-[260px] text-center">
-            <div className="w-12 h-12 rounded-sm bg-accent/10 flex items-center justify-center mb-4">
-              <span className="text-accent text-lg">▶</span>
-            </div>
-            <p className="font-display text-xl font-[300] text-text-primary mb-2">
-              {t('demo.placeholder.title', lang)}
-            </p>
-            <p className="font-body text-sm text-text-secondary max-w-xs">
-              {t('demo.placeholder.text', lang)}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ─── Contact ──────────────────────────────────────────────────────────────────
-
-function ContactLeft() {
-  const shouldReduceMotion = useReducedMotion()
-  const { lang } = useLanguage()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref as React.RefObject<Element>, { once: false, margin: '-40px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col justify-center min-h-full px-6 lg:px-12 pt-24 pb-10 bg-bg overflow-hidden"
-      variants={shouldReduceMotion ? undefined : containerVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      <motion.p className="section-label mb-5" variants={shouldReduceMotion ? undefined : itemVariants}>
-        {t('contact.label', lang)}
-      </motion.p>
-      <motion.h2
-        className="font-display text-3xl md:text-4xl font-[300] text-text-primary leading-tight mb-6"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {t('contact.heading', lang)}
-      </motion.h2>
-      <motion.p
-        className="font-body text-sm text-text-secondary leading-relaxed mb-8"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {t('contact.description', lang)}
-      </motion.p>
-
-      {/* Trust elements */}
-      <motion.div
-        className="flex flex-col gap-4 mb-8"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {[
-          { icon: '💬', label: t('contact.whatsapp', lang), value: '+357 96 254 148' },
-          { icon: '✉', label: t('contact.email', lang), value: 'contact@dayone-web.com' },
-          { icon: '📍', label: t('contact.basedIn', lang), value: t('contact.location', lang) },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center gap-3">
-            <span className="text-lg" aria-hidden="true">{item.icon}</span>
-            <div>
-              <p className="font-body text-xs text-text-secondary">{item.label}</p>
-              <p className="font-body text-sm text-text-primary font-[500]">{item.value}</p>
-            </div>
-          </div>
-        ))}
-      </motion.div>
-
-      <motion.p
-        className="font-body text-xs text-text-secondary/60 italic"
-        variants={shouldReduceMotion ? undefined : itemVariants}
-      >
-        {t('contact.responseTime', lang)}
-      </motion.p>
-    </motion.div>
-  )
-}
-
-function ContactRight() {
-  return (
-    <div className="flex flex-col justify-center items-center min-h-full px-6 lg:px-10 pt-24 pb-10 bg-surface overflow-y-auto">
-      <div className="w-full max-w-md">
-        <ContactFormCard />
-      </div>
-    </div>
-  )
-}
-
-// ─── Back to top ──────────────────────────────────────────────────────────────
-
-function BackToTop() {
-  const { scrollToSection } = useScrollContext()
-  const { lang } = useLanguage()
-  return (
-    <div className="text-center py-6 bg-surface border-t border-border">
-      <button
-        onClick={() => scrollToSection(0)}
-        className="font-body text-sm text-text-secondary/60 hover:text-text-secondary transition-colors duration-200"
-      >
-        {t('backToTop', lang)}
-      </button>
-    </div>
-  )
-}
-
-// ─── Panel definitions ────────────────────────────────────────────────────────
-
-const PANELS = [
-  { left: <HeroLeft />,     right: <HeroRight /> },      // 0: hero
-  { children: <Process /> },                               // 1: process (full)
-  { children: <Offer /> },                                 // 2: offer (full)
-  { left: <ContactLeft />,   right: <ContactRight /> },   // 3: contact
+  {
+    no: '03',
+    name: 'Maintain',
+    line: 'It stays cared for. Watched, refined, kept sharp. The relationship doesn’t end at launch — that’s where it settles in.',
+  },
 ]
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+const beats = [
+  {
+    title: 'Built for one company’s exact need',
+    body: 'No templates, no off-the-shelf compromise. We build the system your business actually requires, the way it actually works.',
+  },
+  {
+    title: 'The same team builds and maintains',
+    body: 'The people who designed it are the people who keep it running. Understanding compounds instead of resetting.',
+  },
+  {
+    title: 'No handoff',
+    body: 'Nothing gets thrown over a wall. There is no second team, no knowledge lost in translation, no starting over.',
+  },
+  {
+    title: 'We stay',
+    body: 'Launch is the beginning, not the finish line. We’re still here months later, still shaping what we built.',
+  },
+]
 
 export default function HomePage() {
   return (
-    <ScrollProvider>
-      <JsonLd data={{
-        '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'Day One Web Studio',
-        url: 'https://dayone-web.com',
-        description: 'Day One builds your website and becomes your marketing team. Websites, Google presence, social media, and monthly reporting for small businesses in Cyprus and Greece.',
-        email: 'contact@dayone-web.com',
-        telephone: '+35796254148',
-        address: {
-          '@type': 'PostalAddress',
-          addressCountry: 'CY',
-        },
-        areaServed: [
-          { '@type': 'Country', name: 'Cyprus' },
-          { '@type': 'Country', name: 'Greece' },
-        ],
-        serviceType: ['Web Development', 'Marketing Team Service', 'Social Media Management', 'Website Maintenance'],
-        priceRange: '$$',
-      }} />
-      <Navbar />
-      <main>
-        <SplitLayout
-          panels={PANELS}
-          after={
-            <>
-              <div className="snap-section-end">
-                <BackToTop />
-                <Footer />
+    <>
+      {/* ── Hero — centered lockup, full height ────────────── */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
+        <div className="container-wide relative z-10">
+          <div className="flex min-h-screen flex-col items-center justify-center text-center py-28">
+            <Reveal className="mb-8 sm:mb-10">
+              <Magnetic mode="ambient" strength={0.05} maxShift={18}>
+                <Logo variant="primary" size="2xl" className="justify-center" />
+              </Magnetic>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="eyebrow mb-6">A technical partner — Paphos, Cyprus</p>
+            </Reveal>
+            <TextReveal
+              as="h1"
+              className="t-h2 display-balance max-w-3xl mx-auto"
+              trigger="load"
+              baseDelay={0.18}
+              stagger={0.07}
+              lines={[
+                { text: 'Build, scale, maintain.' },
+                { text: 'One continuous relationship.', className: 'text-accent mt-2' },
+              ]}
+            />
+            <Reveal delay={0.18}>
+              <p className="t-lead mt-8 text-text-secondary measure-lg mx-auto display-pretty">
+                From idea to realization, we build the concrete system your business needs — and make sure you&rsquo;re visible to the right people.
+              </p>
+            </Reveal>
+            <Reveal delay={0.26}>
+              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+                <BookCall size="lg" />
+                <Button href="/work" variant="outline" size="lg" arrow>
+                  See our work
+                </Button>
               </div>
-            </>
-          }
-        />
-      </main>
-    </ScrollProvider>
+            </Reveal>
+          </div>
+        </div>
+        <ScrollCue />
+      </section>
+
+      {/* ── The promise — left-anchored statement (uses the left space) ── */}
+      <section className="border-t border-border bg-bg">
+        <div className="container-wide section">
+          <Reveal>
+            <p className="eyebrow mb-8">Why us</p>
+          </Reveal>
+          <Reveal>
+            <p className="t-h2 text-text-primary display-balance max-w-4xl">
+              One team, from day one. We build the system, we understand it completely, and we stay long after it ships.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-9 font-body text-base md:text-lg text-text-secondary leading-relaxed measure-lg">
+              Most studios hand you a finished thing and move on. We don&rsquo;t. The value isn&rsquo;t in the launch — it&rsquo;s in everything after, when understanding compounds and the system becomes something only we could keep improving. You get a partner who treats your business like their own, because the work is never really done.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── What we do — editorial numbered horizons ───────── */}
+      <section className="section-dark">
+        <div className="container-wide section">
+          <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
+            <Reveal className="md:col-span-3">
+              <p className="eyebrow">What we do</p>
+            </Reveal>
+            <div className="md:col-span-8 md:col-start-5">
+              <TextReveal
+                as="h2"
+                className="t-h1 display-balance"
+                stagger={0.04}
+                lines={[{ text: 'Not three services. Three horizons of the same engagement.' }]}
+              />
+              <Reveal delay={0.1}>
+                <p className="mt-7 font-body text-base md:text-lg text-[#A39E96] leading-relaxed measure-lg">
+                  Build, scale and maintain aren&rsquo;t a menu you pick from. They&rsquo;re one relationship over time, held by one team.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+
+          <HorizonRows tracks={tracks} />
+
+          <Reveal delay={0.1}>
+            <div className="mt-14">
+              <Button href="/services" variant="outline-dark" size="lg" arrow>
+                How we work together
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Proof — heading + hairline list, Forge accent row ─ */}
+      <section className="bg-bg border-t border-border">
+        <div className="container-wide section">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-8">
+            <div className="md:col-span-3">
+              <Reveal>
+                <p className="eyebrow mb-5">Proof</p>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <p className="font-body text-sm text-text-tertiary leading-relaxed max-w-[220px]">
+                  Named, real, and in use. Not a logo wall.
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="md:col-span-9">
+              <RevealGroup className="flex flex-col" stagger={0.1}>
+                <RevealItem className="border-t border-border">
+                  <Link href="/work" className="group grid md:grid-cols-[180px_1fr_auto] gap-3 md:gap-8 items-start md:items-center py-8 md:py-10 transition-colors duration-300">
+                    <span className="eyebrow-muted pt-1">Ongoing engagement</span>
+                    <span className="block">
+                      <span className="block t-h2 text-text-primary group-hover:text-accent transition-colors duration-250">Astrala Advisory</span>
+                      <span className="block mt-3 font-body text-base text-text-secondary leading-relaxed measure">
+                        Content, newsletter and brand work for an advisory firm — an ongoing engagement, live and building.
+                      </span>
+                    </span>
+                    <span aria-hidden="true" className="hidden md:block text-text-tertiary text-xl transition-all duration-300 group-hover:text-accent group-hover:translate-x-1">→</span>
+                  </Link>
+                </RevealItem>
+
+                <RevealItem className="border-t border-border">
+                  <Link href="/work" className="group grid md:grid-cols-[180px_1fr_auto] gap-3 md:gap-8 items-start md:items-center py-8 md:py-10 transition-colors duration-300">
+                    <span className="eyebrow-muted pt-1">Delivered build</span>
+                    <span className="block">
+                      <span className="block t-h2 text-text-primary group-hover:text-accent transition-colors duration-250">Delbeteris</span>
+                      <span className="block mt-3 font-body text-base text-text-secondary leading-relaxed measure">
+                        A clean, fast site for a private-transfer company in Northern Greece — delivered, live, doing its job.
+                      </span>
+                    </span>
+                    <span aria-hidden="true" className="hidden md:block text-text-tertiary text-xl transition-all duration-300 group-hover:text-accent group-hover:translate-x-1">→</span>
+                  </Link>
+                </RevealItem>
+              </RevealGroup>
+
+              {/* Forge accent row — distinct from the case studies */}
+              <Reveal delay={0.08}>
+                <Link
+                  href="/forge"
+                  className="group mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-2 border-rust bg-surface/60 pl-6 pr-6 py-7 transition-colors duration-300 hover:bg-surface"
+                >
+                  <p className="t-h3 text-text-primary font-light">
+                    The system we run Day One on.
+                    <span className="text-text-tertiary"> Built by us, for us.</span>
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 font-body text-sm text-accent whitespace-nowrap">
+                    Meet Forge
+                    <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+                  </span>
+                </Link>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── How we work — heading + offset grid ────────────── */}
+      <section className="bg-surface border-t border-border">
+        <div className="container-wide section">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <p className="eyebrow mb-7">How we work</p>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <h2 className="t-h1 max-w-xs display-balance">Four things that don&rsquo;t change.</h2>
+              </Reveal>
+            </div>
+
+            <RevealGroup className="lg:col-span-7 lg:col-start-6 grid sm:grid-cols-2 gap-x-12 gap-y-12" stagger={0.1}>
+              {beats.map((beat, i) => (
+                <RevealItem key={beat.title}>
+                  <span className="t-index text-accent">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="t-h3 mt-4 text-text-primary">{beat.title}</h3>
+                  <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure">{beat.body}</p>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </div>
+        </div>
+      </section>
+
+      <CtaSection />
+    </>
   )
 }
