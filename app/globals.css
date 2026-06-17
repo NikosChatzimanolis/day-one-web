@@ -305,6 +305,18 @@ a { color: inherit; text-decoration: none; }
   .svc { padding: 2.25rem 1.75rem; }
 }
 
+/* ── Magnetic mail link — reference underline-sweep on hover ── */
+.mail-sweep { position: relative; }
+.mail-sweep::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px;
+  background: var(--color-rust); transition: width 0.5s var(--ease);
+}
+.mail-sweep:hover { color: var(--color-rust); }
+.mail-sweep:hover::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .mail-sweep::after { transition: none; }
+}
+
 /* ─────────────────────────────────────────
    Hero scroll cue (reference drawing line)
 ───────────────────────────────────────── */
