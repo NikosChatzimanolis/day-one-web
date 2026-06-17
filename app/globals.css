@@ -260,6 +260,52 @@ a { color: inherit; text-decoration: none; }
 * { scrollbar-width: thin; scrollbar-color: var(--color-border-strong) var(--color-bg); }
 
 /* ─────────────────────────────────────────
+   Section rhythm + card/tile primitives (reference)
+───────────────────────────────────────── */
+.sec-pad { padding-block: clamp(5.25rem, 9vw, 7.5rem); }
+
+/* Service card — cream surface, hairline border, rust left-bar that grows
+   to full height on hover, with a subtle lift. */
+.svc {
+  position: relative; overflow: hidden;
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  padding: clamp(2.25rem, 3vw, 2.875rem) clamp(1.75rem, 3vw, 2.625rem);
+  transition: transform 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+.svc::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 0;
+  background: var(--color-rust); transition: height 0.6s var(--ease);
+}
+.svc:hover { transform: translateY(-4px); border-color: rgba(192, 76, 42, 0.35); }
+.svc:hover::before { height: 100%; }
+
+/* Work tile — dark 16:10 panel with a rust radial glow that intensifies on
+   hover; numbered, with a grayscale locked state. */
+.tile {
+  position: relative; overflow: hidden; aspect-ratio: 16 / 10;
+  display: flex; align-items: flex-end; padding: 2rem;
+  background: var(--color-dark); color: var(--color-bg);
+}
+.tile .glow {
+  position: absolute; inset: 0; transition: opacity 0.6s var(--ease); opacity: 0.85;
+  background: radial-gradient(120% 120% at 30% 110%, rgba(192, 76, 42, 0.55), transparent 60%);
+}
+.tile:hover .glow { opacity: 1; }
+.tile .tnum { position: absolute; top: 1.6rem; left: 2rem; font-size: 12px; letter-spacing: 0.3em; color: var(--color-muted); }
+.tile h4, .tile .tile-title { position: relative; z-index: 2; }
+.tile.locked { filter: grayscale(1); opacity: 0.5; }
+.tile.locked .glow { background: radial-gradient(120% 120% at 30% 110%, rgba(154, 143, 130, 0.4), transparent 60%); }
+.tile .lock {
+  position: absolute; top: 1.5rem; right: 1.875rem; font-size: 11px; letter-spacing: 0.24em;
+  color: var(--color-bg); border: 1px solid rgba(242, 237, 228, 0.4); padding: 5px 11px; border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .svc { padding: 2.25rem 1.75rem; }
+}
+
+/* ─────────────────────────────────────────
    Hero scroll cue (reference drawing line)
 ───────────────────────────────────────── */
 .scrollcue {
@@ -286,6 +332,7 @@ a { color: inherit; text-decoration: none; }
   html { scroll-behavior: auto; }
   .gradient-mesh { animation: none; }
   .scrollcue-line { animation: none; }
+  .svc, .svc::before, .tile .glow { transition: none; }
 }
 
 @media print {
