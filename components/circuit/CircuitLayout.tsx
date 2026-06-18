@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useFill } from './useFill'
 
 const STEM_LENGTH = 56 // px: fallback hero stem drop if the eyebrow isn't found
 const FORK_GAP = 20 // px: clearance kept between the fork line and the eyebrow
@@ -27,6 +28,8 @@ export default function CircuitLayout() {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const [geo, setGeo] = useState<Geometry | null>(null)
+  const leftFillRef = useFill()
+  const rightFillRef = useFill()
 
   useEffect(() => {
     const measure = () => {
@@ -95,6 +98,27 @@ export default function CircuitLayout() {
       {/* Left + right rails */}
       <line x1={xL} y1={railTop} x2={xL} y2={docHeight} stroke={DULL} strokeWidth="1" />
       <line x1={xR} y1={railTop} x2={xR} y2={docHeight} stroke={DULL} strokeWidth="1" />
+
+      {/* Terracotta fill over each rail — grows from the fork downward as the
+          engine writes --fill. pathLength normalizes the dash math to 0..1. */}
+      <line
+        ref={leftFillRef}
+        className="circuit-rail-fill"
+        x1={xL}
+        y1={railTop}
+        x2={xL}
+        y2={docHeight}
+        pathLength={1}
+      />
+      <line
+        ref={rightFillRef}
+        className="circuit-rail-fill"
+        x1={xR}
+        y1={railTop}
+        x2={xR}
+        y2={docHeight}
+        pathLength={1}
+      />
 
       {/* Home-only stem + fork */}
       {fork && (

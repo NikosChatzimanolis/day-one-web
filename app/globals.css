@@ -392,3 +392,15 @@ a { color: inherit; text-decoration: none; }
   padding: 0.25rem 0.6rem;
   line-height: 1;
 }
+
+/* Terracotta rail fill, drawn over the dull rail. The engine writes --fill
+   (0..1); the dash reveals that fraction of the line from its start point (the
+   fork) downward. stroke-dashoffset (not transform) keeps it Safari-reliable and
+   consistent with the Phase 3 stroke-fill borders. */
+.circuit-rail-fill {
+  stroke: var(--color-rust);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--fill, 0));
+  pointer-events: none;
+}
