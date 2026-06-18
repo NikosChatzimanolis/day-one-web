@@ -422,3 +422,18 @@ a { color: inherit; text-decoration: none; }
   stroke-dashoffset: calc(1 - var(--fill, 0));
   pointer-events: none;
 }
+
+/* Two stacked copies of the same text: dull base (inherits color) + terracotta
+   overlay revealed bottom-up by a clip-path as --fill goes 0→1. */
+.circuit-filltext {
+  position: relative;
+  display: inline-block;
+}
+.circuit-filltext-fill {
+  position: absolute;
+  inset: 0;
+  color: var(--color-rust);
+  /* inset(top right bottom left): clip from the TOP by (1-fill)*100% so the fill
+     is revealed from the bottom up. fill=0 → fully clipped; fill=1 → fully shown. */
+  clip-path: inset(calc((1 - var(--fill, 0)) * 100%) 0 0 0);
+}
