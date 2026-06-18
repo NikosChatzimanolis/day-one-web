@@ -30,6 +30,8 @@ export default function CircuitLayout() {
   const [geo, setGeo] = useState<Geometry | null>(null)
   const leftFillRef = useFill()
   const rightFillRef = useFill()
+  const stemFillRef = useFill()
+  const forkFillRef = useFill()
 
   useEffect(() => {
     const measure = () => {
@@ -127,6 +129,24 @@ export default function CircuitLayout() {
           <line x1={fork.x} y1={fork.stemTop} x2={fork.x} y2={fork.y} stroke={DULL} strokeWidth="1" />
           {/* horizontal fork out to both rails */}
           <line x1={xL} y1={fork.y} x2={xR} y2={fork.y} stroke={DULL} strokeWidth="1" />
+          <line
+            ref={stemFillRef}
+            className="circuit-rail-fill"
+            x1={fork.x}
+            y1={fork.stemTop}
+            x2={fork.x}
+            y2={fork.y}
+            pathLength={1}
+          />
+          <line
+            ref={forkFillRef}
+            className="circuit-rail-fill"
+            x1={xL}
+            y1={fork.y}
+            x2={xR}
+            y2={fork.y}
+            pathLength={1}
+          />
         </>
       )}
     </svg>
