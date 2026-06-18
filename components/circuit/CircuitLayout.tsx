@@ -138,6 +138,9 @@ export default function CircuitLayout() {
             y2={fork.y}
             pathLength={1}
           />
+          {/* Horizontal fork: zero-height, so useFill falls back to a 1px span
+              and it reveals near-instantly — intentional ("powers on" with the
+              stem). Don't add a band; it wouldn't behave intuitively here. */}
           <line
             ref={forkFillRef}
             className="circuit-rail-fill"
