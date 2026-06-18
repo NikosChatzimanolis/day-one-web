@@ -1,14 +1,16 @@
 // ── components/circuit/Section.tsx ──
 // A full-bleed page band that emits a dull rail-to-rail top divider into the
-// circuit layer and registers itself with the circuit engine. Authoring a page
-// = composing <Section> blocks; dividers are never hardcoded. Pass `firstBand`
-// to suppress the divider where a band should not have one (e.g. right under the
-// hero fork). The inner centered container still lives in the children.
+// circuit layer and registers itself with the fill engine via useFill. Authoring
+// a page = composing <Section> blocks; dividers are never hardcoded. Pass
+// `firstBand` to suppress the divider where a band should not have one (e.g. the
+// band right under the hero fork). The inner centered container lives in the
+// children. (Phase 2: the section registers and the engine drives its --fill, but
+// nothing consumes it visually yet — section/divider fill visuals arrive in
+// Phase 3. The divider stays dull this round.)
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
-import { useCircuit } from './CircuitContext'
+import { useFill } from './useFill'
 
 export default function Section({
   children,
@@ -22,18 +24,10 @@ export default function Section({
   firstBand?: boolean
   id?: string
 }) {
-  const ref = useRef<HTMLElement>(null)
-  const circuit = useCircuit()
-
-  useEffect(() => {
-    if (!circuit || !ref.current) return
-    // Phase 1: registration is a no-op stub; Phase 2 consumes it. Registering the
-    // section element here means new <Section> blocks participate automatically.
-    return circuit.register({ el: ref.current })
-  }, [circuit])
+  const fillRef = useFill()
 
   return (
-    <section ref={ref} id={id} className={cn('relative', className)}>
+    <section ref={fillRef} id={id} className={cn('relative', className)}>
       {!firstBand && <span aria-hidden="true" className="circuit-divider" />}
       {children}
     </section>
