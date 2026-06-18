@@ -1,7 +1,6 @@
 // ── app/page.tsx — Home ──
 import Link from 'next/link'
 import SpineAlignedLogo from '@/components/ui/SpineAlignedLogo'
-import LivingThread from '@/components/ui/LivingThread'
 import BookCall from '@/components/ui/BookCall'
 import { Button } from '@/components/ui/Button'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
@@ -49,9 +48,7 @@ const beats = [
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      <LivingThread />
-
+    <>
       {/* ── Hero — centered lockup, full height ────────────── */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
@@ -237,6 +234,6 @@ export default function HomePage() {
       </section>
 
       <CtaSection />
-    </div>
+    </>
   )
 }
