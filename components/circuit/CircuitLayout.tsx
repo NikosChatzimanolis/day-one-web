@@ -8,7 +8,8 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-const STEM_LENGTH = 56 // px: hero stem drop from the logo divider to the fork
+const STEM_LENGTH = 56 // px: fallback hero stem drop if the eyebrow isn't found
+const FORK_GAP = 20 // px: clearance kept between the fork line and the eyebrow
 const TOP_ANCHOR = 120 // px: where inner-page rails begin (below the fixed header)
 const DULL = 'var(--color-muted)'
 
@@ -46,7 +47,15 @@ export default function CircuitLayout() {
           const r = divider.getBoundingClientRect()
           const x = r.left + r.width / 2 + window.scrollX
           const stemTop = r.bottom + window.scrollY
-          const y = stemTop + STEM_LENGTH
+          // Place the fork a clear gap ABOVE the hero eyebrow ("A technical
+          // partner — Paphos…"), so the split never crosses or touches it.
+          // Falls back to a fixed stem drop if the eyebrow can't be measured.
+          const eyebrow = document.querySelector<HTMLElement>('#main .eyebrow')
+          let y = stemTop + STEM_LENGTH
+          if (eyebrow) {
+            const eyebrowTop = eyebrow.getBoundingClientRect().top + window.scrollY
+            y = Math.max(stemTop + 16, eyebrowTop - FORK_GAP)
+          }
           fork = { x, y, stemTop }
           railTop = y
         }
