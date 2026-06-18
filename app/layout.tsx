@@ -7,7 +7,6 @@ import ReactiveGrid from '@/components/ui/ReactiveGrid'
 import Spine from '@/components/ui/Spine'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import LivingThread from '@/components/ui/LivingThread'
 import { JsonLd } from './jsonld'
 import { site } from '@/lib/site'
 
@@ -115,11 +114,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Spine />
         <CustomCursor />
         <Navbar />
-        <div className="relative">
-          <LivingThread />
-          <main id="main">{children}</main>
-          <Footer />
-        </div>
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   )

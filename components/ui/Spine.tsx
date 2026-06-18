@@ -1,6 +1,6 @@
 // ── components/ui/Spine.tsx ──
-// Fixed center hairline that fills with rust as the page scrolls. Mirrors the
-// reference's connecting spine. Hidden on small screens and under reduced motion.
+// Fixed center hairline that fills with rust as the page scrolls. Hidden on
+// small screens and under reduced motion.
 'use client'
 
 import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion'

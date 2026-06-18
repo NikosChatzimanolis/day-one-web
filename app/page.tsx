@@ -90,7 +90,7 @@ export default function HomePage() {
       </section>
 
       {/* ── The promise — left-anchored statement (uses the left space) ── */}
-      <section data-thread-rung className="border-t border-border bg-bg">
+      <section className="border-t border-border bg-bg">
         <div className="container-wide section">
           <Reveal>
             <p className="eyebrow mb-8">Why us</p>
@@ -143,7 +143,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Proof — heading + hairline list, Forge accent row ─ */}
-      <section data-thread-rung className="bg-bg border-t border-border">
+      <section className="bg-bg border-t border-border">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-10 md:gap-8">
             <div className="md:col-span-3">
@@ -208,7 +208,7 @@ export default function HomePage() {
       </section>
 
       {/* ── How we work — heading + offset grid ────────────── */}
-      <section data-thread-rung className="bg-surface border-t border-border">
+      <section className="bg-surface border-t border-border">
         <div className="container-wide section">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
             <div className="lg:col-span-4">
@@ -223,7 +223,7 @@ export default function HomePage() {
             <RevealGroup className="lg:col-span-7 lg:col-start-6 grid sm:grid-cols-2 gap-x-12 gap-y-12" stagger={0.1}>
               {beats.map((beat, i) => (
                 <RevealItem key={beat.title}>
-                  <span data-thread-node className="t-index thread-num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="t-index text-accent">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="t-h3 mt-4 text-text-primary">{beat.title}</h3>
                   <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure">{beat.body}</p>
                 </RevealItem>
