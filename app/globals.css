@@ -352,3 +352,43 @@ a { color: inherit; text-decoration: none; }
 @media print {
   * { background: white !important; color: black !important; }
 }
+
+/* ── Circuit fill mechanic ─────────────────────────────────────────────
+   Edge rails + section dividers, drawn dull-gray in Phase 1. The rail inset
+   is the single source of truth for both the SVG rails (read in JS) and the
+   rail-to-rail dividers (used in CSS). */
+:root { --circuit-inset: 16px; }
+@media (min-width: 768px) { :root { --circuit-inset: 24px; } }
+
+/* SVG overlay: spans the document, sits above the dotted grid (z-1) and below
+   the navbar (z-50). Geometry/lines are set inline by <CircuitLayout>. */
+.circuit-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* A section's full-bleed top divider, rail-to-rail, dull. */
+.circuit-divider {
+  position: absolute;
+  top: 0;
+  left: var(--circuit-inset);
+  right: var(--circuit-inset);
+  height: 1px;
+  background: var(--color-muted);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Dull bordered numeral box (light + dark tone). Becomes fillable in Phase 3. */
+.circuit-numbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-muted);
+  padding: 0.25rem 0.6rem;
+  line-height: 1;
+}

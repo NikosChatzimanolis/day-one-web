@@ -4,7 +4,8 @@ import { Alex_Brush, Jost, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/ui/CustomCursor'
 import ReactiveGrid from '@/components/ui/ReactiveGrid'
-import Spine from '@/components/ui/Spine'
+import CircuitLayout from '@/components/circuit/CircuitLayout'
+import { CircuitProvider } from '@/components/circuit/CircuitContext'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { JsonLd } from './jsonld'
@@ -110,12 +111,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             serviceType: ['Custom Software Development', 'Web Platforms', 'Product Engineering', 'Growth Partnership'],
           }}
         />
-        <ReactiveGrid />
-        <Spine />
-        <CustomCursor />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <CircuitProvider>
+          <ReactiveGrid />
+          <CircuitLayout />
+          <CustomCursor />
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
+        </CircuitProvider>
       </body>
     </html>
   )

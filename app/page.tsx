@@ -1,7 +1,9 @@
 // ── app/page.tsx — Home ──
 import Link from 'next/link'
-import SpineAlignedLogo from '@/components/ui/SpineAlignedLogo'
+import Logo from '@/components/ui/Logo'
 import BookCall from '@/components/ui/BookCall'
+import Section from '@/components/circuit/Section'
+import NumberBox from '@/components/circuit/NumberBox'
 import { Button } from '@/components/ui/Button'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
@@ -55,7 +57,7 @@ export default function HomePage() {
         <div className="container-wide relative z-10">
           <div className="flex min-h-screen flex-col items-center justify-center text-center py-28">
             <Reveal className="mb-8 sm:mb-10">
-              <SpineAlignedLogo variant="primary" size="2xl" />
+              <Logo variant="primary" size="2xl" />
             </Reveal>
             <Reveal delay={0.08}>
               <p className="eyebrow mb-6">A technical partner — Paphos, Cyprus</p>
@@ -90,7 +92,7 @@ export default function HomePage() {
       </section>
 
       {/* ── The promise — left-anchored statement (uses the left space) ── */}
-      <section className="border-t border-border bg-bg">
+      <Section className="bg-bg">
         <div className="container-wide section">
           <Reveal>
             <p className="eyebrow mb-8">Why us</p>
@@ -106,10 +108,10 @@ export default function HomePage() {
             </p>
           </Reveal>
         </div>
-      </section>
+      </Section>
 
       {/* ── What we do — editorial numbered horizons ───────── */}
-      <section className="section-dark">
+      <Section className="section-dark">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
             <Reveal className="md:col-span-3">
@@ -140,10 +142,10 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </Section>
 
       {/* ── Proof — heading + hairline list, Forge accent row ─ */}
-      <section className="bg-bg border-t border-border">
+      <Section className="bg-bg">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-10 md:gap-8">
             <div className="md:col-span-3">
@@ -205,10 +207,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* ── How we work — heading + offset grid ────────────── */}
-      <section className="bg-surface border-t border-border">
+      <Section className="bg-surface">
         <div className="container-wide section">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
             <div className="lg:col-span-4">
@@ -223,7 +225,7 @@ export default function HomePage() {
             <RevealGroup className="lg:col-span-7 lg:col-start-6 grid sm:grid-cols-2 gap-x-12 gap-y-12" stagger={0.1}>
               {beats.map((beat, i) => (
                 <RevealItem key={beat.title}>
-                  <span className="t-index text-accent">{String(i + 1).padStart(2, '0')}</span>
+                  <NumberBox>{String(i + 1).padStart(2, '0')}</NumberBox>
                   <h3 className="t-h3 mt-4 text-text-primary">{beat.title}</h3>
                   <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure">{beat.body}</p>
                 </RevealItem>
@@ -231,7 +233,7 @@ export default function HomePage() {
             </RevealGroup>
           </div>
         </div>
-      </section>
+      </Section>
 
       <CtaSection />
     </>
