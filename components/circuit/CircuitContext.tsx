@@ -86,6 +86,11 @@ export function CircuitProvider({ children }: { children: React.ReactNode }) {
         forkY = Math.min(forkY, g.top)
         pageBottom = Math.max(pageBottom, g.top + g.span)
       })
+      // forkY / pageBottom are GLOBAL bounds derived from ALL registrants (min
+      // top / max bottom), used to clamp the single shared fill front. Today the
+      // rails set them (their top = the fork, their bottom = page bottom). Note
+      // for Phase 3: registering an element whose top is above the fork, or whose
+      // bottom is below the rails, will shift this shared clamp for every element.
       bounds.current = {
         forkY: forkY === Infinity ? 0 : forkY,
         pageBottom: Math.max(pageBottom, document.documentElement.scrollHeight),
