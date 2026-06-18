@@ -1,12 +1,14 @@
+'use client'
 // ── components/ui/Button.tsx ──
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import DrawBorder from '@/components/circuit/DrawBorder'
 
 type Variant = 'primary' | 'outline' | 'ghost' | 'outline-dark'
 type Size = 'md' | 'lg'
 
 const base =
-  'group inline-flex items-center justify-center gap-2 font-body font-medium rounded-sm transition-all duration-250 ease-out-expo focus-visible:outline-2 focus-visible:outline-offset-2'
+  'group relative inline-flex items-center justify-center gap-2 font-body font-medium rounded-sm transition-all duration-250 ease-out-expo focus-visible:outline-2 focus-visible:outline-offset-2'
 
 const sizes: Record<Size, string> = {
   md: 'px-5 py-2.5 text-sm',
@@ -47,8 +49,10 @@ export function Button({
   external,
 }: ButtonAsLink) {
   const classes = cn(base, variant !== 'ghost' && sizes[size], variants[variant], className)
+  const drawsBorder = variant === 'outline' || variant === 'outline-dark'
   const inner = (
     <>
+      {drawsBorder && <DrawBorder radius={2} band={120} />}
       {children}
       {arrow && (
         <span
