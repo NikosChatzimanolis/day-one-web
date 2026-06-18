@@ -89,7 +89,7 @@ export default function HorizonRows({ tracks }: { tracks: Horizon[] }) {
             i === tracks.length - 1 ? 'border-b' : ''
           }`}
         >
-          <span className="t-index text-rust md:col-span-1">{track.no}</span>
+          <span data-thread-node className="t-index thread-num md:col-span-1">{track.no}</span>
           <h3 className="t-h2 text-dark-text md:col-span-4">{track.name}</h3>
           <p className="font-body text-base leading-relaxed text-dark-text-secondary measure-lg md:col-span-6 md:col-start-7 md:text-lg">
             {track.line}

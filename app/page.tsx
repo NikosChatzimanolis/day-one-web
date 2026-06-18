@@ -1,11 +1,11 @@
 // ── app/page.tsx — Home ──
 import Link from 'next/link'
-import Logo from '@/components/ui/Logo'
+import SpineAlignedLogo from '@/components/ui/SpineAlignedLogo'
+import LivingThread from '@/components/ui/LivingThread'
 import BookCall from '@/components/ui/BookCall'
 import { Button } from '@/components/ui/Button'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
-import Magnetic from '@/components/ui/Magnetic'
 import HorizonRows from '@/components/sections/HorizonRows'
 import CtaSection from '@/components/sections/CtaSection'
 import ScrollCue from '@/components/ui/ScrollCue'
@@ -49,16 +49,16 @@ const beats = [
 
 export default function HomePage() {
   return (
-    <>
+    <div className="relative">
+      <LivingThread />
+
       {/* ── Hero — centered lockup, full height ────────────── */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh" aria-hidden="true" />
         <div className="container-wide relative z-10">
           <div className="flex min-h-screen flex-col items-center justify-center text-center py-28">
             <Reveal className="mb-8 sm:mb-10">
-              <Magnetic mode="ambient" strength={0.05} maxShift={18}>
-                <Logo variant="primary" size="2xl" className="justify-center" />
-              </Magnetic>
+              <SpineAlignedLogo variant="primary" size="2xl" />
             </Reveal>
             <Reveal delay={0.08}>
               <p className="eyebrow mb-6">A technical partner — Paphos, Cyprus</p>
@@ -93,7 +93,7 @@ export default function HomePage() {
       </section>
 
       {/* ── The promise — left-anchored statement (uses the left space) ── */}
-      <section className="border-t border-border bg-bg">
+      <section data-thread-rung className="border-t border-border bg-bg">
         <div className="container-wide section">
           <Reveal>
             <p className="eyebrow mb-8">Why us</p>
@@ -146,7 +146,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Proof — heading + hairline list, Forge accent row ─ */}
-      <section className="bg-bg border-t border-border">
+      <section data-thread-rung className="bg-bg border-t border-border">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-10 md:gap-8">
             <div className="md:col-span-3">
@@ -211,7 +211,7 @@ export default function HomePage() {
       </section>
 
       {/* ── How we work — heading + offset grid ────────────── */}
-      <section className="bg-surface border-t border-border">
+      <section data-thread-rung className="bg-surface border-t border-border">
         <div className="container-wide section">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
             <div className="lg:col-span-4">
@@ -226,7 +226,7 @@ export default function HomePage() {
             <RevealGroup className="lg:col-span-7 lg:col-start-6 grid sm:grid-cols-2 gap-x-12 gap-y-12" stagger={0.1}>
               {beats.map((beat, i) => (
                 <RevealItem key={beat.title}>
-                  <span className="t-index text-accent">{String(i + 1).padStart(2, '0')}</span>
+                  <span data-thread-node className="t-index thread-num">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="t-h3 mt-4 text-text-primary">{beat.title}</h3>
                   <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure">{beat.body}</p>
                 </RevealItem>
@@ -237,6 +237,6 @@ export default function HomePage() {
       </section>
 
       <CtaSection />
-    </>
+    </div>
   )
 }
