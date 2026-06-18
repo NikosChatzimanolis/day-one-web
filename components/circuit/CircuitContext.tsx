@@ -64,7 +64,11 @@ export function CircuitProvider({ children }: { children: React.ReactNode }) {
   const register = useCallback((reg: FillRegistration) => {
     registry.current.add(reg)
     elToReg.current.set(reg.el, reg)
-    visible.current.add(reg) // assume visible until the observer says otherwise
+    // Seed as visible: this is load-time correctness insurance, not just an
+    // optimization — the first tick runs over everything before the async
+    // observer prunes offscreen elements, so a page restored mid-scroll or a
+    // deep link still computes every element's correct latched fill up front.
+    visible.current.add(reg)
     io.current?.observe(reg.el)
     needsMeasure.current = true
     dirtyVisible.current = true
@@ -140,7 +144,14 @@ export function CircuitProvider({ children }: { children: React.ReactNode }) {
       if (sy !== lastScrollY || measured || dirtyVisible.current) {
         const { forkY, pageBottom } = bounds.current
         const front = Math.min(Math.max(sy + window.innerHeight * REF, forkY), pageBottom)
-        visible.current.forEach((reg) => {
+        // A discrete jump (anchor click, scrollTo, scroll restoration) can move an
+        // element from offscreen-below to offscreen-above without an intervening
+        // on-screen frame; the async observer would never add it to `visible`,
+        // stranding it at a stale fill. On a large scroll delta, fall back to the
+        // full registry so every element self-corrects this frame.
+        const targets =
+          Math.abs(sy - lastScrollY) > window.innerHeight ? registry.current : visible.current
+        targets.forEach((reg) => {
           const g = geometry.current.get(reg)
           if (!g) return
           const fill = Math.min(Math.max((front - g.top) / g.span, 0), 1)
