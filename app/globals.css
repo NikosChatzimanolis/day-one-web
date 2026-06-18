@@ -403,6 +403,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Dull bordered numeral box (light + dark tone). Becomes fillable in Phase 3. */
 .circuit-numbox {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -436,4 +437,24 @@ a { color: inherit; text-decoration: none; }
   /* inset(top right bottom left): clip from the TOP by (1-fill)*100% so the fill
      is revealed from the bottom up. fill=0 → fully clipped; fill=1 → fully shown. */
   clip-path: inset(calc((1 - var(--fill, 0)) * 100%) 0 0 0);
+}
+
+/* Terracotta draw-on border overlay. overflow:visible so the 1px non-scaling
+   stroke isn't clipped at the SVG edge; stroke-dashoffset reveals --fill of the
+   normalized (pathLength=1) perimeter. */
+.circuit-drawborder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.circuit-drawborder rect {
+  fill: none;
+  stroke: var(--color-rust);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--fill, 0));
 }
