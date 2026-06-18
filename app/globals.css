@@ -371,7 +371,9 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-/* A section's full-bleed top divider, rail-to-rail, dull. */
+/* A section's full-bleed top divider, rail-to-rail. Dull base line; two
+   terracotta segments grow inward from each rail (scaleX) to meet at center as
+   --fill goes 0→1. */
 .circuit-divider {
   position: absolute;
   top: 0;
@@ -381,6 +383,22 @@ a { color: inherit; text-decoration: none; }
   background: var(--color-muted);
   z-index: 2;
   pointer-events: none;
+}
+.circuit-divider-seg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: var(--color-rust);
+  transform: scaleX(var(--fill, 0));
+}
+.circuit-divider-seg-l {
+  left: 0;
+  transform-origin: left center;
+}
+.circuit-divider-seg-r {
+  right: 0;
+  transform-origin: right center;
 }
 
 /* Dull bordered numeral box (light + dark tone). Becomes fillable in Phase 3. */

@@ -1,16 +1,15 @@
 // ── components/circuit/Section.tsx ──
-// A full-bleed page band that emits a dull rail-to-rail top divider into the
-// circuit layer and registers itself with the fill engine via useFill. Authoring
-// a page = composing <Section> blocks; dividers are never hardcoded. Pass
-// `firstBand` to suppress the divider where a band should not have one (e.g. the
-// band right under the hero fork). The inner centered container lives in the
-// children. (Phase 2: the section registers and the engine drives its --fill, but
-// nothing consumes it visually yet — section/divider fill visuals arrive in
-// Phase 3. The divider stays dull this round.)
+// A full-bleed page band that emits a fillable rail-to-rail top divider into the
+// circuit layer. Authoring a page = composing <Section> blocks; dividers are
+// never hardcoded. Pass `firstBand` to suppress the divider where a band should
+// not have one (e.g. the band right under the hero fork). The inner centered
+// container lives in the children. The <Divider> registers with the fill engine;
+// Section itself no longer registers (its Phase-1 stub registration was visual-
+// less and is dropped now that the divider is the real fill participant).
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useFill } from './useFill'
+import Divider from './Divider'
 
 export default function Section({
   children,
@@ -24,11 +23,9 @@ export default function Section({
   firstBand?: boolean
   id?: string
 }) {
-  const fillRef = useFill()
-
   return (
-    <section ref={fillRef} id={id} className={cn('relative', className)}>
-      {!firstBand && <span aria-hidden="true" className="circuit-divider" />}
+    <section id={id} className={cn('relative', className)}>
+      {!firstBand && <Divider />}
       {children}
     </section>
   )
