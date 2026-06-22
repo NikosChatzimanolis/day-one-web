@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import ForgeBoard from '@/components/forge/ForgeBoard'
+import ForgeMock from '@/components/forge/ForgeMock'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
 import Magnetic from '@/components/ui/Magnetic'
@@ -48,7 +48,7 @@ export default function ForgePage() {
           }}
         />
         <div className="container-wide relative z-10 section-hero">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-14 items-center">
             <div>
               <Reveal>
                 <div className="flex items-center gap-3 mb-8">
@@ -96,7 +96,7 @@ export default function ForgePage() {
             </div>
 
             <Reveal delay={0.12}>
-              <ForgeBoard />
+              <ForgeMock />
             </Reveal>
           </div>
         </div>

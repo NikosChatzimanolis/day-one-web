@@ -1,33 +1,35 @@
 // ── components/ui/ReactiveGrid.tsx ──
-// The living layer. A single fixed canvas, present site-wide, that keeps the
-// faint graph-paper grid quietly alive: dots ease toward a soft rust pool under
-// the cursor, drift with scroll depth (parallax), and flip tone (ink ↔ cream)
-// across dark sections so the grid stays continuous from light bands into dark.
+// The living layer. A single fixed overlay canvas, present site-wide, that
+// paints the faint graph-paper grid and brightens whole cells in rust near the
+// cursor. The grid appears only on bare light (bg-bg) background; dark sections,
+// deeper-cream surface bands, cards (.svc, .tile), buttons, and [data-no-grid]
+// regions are cut out via clearRect. Lines are static (no parallax) — only the
+// cursor bloom animates.
 //
 // Design constraints it honours:
-//  • felt, not seen — base contrast is a whisper; the accent only blooms near
-//    the cursor, which is exactly where the reader is looking, never over a
-//    paragraph they're mid-read on.
+//  • felt, not seen — base lines are a whisper; the rust cells only bloom near
+//    the cursor, exactly where the reader is looking.
 //  • GPU-cheap — one rAF loop that sleeps when nothing is moving and re-wakes on
 //    pointer / scroll; paused while the tab is hidden; DPR-capped.
-//  • degrades — reduced-motion gets one static tone-aware pass (no loop, no
-//    pool); coarse pointers (touch) get a lighter, pointer-free version.
+//  • degrades — reduced-motion gets one static pass (no loop, no cells); coarse
+//    pointers (touch) get the lines without the cursor bloom.
 'use client'
 
 import { useEffect, useRef } from 'react'
 
-const SPACING = 46 // grid rhythm (px) — sits with the editorial 48px feel
-const DOT = 1.6 // dot side (px)
-const POOL_RADIUS = 200 // cursor influence radius (px)
-const PARALLAX = 0.055 // how much the field drifts against scroll depth
+const CELL = 46 // grid rhythm (px)
+const POOL_RADIUS = 150 // cursor influence radius (px)
+const PARALLAX = 0 // horizontal lines stay pixel-aligned (no scroll drift)
 
 // tone palette (r,g,b) — pulled from the brand tokens
-const INK = [26, 24, 22] // light-section dots
-const CREAM = [245, 240, 234] // dark-section dots
-const RUST_LIGHT = [181, 85, 47] // --color-accent
-const RUST_DARK = [217, 113, 79] // dark-section rust (#D9714F)
+const INK = [26, 24, 22] // light-section lines
+const RUST_LIGHT = [192, 76, 42] // --color-rust (#C04C2A)
+const BASE_LIGHT = 0.05 // ink line alpha on light bands
+const CELL_MAX = 0.16 // rust cell fill peak alpha
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+type Rect = [left: number, top: number, right: number, bottom: number]
 
 export default function ReactiveGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -48,33 +50,33 @@ export default function ReactiveGrid() {
     let vw = 0
     let vh = 0
     let dpr = 1
-    let step = SPACING
 
     // eased cursor pool
     const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, target: 0, glow: 0 }
-    // eased parallax offset of the dot field
+    // eased parallax offset of the horizontal lines
     let offsetY = 0
-    let maxScroll = 1
-    let darkBands: Array<[number, number]> = []
+    let noGridRects: Rect[] = []
+    let boundsDirty = true
 
     let running = false
     let rafId = 0
 
-    function computeBands() {
-      const els = document.querySelectorAll<HTMLElement>('.section-dark, .forge-dark')
-      const sy = window.scrollY
-      const bands: Array<[number, number]> = []
+    function computeNoGridRects() {
+      const els = document.querySelectorAll<HTMLElement>(
+        '.section-dark, .forge-dark, .svc, .tile, [data-no-grid]'
+      )
+      const rects: Rect[] = []
       els.forEach((el) => {
         const r = el.getBoundingClientRect()
-        bands.push([r.top + sy, r.bottom + sy])
+        rects.push([r.left, r.top, r.right, r.bottom])
       })
-      darkBands = bands
-      maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+      noGridRects = rects
     }
 
-    function inDark(docY: number) {
-      for (let i = 0; i < darkBands.length; i++) {
-        if (docY >= darkBands[i][0] && docY < darkBands[i][1]) return true
+    function inNoGrid(x: number, y: number) {
+      for (let i = 0; i < noGridRects.length; i++) {
+        const [left, top, right, bottom] = noGridRects[i]
+        if (x >= left && x < right && y >= top && y < bottom) return true
       }
       return false
     }
@@ -83,93 +85,102 @@ export default function ReactiveGrid() {
       dpr = Math.min(window.devicePixelRatio || 1, 2)
       vw = window.innerWidth
       vh = window.innerHeight
-      step = coarse ? SPACING * 1.4 : SPACING
       canvas!.width = Math.floor(vw * dpr)
       canvas!.height = Math.floor(vh * dpr)
       canvas!.style.width = `${vw}px`
       canvas!.style.height = `${vh}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      computeBands()
+      boundsDirty = true
+      draw() // synchronous first paint — no empty flash, survives a paused rAF
       wake()
     }
 
+    // Draw the full line grid (verticals + parallax-drifted horizontals) in one
+    // tone, within whatever clip is currently set.
+    function drawLines(rgb: number[], alpha: number, off: number) {
+      ctx.lineWidth = 1
+      ctx.strokeStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`
+      ctx.beginPath()
+      for (let x = 0; x <= vw; x += CELL) {
+        ctx.moveTo(x + 0.5, 0)
+        ctx.lineTo(x + 0.5, vh)
+      }
+      for (let y = -CELL; y <= vh + CELL; y += CELL) {
+        const yy = y - off
+        ctx.moveTo(0, yy + 0.5)
+        ctx.lineTo(vw, yy + 0.5)
+      }
+      ctx.stroke()
+    }
+
     function draw() {
+      if (boundsDirty) {
+        computeNoGridRects()
+        boundsDirty = false
+      }
+
       ctx.clearRect(0, 0, vw, vh)
-      const sy = window.scrollY
-      const progress = Math.min(1, sy / maxScroll)
+      const off = ((offsetY % CELL) + CELL) % CELL
+
+      drawLines(INK, BASE_LIGHT, off)
+
+      for (let i = 0; i < noGridRects.length; i++) {
+        const [left, top, right, bottom] = noGridRects[i]
+        ctx.clearRect(left - 1, top - 1, right - left + 2, bottom - top + 2)
+      }
+
+      // rust-brightened cells near the cursor (drawn over the lines, inset 1px so
+      // the grid still frames each cell).
       const glow = pointer.glow
-      const px = pointer.x
-      const py = pointer.y
-      const off = ((offsetY % step) + step) % step
-
-      for (let x = -step; x <= vw + step; x += step) {
-        for (let gy = -step; gy <= vh + step; gy += step) {
-          const y = gy + off
-          const dark = inDark(y + sy)
-          const dot = dark ? CREAM : INK
-          const rust = dark ? RUST_DARK : RUST_LIGHT
-
-          // base whisper, evolving a touch denser/brighter deeper down the page
-          let a = (dark ? 0.06 : 0.045) + progress * 0.012
-          let cr = dot[0]
-          let cg = dot[1]
-          let cb = dot[2]
-          let dx = 0
-          let dy = 0
-
-          if (glow > 0.001) {
-            const ox = x - px
-            const oy = y - py
-            const dist = Math.sqrt(ox * ox + oy * oy)
-            if (dist < POOL_RADIUS) {
-              const p = 1 - dist / POOL_RADIUS
-              const pe = p * p * glow // smooth falloff scaled by pool intensity
-              a += pe * 0.42
-              const mix = pe * 0.95
-              cr = lerp(cr, rust[0], mix)
-              cg = lerp(cg, rust[1], mix)
-              cb = lerp(cb, rust[2], mix)
-              if (dist > 0.001) {
-                const pull = pe * 8 // subtle warp toward the cursor
-                dx = -(ox / dist) * pull
-                dy = -(oy / dist) * pull
-              }
-            }
+      if (glow > 0.002 && pointer.x > -100) {
+        const px = pointer.x
+        const py = pointer.y
+        const R = POOL_RADIUS
+        const i0 = Math.floor((px - R) / CELL)
+        const i1 = Math.ceil((px + R) / CELL)
+        const j0 = Math.floor((py + off - R) / CELL)
+        const j1 = Math.ceil((py + off + R) / CELL)
+        for (let i = i0; i <= i1; i++) {
+          for (let j = j0; j <= j1; j++) {
+            const cellX = i * CELL
+            const cellY = j * CELL - off
+            const cxp = cellX + CELL / 2
+            const cyp = cellY + CELL / 2
+            if (inNoGrid(cxp, cyp)) continue
+            const d = Math.hypot(cxp - px, cyp - py)
+            if (d >= R) continue
+            const a = 1 - d / R
+            ctx.fillStyle = `rgba(${RUST_LIGHT[0]},${RUST_LIGHT[1]},${RUST_LIGHT[2]},${a * a * CELL_MAX * glow})`
+            ctx.fillRect(cellX + 1, cellY + 1, CELL - 2, CELL - 2)
           }
-
-          if (a <= 0.003) continue
-          ctx.globalAlpha = a
-          ctx.fillStyle = `rgb(${cr | 0},${cg | 0},${cb | 0})`
-          ctx.fillRect(x + dx - DOT / 2, y + dy - DOT / 2, DOT, DOT)
         }
       }
-      ctx.globalAlpha = 1
     }
 
     function frame() {
-      pointer.x = lerp(pointer.x, pointer.tx, 0.1)
-      pointer.y = lerp(pointer.y, pointer.ty, 0.1)
+      pointer.x = lerp(pointer.x, pointer.tx, 0.12)
+      pointer.y = lerp(pointer.y, pointer.ty, 0.12)
       pointer.glow = lerp(pointer.glow, pointer.target, 0.08)
-      const targetOffset = -window.scrollY * PARALLAX
-      offsetY = lerp(offsetY, targetOffset, 0.08)
+      const targetOffset = window.scrollY * PARALLAX
+      offsetY = lerp(offsetY, targetOffset, 0.12)
 
       draw()
 
       const posSettled =
         Math.abs(pointer.x - pointer.tx) < 0.5 && Math.abs(pointer.y - pointer.ty) < 0.5
       const glowSettled = Math.abs(pointer.glow - pointer.target) < 0.004
-      const offsetSettled = Math.abs(offsetY - targetOffset) < 0.3
+      const offsetSettled = Math.abs(offsetY - window.scrollY * PARALLAX) < 0.3
 
       if (posSettled && glowSettled && offsetSettled) {
-        running = false // sleep; the last frame (incl. a resting pool) stays drawn
+        running = false // sleep; the last frame stays drawn
         return
       }
       rafId = requestAnimationFrame(frame)
     }
 
     function drawStatic() {
-      // reduced-motion: tone-aware texture, no pool, no drift
-      offsetY = 0
+      // reduced-motion: static lines at the current scroll, no cells, no loop
+      offsetY = window.scrollY * PARALLAX
       pointer.glow = 0
       draw()
     }
@@ -196,6 +207,7 @@ export default function ReactiveGrid() {
       wake()
     }
     function onScroll() {
+      boundsDirty = true
       wake()
     }
     function onVisibility() {
@@ -203,7 +215,7 @@ export default function ReactiveGrid() {
         if (rafId) cancelAnimationFrame(rafId)
         running = false
       } else {
-        computeBands()
+        boundsDirty = true
         wake()
       }
     }
@@ -229,10 +241,12 @@ export default function ReactiveGrid() {
     }
     reduceMql.addEventListener('change', onMotionPref)
 
-    // section positions settle after fonts/layout — recompute a few times
-    const t1 = window.setTimeout(() => { computeBands(); wake() }, 400)
-    const t2 = window.setTimeout(() => { computeBands(); wake() }, 1400)
-    if (document.fonts?.ready) document.fonts.ready.then(() => { computeBands(); wake() })
+    // element positions settle after fonts/layout — recompute a few times
+    const t1 = window.setTimeout(() => { boundsDirty = true; draw(); wake() }, 400)
+    const t2 = window.setTimeout(() => { boundsDirty = true; draw(); wake() }, 1400)
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => { boundsDirty = true; draw(); wake() })
+    }
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId)

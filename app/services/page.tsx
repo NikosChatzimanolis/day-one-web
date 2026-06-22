@@ -20,6 +20,8 @@ const customIncludes = [
 
 const growthIncludes = [
   'Continuous build — the next feature, the next surface, the next thing you need',
+  'Brand and content — the voice, the identity, the editorial system that builds a presence',
+  'Marketing strategy and systems — the channels, the cadence, the infrastructure that compounds',
   'Improvement and refinement of what’s already live',
   'Care and upkeep, so nothing quietly rots',
   'Visibility — making sure the right people find you',
@@ -98,7 +100,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── How they fit — tight measure statement ─────────── */}
-      <section className="bg-surface border-b border-border">
+      <section data-no-grid className="bg-surface border-b border-border">
         <div className="container-narrow section-sm">
           <Reveal>
             <p className="eyebrow mb-7">How they fit together</p>

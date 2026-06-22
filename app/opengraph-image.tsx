@@ -3,7 +3,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Day One — Web Development, Maintenance & Social Media'
+export const alt = 'Day One — A technical partner that ships like a founder'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -41,22 +41,22 @@ export default async function Image() {
             right: 0,
             bottom: 0,
             background:
-              'radial-gradient(ellipse 80% 60% at 20% 20%, rgba(196, 82, 42, 0.06) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(196, 82, 42, 0.04) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 50% 50%, rgba(240, 235, 227, 0.15) 0%, transparent 70%)',
+              'radial-gradient(ellipse 80% 60% at 20% 20%, rgba(181, 85, 47, 0.06) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 80% 70%, rgba(181, 85, 47, 0.04) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 50% 50%, rgba(240, 235, 227, 0.15) 0%, transparent 70%)',
           }}
         />
         {/* Label */}
         <div
           style={{
-            color: '#C4522A',
+            color: '#B5552F',
             fontSize: 20,
-            letterSpacing: '0.12em',
+            letterSpacing: '0.18em',
             textTransform: 'uppercase',
             marginBottom: 24,
             fontFamily: 'Jost',
             fontWeight: 300,
           }}
         >
-          WEB DEVELOPMENT · MAINTENANCE · SOCIAL MEDIA
+          BUILD · SCALE · MAINTAIN
         </div>
 
         {/* Logo wordmark */}
@@ -136,7 +136,7 @@ export default async function Image() {
             fontFamily: 'Jost',
           }}
         >
-          We build, maintain & grow your online presence
+          A technical partner that ships like a founder
         </div>
 
         {/* Accent line */}
@@ -144,7 +144,7 @@ export default async function Image() {
           style={{
             width: 60,
             height: 3,
-            background: '#C4522A',
+            background: '#B5552F',
             marginTop: 52,
             borderRadius: 2,
           }}

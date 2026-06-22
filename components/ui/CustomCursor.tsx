@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react'
 import {
   motion,
   useMotionValue,
-  useSpring,
   useReducedMotion,
 } from 'framer-motion'
 
@@ -14,13 +13,12 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(true)
+  const [isOnDark, setIsOnDark] = useState(false)
 
+  // Bound directly to the raw pointer — no spring — so the cursor tracks the
+  // hand 1:1 with no drag or momentum. Only the size/fill on hover animates.
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
-
-  const springConfig = { stiffness: 500, damping: 40, mass: 0.5 }
-  const springX = useSpring(cursorX, springConfig)
-  const springY = useSpring(cursorY, springConfig)
 
   useEffect(() => {
     const checkMobile = () => {
@@ -34,9 +32,25 @@ export default function CustomCursor() {
   useEffect(() => {
     if (isMobile || shouldReduceMotion) return
 
+    let lastX = -100
+    let lastY = -100
+    let rafId = 0
+
+    const checkDark = () => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        rafId = 0
+        const el = document.elementFromPoint(lastX, lastY) as HTMLElement | null
+        setIsOnDark(!!el?.closest('.section-dark, .forge-dark'))
+      })
+    }
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
+      lastX = e.clientX
+      lastY = e.clientY
+      checkDark()
       if (!isVisible) setIsVisible(true)
     }
 
@@ -59,13 +73,16 @@ export default function CustomCursor() {
     const handleHoverEnd = () => setIsHovering(false)
 
     window.addEventListener('mousemove', moveCursor)
+    window.addEventListener('scroll', checkDark, { passive: true })
     document.addEventListener('mouseenter', handleMouseEnter)
     document.addEventListener('mouseleave', handleMouseLeave)
     document.addEventListener('mouseover', handleHoverStart)
     document.addEventListener('mouseout', handleHoverEnd)
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId)
       window.removeEventListener('mousemove', moveCursor)
+      window.removeEventListener('scroll', checkDark)
       document.removeEventListener('mouseenter', handleMouseEnter)
       document.removeEventListener('mouseleave', handleMouseLeave)
       document.removeEventListener('mouseover', handleHoverStart)
@@ -84,24 +101,30 @@ export default function CustomCursor() {
         }
       `}</style>
 
+      {/* Intentional, on-brand cursor. At rest it's a small filled near-black
+          dot on light sections, cream on dark sections. On interactive elements
+          it grows into a filled rust circle. */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full"
         style={{
-          x: springX,
-          y: springY,
+          x: cursorX,
+          y: cursorY,
           translateX: '-50%',
           translateY: '-50%',
         }}
         animate={{
-          width: isHovering ? 36 : 12,
-          height: isHovering ? 36 : 12,
+          width: isHovering ? 34 : 16,
+          height: isHovering ? 34 : 16,
           opacity: isVisible ? 1 : 0,
-          backgroundColor: isHovering ? 'rgba(196, 82, 42, 0.85)' : '#ffffff',
-          mixBlendMode: isHovering ? 'normal' : 'difference',
+          backgroundColor: isHovering
+            ? 'rgba(181, 85, 47, 0.9)'
+            : isOnDark
+              ? 'rgba(245, 240, 234, 0.92)'
+              : 'rgba(26, 24, 22, 0.92)',
         }}
         transition={{
-          width: { duration: 0.2, ease: 'easeOut' },
-          height: { duration: 0.2, ease: 'easeOut' },
+          width: { duration: 0.25, ease: 'easeOut' },
+          height: { duration: 0.25, ease: 'easeOut' },
           opacity: { duration: 0.15 },
           backgroundColor: { duration: 0.2 },
         }}

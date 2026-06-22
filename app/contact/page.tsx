@@ -85,7 +85,7 @@ export default function ContactPage() {
             {/* Enquiry form */}
             <div>
               <Reveal delay={0.06}>
-                <div className="rounded-lg border border-border bg-surface p-7 md:p-10">
+                <div data-no-grid className="rounded-lg border border-border bg-surface p-7 md:p-10">
                   <p className="eyebrow mb-6">Project enquiry</p>
                   <h2 className="t-h3 text-text-primary mb-8">Or send a few lines.</h2>
                   <ContactForm />

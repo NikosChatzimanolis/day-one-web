@@ -18,7 +18,10 @@ const sizeMap: Record<LogoSize, { day: string; one: string; tagline: string; div
   md:  { day: 'text-[3rem]',   one: 'text-[1.5rem]',   tagline: 'text-[0.5rem]',    dividerMargin: 'mx-3 mb-[0.4rem]', gap: 'gap-[0.2rem]',  pb: 'pb-[0.4rem]' },
   lg:  { day: 'text-[4.5rem]', one: 'text-[1.875rem]', tagline: 'text-[0.5625rem]', dividerMargin: 'mx-3 mb-[0.4rem]', gap: 'gap-[0.2rem]',  pb: 'pb-[0.4rem]' },
   xl:  { day: 'text-[6rem]',   one: 'text-[2.5rem]',   tagline: 'text-[0.75rem]',   dividerMargin: 'mx-4 mb-[0.5rem]', gap: 'gap-[0.25rem]', pb: 'pb-[0.5rem]' },
-  '2xl': { day: 'text-[9rem]',  one: 'text-[3.5rem]',  tagline: 'text-[1rem]',      dividerMargin: 'mx-5 mb-[0.6rem]', gap: 'gap-[0.3rem]',  pb: 'pb-[0.6rem]' },
+  // Fluid: caps at the desktop sizes (9rem / 3.5rem / 1rem) but scales down on
+  // narrow viewports so the hero lockup never overflows — mirrors the reference
+  // clamp() sizing.
+  '2xl': { day: 'text-[clamp(3.5rem,14vw,9rem)]', one: 'text-[clamp(1.5rem,5.5vw,3.5rem)]', tagline: 'text-[clamp(0.55rem,1.6vw,1rem)]', dividerMargin: 'mx-[clamp(0.6rem,2vw,1.25rem)] mb-[0.6rem]', gap: 'gap-[0.3rem]',  pb: 'pb-[0.6rem]' },
 }
 
 const variantColors: Record<LogoVariant, { day: string; one: string; tagline: string; divider: string }> = {
@@ -42,7 +45,7 @@ export default function Logo({ variant = 'primary', size = 'md', className, show
       </span>
 
       {/* Vertical divider */}
-      <span className={cn('w-[1.5px] self-stretch shrink-0', s.dividerMargin, c.divider)} />
+      <span data-logo-divider className={cn('w-[1.5px] self-stretch shrink-0', s.dividerMargin, c.divider)} />
 
       {/* Right column: ONE + tagline */}
       <span className={cn('flex flex-col justify-end', s.gap, s.pb)}>

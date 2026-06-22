@@ -9,6 +9,7 @@ interface ContactBody {
   name: unknown
   email: unknown
   message: unknown
+  company?: unknown // honeypot — must stay empty
 }
 
 function validateBody(body: ContactBody): string | null {
@@ -30,6 +31,12 @@ function validateBody(body: ContactBody): string | null {
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as ContactBody
+
+    // Honeypot: a real person never fills this. Accept silently and drop.
+    if (typeof body.company === 'string' && body.company.trim().length > 0) {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
+
     const validationError = validateBody(body)
 
     if (validationError) {
@@ -73,7 +80,7 @@ Sent via dayone-web.com
     .value { font-size: 15px; color: #1A1A18; }
     .message-box { background: #F7F4EF; border: 1px solid #E0D9D0; border-radius: 4px; padding: 16px; font-size: 15px; color: #1A1A18; line-height: 1.6; white-space: pre-wrap; }
     .footer { padding: 16px 32px; border-top: 1px solid #E0D9D0; font-size: 11px; color: #9C9790; }
-    .reply-cta { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #C4522A; color: #fff; border-radius: 4px; text-decoration: none; font-size: 14px; }
+    .reply-cta { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #C04C2A; color: #fff; border-radius: 4px; text-decoration: none; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -89,7 +96,7 @@ Sent via dayone-web.com
       </div>
       <div class="field">
         <div class="label">Email</div>
-        <div class="value"><a href="mailto:${email}" style="color: #C4522A;">${email}</a></div>
+        <div class="value"><a href="mailto:${email}" style="color: #C04C2A;">${email}</a></div>
       </div>
       <div class="field">
         <div class="label">Message</div>

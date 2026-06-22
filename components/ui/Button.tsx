@@ -2,7 +2,6 @@
 // ── components/ui/Button.tsx ──
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import DrawBorder from '@/components/circuit/DrawBorder'
 
 type Variant = 'primary' | 'outline' | 'ghost' | 'outline-dark'
 type Size = 'md' | 'lg'
@@ -49,10 +48,9 @@ export function Button({
   external,
 }: ButtonAsLink) {
   const classes = cn(base, variant !== 'ghost' && sizes[size], variants[variant], className)
-  const drawsBorder = variant === 'outline' || variant === 'outline-dark'
+  const noGrid = variant !== 'ghost' ? ({ 'data-no-grid': true } as const) : {}
   const inner = (
     <>
-      {drawsBorder && <DrawBorder radius={2} band={120} />}
       {children}
       {arrow && (
         <span
@@ -67,14 +65,14 @@ export function Button({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} {...noGrid}>
         {inner}
       </a>
     )
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} {...noGrid}>
       {inner}
     </Link>
   )

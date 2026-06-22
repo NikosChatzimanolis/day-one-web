@@ -2,8 +2,6 @@
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 import BookCall from '@/components/ui/BookCall'
-import Section from '@/components/circuit/Section'
-import NumberBox from '@/components/circuit/NumberBox'
 import { Button } from '@/components/ui/Button'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
@@ -92,7 +90,7 @@ export default function HomePage() {
       </section>
 
       {/* ── The promise — left-anchored statement (uses the left space) ── */}
-      <Section className="bg-bg">
+      <section className="relative bg-bg">
         <div className="container-wide section">
           <Reveal>
             <p className="eyebrow mb-8">Why us</p>
@@ -108,10 +106,10 @@ export default function HomePage() {
             </p>
           </Reveal>
         </div>
-      </Section>
+      </section>
 
       {/* ── What we do — editorial numbered horizons ───────── */}
-      <Section className="section-dark">
+      <section className="relative section-dark">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-8 mb-16 md:mb-24">
             <Reveal className="md:col-span-3">
@@ -142,10 +140,10 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </Section>
+      </section>
 
       {/* ── Proof — heading + hairline list, Forge accent row ─ */}
-      <Section className="bg-bg">
+      <section className="relative bg-bg">
         <div className="container-wide section">
           <div className="grid md:grid-cols-12 gap-10 md:gap-8">
             <div className="md:col-span-3">
@@ -192,6 +190,7 @@ export default function HomePage() {
               <Reveal delay={0.08}>
                 <Link
                   href="/forge"
+                  data-no-grid
                   className="group mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-2 border-rust bg-surface/60 pl-6 pr-6 py-7 transition-colors duration-300 hover:bg-surface"
                 >
                   <p className="t-h3 text-text-primary font-light">
@@ -207,10 +206,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* ── How we work — heading + offset grid ────────────── */}
-      <Section className="bg-surface">
+      <section data-no-grid className="relative bg-surface">
         <div className="container-wide section">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
             <div className="lg:col-span-4">
@@ -225,7 +224,7 @@ export default function HomePage() {
             <RevealGroup className="lg:col-span-7 lg:col-start-6 grid sm:grid-cols-2 gap-x-12 gap-y-12" stagger={0.1}>
               {beats.map((beat, i) => (
                 <RevealItem key={beat.title}>
-                  <NumberBox>{String(i + 1).padStart(2, '0')}</NumberBox>
+                  <span className="t-index text-muted">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="t-h3 mt-4 text-text-primary">{beat.title}</h3>
                   <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure">{beat.body}</p>
                 </RevealItem>
@@ -233,7 +232,7 @@ export default function HomePage() {
             </RevealGroup>
           </div>
         </div>
-      </Section>
+      </section>
 
       <CtaSection />
     </>

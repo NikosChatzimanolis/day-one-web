@@ -34,18 +34,12 @@ export default function Navbar() {
   const reduce = useReducedMotion()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   // Close drawer on route change
   useEffect(() => { setIsOpen(false) }, [pathname])
 
+  // The hamburger is mobile-only (desktop shows inline links) — close the drawer
+  // if the viewport grows past the breakpoint while it's open.
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setIsOpen(false) }
     window.addEventListener('resize', onResize)
@@ -57,27 +51,22 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
-  // Pages with a dark hero need a light navbar treatment while at the top
-  // (before the parchment background kicks in on scroll).
-  const onDark = pathname.startsWith('/forge') && !scrolled
-
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 inset-x-0 z-50 transition-all duration-400 ease-out-expo',
-          scrolled
-            ? 'bg-[rgba(250,234,219,0.88)] backdrop-blur-md border-b border-border'
-            : 'bg-transparent border-b border-transparent'
-        )}
-      >
+      <header className="fixed top-0 inset-x-0 z-50 bg-transparent">
         <div className="container-wide">
-          <div className="flex items-center justify-between h-[72px]">
-            <Link href="/" aria-label="Day One — home" className="hover:opacity-80 transition-opacity duration-250">
-              <Logo variant={onDark ? 'dark' : 'primary'} size="sm" showTagline={false} />
+          <div className="flex items-center justify-between gap-3 py-3">
+            {/* parchment chip only behind the logo */}
+            <Link
+              href="/"
+              aria-label="Day One — home"
+              className="inline-flex items-center rounded-full bg-bg border border-border shadow-sm px-4 py-2 hover:opacity-90 transition-opacity duration-250"
+            >
+              <Logo variant="primary" size="sm" showTagline={false} />
             </Link>
 
-            <nav className="hidden md:flex items-center gap-9" aria-label="Main">
+            {/* parchment chip only behind the nav links */}
+            <nav className="hidden md:flex items-center gap-7 rounded-full bg-bg border border-border shadow-sm px-6 py-2.5" aria-label="Main">
               {nav.slice(1).map((item) => {
                 const active = isActive(pathname, item.href)
                 return (
@@ -86,40 +75,24 @@ export default function Navbar() {
                     href={item.href}
                     aria-current={active ? 'page' : undefined}
                     className={cn(
-                      'relative text-sm font-body transition-colors duration-250',
-                      active
-                        ? onDark ? 'text-rust' : 'text-accent'
-                        : onDark ? 'text-dark-text hover:text-rust' : 'text-text-primary hover:text-accent'
+                      'text-[13px] font-body tracking-wide transition-colors duration-250',
+                      active ? 'text-accent' : 'text-text-primary hover:text-accent'
                     )}
                   >
                     {item.label}
-                    <span
-                      className={cn(
-                        'absolute -bottom-1.5 left-0 h-px transition-all duration-300 ease-out-expo',
-                        onDark ? 'bg-rust' : 'bg-accent',
-                        active ? 'w-full' : 'w-0'
-                      )}
-                    />
                   </Link>
                 )
               })}
             </nav>
 
-            <div className="flex items-center gap-3">
-              <div className="hidden md:block">
-                <BookCall size="md" arrow={false} />
-              </div>
-              <button
-                className={cn(
-                  'md:hidden flex items-center justify-center w-10 h-10 -mr-2',
-                  onDark ? 'text-dark-text' : 'text-text-primary'
-                )}
-                onClick={() => setIsOpen(true)}
-                aria-label="Open menu"
-              >
-                <Menu size={22} strokeWidth={1.5} />
-              </button>
-            </div>
+            {/* parchment chip behind the mobile menu button */}
+            <button
+              className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg border border-border shadow-sm text-text-primary hover:text-accent transition-colors duration-250"
+              onClick={() => setIsOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu size={22} strokeWidth={1.5} />
+            </button>
           </div>
         </div>
       </header>
@@ -128,7 +101,7 @@ export default function Navbar() {
         {isOpen && (
           <>
             <motion.div
-              className="fixed inset-0 z-[60] bg-[rgba(26,24,22,0.45)] backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[60] bg-[rgba(26,24,22,0.45)] backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -136,7 +109,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             />
             <motion.div
-              className="fixed top-0 right-0 bottom-0 z-[70] w-[82vw] max-w-[360px] bg-bg flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 z-[70] w-[82vw] max-w-[360px] bg-bg flex flex-col"
               variants={reduce ? undefined : drawerVariants}
               initial="closed"
               animate="open"

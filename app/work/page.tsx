@@ -8,7 +8,7 @@ import BookCall from '@/components/ui/BookCall'
 import BrowserFrame from '@/components/ui/BrowserFrame'
 import AstralaVisual from '@/components/work/AstralaVisual'
 import AstralaLiveEmbed from '@/components/work/AstralaLiveEmbed'
-import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import Reveal from '@/components/ui/Reveal'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -80,28 +80,6 @@ export default function WorkPage() {
         lead="We don’t show logo walls. We show the things we built, what they needed to do, and what happened next."
       />
 
-      {/* ── Index tiles — quick visual entry to each engagement ── */}
-      <section className="bg-bg border-b border-border">
-        <div className="container-wide section">
-          <RevealGroup className="grid gap-6 md:grid-cols-2" stagger={0.1}>
-            <RevealItem>
-              <a href="#astrala" className="tile">
-                <span className="tnum">01</span>
-                <div className="glow" aria-hidden="true" />
-                <h4 className="t-h3 tile-title">Astrala Advisory</h4>
-              </a>
-            </RevealItem>
-            <RevealItem>
-              <a href="#delbeteris" className="tile">
-                <span className="tnum">02</span>
-                <div className="glow" aria-hidden="true" />
-                <h4 className="t-h3 tile-title">Delbeteris</h4>
-              </a>
-            </RevealItem>
-          </RevealGroup>
-        </div>
-      </section>
-
       {/* ── Astrala ─────────────────────────────────────────── */}
       <section id="astrala" className="bg-bg border-b border-border scroll-mt-24">
         <div className="container-wide section">
@@ -164,7 +142,7 @@ export default function WorkPage() {
       </section>
 
       {/* ── Delbeteris ──────────────────────────────────────── */}
-      <section id="delbeteris" className="bg-surface border-b border-border scroll-mt-24">
+      <section id="delbeteris" data-no-grid className="bg-surface border-b border-border scroll-mt-24">
         <div className="container-wide section">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <Reveal delay={0.1} className="order-2 lg:order-1">

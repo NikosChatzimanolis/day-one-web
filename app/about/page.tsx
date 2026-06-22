@@ -31,7 +31,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="The studio"
-        title="A small team that builds like the company is ours."
+        title="A team that builds like the company is ours."
         lead="Day One is a studio, not a vendor. We build the systems businesses run on, and we stay to keep them running."
       />
 
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Honest line — left-anchored closing statement, tightened band */}
-      <section className="bg-surface border-b border-border">
+      <section data-no-grid className="bg-surface border-b border-border">
         <div className="container-wide section-sm">
           <Reveal>
             <p className="t-h2 text-text-primary display-balance max-w-4xl">

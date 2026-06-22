@@ -1,9 +1,6 @@
 // ── components/sections/HorizonRows.tsx ──
-// The Build / Scale / Maintain horizons. The connecting line and node-warming
-// that used to live here (a framer scroll-progress thread) were removed during
-// the circuit teardown — the new circuit rails/dividers and (Phase 3) fillable
-// numerals replace it. This now renders the editorial grid only, statically.
-import NumberBox from '@/components/circuit/NumberBox'
+// The Build / Scale / Maintain horizons. Renders the editorial grid statically,
+// with a small tracked index numeral per row.
 
 export interface Horizon {
   no: string
@@ -22,7 +19,7 @@ export default function HorizonRows({ tracks }: { tracks: Horizon[] }) {
           }`}
         >
           <div className="md:col-span-1">
-            <NumberBox tone="dark">{track.no}</NumberBox>
+            <span className="t-index text-dark-text-tertiary">{track.no}</span>
           </div>
           <h3 className="t-h2 text-dark-text md:col-span-4">{track.name}</h3>
           <p className="font-body text-base leading-relaxed text-dark-text-secondary measure-lg md:col-span-6 md:col-start-7 md:text-lg">
