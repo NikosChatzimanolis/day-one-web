@@ -74,9 +74,15 @@ export default function Footer() {
           <p className="font-body text-xs text-muted">
             © {year} {site.legalName}.
           </p>
-          <p className="font-body text-xs text-muted">
-            {site.location}
-          </p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/privacy"
+              className="font-body text-xs text-muted hover:text-dark-text transition-colors duration-250"
+            >
+              Privacy
+            </Link>
+            <p className="font-body text-xs text-muted">{site.location}</p>
+          </div>
         </div>
       </div>
     </footer>

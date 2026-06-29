@@ -6,6 +6,7 @@ import CustomCursor from '@/components/ui/CustomCursor'
 import ReactiveGrid from '@/components/ui/ReactiveGrid'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import CookieConsent from '@/components/layout/CookieConsent'
 import { JsonLd } from './jsonld'
 import { site } from '@/lib/site'
 
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   )
