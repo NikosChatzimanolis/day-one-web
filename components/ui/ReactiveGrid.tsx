@@ -18,8 +18,17 @@
 import { useEffect, useRef } from 'react'
 
 const CELL = 46 // grid rhythm (px)
-const POOL_RADIUS = 150 // cursor influence radius (px)
+const POOL_RADIUS = 150 // half-width of the slice / radius of the pool at rest (px)
 const PARALLAX = 0 // horizontal lines stay pixel-aligned (no scroll drift)
+
+// The bloom "cuts" along the cursor's path: a tight leading point races ahead
+// while a slower trailing point lags, so the lit pool stretches into a slice
+// while moving and heals back into a round pool at rest — knife-through-butter.
+const HEAD_EASE = 0.24 // leading edge — tracks the cursor tightly
+const TAIL_EASE = 0.085 // trailing edge — lags, giving the slice its length
+const TAIL_MAX_LEN = 240 // px — cap the slice so a fast flick doesn't streak forever
+const CELL_ATTACK = 0.18 // how fast a cell brightens toward its target
+const CELL_RELEASE = 0.06 // how fast it fades back — slower = silkier trail
 
 // tone palette (r,g,b) — pulled from the brand tokens
 const INK = [26, 24, 22] // light-section lines
@@ -28,6 +37,22 @@ const BASE_LIGHT = 0.05 // ink line alpha on light bands
 const CELL_MAX = 0.16 // rust cell fill peak alpha
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+// smoothstep — softens the falloff at the edge of the pool
+const smooth = (t: number) => t * t * (3 - 2 * t)
+// shortest distance from a point to the segment a→b (the cursor's recent path),
+// so cells light by their distance to the whole slice, not just its centre.
+const segDist = (
+  px: number, py: number,
+  ax: number, ay: number,
+  bx: number, by: number,
+) => {
+  const dx = bx - ax
+  const dy = by - ay
+  const len2 = dx * dx + dy * dy
+  let t = len2 > 0 ? ((px - ax) * dx + (py - ay) * dy) / len2 : 0
+  t = t < 0 ? 0 : t > 1 ? 1 : t
+  return Math.hypot(px - (ax + t * dx), py - (ay + t * dy))
+}
 
 type Rect = [left: number, top: number, right: number, bottom: number]
 
@@ -51,8 +76,18 @@ export default function ReactiveGrid() {
     let vh = 0
     let dpr = 1
 
-    // eased cursor pool
-    const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, target: 0, glow: 0 }
+    // eased cursor pool — `cells` holds each brightened cell's current/target
+    // alpha, so cells fade in and out independently (no popping when the cursor
+    // jumps between them).
+    const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999 }
+    let active = false // cursor is currently on the page
+    let primed = false // bloom has been snapped onto the first cursor position
+    type Cell = { i: number; j: number; cur: number; tgt: number }
+    const cells = new Map<string, Cell>()
+    let cellsMoving = false
+    // trailing point of the slice (the head is `pointer.x/y`)
+    let tailX = -9999
+    let tailY = -9999
     // eased parallax offset of the horizontal lines
     let offsetY = 0
     let noGridRects: Rect[] = []
@@ -129,49 +164,90 @@ export default function ReactiveGrid() {
         ctx.clearRect(left - 1, top - 1, right - left + 2, bottom - top + 2)
       }
 
-      // rust-brightened cells near the cursor (drawn over the lines, inset 1px so
-      // the grid still frames each cell).
-      const glow = pointer.glow
-      if (glow > 0.002 && pointer.x > -100) {
-        const px = pointer.x
-        const py = pointer.y
+      if (reduce) {
+        cellsMoving = false
+        return
+      }
+
+      // Refresh targets: every tracked cell decays to 0 unless the cursor is on
+      // the page and within reach, where it aims for a smoothstepped, distance-
+      // based peak.
+      cells.forEach((c) => {
+        c.tgt = 0
+      })
+      if (active && primed) {
+        const hx = pointer.x
+        const hy = pointer.y
+        const ax = tailX
+        const ay = tailY
         const R = POOL_RADIUS
-        const i0 = Math.floor((px - R) / CELL)
-        const i1 = Math.ceil((px + R) / CELL)
-        const j0 = Math.floor((py + off - R) / CELL)
-        const j1 = Math.ceil((py + off + R) / CELL)
+        // bounding box of the whole capsule (tail → head, padded by R)
+        const i0 = Math.floor((Math.min(hx, ax) - R) / CELL)
+        const i1 = Math.ceil((Math.max(hx, ax) + R) / CELL)
+        const j0 = Math.floor((Math.min(hy, ay) + off - R) / CELL)
+        const j1 = Math.ceil((Math.max(hy, ay) + off + R) / CELL)
         for (let i = i0; i <= i1; i++) {
           for (let j = j0; j <= j1; j++) {
-            const cellX = i * CELL
-            const cellY = j * CELL - off
-            const cxp = cellX + CELL / 2
-            const cyp = cellY + CELL / 2
+            const cxp = i * CELL + CELL / 2
+            const cyp = j * CELL - off + CELL / 2
             if (inNoGrid(cxp, cyp)) continue
-            const d = Math.hypot(cxp - px, cyp - py)
+            const d = segDist(cxp, cyp, ax, ay, hx, hy)
             if (d >= R) continue
-            const a = 1 - d / R
-            ctx.fillStyle = `rgba(${RUST_LIGHT[0]},${RUST_LIGHT[1]},${RUST_LIGHT[2]},${a * a * CELL_MAX * glow})`
-            ctx.fillRect(cellX + 1, cellY + 1, CELL - 2, CELL - 2)
+            const tgt = smooth(1 - d / R) * CELL_MAX
+            const key = i + ',' + j
+            const existing = cells.get(key)
+            if (existing) existing.tgt = tgt
+            else cells.set(key, { i, j, cur: 0, tgt })
           }
         }
       }
+
+      // Ease each cell toward its target and paint it (inset 1px so the grid
+      // still frames the cell). Fully-faded cells are dropped; `cellsMoving`
+      // keeps the loop alive until the last one settles.
+      let moving = false
+      cells.forEach((c, key) => {
+        const rate = c.tgt > c.cur ? CELL_ATTACK : CELL_RELEASE
+        c.cur += (c.tgt - c.cur) * rate
+        if (c.cur < 0.002 && c.tgt === 0) {
+          cells.delete(key)
+          return
+        }
+        if (Math.abs(c.tgt - c.cur) > 0.0016) moving = true
+        ctx.fillStyle = `rgba(${RUST_LIGHT[0]},${RUST_LIGHT[1]},${RUST_LIGHT[2]},${c.cur})`
+        ctx.fillRect(c.i * CELL + 1, c.j * CELL - off + 1, CELL - 2, CELL - 2)
+      })
+      cellsMoving = moving
     }
 
     function frame() {
-      pointer.x = lerp(pointer.x, pointer.tx, 0.12)
-      pointer.y = lerp(pointer.y, pointer.ty, 0.12)
-      pointer.glow = lerp(pointer.glow, pointer.target, 0.08)
+      // leading edge tracks tightly; trailing edge lags to form the slice
+      pointer.x = lerp(pointer.x, pointer.tx, HEAD_EASE)
+      pointer.y = lerp(pointer.y, pointer.ty, HEAD_EASE)
+      tailX = lerp(tailX, pointer.tx, TAIL_EASE)
+      tailY = lerp(tailY, pointer.ty, TAIL_EASE)
+      // cap how far the tail may trail the head so a fast flick slices a fixed
+      // length instead of streaking across the whole viewport
+      const dxT = tailX - pointer.x
+      const dyT = tailY - pointer.y
+      const lenT = Math.hypot(dxT, dyT)
+      if (lenT > TAIL_MAX_LEN) {
+        tailX = pointer.x + (dxT / lenT) * TAIL_MAX_LEN
+        tailY = pointer.y + (dyT / lenT) * TAIL_MAX_LEN
+      }
       const targetOffset = window.scrollY * PARALLAX
       offsetY = lerp(offsetY, targetOffset, 0.12)
 
       draw()
 
       const posSettled =
-        Math.abs(pointer.x - pointer.tx) < 0.5 && Math.abs(pointer.y - pointer.ty) < 0.5
-      const glowSettled = Math.abs(pointer.glow - pointer.target) < 0.004
+        Math.abs(pointer.x - pointer.tx) < 0.5 &&
+        Math.abs(pointer.y - pointer.ty) < 0.5 &&
+        Math.abs(tailX - pointer.tx) < 0.5 &&
+        Math.abs(tailY - pointer.ty) < 0.5
       const offsetSettled = Math.abs(offsetY - window.scrollY * PARALLAX) < 0.3
 
-      if (posSettled && glowSettled && offsetSettled) {
+      if (posSettled && offsetSettled && !cellsMoving) {
         running = false // sleep; the last frame stays drawn
         return
       }
@@ -181,7 +257,6 @@ export default function ReactiveGrid() {
     function drawStatic() {
       // reduced-motion: static lines at the current scroll, no cells, no loop
       offsetY = window.scrollY * PARALLAX
-      pointer.glow = 0
       draw()
     }
 
@@ -199,11 +274,20 @@ export default function ReactiveGrid() {
     function onMove(e: MouseEvent) {
       pointer.tx = e.clientX
       pointer.ty = e.clientY
-      pointer.target = 1
+      // snap the bloom onto the cursor the first time so it doesn't slide in
+      // from the corner; ease from there on.
+      if (!primed) {
+        pointer.x = e.clientX
+        pointer.y = e.clientY
+        tailX = e.clientX
+        tailY = e.clientY
+        primed = true
+      }
+      active = true
       wake()
     }
     function onLeave() {
-      pointer.target = 0
+      active = false
       wake()
     }
     function onScroll() {
