@@ -1,19 +1,21 @@
-// ── app/work/page.tsx — Work / Proof ──
+// ── app/work/page.tsx · Work / Proof ──
+// Order is deliberate: product and platform engineering lead the page, the
+// delivered client sites and brand work follow as a grouped band of smaller
+// cards. New copy on this page avoids em-dashes.
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import BookCall from '@/components/ui/BookCall'
-import AstralaVisual from '@/components/work/AstralaVisual'
-import AstralaLiveEmbed from '@/components/work/AstralaLiveEmbed'
-import SiteEmbed from '@/components/work/SiteEmbed'
-import Reveal from '@/components/ui/Reveal'
+import { Button } from '@/components/ui/Button'
+import ForgeMock from '@/components/forge/ForgeMock'
+import SiteShot from '@/components/work/SiteShot'
+import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Named engagements: Delbeteris, a delivered private-transfer site; Ta Pinakia, a delivered restaurant site in Cyprus; and an ongoing content, newsletter and brand engagement with Astrala Advisory.',
+    'Forge, the production task system we built and run; a multi-service platform engineering engagement; and delivered sites and brand work for Delbeteris, Ta Pinakia, and Astrala Advisory.',
 }
 
 interface Block {
@@ -41,49 +43,33 @@ function CaseBlocks({ blocks, dark }: { blocks: Block[]; dark?: boolean }) {
   )
 }
 
-const astralaBlocks: Block[] = [
+const forgeBlocks: Block[] = [
   {
     label: 'The need',
-    body: 'Astrala Advisory needed an editorial presence that matched the depth of their work — a brand voice, a newsletter, and a steady content rhythm aimed at senior decision-makers across European markets.',
+    body: 'Off-the-shelf trackers didn’t fit how the studio actually works. We needed one page per task, a queue instead of a daily to-do list, and software quiet enough to think in.',
   },
   {
-    label: 'What we do',
-    body: 'We run the content and brand side: brand voice and identity, the newsletter as an editorial publication, and an ongoing social and content cadence. One team holding the whole editorial system, month over month.',
+    label: 'What we built',
+    body: 'A production task management PWA: two queue lanes you drag to reorder, one page per task holding its intent and its steps, autosave, and sync across devices.',
   },
   {
     label: 'Where it stands',
-    body: 'An active engagement, in development. The brand system and newsletter are in build, with content and audience growth underway.',
+    body: 'Live and in daily use as the studio’s operational backbone. In early access, free for now, and in active development.',
   },
 ]
 
-const delbeterisBlocks: Block[] = [
-  {
-    label: 'The need',
-    body: 'A private-transfer company in Northern Greece needed a real presence — fast, clear, and trustworthy enough to book a car against.',
-  },
-  {
-    label: 'What we built',
-    body: 'A clean, fast multi-page site: services, fleet, tours and a clear path to enquire. Built to load quickly and read well on a phone at the airport.',
-  },
-  {
-    label: 'The result',
-    body: 'Found on page one before the season started. Across its first four months, the redesigned site held an average Google Search position of 7.5 with a 4.4% average click-through rate.',
-  },
+const platformWork = [
+  'Full security audit of a 48,000 line codebase across 6 services, 30 verified findings triaged by severity.',
+  'Row-level security hardening across the data layer following a GDPR exposure review.',
+  'Azure infrastructure: Container Apps deployment, custom domains, managed TLS, cross-subscription migration.',
+  'CI/CD pipeline rebuild on Microsoft-hosted agents.',
+  'Third-party system migration including data export tooling and PDF report generation.',
 ]
 
-const taPinakiaBlocks: Block[] = [
-  {
-    label: 'The need',
-    body: 'A restaurant in Cyprus with no website at all — no way to be found ahead of a meal, and nowhere to send people for the menu, the hours, or the place itself.',
-  },
-  {
-    label: 'What we built',
-    body: 'A fast, appetite-first site: the menu, the room and a clear way to find and reach it. Built to load quickly and read well on a phone, at the table or on the way.',
-  },
-  {
-    label: 'The result',
-    body: 'An audience from zero. In one recent week, the site drew 564 visitors and 1,298 page views — reach the restaurant simply did not have before, with no previous website to build on.',
-  },
+const platformStats = [
+  { value: '48,000', label: 'Lines of code audited' },
+  { value: '6', label: 'Services' },
+  { value: '30', label: 'Verified findings' },
 ]
 
 export default function WorkPage() {
@@ -91,158 +77,226 @@ export default function WorkPage() {
     <>
       <PageHero
         eyebrow="Work"
-        title="Real systems. Named clients. Live and in use."
+        title="Real systems. Live and in use."
         lead="We don’t show logo walls. We show the things we built, what they needed to do, and what happened next."
       />
 
-      {/* ── Delbeteris ──────────────────────────────────────── */}
-      <section id="delbeteris" data-no-grid className="bg-bg border-b border-border scroll-mt-24">
+      {/* ── Forge · product, built and run by Day One ───────── */}
+      <section id="forge" className="bg-bg border-b border-border scroll-mt-24">
         <div className="container-wide section">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <Reveal delay={0.1} className="order-2 lg:order-1">
-              <SiteEmbed
-                url="delbeteristransfer.com"
-                embedSrc="https://delbeteristransfer.com/en"
-                title="Delbeteris"
-              >
-                <div className="absolute inset-0">
-                  <Image
-                    src="/work/delbeteris-hero.jpg"
-                    alt="Delbeteris private transfer site — fleet on the road in Northern Greece"
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              </SiteEmbed>
-            </Reveal>
-            <div className="order-1 lg:order-2">
+          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 lg:gap-16 items-center">
+            <div>
               <Reveal>
-                <p className="eyebrow mb-6">Delivered build · Greece</p>
+                <p className="eyebrow mb-6">Product · Built and run by Day One</p>
               </Reveal>
               <Reveal delay={0.05}>
-                <h2 className="t-h1 display-balance">Delbeteris</h2>
+                <h2 className="t-h1 display-balance">Forge</h2>
               </Reveal>
               <Reveal delay={0.1}>
                 <p className="t-lead mt-7 text-text-secondary measure display-pretty">
-                  A clean, fast site for a private-transfer company in Kavala — built to be read on a phone, trusted at a glance, and booked against.
+                  We built it because we needed it. It became the operational backbone the studio
+                  runs on, and it ships to early-access users today.
                 </p>
               </Reveal>
               <Reveal delay={0.16}>
                 <p className="mt-7 font-body text-sm text-text-tertiary tracking-wide">
-                  Next.js · Multi-language · Delivered &amp; live
+                  Product · PWA · Live in early access
                 </p>
               </Reveal>
             </div>
+            <Reveal delay={0.1}>
+              <ForgeMock />
+            </Reveal>
           </div>
 
           <Reveal>
-            <CaseBlocks blocks={delbeterisBlocks} />
+            <CaseBlocks blocks={forgeBlocks} />
           </Reveal>
 
           <Reveal delay={0.08}>
             <div className="mt-12">
-              <BookCall size="lg" label="Start a build like this" />
+              <Button href="/forge" variant="outline" size="lg" arrow>
+                See Forge in detail
+              </Button>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Ta Pinakia ──────────────────────────────────────── */}
-      <section id="ta-pinakia" data-no-grid className="bg-surface border-b border-border scroll-mt-24">
+      {/* ── Recruitment & Operations Platform · anonymized ──── */}
+      <section id="platform" data-no-grid className="bg-surface border-b border-border scroll-mt-24">
         <div className="container-wide section">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="order-1">
-              <Reveal>
-                <p className="eyebrow mb-6">Delivered build · Cyprus</p>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h2 className="t-h1 display-balance">Ta Pinakia</h2>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="t-lead mt-7 text-text-secondary measure display-pretty">
-                  A warm, appetite-first site for a Cyprus restaurant — easy to find, easy to read on a phone, and ready before the first guest arrives.
-                </p>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <p className="mt-7 font-body text-sm text-text-tertiary tracking-wide">
-                  Restaurant · Menu · Delivered &amp; live
-                </p>
-              </Reveal>
-            </div>
-            <Reveal delay={0.1} className="order-2">
-              <SiteEmbed url="tapinakia.com" title="Ta Pinakia" />
-            </Reveal>
-          </div>
-
-          <Reveal>
-            <CaseBlocks blocks={taPinakiaBlocks} />
-          </Reveal>
-
-          <Reveal delay={0.08}>
-            <div className="mt-12">
-              <BookCall size="lg" label="Start a build like this" />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Astrala ─────────────────────────────────────────── */}
-      <section id="astrala" className="bg-bg border-b border-border scroll-mt-24">
-        <div className="container-wide section">
-          {/* Header */}
           <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow mb-6">Ongoing engagement · Content &amp; brand</p>
+              <p className="eyebrow mb-6">Platform engineering · Cyprus</p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="t-h1 display-balance">Astrala Advisory</h2>
+              <h2 className="t-h1 display-balance">Recruitment &amp; Operations Platform</h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="t-lead mt-7 text-text-secondary measure display-pretty">
-                Content, newsletter, and brand work for an advisory firm — an ongoing engagement, live and building.
+              <p className="t-lead mt-7 text-text-secondary measure-lg display-pretty">
+                A multi-service recruitment and operations platform serving an advisory group:
+                candidate management, client portal, behavioral assessments, automated reporting,
+                and internal tooling.
               </p>
             </Reveal>
-            <Reveal delay={0.16}>
+            <Reveal delay={0.14}>
+              <p className="mt-6 font-body text-base md:text-lg text-text-secondary leading-relaxed measure-lg">
+                Day One operates as the technical backbone across the full stack.
+              </p>
+            </Reveal>
+            <Reveal delay={0.18}>
               <p className="mt-7 font-body text-sm text-text-tertiary tracking-wide">
-                Brand &amp; identity · Social · Editorial newsletter
+                React · Node.js · Supabase · PostgreSQL · Azure · Azure DevOps
               </p>
             </Reveal>
           </div>
 
-          {/* The direction · the direction, live — brand board paired with the live site */}
-          <div className="mt-14 grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
-            <Reveal>
-              <p className="eyebrow-muted mb-4">The direction</p>
-              <AstralaVisual />
-            </Reveal>
-            <Reveal delay={0.08}>
-              <div className="mb-4 flex items-baseline justify-between gap-4">
-                <p className="eyebrow-muted">The direction, live</p>
-                <a
-                  href="https://astralaadvisory.eu.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-                >
-                  View live
-                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
-                </a>
-              </div>
-              <AstralaLiveEmbed />
-              <p className="mt-4 font-body text-sm text-text-tertiary">
-                Brand direction by Day One, live on Astrala&rsquo;s site.
-              </p>
-            </Reveal>
-          </div>
-
+          {/* Scale of the engagement */}
           <Reveal>
-            <CaseBlocks blocks={astralaBlocks} />
+            <div className="mt-14 grid sm:grid-cols-3 border-t border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
+              {platformStats.map((s) => (
+                <div key={s.label} className="py-8 sm:py-9 sm:px-8 first:sm:pl-0 last:sm:pr-0">
+                  <p className="t-h2 text-text-primary">{s.value}</p>
+                  <p className="mt-3 font-body text-sm text-text-tertiary">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </Reveal>
+
+          {/* What we did */}
+          <Reveal>
+            <p className="eyebrow mt-14 mb-2">What we did</p>
+          </Reveal>
+          <RevealGroup className="flex flex-col" stagger={0.08}>
+            {platformWork.map((item, i) => (
+              <RevealItem
+                key={item}
+                className={cn(
+                  'flex items-baseline gap-6 py-6 border-t border-border',
+                  i === platformWork.length - 1 && 'border-b'
+                )}
+              >
+                <span className="t-index text-rust shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <p className="font-body text-base md:text-lg leading-relaxed text-text-secondary measure-xl">
+                  {item}
+                </p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
 
           <Reveal delay={0.08}>
             <div className="mt-12">
               <BookCall size="lg" label="Start an engagement like this" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Brand & local business work · grouped smaller cards ── */}
+      <section className="bg-bg border-b border-border">
+        <div className="container-wide section">
+          <Reveal>
+            <p className="eyebrow mb-6">Delivered &amp; ongoing</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="t-h2 display-balance max-w-3xl">Brand &amp; local business work</h2>
+          </Reveal>
+
+          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-3" stagger={0.1}>
+            {/* Delbeteris */}
+            <RevealItem className="h-full" as="div">
+              <article id="delbeteris" className="svc flex h-full flex-col scroll-mt-24">
+                <SiteShot
+                  url="delbeteristransfer.com"
+                  src="/work/delbeteris-site.jpg"
+                  alt="The Delbeteris home page: a black Mercedes van at Kavala airport under the headline Private Transfers and Tours Kavala"
+                />
+                <p className="eyebrow-muted mt-7 mb-3">Delivered build · Greece</p>
+                <h3 className="t-h3 mb-3">Delbeteris</h3>
+                <p className="font-body text-base leading-relaxed text-text-secondary">
+                  A clean, fast site for a private-transfer company in Kavala. Built to be read on
+                  a phone, trusted at a glance, and booked against.
+                </p>
+                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                  Page one on Google before the season started: average position 7.5 with a 4.4%
+                  click-through rate across its first four months.
+                </p>
+                <a
+                  href="https://delbeteristransfer.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
+                >
+                  View live
+                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
+                </a>
+              </article>
+            </RevealItem>
+
+            {/* Ta Pinakia */}
+            <RevealItem className="h-full" as="div">
+              <article id="ta-pinakia" className="svc flex h-full flex-col scroll-mt-24">
+                <SiteShot
+                  url="tapinakia.com"
+                  src="/work/ta-pinakia-site.jpg"
+                  alt="The Ta Pinakia home page: the restaurant’s painted-plate wall behind its Greek signage"
+                />
+                <p className="eyebrow-muted mt-7 mb-3">Delivered build · Cyprus</p>
+                <h3 className="t-h3 mb-3">Ta Pinakia</h3>
+                <p className="font-body text-base leading-relaxed text-text-secondary">
+                  A warm, appetite-first site for a Cyprus restaurant. Easy to find, easy to read
+                  on a phone, and ready before the first guest arrives.
+                </p>
+                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                  An audience from zero: 564 visitors and 1,298 page views in one recent week, with
+                  no previous website to build on.
+                </p>
+                <a
+                  href="https://tapinakia.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
+                >
+                  View live
+                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
+                </a>
+              </article>
+            </RevealItem>
+
+            {/* Astrala Advisory */}
+            <RevealItem className="h-full" as="div">
+              <article id="astrala" className="svc flex h-full flex-col scroll-mt-24">
+                <SiteShot
+                  url="astralaadvisory.eu.com"
+                  src="/work/astrala-site.jpg"
+                  alt="The Astrala Advisory home page: a deep navy hero with a wireframe globe and serif headline"
+                />
+                <p className="eyebrow-muted mt-7 mb-3">Ongoing engagement · Content &amp; brand</p>
+                <h3 className="t-h3 mb-3">Astrala Advisory</h3>
+                <p className="font-body text-base leading-relaxed text-text-secondary">
+                  Content, newsletter, and brand work for an advisory firm. An ongoing engagement,
+                  live and building.
+                </p>
+                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                  Brand &amp; identity · Social · Editorial newsletter
+                </p>
+                <a
+                  href="https://astralaadvisory.eu.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
+                >
+                  View live
+                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
+                </a>
+              </article>
+            </RevealItem>
+          </RevealGroup>
+
+          <Reveal delay={0.08}>
+            <div className="mt-12">
+              <BookCall size="lg" label="Start a build like this" />
             </div>
           </Reveal>
         </div>

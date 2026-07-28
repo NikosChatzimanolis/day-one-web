@@ -19,14 +19,19 @@ export const site = {
   forgeUrl: process.env.NEXT_PUBLIC_FORGE_URL ?? 'https://forge-dayone.com',
 } as const
 
-export const nav = [
+export type NavItem = { label: string; href: string; highlight?: boolean }
+
+export const nav: readonly NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'Forge', href: '/forge' },
   { label: 'About', href: '/about' },
+  // The two fixed-offering pages sit together, ahead of Contact.
+  { label: 'White-label', href: '/white-label' },
+  { label: 'Security', href: '/security', highlight: true },
   { label: 'Contact', href: '/contact' },
-] as const
+]
 
 // Primary CTA target across the site. The Book-a-call action always lands on
 // the contact page's booking block (or the external calendar when configured).

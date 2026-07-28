@@ -66,7 +66,7 @@ export default function Navbar() {
             </Link>
 
             {/* parchment chip only behind the nav links */}
-            <nav className="hidden md:flex items-center gap-7 rounded-full bg-bg border border-border shadow-sm px-6 py-2.5" aria-label="Main">
+            <nav className="hidden md:flex items-center gap-6 rounded-full bg-bg border border-border shadow-sm px-6 py-2.5" aria-label="Main">
               {nav.slice(1).map((item) => {
                 const active = isActive(pathname, item.href)
                 return (
@@ -76,7 +76,11 @@ export default function Navbar() {
                     aria-current={active ? 'page' : undefined}
                     className={cn(
                       'text-[13px] font-body tracking-wide transition-colors duration-250',
-                      active ? 'text-accent' : 'text-text-primary hover:text-accent'
+                      item.highlight
+                        ? 'text-rust font-medium hover:text-accent-dark'
+                        : active
+                          ? 'text-accent'
+                          : 'text-text-primary hover:text-accent'
                     )}
                   >
                     {item.label}
@@ -133,7 +137,11 @@ export default function Navbar() {
                       href={item.href}
                       className={cn(
                         'flex items-center py-3.5 font-display text-2xl font-light border-b border-border/60 transition-colors',
-                        isActive(pathname, item.href) ? 'text-accent' : 'text-text-primary hover:text-accent'
+                        item.highlight
+                          ? 'text-rust'
+                          : isActive(pathname, item.href)
+                            ? 'text-accent'
+                            : 'text-text-primary hover:text-accent'
                       )}
                     >
                       {item.label}

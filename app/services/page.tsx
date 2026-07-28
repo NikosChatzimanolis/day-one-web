@@ -1,5 +1,6 @@
 // ── app/services/page.tsx — Services ──
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import BookCall from '@/components/ui/BookCall'
@@ -96,6 +97,27 @@ export default function ServicesPage() {
               </div>
             </RevealItem>
           </RevealGroup>
+
+          {/* Fixed-scope security review: a distinct, one-off engagement */}
+          <Reveal delay={0.05}>
+            <Link
+              href="/security"
+              data-no-grid
+              className="group mt-8 flex flex-col gap-6 border-l-2 border-rust bg-surface/60 pl-7 pr-7 py-8 transition-colors duration-300 hover:bg-surface md:mt-10 md:flex-row md:items-center md:justify-between md:gap-10"
+            >
+              <div className="max-w-2xl">
+                <p className="eyebrow mb-3">Also available · fixed scope</p>
+                <h3 className="t-h3 text-text-primary">Security &amp; GDPR review</h3>
+                <p className="mt-3 font-body text-base text-text-secondary leading-relaxed measure-lg">
+                  A two-week technical security and GDPR review for teams handling customer, financial, or health data. Severity-rated findings and a prioritized fix list.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 font-body text-sm text-accent whitespace-nowrap">
+                See the security review
+                <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 

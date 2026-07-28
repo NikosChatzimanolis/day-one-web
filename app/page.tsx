@@ -234,6 +234,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Fixed-offering entries — reachable from the landing ─ */}
+      <section className="relative bg-bg border-t border-border">
+        <div className="container-wide section-sm">
+          <div className="flex flex-col gap-4">
+            <Reveal>
+              <Link
+                href="/white-label"
+                data-no-grid
+                className="group flex flex-col gap-4 border-l-2 border-rust bg-surface/60 pl-6 pr-6 py-7 transition-colors duration-300 hover:bg-surface sm:flex-row sm:items-center sm:justify-between"
+              >
+                <p className="t-h3 text-text-primary font-light">
+                  Run an agency?
+                  <span className="text-text-tertiary"> Overflow builds that ship under your brand.</span>
+                </p>
+                <span className="inline-flex items-center gap-1.5 font-body text-sm text-accent whitespace-nowrap">
+                  White-label
+                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+                </span>
+              </Link>
+            </Reveal>
+
+            <Reveal delay={0.06}>
+              <Link
+                href="/security"
+                data-no-grid
+                className="group flex flex-col gap-4 border-l-2 border-rust bg-surface/60 pl-6 pr-6 py-7 transition-colors duration-300 hover:bg-surface sm:flex-row sm:items-center sm:justify-between"
+              >
+                <p className="t-h3 text-text-primary font-light">
+                  Handling sensitive data?
+                  <span className="text-text-tertiary"> A fixed-scope security &amp; GDPR review.</span>
+                </p>
+                <span className="inline-flex items-center gap-1.5 font-body text-sm text-accent whitespace-nowrap">
+                  Security review
+                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+                </span>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       <CtaSection />
     </>
   )
