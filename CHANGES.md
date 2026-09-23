@@ -1,6 +1,6 @@
 # Changes: 2026-09 homepage and positioning redesign
 
-Branch `redesign/partner-products`, eight commits on top of `2d7e97a`. Nothing is pushed.
+Branch `redesign/partner-products`, eleven commits on top of `2d7e97a`. Nothing is pushed.
 Gates: `npx tsc --noEmit` clean, `npx next build` exit 0. There is no ESLint config in this repo.
 
 ## Routes added
@@ -51,6 +51,6 @@ All six are in `app/sitemap.ts` and prerender statically. Titles and description
 5. **Security nav highlight.** Security was the one rust link in the old header. The mockup shows uniform ink links, so the highlight is off. Flip `highlight: true` back on in `lib/site.ts` if you want it.
 6. **/security buttons.** That page keeps its own rust, square-cornered CTA (untouched per the brief) while the rest of the site now uses ink pills.
 7. **Footer legal line** is "© year Day One Web Studio" per the brief; the full trading name still lives in `site.legalName` and is no longer rendered anywhere.
-8. **OG image** (`app/opengraph-image.tsx`) still carries the old "ships like a founder" tagline.
+8. **OG image** (`app/opengraph-image.tsx`): alt and drawn tagline now use the new positioning; the layout of the image itself is unchanged.
 9. **Lighthouse was not run** in this session (no preview server was started, per your preference). Practices kept: hero and product heroes render without the entrance animation so the h1 is the LCP element, mockups are markup only, below-the-fold frames use `content-visibility`, no new fonts or scripts. Please run Lighthouse on the deployed preview and compare against the previous scores.
 10. **Astrala wordmark** is Cormorant text, as the brief allows. A raster wordmark PNG exists in the Astrala repo (`astralaadvisory/public/brand/astrala-wordmark.png`) if you would rather use the real asset.
