@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Alex_Brush, Jost, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/ui/CustomCursor'
-import ReactiveGrid from '@/components/ui/ReactiveGrid'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import CookieConsent from '@/components/layout/CookieConsent'
@@ -110,7 +109,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             serviceType: ['Embedded Development Teams', 'White-label Engineering', 'Custom Software Development', 'Software Products', 'Security and GDPR Review'],
           }}
         />
-        <ReactiveGrid />
         <CustomCursor />
         <Navbar />
         <main id="main">{children}</main>

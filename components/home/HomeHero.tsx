@@ -1,7 +1,7 @@
 // ── components/home/HomeHero.tsx ──
 // Left-anchored hero with the ghosted Day ONE watermark on the right. Rendered
 // without an entrance animation so the h1 is painted as the LCP element the
-// moment HTML arrives; the faint background grid comes from ReactiveGrid.
+// moment HTML arrives. No background grid: the reference is plain parchment.
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 import BookCall from '@/components/ui/BookCall'
