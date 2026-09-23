@@ -40,15 +40,15 @@ export default function ProductsShowcase() {
 
         {/* row 2 · two panels */}
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <Reveal delay={0.05} className="grid items-center gap-6 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal delay={0.05} className="grid items-center gap-6 sm:grid-cols-2">
             <ProductFrame variant="center" lazy className="aspect-[5/6]">
               <AttendanceMock />
             </ProductFrame>
             <ProductText product={p.attendance} href="/products/attendance" learnMore={t.learnMore} />
           </Reveal>
-          <Reveal delay={0.1} className="grid items-center gap-6 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal delay={0.1} className="grid items-center gap-6 sm:grid-cols-2">
             <ProductFrame variant="center" lazy className="aspect-[5/6]">
-              <SigningMock />
+              <SigningMock compact />
             </ProductFrame>
             <ProductText product={p.documentSigning} href="/products/document-signing" learnMore={t.learnMore} />
           </Reveal>
