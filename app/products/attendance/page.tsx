@@ -1,7 +1,7 @@
 // ── app/products/attendance/page.tsx ──
 import type { Metadata } from 'next'
 import ProductPage from '@/components/products/ProductPage'
-import AttendanceMock from '@/components/products/AttendanceMock'
+import { PhoneShot, shots } from '@/components/products/AppShot'
 import { copy } from '@/lib/copy'
 import { site } from '@/lib/site'
 
@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 }
 
 export default function AttendancePage() {
-  return <ProductPage product={copy.products.attendance} mock={<AttendanceMock />} />
+  return <ProductPage product={copy.products.attendance} mock={<PhoneShot src={shots.attendanceClock} priority />} />
 }

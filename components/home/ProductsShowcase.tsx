@@ -7,8 +7,7 @@
 import Reveal from '@/components/ui/Reveal'
 import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
-import CyConstructionMock from '@/components/products/CyConstructionMock'
-import AttendanceMock from '@/components/products/AttendanceMock'
+import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
 import SigningMock from '@/components/products/SigningMock'
 import { copy } from '@/lib/copy'
 
@@ -33,7 +32,7 @@ export default function ProductsShowcase() {
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">
             <ProductFrame variant="bleed" lazy className="aspect-[4/3] md:aspect-[16/10]">
-              <CyConstructionMock />
+              <DashboardShot src={shots.cyDashboard} />
             </ProductFrame>
           </Reveal>
         </div>
@@ -42,7 +41,7 @@ export default function ProductsShowcase() {
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <Reveal delay={0.05} className="grid items-center gap-6 sm:grid-cols-2">
             <ProductFrame variant="center" lazy className="aspect-[5/6]">
-              <AttendanceMock />
+              <PhoneShot src={shots.attendanceClock} />
             </ProductFrame>
             <ProductText product={p.attendance} href="/products/attendance" learnMore={t.learnMore} />
           </Reveal>

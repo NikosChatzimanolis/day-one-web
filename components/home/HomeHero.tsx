@@ -40,16 +40,18 @@ export default function HomeHero() {
                 <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
               </Link>
             </div>
+            <p className="mt-10 font-body text-sm text-text-tertiary">{t.note}</p>
           </div>
 
-          <div className="lg:col-span-4">
+          <div className="flex flex-col lg:col-span-4">
             <HeroCollage />
+            <Timeline
+              labels={[tl.build, tl.scale, tl.maintain]}
+              tone="light"
+              animate
+              className="mt-8 w-full max-w-[340px] self-start lg:mt-10 lg:self-end"
+            />
           </div>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <p className="font-body text-sm text-text-tertiary">{t.note}</p>
-          <Timeline labels={[tl.build, tl.scale, tl.maintain]} tone="light" animate className="w-full max-w-[340px]" />
         </div>
       </div>
     </section>

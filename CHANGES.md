@@ -39,7 +39,8 @@ All six are in `app/sitemap.ts` and prerender statically. Titles and description
 - **About** (`app/about/page.tsx`): Team block with `{{FOUNDER_NAME}}`, Lead Developer. The placeholder is literal in all three dictionaries; fill it in `lib/copy/{en,el,ru}.ts` under `about.team.founderName`.
 - **Work** (`app/work/page.tsx`): "More work" stubs with anchors `#cy-construction`, `#forex`, `#taxi-xanthi`, `#sun-seals` (Delbeteris already had `#delbeteris`). Stubs carry only name and category from the brief.
 - **Layout** (`app/layout.tsx`): default title and description from the new copy; title template `%s | Day One`; Cormorant now also loads weight 400 for the italic line; JSON-LD `serviceType` refreshed.
-- **Tailwind / CSS**: `font-cormorant` family; `.lazy-block` (content-visibility) for below-the-fold mockups.
+- **Product visuals**: CY-Construction and the attendance platform now use real screenshots (`public/products/`, via `components/products/AppShot.tsx` and next/image) instead of CSS mockups. Sources are demo / seed data only: the CY-Construction demo tenant ("Demo Constructions Ltd", fictional projects, cropped above the signed-in line) and the attendance app's seed-database employee clock screen from the Phoenix repo's screenshot pack. A production attendance screenshot with real staff names was deliberately not used. The signing card and the Astrala Nexus panel remain CSS mockups (no shootable UI / see open item 1). `CyConstructionMock.tsx` and `AttendanceMock.tsx` are now unused but kept.
+- **Tailwind / CSS**: `font-cormorant` family; `.lazy-block` (content-visibility) for below-the-fold mockups; `.section-tight` rhythm; timeline draw-on keyframes.
 - **Copy layer** (`lib/copy/`, `TRANSLATIONS_REVIEW.md`, `scripts/translations-review.mts`): every new string is a key with EN, EL and RU. Regenerate the review file with `node scripts/translations-review.mts`.
 
 ## Open items

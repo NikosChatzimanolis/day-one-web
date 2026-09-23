@@ -3,8 +3,7 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import ProductRow from '@/components/products/ProductRow'
-import CyConstructionMock from '@/components/products/CyConstructionMock'
-import AttendanceMock from '@/components/products/AttendanceMock'
+import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
 import SigningMock from '@/components/products/SigningMock'
 import { copy } from '@/lib/copy'
 import { site } from '@/lib/site'
@@ -27,7 +26,7 @@ export default function ProductsPage() {
           <ProductRow
             product={t.cyConstruction}
             href="/products/cy-construction"
-            mock={<CyConstructionMock />}
+            mock={<DashboardShot src={shots.cyDashboard} priority />}
             learnMore={copy.common.learnMore}
             headingLevel="h2"
             variant="bleed"
@@ -36,7 +35,7 @@ export default function ProductsPage() {
           <ProductRow
             product={t.attendance}
             href="/products/attendance"
-            mock={<AttendanceMock />}
+            mock={<PhoneShot src={shots.attendanceClock} />}
             learnMore={copy.common.learnMore}
             headingLevel="h2"
           />
