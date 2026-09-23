@@ -14,7 +14,7 @@ export const en = {
         'We become your engineering team, or the team behind your agency. And we build products of our own. A small senior engineering team based in Cyprus, working globally.',
     },
     partner: {
-      title: 'Partner with Day One',
+      title: 'Partner with us',
       description:
         'Embedded development teams, white-label engineering for agencies and dev shops, referral and revenue-share partnerships, monthly retainers. A small senior engineering team in Cyprus.',
     },
