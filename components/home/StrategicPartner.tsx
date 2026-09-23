@@ -1,0 +1,60 @@
+// ── components/home/StrategicPartner.tsx ──
+// Dark band: the Astrala Advisory partnership, two outlined chips, and the
+// Astrala wordmark linking out to their site.
+import Link from 'next/link'
+import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import AstralaWordmark from '@/components/brand/AstralaWordmark'
+import { copy } from '@/lib/copy'
+import { site } from '@/lib/site'
+
+export default function StrategicPartner() {
+  const t = copy.home.strategic
+  return (
+    <section className="section-dark">
+      <div className="container-wide section-sm">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <p className="eyebrow flex items-center gap-4">
+                {t.eyebrow}
+                <span aria-hidden="true" className="block h-px w-10 bg-dark-border" />
+              </p>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="t-h1 display-balance mt-6">
+                <Link href="/astrala" className="transition-colors duration-250 hover:text-rust">
+                  {t.title}
+                </Link>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="measure-lg display-pretty mt-6 font-body text-base leading-relaxed md:text-lg">{t.sub}</p>
+            </Reveal>
+            <RevealGroup className="mt-8 flex flex-wrap gap-3" stagger={0.06}>
+              {t.chips.map((chip) => (
+                <RevealItem
+                  key={chip}
+                  as="span"
+                  className="inline-flex items-center rounded-sm border border-dark-border px-3.5 py-2 font-body text-sm text-dark-text"
+                >
+                  {chip}
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </div>
+          <Reveal delay={0.12} className="flex justify-center lg:col-span-4 lg:col-start-9 lg:justify-end">
+            <a
+              href={site.astralaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.visit}
+              className="transition-opacity duration-250 hover:opacity-80"
+            >
+              <AstralaWordmark tagline={t.tagline} tone="dark" />
+            </a>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
