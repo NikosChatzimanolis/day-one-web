@@ -1,11 +1,11 @@
 // ── app/astrala/page.tsx · The Astrala Advisory partnership ──
 // Day One is Astrala's external engineering partner: we take technical work
 // off their plate, our services reach clients through them, theirs through
-// us. Security posture, referral structure, link out. Copy from lib/copy;
+// us. Their logo sits in the hero; then how it works, security posture,
+// referral structure, link out. Copy from lib/copy;
 // no em-dashes.
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import AstralaLogo from '@/components/brand/AstralaLogo'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
@@ -27,17 +27,39 @@ const arrow = (
 export default function AstralaPage() {
   return (
     <>
-      <PageHero instant eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead}>
-        <a
-          href={site.astralaUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-        >
-          {t.visit}
-          <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
-        </a>
-      </PageHero>
+      {/* ── Hero · copy left, their logo on a charcoal plaque right ── */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="container-wide section-hero">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
+            <div className="lg:col-span-7">
+              <p className="eyebrow mb-7">{t.hero.eyebrow}</p>
+              <h1 className="t-display display-balance">{t.hero.title}</h1>
+              <p className="t-lead measure-lg display-pretty mt-9 text-text-secondary">{t.hero.lead}</p>
+              <a
+                href={site.astralaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-10 inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
+              >
+                {t.visit}
+                <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
+              </a>
+            </div>
+            <div className="lg:col-span-5">
+              <a
+                href={site.astralaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.visit}
+                data-no-grid
+                className="flex items-center justify-center rounded-xl bg-dark px-10 py-14 transition-opacity duration-250 hover:opacity-90 md:px-14 md:py-16"
+              >
+                <AstralaLogo tagline={copy.home.strategic.tagline} tone="dark" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── How the partnership works · three hairline columns ── */}
       <section className="border-b border-border bg-bg">
@@ -63,43 +85,30 @@ export default function AstralaPage() {
         </div>
       </section>
 
-      {/* ── Security posture · dark band with their logo ───── */}
+      {/* ── Security posture · dark band ───────────────────── */}
       <section className="section-dark">
         <div className="container-wide section">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <p className="eyebrow mb-6">{t.security.eyebrow}</p>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h2 className="t-h1 display-balance">{t.security.title}</h2>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="t-lead measure-lg display-pretty mt-7">{t.security.body}</p>
-              </Reveal>
-              <RevealGroup className="mt-9 flex flex-wrap gap-3" stagger={0.06}>
-                {t.security.chips.map((chip) => (
-                  <RevealItem
-                    key={chip}
-                    as="span"
-                    className="inline-flex items-center rounded-full border border-dark-border px-4 py-2 font-body text-sm text-dark-text"
-                  >
-                    {chip}
-                  </RevealItem>
-                ))}
-              </RevealGroup>
-            </div>
-            <Reveal delay={0.12} className="flex justify-center lg:col-span-4 lg:col-start-9">
-              <a
-                href={site.astralaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t.visit}
-                className="w-full max-w-[380px] transition-opacity duration-250 hover:opacity-80"
-              >
-                <AstralaLogo tagline={copy.home.strategic.tagline} tone="dark" />
-              </a>
+          <div className="max-w-3xl">
+            <Reveal>
+              <p className="eyebrow mb-6">{t.security.eyebrow}</p>
             </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="t-h1 display-balance">{t.security.title}</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="t-lead measure-lg display-pretty mt-7">{t.security.body}</p>
+            </Reveal>
+            <RevealGroup className="mt-9 flex flex-wrap gap-3" stagger={0.06}>
+              {t.security.chips.map((chip) => (
+                <RevealItem
+                  key={chip}
+                  as="span"
+                  className="inline-flex items-center rounded-full border border-dark-border px-4 py-2 font-body text-sm text-dark-text"
+                >
+                  {chip}
+                </RevealItem>
+              ))}
+            </RevealGroup>
           </div>
         </div>
       </section>
