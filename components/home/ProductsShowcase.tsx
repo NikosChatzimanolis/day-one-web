@@ -9,11 +9,12 @@ import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
 import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
 import SigningMock from '@/components/products/SigningMock'
-import { copy } from '@/lib/copy'
+import { t, localeHref } from '@/lib/copy/request'
 
 export default function ProductsShowcase() {
-  const t = copy.home.products
-  const p = copy.products
+  const c = t()
+  const h = c.home.products
+  const p = c.products
   return (
     <section className="border-b border-border bg-bg">
       <div className="container-wide section-tight">
@@ -21,13 +22,13 @@ export default function ProductsShowcase() {
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col lg:col-span-4">
             <Reveal>
-              <p className="eyebrow mb-5">{t.eyebrow}</p>
+              <p className="eyebrow mb-5">{h.eyebrow}</p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="t-h1 display-balance max-w-sm">{t.title}</h2>
+              <h2 className="t-h1 display-balance max-w-sm">{h.title}</h2>
             </Reveal>
             <Reveal delay={0.1} className="mt-10 lg:mt-auto lg:pt-10">
-              <ProductText product={p.cyConstruction} href="/products/construction-erp" learnMore={t.learnMore} />
+              <ProductText product={p.cyConstruction} href={localeHref('/products/construction-erp')} learnMore={h.learnMore} />
             </Reveal>
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">
@@ -43,13 +44,13 @@ export default function ProductsShowcase() {
             <ProductFrame variant="center" lazy className="aspect-[5/6]">
               <PhoneShot src={shots.attendanceClock} />
             </ProductFrame>
-            <ProductText product={p.attendance} href="/products/attendance" learnMore={t.learnMore} />
+            <ProductText product={p.attendance} href={localeHref('/products/attendance')} learnMore={h.learnMore} />
           </Reveal>
           <Reveal delay={0.1} className="grid items-center gap-6 sm:grid-cols-2">
             <ProductFrame variant="center" lazy className="aspect-[5/6]">
               <SigningMock compact />
             </ProductFrame>
-            <ProductText product={p.documentSigning} href="/products/document-signing" learnMore={t.learnMore} />
+            <ProductText product={p.documentSigning} href={localeHref('/products/document-signing')} learnMore={h.learnMore} />
           </Reveal>
         </div>
       </div>

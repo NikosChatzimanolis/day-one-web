@@ -5,18 +5,21 @@ import CtaSection from '@/components/sections/CtaSection'
 import ProductRow from '@/components/products/ProductRow'
 import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
 import SigningMock from '@/components/products/SigningMock'
-import { copy } from '@/lib/copy'
-import { site } from '@/lib/site'
+import { getCopy, type Locale } from '@/lib/copy'
+import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
+import { pageMetadata } from '@/lib/copy/metadata'
 
-export const metadata: Metadata = {
-  title: copy.meta.products.title,
-  description: copy.meta.products.description,
-  alternates: { canonical: `${site.url}/products` },
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata(locale, getCopy(locale).meta.products, '/products')
 }
-
-const t = copy.products
-
-export default function ProductsPage() {
+export default async function ProductsPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const c = getCopy(locale)
+  const t = c.products
   return (
     <>
       <PageHero instant eyebrow={t.index.eyebrow} title={t.index.title} lead={t.index.lead} />
@@ -25,25 +28,25 @@ export default function ProductsPage() {
         <div className="container-wide section-sm divide-y divide-border">
           <ProductRow
             product={t.cyConstruction}
-            href="/products/construction-erp"
+            href={localeHref('/products/construction-erp')}
             mock={<DashboardShot src={shots.cyDashboard} priority />}
-            learnMore={copy.common.learnMore}
+            learnMore={c.common.learnMore}
             headingLevel="h2"
             variant="bleed"
             lazy={false}
           />
           <ProductRow
             product={t.attendance}
-            href="/products/attendance"
+            href={localeHref('/products/attendance')}
             mock={<PhoneShot src={shots.attendanceClock} />}
-            learnMore={copy.common.learnMore}
+            learnMore={c.common.learnMore}
             headingLevel="h2"
           />
           <ProductRow
             product={t.documentSigning}
-            href="/products/document-signing"
+            href={localeHref('/products/document-signing')}
             mock={<SigningMock />}
-            learnMore={copy.common.learnMore}
+            learnMore={c.common.learnMore}
             headingLevel="h2"
           />
         </div>

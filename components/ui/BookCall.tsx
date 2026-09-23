@@ -1,12 +1,13 @@
 // ── components/ui/BookCall.tsx ──
 // The site's primary CTA. Resolves to an external calendar when configured,
-// otherwise routes to the contact page's booking block. The primary button is
-// magnetic by default — it eases a few px toward the cursor on hover — which is
-// turned off for the full-width mobile drawer button (touch, no pointer).
+// otherwise routes to the contact page's booking block in the current locale.
+// Server component: the label comes from the request locale unless given.
+// The primary button is magnetic by default (eases a few px toward the cursor
+// on hover); pass magnetic={false} for full-width touch placements.
 import { Button } from '@/components/ui/Button'
 import Magnetic from '@/components/ui/Magnetic'
 import { site, bookCallHref } from '@/lib/site'
-import { copy } from '@/lib/copy'
+import { t, localeHref } from '@/lib/copy/request'
 
 interface BookCallProps {
   variant?: 'primary' | 'outline' | 'outline-dark' | 'cream'
@@ -22,21 +23,21 @@ export default function BookCall({
   variant = 'primary',
   size = 'lg',
   className,
-  label = copy.nav.bookCall,
+  label,
   arrow = false,
   magnetic = true,
 }: BookCallProps) {
   const usesCalendar = Boolean(site.bookingUrl)
   const button = (
     <Button
-      href={usesCalendar ? site.bookingUrl : bookCallHref}
+      href={usesCalendar ? site.bookingUrl : localeHref(bookCallHref)}
       external={usesCalendar}
       variant={variant}
       size={size}
       arrow={arrow}
       className={className}
     >
-      {label}
+      {label ?? t().nav.bookCall}
     </Button>
   )
 

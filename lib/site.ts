@@ -1,7 +1,6 @@
 // ── lib/site.ts ──
 // Single source of truth for site-wide constants: contact details, nav,
 // booking flow, and the legal entity line. Keeps voice + facts consistent.
-import { copy } from '@/lib/copy'
 
 export const site = {
   name: 'Day One',
@@ -23,18 +22,21 @@ export const site = {
   astralaUrl: 'https://astralaadvisory.eu.com',
 } as const
 
-export type NavItem = { label: string; href: string; highlight?: boolean }
+export type NavKey = 'partner' | 'products' | 'work' | 'astrala' | 'security' | 'about' | 'contact'
+export type NavItem = { key: NavKey; href: string }
 
-// Header + footer navigation. /forge keeps its route but is no longer listed;
-// /services and /white-label redirect to /partner (see next.config.ts).
-export const nav: readonly NavItem[] = [
-  { label: copy.nav.partner, href: '/partner' },
-  { label: copy.nav.products, href: '/products' },
-  { label: copy.nav.work, href: '/work' },
-  { label: copy.nav.astrala, href: '/astrala' },
-  { label: copy.nav.security, href: '/security' },
-  { label: copy.nav.about, href: '/about' },
-  { label: copy.nav.contact, href: '/contact' },
+// Header + footer navigation. Labels come from the copy dictionary at render
+// time (copy.nav[key]); hrefs are unprefixed and localised where rendered.
+// /forge keeps its route but is no longer listed; /services and /white-label
+// redirect to /partner (see next.config.ts).
+export const navItems: readonly NavItem[] = [
+  { key: 'partner', href: '/partner' },
+  { key: 'products', href: '/products' },
+  { key: 'work', href: '/work' },
+  { key: 'astrala', href: '/astrala' },
+  { key: 'security', href: '/security' },
+  { key: 'about', href: '/about' },
+  { key: 'contact', href: '/contact' },
 ]
 
 // Primary CTA target across the site. The Book-a-call action always lands on

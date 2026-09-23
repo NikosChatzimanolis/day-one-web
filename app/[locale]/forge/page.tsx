@@ -7,6 +7,8 @@ import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
 import Magnetic from '@/components/ui/Magnetic'
 import { site, bookCallHref } from '@/lib/site'
+import type { Locale } from '@/lib/copy'
+import { setRequestLocale, localeHref } from '@/lib/copy/request'
 
 export const metadata: Metadata = {
   title: 'Forge — the system we run on',
@@ -34,7 +36,11 @@ const whatItDoes = [
 
 const RUST = '#C04C2A'
 
-export default function ForgePage() {
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export default async function ForgePage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <div className="forge-dark">
       {/* ── Hero ───────────────────────────────────────────── */}

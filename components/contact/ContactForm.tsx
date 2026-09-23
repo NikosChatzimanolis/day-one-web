@@ -3,7 +3,6 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { copy } from '@/lib/copy'
 import { contactIntents, type ContactIntent } from '@/lib/site'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
@@ -13,12 +12,19 @@ const inputBase =
 
 const labelClass = 'block font-body text-xs font-medium uppercase tracking-wide text-text-tertiary mb-2'
 
+export interface ContactLabels {
+  intentLabel: string
+  chooseOne: string
+  intents: Record<ContactIntent, string>
+}
+
 interface ContactFormProps {
+  labels: ContactLabels
   /** Pre-selected intent, usually from ?intent= on the contact page. */
   defaultIntent?: ContactIntent
 }
 
-export default function ContactForm({ defaultIntent }: ContactFormProps) {
+export default function ContactForm({ labels, defaultIntent }: ContactFormProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState<string | null>(null)
 
@@ -85,7 +91,7 @@ export default function ContactForm({ defaultIntent }: ContactFormProps) {
 
       <div>
         <label htmlFor="intent" className={labelClass}>
-          {copy.contact.intentLabel}
+          {labels.intentLabel}
         </label>
         <select
           id="intent"
@@ -99,11 +105,11 @@ export default function ContactForm({ defaultIntent }: ContactFormProps) {
           }}
         >
           <option value="" disabled>
-            Choose one
+            {labels.chooseOne}
           </option>
           {contactIntents.map((intent) => (
             <option key={intent} value={intent}>
-              {copy.contact.intents[intent]}
+              {labels.intents[intent]}
             </option>
           ))}
         </select>

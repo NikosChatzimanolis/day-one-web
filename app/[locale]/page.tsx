@@ -10,8 +10,14 @@ import SelectedWork from '@/components/home/SelectedWork'
 import HowWeWork from '@/components/home/HowWeWork'
 import SecurityBar from '@/components/home/SecurityBar'
 import CtaSection from '@/components/sections/CtaSection'
+import type { Locale } from '@/lib/copy'
+import { setRequestLocale } from '@/lib/copy/request'
 
-export default function HomePage() {
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export default async function HomePage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <>
       <HomeHero />

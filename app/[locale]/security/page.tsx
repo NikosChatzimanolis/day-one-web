@@ -8,6 +8,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import type { Locale } from '@/lib/copy'
+import { setRequestLocale, localeHref } from '@/lib/copy/request'
 
 export const metadata: Metadata = {
   title: 'Security & GDPR Review',
@@ -97,7 +99,11 @@ const stats = [
   { label: 'Ongoing', value: 'from €1,000/mo', note: 'Optional retainer' },
 ]
 
-export default function SecurityPage() {
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export default async function SecurityPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <>
       <PageHero

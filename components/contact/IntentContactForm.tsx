@@ -5,11 +5,11 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import ContactForm from '@/components/contact/ContactForm'
+import ContactForm, { type ContactLabels } from '@/components/contact/ContactForm'
 import { isContactIntent } from '@/lib/site'
 
-export default function IntentContactForm() {
+export default function IntentContactForm({ labels }: { labels: ContactLabels }) {
   const params = useSearchParams()
   const raw = params.get('intent')
-  return <ContactForm defaultIntent={isContactIntent(raw) ? raw : undefined} />
+  return <ContactForm labels={labels} defaultIntent={isContactIntent(raw) ? raw : undefined} />
 }

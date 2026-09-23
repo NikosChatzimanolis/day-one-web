@@ -7,18 +7,20 @@ import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import BookCall from '@/components/ui/BookCall'
-import { copy } from '@/lib/copy'
-import { site } from '@/lib/site'
+import { getCopy, type Locale } from '@/lib/copy'
+import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
+import { pageMetadata } from '@/lib/copy/metadata'
 
-export const metadata: Metadata = {
-  title: copy.meta.partner.title,
-  description: copy.meta.partner.description,
-  alternates: { canonical: `${site.url}/partner` },
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata(locale, getCopy(locale).meta.partner, '/partner')
 }
-
-const t = copy.partner
-
-export default function PartnerPage() {
+export default async function PartnerPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const t = getCopy(locale).partner
   return (
     <>
       <PageHero instant eyebrow={t.hero.eyebrow} title={t.hero.title} lead={t.hero.lead} />

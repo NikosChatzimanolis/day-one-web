@@ -8,6 +8,10 @@ import BookCall from '@/components/ui/BookCall'
 import Reveal from '@/components/ui/Reveal'
 import Magnetic from '@/components/ui/Magnetic'
 import { site } from '@/lib/site'
+import { getCopy, type Locale } from '@/lib/copy'
+import { setRequestLocale } from '@/lib/copy/request'
+
+type PageProps = { params: Promise<{ locale: Locale }> }
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -22,7 +26,11 @@ const channels = [
   { label: 'Studio', value: site.location },
 ]
 
-export default function ContactPage() {
+export default async function ContactPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const c = getCopy(locale).contact
+  const labels = { intentLabel: c.intentLabel, chooseOne: c.chooseOne, intents: c.intents }
   return (
     <>
       <PageHero
@@ -90,8 +98,8 @@ export default function ContactPage() {
                 <div data-no-grid className="rounded-lg border border-border bg-surface p-7 md:p-10">
                   <p className="eyebrow mb-6">Project enquiry</p>
                   <h2 className="t-h3 text-text-primary mb-8">Or send a few lines.</h2>
-                  <Suspense fallback={<ContactForm />}>
-                    <IntentContactForm />
+                  <Suspense fallback={<ContactForm labels={labels} />}>
+                    <IntentContactForm labels={labels} />
                   </Suspense>
                 </div>
               </Reveal>

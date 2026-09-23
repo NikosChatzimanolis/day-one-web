@@ -7,7 +7,8 @@ import BookCall from '@/components/ui/BookCall'
 import CtaSection from '@/components/sections/CtaSection'
 import ProductFrame from '@/components/products/ProductFrame'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
-import { copy, type ProductCopy } from '@/lib/copy'
+import type { ProductCopy } from '@/lib/copy'
+import { t, localeHref } from '@/lib/copy/request'
 import { demoHref } from '@/lib/site'
 
 interface ProductPageProps {
@@ -17,7 +18,9 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ product, mock, frameVariant = 'center' }: ProductPageProps) {
-  const t = copy.products.common
+  const c = t()
+  const p = c.products.common
+  const demo = localeHref(demoHref)
   return (
     <>
       {/* ── Hero · rendered without the entrance so the h1 is the LCP ── */}
@@ -25,7 +28,7 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
         <div className="container-wide section-hero">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className="lg:col-span-5">
-              <p className="eyebrow mb-7">{copy.nav.products}</p>
+              <p className="eyebrow mb-7">{c.nav.products}</p>
               <h1 className="t-h1 display-balance">{product.name}</h1>
               <p className="t-lead display-pretty mt-7 text-text-primary">{product.tagline}</p>
               <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed text-text-secondary md:text-lg">
@@ -33,8 +36,8 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
               </p>
               {product.meta && <p className="mt-6 font-body text-sm text-text-tertiary">{product.meta}</p>}
               <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                <Button href={demoHref} size="lg">
-                  {t.requestDemo}
+                <Button href={demo} size="lg">
+                  {p.requestDemo}
                 </Button>
                 <BookCall variant="outline" size="lg" magnetic={false} />
               </div>
@@ -50,7 +53,7 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
       <section className="border-b border-border bg-bg">
         <div className="container-wide section">
           <Reveal>
-            <p className="eyebrow mb-10">{t.featuresTitle}</p>
+            <p className="eyebrow mb-10">{p.featuresTitle}</p>
           </Reveal>
           <RevealGroup className="flex flex-col" stagger={0.08}>
             {product.features.map((f, i) => (
@@ -76,7 +79,7 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
         <div className="container-wide section">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
             <Reveal className="lg:col-span-4">
-              <p className="eyebrow">{t.whoForTitle}</p>
+              <p className="eyebrow">{p.whoForTitle}</p>
             </Reveal>
             <RevealGroup className="flex flex-col lg:col-span-7 lg:col-start-6" stagger={0.08}>
               {product.whoFor.map((line, i) => (
@@ -99,12 +102,12 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
       <section className="border-b border-border bg-bg">
         <div className="container-wide section">
           <Reveal className="max-w-3xl">
-            <p className="eyebrow mb-7">{t.demoEyebrow}</p>
-            <h2 className="t-h1 display-balance">{t.demoTitle}</h2>
-            <p className="t-lead measure-lg display-pretty mt-7 text-text-secondary">{t.demoBody}</p>
+            <p className="eyebrow mb-7">{p.demoEyebrow}</p>
+            <h2 className="t-h1 display-balance">{p.demoTitle}</h2>
+            <p className="t-lead measure-lg display-pretty mt-7 text-text-secondary">{p.demoBody}</p>
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <Button href={demoHref} size="lg" arrow>
-                {t.requestDemo}
+              <Button href={demo} size="lg" arrow>
+                {p.requestDemo}
               </Button>
               <BookCall variant="outline" size="lg" magnetic={false} />
             </div>

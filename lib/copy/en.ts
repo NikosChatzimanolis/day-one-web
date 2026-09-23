@@ -368,6 +368,7 @@ export const en = {
   },
 
   contact: {
+    chooseOne: 'Choose one',
     intentLabel: 'What is this about?',
     intents: {
       partnership: 'Partnership',

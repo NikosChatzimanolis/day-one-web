@@ -3,7 +3,7 @@
 // columns of short lines, each with a Learn more link.
 import Link from 'next/link'
 import Reveal from '@/components/ui/Reveal'
-import { copy } from '@/lib/copy'
+import { t, localeHref } from '@/lib/copy/request'
 
 function Column({
   title,
@@ -40,18 +40,18 @@ function Column({
 }
 
 export default function TwoWays() {
-  const t = copy.home.twoWays
+  const c = t().home.twoWays
   return (
     <section data-no-grid className="border-b border-border bg-surface">
       <div className="container-wide section-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-3">
-            <p className="eyebrow max-w-[12rem] leading-relaxed">{t.eyebrow}</p>
+            <p className="eyebrow max-w-[12rem] leading-relaxed">{c.eyebrow}</p>
             <span aria-hidden="true" className="mt-6 block h-px w-10 bg-rust" />
           </Reveal>
           <div className="grid gap-10 lg:col-span-9 lg:grid-cols-2 lg:gap-0">
-            <Column title={t.partner.title} lines={t.partner.lines} link={t.partner.link} href="/partner" delay={0.05} />
-            <Column title={t.products.title} lines={t.products.lines} link={t.products.link} href="/products" delay={0.1} />
+            <Column title={c.partner.title} lines={c.partner.lines} link={c.partner.link} href={localeHref('/partner')} delay={0.05} />
+            <Column title={c.products.title} lines={c.products.lines} link={c.products.link} href={localeHref('/products')} delay={0.1} />
           </div>
         </div>
       </div>

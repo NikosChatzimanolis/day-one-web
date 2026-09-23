@@ -364,6 +364,7 @@ export const el = {
   },
 
   contact: {
+    chooseOne: 'Επιλέξτε',
     intentLabel: 'Για τι πρόκειται;',
     intents: {
       partnership: 'Συνεργασία',

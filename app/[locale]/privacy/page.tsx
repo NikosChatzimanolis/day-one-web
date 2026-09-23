@@ -6,6 +6,8 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/sections/PageHero'
 import Reveal from '@/components/ui/Reveal'
 import { site } from '@/lib/site'
+import type { Locale } from '@/lib/copy'
+import { setRequestLocale, localeHref } from '@/lib/copy/request'
 
 export const metadata: Metadata = {
   title: 'Privacy Notice',
@@ -27,7 +29,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-export default function PrivacyPage() {
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export default async function PrivacyPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <>
       <PageHero

@@ -364,6 +364,7 @@ export const ru = {
   },
 
   contact: {
+    chooseOne: 'Выберите',
     intentLabel: 'О чём речь?',
     intents: {
       partnership: 'Партнёрство',

@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
       { source: '/services', destination: '/partner', permanent: true },
       { source: '/white-label', destination: '/partner', permanent: true },
       { source: '/products/cy-construction', destination: '/products/construction-erp', permanent: true },
+      { source: '/:locale(el|ru)/services', destination: '/:locale/partner', permanent: true },
+      { source: '/:locale(el|ru)/white-label', destination: '/:locale/partner', permanent: true },
+      { source: '/:locale(el|ru)/products/cy-construction', destination: '/:locale/products/construction-erp', permanent: true },
     ]
   },
 }

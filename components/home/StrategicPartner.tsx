@@ -4,11 +4,11 @@
 import Link from 'next/link'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import AstralaLogo from '@/components/brand/AstralaLogo'
-import { copy } from '@/lib/copy'
+import { t, localeHref } from '@/lib/copy/request'
 import { site } from '@/lib/site'
 
 export default function StrategicPartner() {
-  const t = copy.home.strategic
+  const c = t().home.strategic
   return (
     <section className="section-dark">
       <div className="container-wide section-tight">
@@ -16,22 +16,22 @@ export default function StrategicPartner() {
           <div className="lg:col-span-7">
             <Reveal>
               <p className="eyebrow flex items-center gap-4">
-                {t.eyebrow}
+                {c.eyebrow}
                 <span aria-hidden="true" className="block h-px w-10 bg-dark-border" />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="t-h1 display-balance mt-5">
-                <Link href="/astrala" className="transition-colors duration-250 hover:text-rust">
-                  {t.title}
+                <Link href={localeHref('/astrala')} className="transition-colors duration-250 hover:text-rust">
+                  {c.title}
                 </Link>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed md:text-lg">{t.sub}</p>
+              <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed md:text-lg">{c.sub}</p>
             </Reveal>
             <RevealGroup className="mt-7 flex flex-wrap gap-3" stagger={0.06}>
-              {t.chips.map((chip) => (
+              {c.chips.map((chip) => (
                 <RevealItem
                   key={chip}
                   as="span"
@@ -47,10 +47,10 @@ export default function StrategicPartner() {
               href={site.astralaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t.visit}
+              aria-label={c.visit}
               className="w-full max-w-[380px] transition-opacity duration-250 hover:opacity-80"
             >
-              <AstralaLogo tagline={t.tagline} tone="dark" />
+              <AstralaLogo tagline={c.tagline} tone="dark" />
             </a>
           </Reveal>
         </div>

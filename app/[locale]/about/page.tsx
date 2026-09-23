@@ -7,6 +7,8 @@ import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
+import type { Locale } from '@/lib/copy'
+import { setRequestLocale, localeHref } from '@/lib/copy/request'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -29,7 +31,11 @@ const principles = [
   },
 ]
 
-export default function AboutPage() {
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export default async function AboutPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <>
       <PageHero
@@ -75,7 +81,7 @@ export default function AboutPage() {
           <Reveal delay={0.06}>
             <p className="t-h2 text-text-primary display-balance max-w-4xl">
               <Link
-                href="/forge"
+                href={localeHref('/forge')}
                 className="text-accent underline-offset-4 transition-colors duration-250 hover:text-accent-dark hover:underline"
               >
                 Forge

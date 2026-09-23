@@ -1,6 +1,7 @@
 // ── components/layout/Navbar.tsx ──
-// Fixed header: logotype left, seven text links, outlined "Book a call" pill.
-// No chips, no shadows (reference). Mobile collapses to a drawer.
+// Fixed header: logotype left, seven text links, EN · EL · RU switch, and the
+// outlined "Book a call" pill. Client component, so every string and href
+// arrives as a prop from the [locale] layout. Mobile collapses to a drawer.
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -9,10 +10,9 @@ import { usePathname } from 'next/navigation'
 import { motion, useReducedMotion, AnimatePresence, type Variants } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { nav } from '@/lib/site'
-import { copy } from '@/lib/copy'
+import { localizePath, stripLocale, localeLabels, locales, type Locale } from '@/lib/copy'
 import Logo from '@/components/ui/Logo'
-import BookCall from '@/components/ui/BookCall'
+import { Button } from '@/components/ui/Button'
 
 const drawerVariants: Variants = {
   closed: { x: '100%' },
@@ -29,14 +29,29 @@ const drawerItem: Variants = {
 }
 
 function isActive(pathname: string, href: string) {
-  if (href === '/') return pathname === '/'
+  if (href === '/' || /^\/(el|ru)$/.test(href)) return pathname === href
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-export default function Navbar() {
+export interface NavbarProps {
+  locale: Locale
+  items: { label: string; href: string }[]
+  bookCall: { label: string; href: string; external: boolean }
+  labels: { menuOpen: string; menuClose: string; home: string }
+}
+
+export default function Navbar({ locale, items, bookCall, labels }: NavbarProps) {
   const reduce = useReducedMotion()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const homeHref = localizePath('/', locale)
+  const { path } = stripLocale(pathname)
+  const languages = (Object.keys(locales) as Locale[]).map((code) => ({
+    code,
+    label: localeLabels[code],
+    href: localizePath(path, code),
+    active: code === locale,
+  }))
 
   // Close drawer on route change
   useEffect(() => { setIsOpen(false) }, [pathname])
@@ -54,18 +69,48 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
+  const pill = (className?: string) =>
+    bookCall.external ? (
+      <Button href={bookCall.href} external variant="outline" size="lg" className={className}>
+        {bookCall.label}
+      </Button>
+    ) : (
+      <Button href={bookCall.href} variant="outline" size="lg" className={className}>
+        {bookCall.label}
+      </Button>
+    )
+
+  const languageSwitch = (className?: string) => (
+    <nav aria-label="Language" className={cn('flex items-center gap-3', className)}>
+      {languages.map((l) => (
+        <Link
+          key={l.code}
+          href={l.href}
+          hrefLang={l.code}
+          aria-current={l.active ? 'true' : undefined}
+          className={cn(
+            'font-body text-[12px] tracking-[0.16em] transition-colors duration-250',
+            l.active ? 'text-accent' : 'text-text-tertiary hover:text-text-primary'
+          )}
+        >
+          {l.label}
+        </Link>
+      ))}
+    </nav>
+  )
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 bg-bg">
         <div className="container-hero">
           <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
-            <Link href="/" aria-label={copy.nav.home} className="transition-opacity duration-250 hover:opacity-80">
+            <Link href={homeHref} aria-label={labels.home} className="transition-opacity duration-250 hover:opacity-80">
               <Logo variant="primary" size="md" />
             </Link>
 
-            <div className="hidden items-center gap-9 lg:flex">
+            <div className="hidden items-center gap-8 lg:flex">
               <nav className="flex items-center gap-8" aria-label="Main">
-                {nav.map((item) => {
+                {items.map((item) => {
                   const active = isActive(pathname, item.href)
                   return (
                     <Link
@@ -74,11 +119,7 @@ export default function Navbar() {
                       aria-current={active ? 'page' : undefined}
                       className={cn(
                         'font-body text-[15px] tracking-wide transition-colors duration-250',
-                        item.highlight
-                          ? 'text-rust font-medium hover:text-accent-dark'
-                          : active
-                            ? 'text-accent'
-                            : 'text-text-primary hover:text-accent'
+                        active ? 'text-accent' : 'text-text-primary hover:text-accent'
                       )}
                     >
                       {item.label}
@@ -86,13 +127,14 @@ export default function Navbar() {
                   )
                 })}
               </nav>
-              <BookCall variant="outline" size="lg" magnetic={false} />
+              {languageSwitch()}
+              {pill()}
             </div>
 
             <button
               className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent lg:hidden"
               onClick={() => setIsOpen(true)}
-              aria-label={copy.nav.menuOpen}
+              aria-label={labels.menuOpen}
             >
               <Menu size={22} strokeWidth={1.5} />
             </button>
@@ -123,24 +165,20 @@ export default function Navbar() {
                 <button
                   className="-mr-2 flex h-10 w-10 items-center justify-center text-text-secondary transition-colors hover:text-text-primary"
                   onClick={() => setIsOpen(false)}
-                  aria-label={copy.nav.menuClose}
+                  aria-label={labels.menuClose}
                 >
                   <X size={22} strokeWidth={1.5} />
                 </button>
               </div>
 
               <nav className="flex flex-col gap-1 px-6 py-8" aria-label="Mobile">
-                {nav.map((item, i) => (
+                {items.map((item, i) => (
                   <motion.div key={item.href} custom={i} variants={reduce ? undefined : drawerItem} initial="closed" animate="open">
                     <Link
                       href={item.href}
                       className={cn(
                         'flex items-center border-b border-border py-3.5 font-display text-2xl font-light transition-colors',
-                        item.highlight
-                          ? 'text-rust'
-                          : isActive(pathname, item.href)
-                            ? 'text-accent'
-                            : 'text-text-primary hover:text-accent'
+                        isActive(pathname, item.href) ? 'text-accent' : 'text-text-primary hover:text-accent'
                       )}
                     >
                       {item.label}
@@ -149,8 +187,9 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <div className="mt-auto px-6 pb-10">
-                <BookCall size="lg" className="w-full" magnetic={false} />
+              <div className="mt-auto flex flex-col gap-6 px-6 pb-10">
+                {languageSwitch()}
+                {pill('w-full')}
               </div>
             </motion.div>
           </>

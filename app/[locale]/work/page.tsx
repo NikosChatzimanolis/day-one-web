@@ -12,7 +12,10 @@ import ForgeMock from '@/components/forge/ForgeMock'
 import SiteShot from '@/components/work/SiteShot'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import Link from 'next/link'
-import { copy } from '@/lib/copy'
+import { getCopy, type Locale } from '@/lib/copy'
+import { setRequestLocale, localeHref } from '@/lib/copy/request'
+
+type PageProps = { params: Promise<{ locale: Locale }> }
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -67,7 +70,10 @@ const moreWork = [
   { id: 'forex' },
 ] as const
 
-export default function WorkPage() {
+export default async function WorkPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const copy = getCopy(locale)
   return (
     <>
       <PageHero
@@ -110,7 +116,7 @@ export default function WorkPage() {
 
           <Reveal delay={0.08}>
             <div className="mt-12">
-              <Button href="/forge" variant="outline" size="lg" arrow>
+              <Button href={localeHref('/forge')} variant="outline" size="lg" arrow>
                 See Forge in detail
               </Button>
             </div>
@@ -259,7 +265,7 @@ export default function WorkPage() {
                     </span>
                     {'href' in entry && (
                       <Link
-                        href={entry.href}
+                        href={localeHref(entry.href)}
                         className="group inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
                       >
                         {copy.work.more.seeProduct}

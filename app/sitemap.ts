@@ -1,6 +1,7 @@
 // ── app/sitemap.ts ──
 import { MetadataRoute } from 'next'
 import { site } from '@/lib/site'
+import { locales, localizePath, type Locale } from '@/lib/copy'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -18,10 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/contact', priority: 0.8, freq: 'monthly' as const },
   ]
   const now = new Date()
-  return routes.map((r) => ({
-    url: `${site.url}${r.path}`,
-    lastModified: now,
-    changeFrequency: r.freq,
-    priority: r.priority,
-  }))
+  return (Object.keys(locales) as Locale[]).flatMap((locale) =>
+    routes.map((r) => ({
+      url: `${site.url}${localizePath(r.path || '/', locale)}`,
+      lastModified: now,
+      changeFrequency: r.freq,
+      priority: locale === 'en' ? r.priority : Math.max(0.3, r.priority - 0.2),
+    }))
+  )
 }

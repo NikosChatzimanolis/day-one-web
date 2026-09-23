@@ -9,22 +9,26 @@ import Link from 'next/link'
 import CtaSection from '@/components/sections/CtaSection'
 import AstralaLogo from '@/components/brand/AstralaLogo'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
-import { copy } from '@/lib/copy'
+import { getCopy, type Locale } from '@/lib/copy'
+import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
+import { pageMetadata } from '@/lib/copy/metadata'
 import { site } from '@/lib/site'
 
-export const metadata: Metadata = {
-  title: copy.meta.astrala.title,
-  description: copy.meta.astrala.description,
-  alternates: { canonical: `${site.url}/astrala` },
+type PageProps = { params: Promise<{ locale: Locale }> }
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  return pageMetadata(locale, getCopy(locale).meta.astrala, '/astrala')
 }
-
-const t = copy.astrala
-
 const arrow = (
   <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
 )
 
-export default function AstralaPage() {
+export default async function AstralaPage({ params }: PageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  const c = getCopy(locale)
+  const t = c.astrala
   return (
     <>
       {/* ── Hero · copy left, their logo on a charcoal plaque right ── */}
@@ -54,7 +58,7 @@ export default function AstralaPage() {
                 data-no-grid
                 className="flex items-center justify-center rounded-xl bg-dark px-10 py-14 transition-opacity duration-250 hover:opacity-90 md:px-14 md:py-16"
               >
-                <AstralaLogo tagline={copy.home.strategic.tagline} tone="dark" />
+                <AstralaLogo tagline={c.home.strategic.tagline} tone="dark" />
               </a>
             </div>
           </div>
@@ -126,7 +130,7 @@ export default function AstralaPage() {
                 {t.referral.body}
               </p>
               <Link
-                href="/partner"
+                href={localeHref('/partner')}
                 className="group mt-8 inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
               >
                 {t.referral.link}

@@ -20,7 +20,7 @@ The backup conversion path is a project enquiry form (Resend, honeypot-protected
 - `/about` — The studio and the team block
 - `/contact` — Book a call + project enquiry form with an intent selector (`?intent=`)
 
-All copy introduced by the 2026-09 redesign is keyed in `lib/copy/{en,el,ru}.ts`; see `TRANSLATIONS_REVIEW.md` and `CHANGES.md`.
+All copy introduced by the 2026-09 redesign is keyed in `lib/copy/{en,el,ru}.ts`; see `TRANSLATIONS_REVIEW.md` and `CHANGES.md`. Pages live under `app/[locale]/`: English is unprefixed (`proxy.ts` rewrites it to `/en` internally), Greek at `/el/...`, Russian at `/ru/...`.
 
 ## Stack
 
