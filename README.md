@@ -10,12 +10,17 @@ A six-page studio site. Every page leads to one clear action: **Book a call**.
 The backup conversion path is a project enquiry form (Resend, honeypot-protected).
 
 **Pages:**
-- `/` — Home: hero, the promise, three horizons (build · scale · maintain), proof band, how we work, CTA
-- `/services` — Two tracks: Custom Systems (quoted per project) and Growth Partnership (from €650/mo)
-- `/work` — Proof: Astrala Advisory (flagship platform) and Delbeteris (delivered build)
-- `/forge` — Forge, the task tracker the studio runs on (own dark identity, early-access signup)
-- `/about` — The studio, the "ships like a founder" thesis, continuity
-- `/contact` — Book a call + project enquiry form
+- `/` — Home: hero, two ways to work with us, products, Astrala band, selected work, how we work, security bar, CTA
+- `/partner` — Partnership models, engagement steps, stack (replaces `/services` and `/white-label`, which redirect here)
+- `/products` — CY-Construction, the attendance and leave platform, the document signing service (+ one page each)
+- `/astrala` — The Astrala Advisory partnership
+- `/work` — Case studies and stubs
+- `/security` — Fixed-scope security & GDPR review
+- `/forge` — Forge, the task tracker the studio runs on (route kept, not in nav)
+- `/about` — The studio and the team block
+- `/contact` — Book a call + project enquiry form with an intent selector (`?intent=`)
+
+All copy introduced by the 2026-09 redesign is keyed in `lib/copy/{en,el,ru}.ts`; see `TRANSLATIONS_REVIEW.md` and `CHANGES.md`.
 
 ## Stack
 
