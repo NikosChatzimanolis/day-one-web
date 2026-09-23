@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 }
 
 export default function CyConstructionPage() {
-  return <ProductPage product={copy.products.cyConstruction} mock={<CyConstructionMock />} />
+  return <ProductPage product={copy.products.cyConstruction} mock={<CyConstructionMock />} frameVariant="bleed" />
 }

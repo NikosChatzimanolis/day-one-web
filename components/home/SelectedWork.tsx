@@ -14,7 +14,7 @@ export default function SelectedWork() {
   const t = copy.home.selectedWork
   return (
     <section className="border-b border-border bg-bg">
-      <div className="container-wide section">
+      <div className="container-wide section-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-4">
             <Reveal>
@@ -42,14 +42,14 @@ export default function SelectedWork() {
             </Reveal>
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">
-            <ProductFrame lazy>
+            <ProductFrame variant="bleed" lazy className="aspect-[4/3] md:aspect-[16/9]">
               <NexusMock />
             </ProductFrame>
           </Reveal>
         </div>
 
         <RevealGroup
-          className="mt-14 grid border-t border-border sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-border"
+          className="mt-10 grid border-t border-border sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-border"
           stagger={0.06}
         >
           {t.strip.map((item, i) => (

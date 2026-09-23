@@ -361,3 +361,9 @@ a { color: inherit; text-decoration: none; }
    viewport; the intrinsic size keeps the scrollbar honest meanwhile.
 ───────────────────────────────────────── */
 .lazy-block { content-visibility: auto; contain-intrinsic-size: auto 420px; }
+
+/* ── Homepage rhythm ──────────────────────────────────────────────
+   The landing page is denser than the inner pages: the reference packs a
+   band into 250 to 400px. These two sit below .section-sm / .section-hero. */
+.section-tight      { padding-block: clamp(2.75rem, 4.5vw, 4.5rem); }
+.section-hero-tight { padding-top: clamp(7rem, 9vw, 8.5rem); padding-bottom: clamp(3rem, 4.5vw, 4.25rem); }

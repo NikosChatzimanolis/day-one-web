@@ -15,7 +15,7 @@ const lines = ['w-[86%]', 'w-[72%]', 'w-[80%]', 'w-[58%]', 'w-[66%]']
 
 export default function SigningMock() {
   return (
-    <div className="w-[92%] max-w-[460px] rounded-md border border-line bg-card p-3.5 text-[10px] leading-none sm:p-5 sm:text-[11px]">
+    <div className="w-full max-w-[480px] rounded-md border border-line bg-card p-4 text-[11px] leading-none sm:p-5 sm:text-[12px]">
       <div className="flex items-center justify-between">
         <span className="font-display text-[12px] text-text-primary sm:text-[13px]">Sign document</span>
         <span className="rounded border border-line px-1.5 py-1 text-text-tertiary">1 of 1</span>
@@ -33,7 +33,7 @@ export default function SigningMock() {
           </div>
           <div className="mt-4 border-t border-dashed border-border-strong pt-2">
             <span className="block text-text-tertiary">Signature</span>
-            <span className="mt-1 block font-script text-[18px] leading-none text-text-primary sm:text-[22px]">
+            <span className="mt-1 block font-script text-[22px] leading-none text-text-primary sm:text-[26px]">
               A. B.
             </span>
           </div>

@@ -8,7 +8,7 @@ export default function SecurityBar() {
   const t = copy.home.securityBar
   return (
     <section className="bg-bg">
-      <div className="container-wide section-sm">
+      <div className="container-wide py-8 md:py-10">
         <Reveal>
           <Link
             href="/security"

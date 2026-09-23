@@ -58,7 +58,7 @@ export default function AstralaPage() {
               </Reveal>
             </div>
             <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-              <ProductFrame>
+              <ProductFrame variant="bleed" className="aspect-[4/3] md:aspect-[16/10]">
                 <NexusMock />
               </ProductFrame>
             </Reveal>

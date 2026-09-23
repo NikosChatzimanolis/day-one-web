@@ -25,7 +25,7 @@ export default function CtaSection({
   const t = copy.cta
   return (
     <section data-no-grid className="section-dark">
-      <div className="container-wide section-sm">
+      <div className="container-wide section-tight">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
           <Reveal className="lg:col-span-7">
             <h2 className="display-balance">

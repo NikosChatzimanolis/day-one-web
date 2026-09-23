@@ -43,7 +43,7 @@ export default function TwoWays() {
   const t = copy.home.twoWays
   return (
     <section data-no-grid className="border-b border-border bg-surface">
-      <div className="container-wide section-sm">
+      <div className="container-wide section-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-3">
             <p className="eyebrow max-w-[12rem] leading-relaxed">{t.eyebrow}</p>

@@ -7,7 +7,7 @@ export default function HowWeWork() {
   const t = copy.home.howWeWork
   return (
     <section data-no-grid className="border-b border-border bg-surface">
-      <div className="container-wide section-sm">
+      <div className="container-wide section-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-2">
             <p className="eyebrow">{t.eyebrow}</p>

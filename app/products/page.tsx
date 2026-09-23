@@ -30,6 +30,7 @@ export default function ProductsPage() {
             mock={<CyConstructionMock />}
             learnMore={copy.common.learnMore}
             headingLevel="h2"
+            variant="bleed"
             lazy={false}
           />
           <ProductRow

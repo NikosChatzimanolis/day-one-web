@@ -11,7 +11,7 @@ export default function StrategicPartner() {
   const t = copy.home.strategic
   return (
     <section className="section-dark">
-      <div className="container-wide section-sm">
+      <div className="container-wide section-tight">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
           <div className="lg:col-span-7">
             <Reveal>
@@ -21,16 +21,16 @@ export default function StrategicPartner() {
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="t-h1 display-balance mt-6">
+              <h2 className="t-h1 display-balance mt-5">
                 <Link href="/astrala" className="transition-colors duration-250 hover:text-rust">
                   {t.title}
                 </Link>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="measure-lg display-pretty mt-6 font-body text-base leading-relaxed md:text-lg">{t.sub}</p>
+              <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed md:text-lg">{t.sub}</p>
             </Reveal>
-            <RevealGroup className="mt-8 flex flex-wrap gap-3" stagger={0.06}>
+            <RevealGroup className="mt-7 flex flex-wrap gap-3" stagger={0.06}>
               {t.chips.map((chip) => (
                 <RevealItem
                   key={chip}

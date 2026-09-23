@@ -13,9 +13,10 @@ import { demoHref } from '@/lib/site'
 interface ProductPageProps {
   product: ProductCopy
   mock: React.ReactNode
+  frameVariant?: 'bleed' | 'center' | 'fill'
 }
 
-export default function ProductPage({ product, mock }: ProductPageProps) {
+export default function ProductPage({ product, mock, frameVariant = 'center' }: ProductPageProps) {
   const t = copy.products.common
   return (
     <>
@@ -39,7 +40,7 @@ export default function ProductPage({ product, mock }: ProductPageProps) {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <ProductFrame>{mock}</ProductFrame>
+              <ProductFrame variant={frameVariant} className="aspect-[4/3] md:aspect-[3/2]">{mock}</ProductFrame>
             </div>
           </div>
         </div>
