@@ -17,13 +17,15 @@ interface ShotProps {
   sizes?: string
   priority?: boolean
   className?: string
+  /** Skip the card border and radius (when a WindowFrame already provides them). */
+  bare?: boolean
 }
 
 /** Desktop app screen: fills its frame, anchored top-left so the bleed crop
  *  runs off the right and bottom. Decorative (the copy carries the meaning). */
-export function DashboardShot({ src, sizes = '(min-width: 1024px) 820px, 100vw', priority = false, className }: ShotProps) {
+export function DashboardShot({ src, sizes = '(min-width: 1024px) 820px, 100vw', priority = false, className, bare = false }: ShotProps) {
   return (
-    <div className={cn('relative h-full w-full overflow-hidden rounded-md border border-line bg-card', className)}>
+    <div className={cn('relative h-full w-full overflow-hidden bg-card', !bare && 'rounded-md border border-line', className)}>
       <Image src={src} alt="" fill sizes={sizes} priority={priority} className="object-cover object-left-top" />
     </div>
   )

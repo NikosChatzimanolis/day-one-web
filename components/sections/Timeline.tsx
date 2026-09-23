@@ -22,7 +22,7 @@ export default function Timeline({ labels, tone = 'dark', animate = false, class
       <span
         className={cn(
           'tl-line absolute left-[5px] right-[5px] top-[5px] h-px',
-          dark ? 'bg-rust/60' : 'bg-rust/45'
+          dark ? 'bg-rust/60' : 'bg-rust/70'
         )}
       />
       <div className="relative flex justify-between">
