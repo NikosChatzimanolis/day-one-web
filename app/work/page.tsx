@@ -1,7 +1,7 @@
 // ── app/work/page.tsx · Work / Proof ──
-// Order is deliberate: product and platform engineering lead the page, the
-// delivered client sites and brand work follow as a grouped band of smaller
-// cards. New copy on this page avoids em-dashes.
+// Order is deliberate: Forge leads the page, the delivered client sites and
+// the Astrala partnership follow as a grouped band of smaller cards, then the
+// stubs. New copy on this page avoids em-dashes.
 import type { Metadata } from 'next'
 import { cn } from '@/lib/utils'
 import PageHero from '@/components/sections/PageHero'
@@ -17,7 +17,7 @@ import { copy } from '@/lib/copy'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Forge, the production task system we built and run; a multi-service platform engineering engagement; and delivered sites and brand work for Delbeteris, Ta Pinakia, and Astrala Advisory.',
+    'Forge, the production task system we built and run; delivered sites for Delbeteris and Ta Pinakia; and the Astrala Advisory partnership.',
 }
 
 interface Block {
@@ -60,26 +60,12 @@ const forgeBlocks: Block[] = [
   },
 ]
 
-const platformWork = [
-  'Full security audit of a 48,000 line codebase across 6 services, 30 verified findings triaged by severity.',
-  'Row-level security hardening across the data layer following a GDPR exposure review.',
-  'Azure infrastructure: Container Apps deployment, custom domains, managed TLS, cross-subscription migration.',
-  'CI/CD pipeline rebuild on Microsoft-hosted agents.',
-  'Third-party system migration including data export tooling and PDF report generation.',
-]
-
 // Anchors for the homepage Selected Work strip. Stubs carry only the name and
 // category from the brief; details are added when each case study is written.
 const moreWork = [
   { id: 'cy-construction', href: '/products/construction-erp' },
   { id: 'forex' },
 ] as const
-
-const platformStats = [
-  { value: '48,000', label: 'Lines of code audited' },
-  { value: '6', label: 'Services' },
-  { value: '30', label: 'Verified findings' },
-]
 
 export default function WorkPage() {
   return (
@@ -127,76 +113,6 @@ export default function WorkPage() {
               <Button href="/forge" variant="outline" size="lg" arrow>
                 See Forge in detail
               </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Recruitment & Operations Platform · anonymized ──── */}
-      <section id="platform" data-no-grid className="bg-surface border-b border-border scroll-mt-24">
-        <div className="container-wide section">
-          <div className="max-w-3xl">
-            <Reveal>
-              <p className="eyebrow mb-6">Platform engineering · Cyprus</p>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="t-h1 display-balance">Recruitment &amp; Operations Platform</h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="t-lead mt-7 text-text-secondary measure-lg display-pretty">
-                A multi-service recruitment and operations platform serving an advisory group:
-                candidate management, client portal, behavioral assessments, automated reporting,
-                and internal tooling.
-              </p>
-            </Reveal>
-            <Reveal delay={0.14}>
-              <p className="mt-6 font-body text-base md:text-lg text-text-secondary leading-relaxed measure-lg">
-                Day One operates as the technical backbone across the full stack.
-              </p>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <p className="mt-7 font-body text-sm text-text-tertiary tracking-wide">
-                React · Node.js · Supabase · PostgreSQL · Azure · Azure DevOps
-              </p>
-            </Reveal>
-          </div>
-
-          {/* Scale of the engagement */}
-          <Reveal>
-            <div className="mt-14 grid sm:grid-cols-3 border-t border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
-              {platformStats.map((s) => (
-                <div key={s.label} className="py-8 sm:py-9 sm:px-8 first:sm:pl-0 last:sm:pr-0">
-                  <p className="t-h2 text-text-primary">{s.value}</p>
-                  <p className="mt-3 font-body text-sm text-text-tertiary">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* What we did */}
-          <Reveal>
-            <p className="eyebrow mt-14 mb-2">What we did</p>
-          </Reveal>
-          <RevealGroup className="flex flex-col" stagger={0.08}>
-            {platformWork.map((item, i) => (
-              <RevealItem
-                key={item}
-                className={cn(
-                  'flex items-baseline gap-6 py-6 border-t border-border',
-                  i === platformWork.length - 1 && 'border-b'
-                )}
-              >
-                <span className="t-index text-rust shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                <p className="font-body text-base md:text-lg leading-relaxed text-text-secondary measure-xl">
-                  {item}
-                </p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-
-          <Reveal delay={0.08}>
-            <div className="mt-12">
-              <BookCall size="lg" label="Start an engagement like this" />
             </div>
           </Reveal>
         </div>
@@ -281,14 +197,14 @@ export default function WorkPage() {
                   src="/work/astrala-site.jpg"
                   alt="The Astrala Advisory home page: a deep navy hero with a wireframe globe and serif headline"
                 />
-                <p className="eyebrow-muted mt-7 mb-3">Ongoing engagement · Content &amp; brand</p>
+                <p className="eyebrow-muted mt-7 mb-3">Strategic partner · Engineering capacity</p>
                 <h3 className="t-h3 mb-3">Astrala Advisory</h3>
                 <p className="font-body text-base leading-relaxed text-text-secondary">
-                  Content, newsletter, and brand work for an advisory firm. An ongoing engagement,
-                  live and building.
+                  We take technical work off their plate when they need capacity. Our services reach
+                  clients through Astrala, and their services reach clients through us.
                 </p>
                 <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
-                  Brand &amp; identity · Social · Editorial newsletter
+                  External engineering team · Services offered through each other
                 </p>
                 <a
                   href="https://astralaadvisory.eu.com"
