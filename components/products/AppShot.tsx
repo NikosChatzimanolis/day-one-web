@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export const shots = {
-  cyDashboard: '/products/cy-construction-dashboard.jpg',
+  cyDashboard: '/products/cy-construction-dashboard-v2.jpg',
   attendanceClock: '/products/attendance-clock.png',
 } as const
 
