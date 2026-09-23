@@ -58,13 +58,13 @@ export default function Navbar() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 bg-bg/90 backdrop-blur-sm">
         <div className="container-wide">
-          <div className="flex items-center justify-between gap-6 py-4">
+          <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
             <Link href="/" aria-label={copy.nav.home} className="transition-opacity duration-250 hover:opacity-80">
-              <Logo variant="primary" size="sm" showTagline={false} />
+              <Logo variant="primary" size="md" />
             </Link>
 
-            <div className="hidden items-center gap-7 lg:flex">
-              <nav className="flex items-center gap-7" aria-label="Main">
+            <div className="hidden items-center gap-9 lg:flex">
+              <nav className="flex items-center gap-8" aria-label="Main">
                 {nav.map((item) => {
                   const active = isActive(pathname, item.href)
                   return (
@@ -73,7 +73,7 @@ export default function Navbar() {
                       href={item.href}
                       aria-current={active ? 'page' : undefined}
                       className={cn(
-                        'font-body text-[13px] tracking-wide transition-colors duration-250',
+                        'font-body text-[15px] tracking-wide transition-colors duration-250',
                         item.highlight
                           ? 'text-rust font-medium hover:text-accent-dark'
                           : active
@@ -86,11 +86,11 @@ export default function Navbar() {
                   )
                 })}
               </nav>
-              <BookCall variant="outline" size="md" magnetic={false} />
+              <BookCall variant="outline" size="lg" magnetic={false} />
             </div>
 
             <button
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent lg:hidden"
               onClick={() => setIsOpen(true)}
               aria-label={copy.nav.menuOpen}
             >

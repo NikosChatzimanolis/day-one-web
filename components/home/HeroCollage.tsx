@@ -1,7 +1,7 @@
 // ── components/home/HeroCollage.tsx ──
 // The hero's focal element: the CY-Construction dashboard as a panel that
 // runs off the right edge of the viewport, the attendance phone overlapping
-// its lower-left corner, and the ghosted Day ONE lockup behind. Real
+// its lower-left corner, and the Day ONE lockup in the header colours behind. Real
 // screenshots of the products (demo / seed data), so it is the studio's own
 // material, not a stock image. Drifts a few px toward the cursor (ambient
 // magnetic) and fades up on mount; static under reduced motion.
@@ -15,8 +15,8 @@ export default function HeroCollage() {
   return (
     <div className="relative hidden min-h-[480px] lg:block" aria-hidden="true">
       {/* ghosted lockup, top-right, behind the panels */}
-      <div className="absolute -top-3 right-0 origin-top-right scale-[1.15] select-none opacity-[0.09]">
-        <Logo variant="mono" size="xl" />
+      <div className="absolute -top-3 right-0 origin-top-right scale-[1.15] select-none opacity-[0.55]">
+        <Logo variant="primary" size="xl" />
       </div>
 
       <Magnetic mode="ambient" strength={0.02} maxShift={8} className="absolute inset-0">
