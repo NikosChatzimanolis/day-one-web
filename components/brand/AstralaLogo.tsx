@@ -3,7 +3,7 @@
 // the real asset at public/partners/astrala-logo.png (their "A" mark +
 // wordmark, background keyed out) when it exists; until then it renders the
 // name in their serif so the band never shows a broken image. Server
-// component, so the file check runs at build time. The tagline is a brand
+// component, so the file check runs at render time on the server (build or dev). The tagline is a brand
 // line and stays untranslated.
 import Image from 'next/image'
 import { existsSync } from 'node:fs'
@@ -11,7 +11,6 @@ import { join } from 'node:path'
 import { cn } from '@/lib/utils'
 
 const LOGO = '/partners/astrala-logo.png'
-const hasLogo = existsSync(join(process.cwd(), 'public', LOGO))
 
 interface AstralaLogoProps {
   tagline: string
@@ -21,6 +20,7 @@ interface AstralaLogoProps {
 
 export default function AstralaLogo({ tagline, tone = 'dark', className }: AstralaLogoProps) {
   const dark = tone === 'dark'
+  const hasLogo = existsSync(join(process.cwd(), 'public', LOGO))
   return (
     <span className={cn('inline-flex w-full max-w-[380px] flex-col items-center', dark ? 'text-dark-text' : 'text-text-primary', className)}>
       {hasLogo ? (

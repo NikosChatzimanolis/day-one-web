@@ -138,8 +138,6 @@ export const en = {
       strip: [
         { name: 'Construction ERP platform', kind: 'Construction operations' },
         { name: 'Forex platform & CRM', kind: 'Confidential client' },
-        { name: 'Taxi Xanthi', kind: 'Transportation' },
-        { name: 'Sun Seals Divers', kind: 'Diving' },
       ],
     },
 
@@ -390,8 +388,6 @@ export const en = {
     stubs: [
       { name: 'Construction ERP platform', kind: 'Construction operations' },
       { name: 'Forex platform & CRM', kind: 'Confidential client' },
-      { name: 'Taxi Xanthi', kind: 'Transportation' },
-      { name: 'Sun Seals Divers', kind: 'Diving' },
     ],
   },
 }

@@ -1,6 +1,6 @@
 // ── components/home/SelectedWork.tsx ──
 // Featured Delbeteris (copy left, the live site in a window frame on the
-// right) over a four-column hairline strip of further work, each entry
+// right) over a two-column hairline strip of further work, each entry
 // linking to its anchor on /work.
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,7 +8,7 @@ import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import WindowFrame from '@/components/products/WindowFrame'
 import { copy } from '@/lib/copy'
 
-const stripHrefs = ['/work#cy-construction', '/work#forex', '/work#taxi-xanthi', '/work#sun-seals']
+const stripHrefs = ['/work#cy-construction', '/work#forex']
 
 export default function SelectedWork() {
   const t = copy.home.selectedWork
@@ -55,14 +55,14 @@ export default function SelectedWork() {
         </div>
 
         <RevealGroup
-          className="mt-10 grid border-t border-border sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-border"
+          className="mt-10 grid border-t border-border sm:grid-cols-2 sm:divide-x sm:divide-border"
           stagger={0.06}
         >
           {t.strip.map((item, i) => (
-            <RevealItem key={item.name} className="border-b border-border lg:border-b-0">
+            <RevealItem key={item.name} className="border-b border-border">
               <Link
                 href={stripHrefs[i]}
-                className="group flex items-center justify-between gap-4 py-5 pr-4 transition-colors duration-250 hover:text-accent lg:px-6 lg:first:pl-0 lg:last:pr-0"
+                className="group flex items-center justify-between gap-4 py-5 pr-4 transition-colors duration-250 hover:text-accent sm:px-6 sm:first:pl-0 sm:last:pr-0"
               >
                 <span className="flex min-w-0 flex-col gap-1">
                   <span className="truncate font-body text-base text-text-primary transition-colors duration-250 group-hover:text-accent">

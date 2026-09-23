@@ -73,8 +73,6 @@ const platformWork = [
 const moreWork = [
   { id: 'cy-construction', href: '/products/construction-erp' },
   { id: 'forex' },
-  { id: 'taxi-xanthi' },
-  { id: 'sun-seals' },
 ] as const
 
 const platformStats = [

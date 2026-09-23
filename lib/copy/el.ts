@@ -134,8 +134,6 @@ export const el = {
       strip: [
         { name: 'Πλατφόρμα ERP για κατασκευές', kind: 'Λειτουργίες κατασκευών' },
         { name: 'Πλατφόρμα Forex & CRM', kind: 'Εμπιστευτικός πελάτης' },
-        { name: 'Taxi Xanthi', kind: 'Μεταφορές επιβατών' },
-        { name: 'Sun Seals Divers', kind: 'Καταδύσεις' },
       ],
     },
 
@@ -386,8 +384,6 @@ export const el = {
     stubs: [
       { name: 'Πλατφόρμα ERP για κατασκευές', kind: 'Λειτουργίες κατασκευών' },
       { name: 'Πλατφόρμα Forex & CRM', kind: 'Εμπιστευτικός πελάτης' },
-      { name: 'Taxi Xanthi', kind: 'Μεταφορές επιβατών' },
-      { name: 'Sun Seals Divers', kind: 'Καταδύσεις' },
     ],
   },
 } satisfies Copy

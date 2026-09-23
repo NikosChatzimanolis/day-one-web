@@ -134,8 +134,6 @@ export const ru = {
       strip: [
         { name: 'ERP-платформа для строительства', kind: 'Управление стройкой' },
         { name: 'Forex-платформа и CRM', kind: 'Конфиденциальный клиент' },
-        { name: 'Taxi Xanthi', kind: 'Перевозки' },
-        { name: 'Sun Seals Divers', kind: 'Дайвинг' },
       ],
     },
 
@@ -386,8 +384,6 @@ export const ru = {
     stubs: [
       { name: 'ERP-платформа для строительства', kind: 'Управление стройкой' },
       { name: 'Forex-платформа и CRM', kind: 'Конфиденциальный клиент' },
-      { name: 'Taxi Xanthi', kind: 'Перевозки' },
-      { name: 'Sun Seals Divers', kind: 'Дайвинг' },
     ],
   },
 } satisfies Copy
