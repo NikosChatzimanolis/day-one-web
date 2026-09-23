@@ -25,7 +25,7 @@ export default function ProductsPage() {
         <div className="container-wide section-sm divide-y divide-border">
           <ProductRow
             product={t.cyConstruction}
-            href="/products/cy-construction"
+            href="/products/construction-erp"
             mock={<DashboardShot src={shots.cyDashboard} priority />}
             learnMore={copy.common.learnMore}
             headingLevel="h2"

@@ -71,7 +71,7 @@ const platformWork = [
 // Anchors for the homepage Selected Work strip. Stubs carry only the name and
 // category from the brief; details are added when each case study is written.
 const moreWork = [
-  { id: 'cy-construction', href: '/products/cy-construction' },
+  { id: 'cy-construction', href: '/products/construction-erp' },
   { id: 'forex' },
   { id: 'taxi-xanthi' },
   { id: 'sun-seals' },

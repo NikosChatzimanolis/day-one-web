@@ -27,7 +27,7 @@ export default function ProductsShowcase() {
               <h2 className="t-h1 display-balance max-w-sm">{t.title}</h2>
             </Reveal>
             <Reveal delay={0.1} className="mt-10 lg:mt-auto lg:pt-10">
-              <ProductText product={p.cyConstruction} href="/products/cy-construction" learnMore={t.learnMore} />
+              <ProductText product={p.cyConstruction} href="/products/construction-erp" learnMore={t.learnMore} />
             </Reveal>
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">

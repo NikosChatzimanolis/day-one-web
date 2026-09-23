@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/services', destination: '/partner', permanent: true },
       { source: '/white-label', destination: '/partner', permanent: true },
+      { source: '/products/cy-construction', destination: '/products/construction-erp', permanent: true },
     ]
   },
 }

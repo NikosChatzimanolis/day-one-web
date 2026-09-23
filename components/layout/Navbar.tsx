@@ -104,7 +104,7 @@ export default function Navbar() {
         {isOpen && (
           <>
             <motion.div
-              className="fixed inset-0 z-[60] bg-[rgba(26,24,22,0.45)] backdrop-blur-sm"
+              className="fixed inset-0 z-[60] bg-[rgba(36,35,32,0.45)] backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

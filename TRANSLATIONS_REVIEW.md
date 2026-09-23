@@ -13,15 +13,15 @@ Keys: 230
 | `meta.partner.title` | Partner with us | Συνεργαστείτε μαζί μας | Партнёрство с нами |
 | `meta.partner.description` | Embedded development teams, white-label engineering for agencies and dev shops, referral and revenue-share partnerships, monthly retainers. A small senior engineering team in Cyprus. | Ενσωματωμένες ομάδες ανάπτυξης, white-label engineering για agencies και dev shops, συνεργασίες με προμήθεια σύστασης και συμμετοχή στα έσοδα, μηνιαία συμβόλαια. Μια μικρή ομάδα έμπειρων μηχανικών στην Κύπρο. | Встроенные команды разработки, white-label разработка для агентств и студий, реферальные партнёрства и разделение выручки, ежемесячные ретейнеры. Небольшая команда опытных инженеров на Кипре. |
 | `meta.products.title` | Products | Προϊόντα | Продукты |
-| `meta.products.description` | Ready software we license and support: CY-Construction, an attendance and leave platform, and a document signing service. Built, maintained and improved by the same team. | Έτοιμο λογισμικό που αδειοδοτούμε και υποστηρίζουμε: CY-Construction, μια πλατφόρμα παρουσίας και αδειών, και μια υπηρεσία ηλεκτρονικής υπογραφής. Χτισμένο, συντηρημένο και βελτιωμένο από την ίδια ομάδα. | Готовое ПО, которое мы лицензируем и поддерживаем: CY-Construction, платформа учёта присутствия и отпусков и сервис электронной подписи. Создано, поддерживается и развивается одной командой. |
-| `meta.cyConstruction.title` | CY-Construction | CY-Construction | CY-Construction |
+| `meta.products.description` | Ready software we license and support: a construction ERP platform, an attendance and leave platform, and a document signing service. Built, maintained and improved by the same team. | Έτοιμο λογισμικό που αδειοδοτούμε και υποστηρίζουμε: μια πλατφόρμα ERP για κατασκευές, μια πλατφόρμα παρουσίας και αδειών, και μια υπηρεσία ηλεκτρονικής υπογραφής. Χτισμένο, συντηρημένο και βελτιωμένο από την ίδια ομάδα. | Готовое ПО, которое мы лицензируем и поддерживаем: ERP-платформа для строительства, платформа учёта присутствия и отпусков и сервис электронной подписи. Создано, поддерживается и развивается одной командой. |
+| `meta.cyConstruction.title` | Construction ERP platform | Πλατφόρμα ERP για κατασκευές | ERP-платформа для строительства |
 | `meta.cyConstruction.description` | Construction operations software. Project managers see every site in under a minute. Workers see their tasks in under a minute. Web and mobile, in English, Greek and Bulgarian. | Λογισμικό λειτουργιών για κατασκευές. Οι project managers βλέπουν κάθε εργοτάξιο σε λιγότερο από ένα λεπτό. Οι εργάτες βλέπουν τις εργασίες τους σε λιγότερο από ένα λεπτό. Web και mobile, στα Αγγλικά, Ελληνικά και Βουλγαρικά. | Софт для управления стройкой. Руководители проектов видят каждый объект меньше чем за минуту. Рабочие видят свои задачи меньше чем за минуту. Web и mobile, на английском, греческом и болгарском. |
 | `meta.attendance.title` | Attendance and leave platform | Πλατφόρμα παρουσίας και αδειών | Платформа учёта присутствия и отпусков |
 | `meta.attendance.description` | Location and office Wi-Fi validated clock-ins, leave balances and manager reports. Installs as a phone app. | Καταγραφή παρουσίας με επιβεβαίωση τοποθεσίας και Wi-Fi γραφείου, υπόλοιπα αδειών και αναφορές για διευθυντές. Εγκαθίσταται ως εφαρμογή κινητού. | Отметки прихода с проверкой геолокации и офисного Wi-Fi, остатки отпусков и отчёты для руководителей. Устанавливается как приложение на телефон. |
 | `meta.documentSigning.title` | Document signing service | Υπηρεσία ηλεκτρονικής υπογραφής | Сервис электронной подписи |
 | `meta.documentSigning.description` | Legally timestamped e-signatures, embeddable in any workflow. Generated from your templates, verified, and delivered onward. | Ηλεκτρονικές υπογραφές με νομικά έγκυρη χρονοσήμανση, ενσωματώσιμες σε κάθε ροή εργασίας. Παράγονται από τα πρότυπά σας, επαληθεύονται και προωθούνται. | Электронные подписи с юридически значимой отметкой времени, встраиваемые в любой процесс. Формируются из ваших шаблонов, проверяются и передаются дальше. |
 | `meta.astrala.title` | Astrala Advisory partnership | Συνεργασία με την Astrala Advisory | Партнёрство с Astrala Advisory |
-| `meta.astrala.description` | Day One engineers the Astrala Advisory recruitment SaaS platform and white-label deployments for their clients. Security and GDPR built in. | Η Day One αναπτύσσει την πλατφόρμα recruitment SaaS της Astrala Advisory και white-label εγκαταστάσεις για τους πελάτες τους. Ασφάλεια και GDPR ενσωματωμένα. | Day One разрабатывает рекрутинговую SaaS-платформу Astrala Advisory и white-label развёртывания для их клиентов. Безопасность и GDPR встроены. |
+| `meta.astrala.description` | Day One is Astrala Advisory’s external engineering partner. We take technical work off their plate, our services reach clients through them, and theirs through us. | Η Day One είναι ο εξωτερικός τεχνικός συνεργάτης της Astrala Advisory. Αναλαμβάνουμε τεχνική δουλειά για να τους αποφορτίσουμε, οι υπηρεσίες μας φτάνουν σε πελάτες μέσω εκείνων, και οι δικές τους μέσω εμάς. | Day One является внешним инженерным партнёром Astrala Advisory. Мы снимаем с них техническую работу, наши услуги доходят до клиентов через них, а их услуги через нас. |
 | `nav.partner` | Partner | Συνεργασία | Партнёрство |
 | `nav.products` | Products | Προϊόντα | Продукты |
 | `nav.work` | Work | Έργα | Проекты |
@@ -73,26 +73,24 @@ Keys: 230
 | `home.products.learnMore` | Learn more | Μάθετε περισσότερα | Подробнее |
 | `home.strategic.eyebrow` | Strategic partner | Στρατηγικός συνεργάτης | Стратегический партнёр |
 | `home.strategic.title` | In partnership with Astrala Advisory. | Σε συνεργασία με την Astrala Advisory. | В партнёрстве с Astrala Advisory. |
-| `home.strategic.sub` | We engineer their recruitment SaaS platform and white-label deployments for their clients. | Αναπτύσσουμε την πλατφόρμα recruitment SaaS τους και white-label εγκαταστάσεις για τους πελάτες τους. | Мы разрабатываем их рекрутинговую SaaS-платформу и white-label развёртывания для их клиентов. |
+| `home.strategic.sub` | We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us. | Αναλαμβάνουμε τεχνική δουλειά όταν χρειάζονται επιπλέον δυναμικό. Οι υπηρεσίες μας φτάνουν σε πελάτες μέσω της Astrala, και οι υπηρεσίες τους φτάνουν σε πελάτες μέσω εμάς. | Мы берём на себя техническую работу, когда им нужны дополнительные силы. Наши услуги доходят до клиентов через Astrala, а их услуги доходят до клиентов через нас. |
 | `home.strategic.chips[0]` | Security & GDPR built in | Ασφάλεια & GDPR ενσωματωμένα | Безопасность и GDPR встроены |
 | `home.strategic.chips[1]` | Cyber Essentials certified | Πιστοποίηση Cyber Essentials | Сертификат Cyber Essentials |
 | `home.strategic.tagline` | Talent builds tomorrow | Talent builds tomorrow | Talent builds tomorrow |
 | `home.strategic.visit` | Visit astralaadvisory.eu.com | Επισκεφθείτε το astralaadvisory.eu.com | Перейти на astralaadvisory.eu.com |
 | `home.selectedWork.eyebrow` | Selected work | Επιλεγμένα έργα | Избранные проекты |
-| `home.selectedWork.featured.name` | Astrala Nexus | Astrala Nexus | Astrala Nexus |
-| `home.selectedWork.featured.kind` | Recruitment SaaS | Recruitment SaaS | Recruitment SaaS |
-| `home.selectedWork.featured.body` | A recruitment platform engineered for Astrala Advisory, with white-label deployments for their clients. | Μια πλατφόρμα recruitment σχεδιασμένη για την Astrala Advisory, με white-label εγκαταστάσεις για τους πελάτες τους. | Рекрутинговая платформа, разработанная для Astrala Advisory, с white-label развёртываниями для их клиентов. |
-| `home.selectedWork.featured.link` | Explore the project | Δείτε το έργο | Смотреть проект |
-| `home.selectedWork.strip[0].name` | CY-Construction | CY-Construction | CY-Construction |
+| `home.selectedWork.featured.name` | Delbeteris | Delbeteris | Delbeteris |
+| `home.selectedWork.featured.kind` | Private transfers, Greece | Ιδιωτικές μεταφορές, Ελλάδα | Частные трансферы, Греция |
+| `home.selectedWork.featured.body` | A clean, fast site for a private-transfer company in Kavala. Built to be read on a phone, trusted at a glance, and booked against. | Ένα καθαρό, γρήγορο site για εταιρεία ιδιωτικών μεταφορών στην Καβάλα. Φτιαγμένο να διαβάζεται στο κινητό, να εμπνέει εμπιστοσύνη με μια ματιά και να δέχεται κρατήσεις. | Чистый, быстрый сайт для компании частных трансферов в Кавале. Сделан так, чтобы читаться с телефона, вызывать доверие с первого взгляда и принимать бронирования. |
+| `home.selectedWork.featured.link` | See the project | Δείτε το έργο | Смотреть проект |
+| `home.selectedWork.strip[0].name` | Construction ERP platform | Πλατφόρμα ERP για κατασκευές | ERP-платформа для строительства |
 | `home.selectedWork.strip[0].kind` | Construction operations | Λειτουργίες κατασκευών | Управление стройкой |
 | `home.selectedWork.strip[1].name` | Forex platform & CRM | Πλατφόρμα Forex & CRM | Forex-платформа и CRM |
 | `home.selectedWork.strip[1].kind` | Confidential client | Εμπιστευτικός πελάτης | Конфиденциальный клиент |
-| `home.selectedWork.strip[2].name` | Delbeteris transfers | Delbeteris transfers | Delbeteris transfers |
-| `home.selectedWork.strip[2].kind` | Transfers | Μεταφορές | Трансферы |
-| `home.selectedWork.strip[3].name` | Taxi Xanthi | Taxi Xanthi | Taxi Xanthi |
-| `home.selectedWork.strip[3].kind` | Transportation | Μεταφορές επιβατών | Перевозки |
-| `home.selectedWork.strip[4].name` | Sun Seals Divers | Sun Seals Divers | Sun Seals Divers |
-| `home.selectedWork.strip[4].kind` | Diving | Καταδύσεις | Дайвинг |
+| `home.selectedWork.strip[2].name` | Taxi Xanthi | Taxi Xanthi | Taxi Xanthi |
+| `home.selectedWork.strip[2].kind` | Transportation | Μεταφορές επιβατών | Перевозки |
+| `home.selectedWork.strip[3].name` | Sun Seals Divers | Sun Seals Divers | Sun Seals Divers |
+| `home.selectedWork.strip[3].kind` | Diving | Καταδύσεις | Дайвинг |
 | `home.howWeWork.eyebrow` | How we work | Πώς δουλεύουμε | Как мы работаем |
 | `home.howWeWork.items[0]` | Custom builds, no templates. | Custom κατασκευές, όχι templates. | Индивидуальная разработка, без шаблонов. |
 | `home.howWeWork.items[1]` | Same team from day one. | Η ίδια ομάδα από την πρώτη μέρα. | Одна команда с первого дня. |
@@ -110,7 +108,7 @@ Keys: 230
 | `products.common.demoTitle` | See it in action. | Δείτε το σε δράση. | Посмотрите в деле. |
 | `products.common.demoBody` | A short walkthrough, then a plain conversation about whether it fits how you work. | Μια σύντομη παρουσίαση, και μετά μια ειλικρινής συζήτηση για το αν ταιριάζει στον τρόπο που δουλεύετε. | Короткая демонстрация, а затем честный разговор о том, подходит ли это вам. |
 | `products.common.requestDemo` | Request a demo | Ζητήστε ένα demo | Запросить демо |
-| `products.cyConstruction.name` | CY-Construction | CY-Construction | CY-Construction |
+| `products.cyConstruction.name` | Construction ERP platform | Πλατφόρμα ERP για κατασκευές | ERP-платформа для строительства |
 | `products.cyConstruction.tagline` | Project managers see every site in under a minute. Workers see their tasks in under a minute. | Οι project managers βλέπουν κάθε εργοτάξιο σε λιγότερο από ένα λεπτό. Οι εργάτες βλέπουν τις εργασίες τους σε λιγότερο από ένα λεπτό. | Руководители проектов видят каждый объект меньше чем за минуту. Рабочие видят свои задачи меньше чем за минуту. |
 | `products.cyConstruction.meta` | Web + mobile · English, Greek, Bulgarian | Web + mobile · Αγγλικά, Ελληνικά, Βουλγαρικά | Web + mobile · английский, греческий, болгарский |
 | `products.cyConstruction.lead` | Construction operations software for companies running several sites at once. One place for projects, stages, tasks, daily reports, safety, materials and finance, with a phone-first view for the people on site. | Λογισμικό λειτουργιών για κατασκευαστικές εταιρείες με πολλά εργοτάξια ταυτόχρονα. Ένα μέρος για έργα, στάδια, εργασίες, ημερήσιες αναφορές, ασφάλεια, υλικά και οικονομικά, με μια όψη σχεδιασμένη πρώτα για κινητό για τους ανθρώπους στο εργοτάξιο. | Софт для управления стройкой для компаний, ведущих несколько объектов одновременно. Проекты, этапы, задачи, ежедневные отчёты, безопасность, материалы и финансы в одном месте, с мобильным интерфейсом для людей на объекте. |
@@ -203,13 +201,15 @@ Keys: 230
 | `partner.ctaLine2` | Let’s find the model that fits. | Ας βρούμε το μοντέλο που ταιριάζει. | Найдём подходящий формат. |
 | `astrala.hero.eyebrow` | Strategic partner | Στρατηγικός συνεργάτης | Стратегический партнёр |
 | `astrala.hero.title` | In partnership with Astrala Advisory. | Σε συνεργασία με την Astrala Advisory. | В партнёрстве с Astrala Advisory. |
-| `astrala.hero.lead` | We engineer their recruitment SaaS platform and white-label deployments for their clients. | Αναπτύσσουμε την πλατφόρμα recruitment SaaS τους και white-label εγκαταστάσεις για τους πελάτες τους. | Мы разрабатываем их рекрутинговую SaaS-платформу и white-label развёртывания для их клиентов. |
-| `astrala.build.eyebrow` | What we build for them | Τι χτίζουμε για εκείνους | Что мы для них создаём |
-| `astrala.build.title` | Astrala Nexus | Astrala Nexus | Astrala Nexus |
-| `astrala.build.body` | A recruitment platform engineered for Astrala Advisory. Built and maintained by the same Day One team, from the first release onward. | Μια πλατφόρμα recruitment σχεδιασμένη για την Astrala Advisory. Χτισμένη και συντηρούμενη από την ίδια ομάδα της Day One, από την πρώτη έκδοση και μετά. | Рекрутинговая платформа, разработанная для Astrala Advisory. Создана и поддерживается одной и той же командой Day One, начиная с первого релиза. |
-| `astrala.whiteLabel.eyebrow` | White-label deployments | White-label εγκαταστάσεις | White-label развёртывания |
-| `astrala.whiteLabel.title` | Their platform, under their clients’ brands. | Η πλατφόρμα τους, με το brand των πελατών τους. | Их платформа под брендами их клиентов. |
-| `astrala.whiteLabel.body` | Astrala offers the platform to its own clients as a white-label deployment. Each deployment runs on the same engineering base, delivered and supported by Day One. | Η Astrala προσφέρει την πλατφόρμα στους δικούς της πελάτες ως white-label εγκατάσταση. Κάθε εγκατάσταση τρέχει στην ίδια τεχνική βάση, που παραδίδεται και υποστηρίζεται από την Day One. | Astrala предлагает платформу своим клиентам как white-label развёртывание. Каждое развёртывание работает на одной инженерной базе, которую поставляет и поддерживает Day One. |
+| `astrala.hero.lead` | We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us. | Αναλαμβάνουμε τεχνική δουλειά όταν χρειάζονται επιπλέον δυναμικό. Οι υπηρεσίες μας φτάνουν σε πελάτες μέσω της Astrala, και οι υπηρεσίες τους φτάνουν σε πελάτες μέσω εμάς. | Мы берём на себя техническую работу, когда им нужны дополнительные силы. Наши услуги доходят до клиентов через Astrala, а их услуги доходят до клиентов через нас. |
+| `astrala.how.eyebrow` | How the partnership works | Πώς λειτουργεί η συνεργασία | Как работает партнёрство |
+| `astrala.how.title` | Capacity both ways. | Δυναμικό και προς τις δύο κατευθύνσεις. | Ресурсы в обе стороны. |
+| `astrala.how.items[0].title` | External capacity | Εξωτερικό δυναμικό | Внешние ресурсы |
+| `astrala.how.items[0].body` | When Astrala needs engineering hands, we step in as an external team so they can offload work without hiring. | Όταν η Astrala χρειάζεται μηχανικούς, μπαίνουμε ως εξωτερική ομάδα ώστε να αποφορτιστούν χωρίς προσλήψεις. | Когда Astrala нужны инженеры, мы подключаемся как внешняя команда, чтобы они могли разгрузиться без найма. |
+| `astrala.how.items[1].title` | Our services through them | Οι υπηρεσίες μας μέσω εκείνων | Наши услуги через них |
+| `astrala.how.items[1].body` | Astrala offers Day One’s engineering to their clients as part of what they provide. | Η Astrala προσφέρει την τεχνική δουλειά της Day One στους πελάτες της ως μέρος όσων παρέχει. | Astrala предлагает инженерную работу Day One своим клиентам как часть того, что они предоставляют. |
+| `astrala.how.items[2].title` | Their services through us | Οι υπηρεσίες τους μέσω εμάς | Их услуги через нас |
+| `astrala.how.items[2].body` | We bring Astrala’s advisory services to the companies we work with. | Φέρνουμε τις συμβουλευτικές υπηρεσίες της Astrala στις εταιρείες με τις οποίες δουλεύουμε. | Мы приводим консультационные услуги Astrala компаниям, с которыми работаем. |
 | `astrala.security.eyebrow` | Security posture | Στάση ασφάλειας | Подход к безопасности |
 | `astrala.security.title` | Security & GDPR built in. | Ασφάλεια & GDPR ενσωματωμένα. | Безопасность и GDPR встроены. |
 | `astrala.security.body` | Security and GDPR are built in from the start rather than reviewed at the end. | Η ασφάλεια και το GDPR ενσωματώνονται από την αρχή, αντί να ελέγχονται στο τέλος. | Безопасность и GDPR закладываются с самого начала, а не проверяются в конце. |
@@ -230,7 +230,7 @@ Keys: 230
 | `work.more.title` | Also built by Day One. | Επίσης χτισμένα από την Day One. | Также создано Day One. |
 | `work.more.note` | Details on request. | Λεπτομέρειες κατόπιν αιτήματος. | Подробности по запросу. |
 | `work.more.seeProduct` | See the product | Δείτε το προϊόν | Смотреть продукт |
-| `work.stubs[0].name` | CY-Construction | CY-Construction | CY-Construction |
+| `work.stubs[0].name` | Construction ERP platform | Πλατφόρμα ERP για κατασκευές | ERP-платформа для строительства |
 | `work.stubs[0].kind` | Construction operations | Λειτουργίες κατασκευών | Управление стройкой |
 | `work.stubs[1].name` | Forex platform & CRM | Πλατφόρμα Forex & CRM | Forex-платформа и CRM |
 | `work.stubs[1].kind` | Confidential client | Εμπιστευτικός πελάτης | Конфиденциальный клиент |

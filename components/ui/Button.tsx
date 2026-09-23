@@ -18,12 +18,12 @@ const sizes: Record<Size, string> = {
 }
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-text-primary text-bg hover:bg-accent',
-  cream: 'bg-bg text-text-primary hover:bg-surface',
+  primary: 'bg-text-primary text-card hover:bg-ink-hover',
+  cream: 'bg-bg text-text-primary hover:bg-card',
   outline:
-    'border border-border-strong text-text-primary hover:border-text-primary bg-transparent',
+    'border border-border text-text-primary hover:border-accent bg-transparent',
   'outline-dark':
-    'border border-white/25 text-dark-text hover:border-rust hover:text-rust bg-transparent',
+    'border border-dark-border text-dark-text hover:border-rust hover:text-rust bg-transparent',
   ghost: 'text-accent hover:text-accent-dark px-0 py-0',
 }
 

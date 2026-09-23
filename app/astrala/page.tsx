@@ -1,14 +1,13 @@
 // ── app/astrala/page.tsx · The Astrala Advisory partnership ──
-// What Day One builds for Astrala, the white-label deployments, the security
-// posture, the referral structure, and a link out to their site. Copy comes
-// from lib/copy; no em-dashes.
+// Day One is Astrala's external engineering partner: we take technical work
+// off their plate, our services reach clients through them, theirs through
+// us. Security posture, referral structure, link out. Copy from lib/copy;
+// no em-dashes.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
-import ProductFrame from '@/components/products/ProductFrame'
-import NexusMock from '@/components/work/NexusMock'
-import AstralaWordmark from '@/components/brand/AstralaWordmark'
+import AstralaLogo from '@/components/brand/AstralaLogo'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { copy } from '@/lib/copy'
 import { site } from '@/lib/site'
@@ -40,50 +39,31 @@ export default function AstralaPage() {
         </a>
       </PageHero>
 
-      {/* ── What we build for them ─────────────────────────── */}
+      {/* ── How the partnership works · three hairline columns ── */}
       <section className="border-b border-border bg-bg">
         <div className="container-wide section">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-10">
-            <div className="lg:col-span-4">
-              <Reveal>
-                <p className="eyebrow mb-6">{t.build.eyebrow}</p>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h2 className="t-h1 display-balance">{t.build.title}</h2>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="measure display-pretty mt-7 font-body text-base leading-relaxed text-text-secondary md:text-lg">
-                  {t.build.body}
-                </p>
-              </Reveal>
-            </div>
-            <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-              <ProductFrame variant="bleed" className="aspect-[4/3] md:aspect-[16/10]">
-                <NexusMock />
-              </ProductFrame>
-            </Reveal>
-          </div>
+          <Reveal>
+            <p className="eyebrow mb-6">{t.how.eyebrow}</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="t-h1 display-balance max-w-2xl">{t.how.title}</h2>
+          </Reveal>
+          <RevealGroup className="mt-12 grid border-t border-border md:grid-cols-3" stagger={0.08}>
+            {t.how.items.map((item, i) => (
+              <RevealItem
+                key={item.title}
+                className="border-b border-border py-9 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              >
+                <span className="t-index text-rust">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="t-h3 mt-5 text-text-primary">{item.title}</h3>
+                <p className="mt-4 font-body text-base leading-relaxed text-text-secondary">{item.body}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
       </section>
 
-      {/* ── White-label deployments ────────────────────────── */}
-      <section data-no-grid className="border-b border-border bg-surface">
-        <div className="container-wide section">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-            <Reveal className="lg:col-span-4">
-              <p className="eyebrow">{t.whiteLabel.eyebrow}</p>
-            </Reveal>
-            <Reveal delay={0.06} className="lg:col-span-7 lg:col-start-6">
-              <h2 className="t-h2 display-balance text-text-primary">{t.whiteLabel.title}</h2>
-              <p className="measure-lg mt-7 font-body text-base leading-relaxed text-text-secondary md:text-lg">
-                {t.whiteLabel.body}
-              </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Security posture · dark band with the wordmark ─── */}
+      {/* ── Security posture · dark band with their logo ───── */}
       <section className="section-dark">
         <div className="container-wide section">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
@@ -115,9 +95,9 @@ export default function AstralaPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.visit}
-                className="transition-opacity duration-250 hover:opacity-80"
+                className="w-full max-w-[380px] transition-opacity duration-250 hover:opacity-80"
               >
-                <AstralaWordmark tagline={copy.home.strategic.tagline} tone="dark" />
+                <AstralaLogo tagline={copy.home.strategic.tagline} tone="dark" />
               </a>
             </Reveal>
           </div>

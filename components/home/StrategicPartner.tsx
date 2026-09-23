@@ -3,7 +3,7 @@
 // Astrala wordmark linking out to their site.
 import Link from 'next/link'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
-import AstralaWordmark from '@/components/brand/AstralaWordmark'
+import AstralaLogo from '@/components/brand/AstralaLogo'
 import { copy } from '@/lib/copy'
 import { site } from '@/lib/site'
 
@@ -48,9 +48,9 @@ export default function StrategicPartner() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.visit}
-              className="transition-opacity duration-250 hover:opacity-80"
+              className="w-full max-w-[380px] transition-opacity duration-250 hover:opacity-80"
             >
-              <AstralaWordmark tagline={t.tagline} tone="dark" />
+              <AstralaLogo tagline={t.tagline} tone="dark" />
             </a>
           </Reveal>
         </div>

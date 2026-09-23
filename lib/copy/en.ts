@@ -21,10 +21,10 @@ export const en = {
     products: {
       title: 'Products',
       description:
-        'Ready software we license and support: CY-Construction, an attendance and leave platform, and a document signing service. Built, maintained and improved by the same team.',
+        'Ready software we license and support: a construction ERP platform, an attendance and leave platform, and a document signing service. Built, maintained and improved by the same team.',
     },
     cyConstruction: {
-      title: 'CY-Construction',
+      title: 'Construction ERP platform',
       description:
         'Construction operations software. Project managers see every site in under a minute. Workers see their tasks in under a minute. Web and mobile, in English, Greek and Bulgarian.',
     },
@@ -41,7 +41,7 @@ export const en = {
     astrala: {
       title: 'Astrala Advisory partnership',
       description:
-        'Day One engineers the Astrala Advisory recruitment SaaS platform and white-label deployments for their clients. Security and GDPR built in.',
+        'Day One is Astrala Advisory’s external engineering partner. We take technical work off their plate, our services reach clients through them, and theirs through us.',
     },
   },
 
@@ -122,7 +122,7 @@ export const en = {
     strategic: {
       eyebrow: 'Strategic partner',
       title: 'In partnership with Astrala Advisory.',
-      sub: 'We engineer their recruitment SaaS platform and white-label deployments for their clients.',
+      sub: 'We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us.',
       chips: ['Security & GDPR built in', 'Cyber Essentials certified'],
       tagline: 'Talent builds tomorrow',
       visit: 'Visit astralaadvisory.eu.com',
@@ -130,19 +130,19 @@ export const en = {
     selectedWork: {
       eyebrow: 'Selected work',
       featured: {
-        name: 'Astrala Nexus',
-        kind: 'Recruitment SaaS',
-        body: 'A recruitment platform engineered for Astrala Advisory, with white-label deployments for their clients.',
-        link: 'Explore the project',
+        name: 'Delbeteris',
+        kind: 'Private transfers, Greece',
+        body: 'A clean, fast site for a private-transfer company in Kavala. Built to be read on a phone, trusted at a glance, and booked against.',
+        link: 'See the project',
       },
       strip: [
-        { name: 'CY-Construction', kind: 'Construction operations' },
+        { name: 'Construction ERP platform', kind: 'Construction operations' },
         { name: 'Forex platform & CRM', kind: 'Confidential client' },
-        { name: 'Delbeteris transfers', kind: 'Transfers' },
         { name: 'Taxi Xanthi', kind: 'Transportation' },
         { name: 'Sun Seals Divers', kind: 'Diving' },
       ],
     },
+
     howWeWork: {
       eyebrow: 'How we work',
       items: [
@@ -174,7 +174,7 @@ export const en = {
       requestDemo: 'Request a demo',
     },
     cyConstruction: {
-      name: 'CY-Construction',
+      name: 'Construction ERP platform',
       tagline:
         'Project managers see every site in under a minute. Workers see their tasks in under a minute.',
       meta: 'Web + mobile · English, Greek, Bulgarian',
@@ -333,17 +333,25 @@ export const en = {
     hero: {
       eyebrow: 'Strategic partner',
       title: 'In partnership with Astrala Advisory.',
-      lead: 'We engineer their recruitment SaaS platform and white-label deployments for their clients.',
+      lead: 'We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us.',
     },
-    build: {
-      eyebrow: 'What we build for them',
-      title: 'Astrala Nexus',
-      body: 'A recruitment platform engineered for Astrala Advisory. Built and maintained by the same Day One team, from the first release onward.',
-    },
-    whiteLabel: {
-      eyebrow: 'White-label deployments',
-      title: 'Their platform, under their clients’ brands.',
-      body: 'Astrala offers the platform to its own clients as a white-label deployment. Each deployment runs on the same engineering base, delivered and supported by Day One.',
+    how: {
+      eyebrow: 'How the partnership works',
+      title: 'Capacity both ways.',
+      items: [
+        {
+          title: 'External capacity',
+          body: 'When Astrala needs engineering hands, we step in as an external team so they can offload work without hiring.',
+        },
+        {
+          title: 'Our services through them',
+          body: 'Astrala offers Day One’s engineering to their clients as part of what they provide.',
+        },
+        {
+          title: 'Their services through us',
+          body: 'We bring Astrala’s advisory services to the companies we work with.',
+        },
+      ],
     },
     security: {
       eyebrow: 'Security posture',
@@ -380,7 +388,7 @@ export const en = {
       seeProduct: 'See the product',
     },
     stubs: [
-      { name: 'CY-Construction', kind: 'Construction operations' },
+      { name: 'Construction ERP platform', kind: 'Construction operations' },
       { name: 'Forex platform & CRM', kind: 'Confidential client' },
       { name: 'Taxi Xanthi', kind: 'Transportation' },
       { name: 'Sun Seals Divers', kind: 'Diving' },

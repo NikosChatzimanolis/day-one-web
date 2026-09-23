@@ -30,6 +30,7 @@ const config: Config = {
         dark: 'var(--color-dark)',
         'dark-raised': 'var(--color-dark-raised)',
         'dark-border': 'var(--color-dark-border)',
+        'ink-hover': 'var(--color-ink-hover)',
       },
       fontFamily: {
         serif: ['var(--font-jost)', 'system-ui', 'sans-serif'],

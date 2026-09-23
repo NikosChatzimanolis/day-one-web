@@ -146,7 +146,7 @@ export default function ContactForm({ defaultIntent }: ContactFormProps) {
         type="submit"
         data-no-grid
         disabled={status === 'submitting'}
-        className="mt-1 inline-flex items-center justify-center rounded-full bg-text-primary px-7 py-3.5 font-body text-sm text-bg transition-all duration-250 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 inline-flex items-center justify-center rounded-full bg-text-primary px-7 py-3.5 font-body text-sm text-card transition-all duration-250 hover:bg-ink-hover disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send enquiry'}
       </button>

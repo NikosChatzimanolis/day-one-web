@@ -12,7 +12,7 @@ The backup conversion path is a project enquiry form (Resend, honeypot-protected
 **Pages:**
 - `/` — Home: hero, two ways to work with us, products, Astrala band, selected work, how we work, security bar, CTA
 - `/partner` — Partnership models, engagement steps, stack (replaces `/services` and `/white-label`, which redirect here)
-- `/products` — CY-Construction, the attendance and leave platform, the document signing service (+ one page each)
+- `/products` — the construction ERP platform, the attendance and leave platform, the document signing service (+ one page each)
 - `/astrala` — The Astrala Advisory partnership
 - `/work` — Case studies and stubs
 - `/security` — Fixed-scope security & GDPR review

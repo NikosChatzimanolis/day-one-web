@@ -25,10 +25,10 @@ const sizeMap: Record<LogoSize, { day: string; one: string; tagline: string; div
 }
 
 const variantColors: Record<LogoVariant, { day: string; one: string; tagline: string; divider: string }> = {
-  primary: { day: 'text-[#C04C2A]', one: 'text-[#1A1816]', tagline: 'text-[#9A8F82]', divider: 'bg-[rgba(192,76,42,0.3)]' },
-  dark:    { day: 'text-[#D06040]', one: 'text-[#F5F0EA]', tagline: 'text-[#6A5F52]', divider: 'bg-[rgba(208,96,64,0.4)]' },
-  white:   { day: 'text-[#F5F0EA]', one: 'text-[#F5F0EA]', tagline: 'text-[rgba(245,240,234,0.5)]', divider: 'bg-[rgba(245,240,234,0.2)]' },
-  mono:    { day: 'text-[#1A1816]', one: 'text-[#1A1816]', tagline: 'text-[#8A7F74]', divider: 'bg-[rgba(26,24,22,0.2)]' },
+  primary: { day: 'text-[#A64B32]', one: 'text-[#242320]', tagline: 'text-[#8F8A80]', divider: 'bg-[rgba(166,75,50,0.3)]' },
+  dark:    { day: 'text-[#C4674C]', one: 'text-[#F7F4EE]', tagline: 'text-[#A8A198]', divider: 'bg-[rgba(196,103,76,0.4)]' },
+  white:   { day: 'text-[#F7F4EE]', one: 'text-[#F7F4EE]', tagline: 'text-[rgba(247,244,238,0.5)]', divider: 'bg-[rgba(247,244,238,0.2)]' },
+  mono:    { day: 'text-[#242320]', one: 'text-[#242320]', tagline: 'text-[#8F8A80]', divider: 'bg-[rgba(36,35,32,0.2)]' },
 }
 
 export default function Logo({ variant = 'primary', size = 'md', className, showTagline = true }: LogoProps) {
