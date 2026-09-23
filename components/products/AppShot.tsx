@@ -34,7 +34,7 @@ export function DashboardShot({ src, sizes = '(min-width: 1024px) 820px, 100vw',
 export function PhoneShot({ src, sizes = '280px', priority = false, className }: ShotProps) {
   return (
     <div
-      className={cn('relative aspect-[387/782] bg-[#1A1816] p-[1.6%]', className)}
+      className={cn('relative h-full aspect-[387/782] bg-[#1A1816] p-[1.6%]', className)}
       style={{ borderRadius: '12% / 5.9%', containerType: 'inline-size' }}
     >
       {/* side buttons */}
