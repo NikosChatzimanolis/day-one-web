@@ -120,7 +120,7 @@ export const ru = {
       title: 'В партнёрстве с Astrala Advisory.',
       sub: 'Мы берём на себя техническую работу, когда им нужны дополнительные силы. Наши услуги доходят до клиентов через Astrala, а их услуги доходят до клиентов через нас.',
       chips: ['Безопасность и GDPR встроены', 'Сертификат Cyber Essentials'],
-      tagline: 'Talent builds tomorrow',
+      tagline: 'Developmental intelligence · Operational excellence',
       visit: 'Перейти на astralaadvisory.eu.com',
     },
     selectedWork: {

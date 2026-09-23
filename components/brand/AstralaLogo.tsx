@@ -1,5 +1,6 @@
 // ── components/brand/AstralaLogo.tsx ──
-// Astrala Advisory's logo with the TALENT BUILDS TOMORROW line beneath. Uses
+// Astrala Advisory's logo with their line beneath (Developmental intelligence ·
+// Operational excellence). Uses
 // the real asset at public/partners/astrala-logo.png (their "A" mark +
 // wordmark, background keyed out) when it exists; until then it renders the
 // name in their serif so the band never shows a broken image. Server
@@ -45,7 +46,7 @@ export default function AstralaLogo({ tagline, tone = 'dark', className }: Astra
       <span aria-hidden="true" className={cn('mt-6 block h-px w-full', dark ? 'bg-dark-border' : 'bg-border')} />
       <span
         className={cn(
-          'mt-4 font-body text-[0.625rem] uppercase leading-none tracking-[0.36em]',
+          'mt-4 text-center font-body text-[0.625rem] uppercase leading-[1.7] tracking-[0.22em]',
           dark ? 'text-dark-text-secondary' : 'text-text-tertiary'
         )}
       >

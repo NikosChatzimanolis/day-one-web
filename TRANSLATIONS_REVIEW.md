@@ -76,7 +76,7 @@ Keys: 222
 | `home.strategic.sub` | We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us. | Αναλαμβάνουμε τεχνική δουλειά όταν χρειάζονται επιπλέον δυναμικό. Οι υπηρεσίες μας φτάνουν σε πελάτες μέσω της Astrala, και οι υπηρεσίες τους φτάνουν σε πελάτες μέσω εμάς. | Мы берём на себя техническую работу, когда им нужны дополнительные силы. Наши услуги доходят до клиентов через Astrala, а их услуги доходят до клиентов через нас. |
 | `home.strategic.chips[0]` | Security & GDPR built in | Ασφάλεια & GDPR ενσωματωμένα | Безопасность и GDPR встроены |
 | `home.strategic.chips[1]` | Cyber Essentials certified | Πιστοποίηση Cyber Essentials | Сертификат Cyber Essentials |
-| `home.strategic.tagline` | Talent builds tomorrow | Talent builds tomorrow | Talent builds tomorrow |
+| `home.strategic.tagline` | Developmental intelligence · Operational excellence | Developmental intelligence · Operational excellence | Developmental intelligence · Operational excellence |
 | `home.strategic.visit` | Visit astralaadvisory.eu.com | Επισκεφθείτε το astralaadvisory.eu.com | Перейти на astralaadvisory.eu.com |
 | `home.selectedWork.eyebrow` | Selected work | Επιλεγμένα έργα | Избранные проекты |
 | `home.selectedWork.featured.name` | Delbeteris | Delbeteris | Delbeteris |

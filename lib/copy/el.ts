@@ -120,7 +120,7 @@ export const el = {
       title: 'Σε συνεργασία με την Astrala Advisory.',
       sub: 'Αναλαμβάνουμε τεχνική δουλειά όταν χρειάζονται επιπλέον δυναμικό. Οι υπηρεσίες μας φτάνουν σε πελάτες μέσω της Astrala, και οι υπηρεσίες τους φτάνουν σε πελάτες μέσω εμάς.',
       chips: ['Ασφάλεια & GDPR ενσωματωμένα', 'Πιστοποίηση Cyber Essentials'],
-      tagline: 'Talent builds tomorrow',
+      tagline: 'Developmental intelligence · Operational excellence',
       visit: 'Επισκεφθείτε το astralaadvisory.eu.com',
     },
     selectedWork: {

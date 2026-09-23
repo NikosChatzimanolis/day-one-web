@@ -124,7 +124,7 @@ export const en = {
       title: 'In partnership with Astrala Advisory.',
       sub: 'We take technical work off their plate when they need capacity. Our services reach clients through Astrala, and their services reach clients through us.',
       chips: ['Security & GDPR built in', 'Cyber Essentials certified'],
-      tagline: 'Talent builds tomorrow',
+      tagline: 'Developmental intelligence · Operational excellence',
       visit: 'Visit astralaadvisory.eu.com',
     },
     selectedWork: {
