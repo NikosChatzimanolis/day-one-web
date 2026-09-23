@@ -47,7 +47,7 @@ export default function TwoWays() {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-3">
             <p className="eyebrow max-w-[12rem] leading-relaxed">{t.eyebrow}</p>
-            <span aria-hidden="true" className="mt-6 block h-px w-10 bg-rust/60" />
+            <span aria-hidden="true" className="mt-6 block h-px w-10 bg-rust" />
           </Reveal>
           <div className="grid gap-10 lg:col-span-9 lg:grid-cols-2 lg:gap-0">
             <Column title={t.partner.title} lines={t.partner.lines} link={t.partner.link} href="/partner" delay={0.05} />
