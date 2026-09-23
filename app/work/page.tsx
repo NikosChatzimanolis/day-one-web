@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/Button'
 import ForgeMock from '@/components/forge/ForgeMock'
 import SiteShot from '@/components/work/SiteShot'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import Link from 'next/link'
+import { copy } from '@/lib/copy'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -65,6 +67,15 @@ const platformWork = [
   'CI/CD pipeline rebuild on Microsoft-hosted agents.',
   'Third-party system migration including data export tooling and PDF report generation.',
 ]
+
+// Anchors for the homepage Selected Work strip. Stubs carry only the name and
+// category from the brief; details are added when each case study is written.
+const moreWork = [
+  { id: 'cy-construction', href: '/products/cy-construction' },
+  { id: 'forex' },
+  { id: 'taxi-xanthi' },
+  { id: 'sun-seals' },
+] as const
 
 const platformStats = [
   { value: '48,000', label: 'Lines of code audited' },
@@ -299,6 +310,53 @@ export default function WorkPage() {
               <BookCall size="lg" label="Start a build like this" />
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ── More work · stubs ─────────────────────────────── */}
+      <section data-no-grid className="bg-surface border-b border-border">
+        <div className="container-wide section">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <p className="eyebrow mb-6">{copy.work.more.eyebrow}</p>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="t-h2 display-balance max-w-xs">{copy.work.more.title}</h2>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-6 font-body text-sm text-text-tertiary">{copy.work.more.note}</p>
+              </Reveal>
+            </div>
+            <RevealGroup className="lg:col-span-7 lg:col-start-6 flex flex-col" stagger={0.08}>
+              {copy.work.stubs.map((stub, i) => {
+                const entry = moreWork[i]
+                return (
+                  <RevealItem
+                    key={entry.id}
+                    className={cn(
+                      'flex flex-col gap-2 border-t border-border-strong py-6 scroll-mt-24 sm:flex-row sm:items-baseline sm:justify-between',
+                      i === copy.work.stubs.length - 1 && 'border-b'
+                    )}
+                  >
+                    <span id={entry.id} className="flex flex-col gap-1">
+                      <span className="t-h3 text-text-primary">{stub.name}</span>
+                      <span className="font-body text-sm text-text-tertiary">{stub.kind}</span>
+                    </span>
+                    {'href' in entry && (
+                      <Link
+                        href={entry.href}
+                        className="group inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
+                      >
+                        {copy.work.more.seeProduct}
+                        <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
+                      </Link>
+                    )}
+                  </RevealItem>
+                )
+              })}
+            </RevealGroup>
+          </div>
         </div>
       </section>
 

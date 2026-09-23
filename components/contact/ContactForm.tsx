@@ -3,13 +3,22 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { copy } from '@/lib/copy'
+import { contactIntents, type ContactIntent } from '@/lib/site'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const inputBase =
   'w-full bg-bg border border-border-strong rounded-sm px-4 py-3 font-body text-sm text-text-primary placeholder:text-text-tertiary transition-colors duration-200 focus:border-accent focus:outline-none'
 
-export default function ContactForm() {
+const labelClass = 'block font-body text-xs font-medium uppercase tracking-wide text-text-tertiary mb-2'
+
+interface ContactFormProps {
+  /** Pre-selected intent, usually from ?intent= on the contact page. */
+  defaultIntent?: ContactIntent
+}
+
+export default function ContactForm({ defaultIntent }: ContactFormProps) {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState<string | null>(null)
 
@@ -21,7 +30,7 @@ export default function ContactForm() {
     const form = e.currentTarget
     const data = new FormData(form)
 
-    // Honeypot — a real person never fills this hidden field.
+    // Honeypot: a real person never fills this hidden field.
     if ((data.get('company') as string)?.trim()) {
       setStatus('success')
       form.reset()
@@ -31,6 +40,7 @@ export default function ContactForm() {
     const payload = {
       name: (data.get('name') as string) ?? '',
       email: (data.get('email') as string) ?? '',
+      intent: (data.get('intent') as string) ?? '',
       message: (data.get('message') as string) ?? '',
       company: (data.get('company') as string) ?? '',
     }
@@ -74,21 +84,47 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="name" className="block font-body text-xs font-medium uppercase tracking-wide text-text-tertiary mb-2">
+        <label htmlFor="intent" className={labelClass}>
+          {copy.contact.intentLabel}
+        </label>
+        <select
+          id="intent"
+          name="intent"
+          required
+          defaultValue={defaultIntent ?? ''}
+          className={cn(inputBase, 'appearance-none bg-[length:12px_12px] bg-[position:right_1rem_center] bg-no-repeat pr-10')}
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%236E6657' stroke-width='1.2'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E\")",
+          }}
+        >
+          <option value="" disabled>
+            Choose one
+          </option>
+          {contactIntents.map((intent) => (
+            <option key={intent} value={intent}>
+              {copy.contact.intents[intent]}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="name" className={labelClass}>
           Name
         </label>
         <input id="name" name="name" type="text" required minLength={2} placeholder="Your name" className={inputBase} />
       </div>
 
       <div>
-        <label htmlFor="email" className="block font-body text-xs font-medium uppercase tracking-wide text-text-tertiary mb-2">
+        <label htmlFor="email" className={labelClass}>
           Email
         </label>
         <input id="email" name="email" type="email" required placeholder="you@company.com" className={inputBase} />
       </div>
 
       <div>
-        <label htmlFor="message" className="block font-body text-xs font-medium uppercase tracking-wide text-text-tertiary mb-2">
+        <label htmlFor="message" className={labelClass}>
           What are you building?
         </label>
         <textarea
@@ -110,7 +146,7 @@ export default function ContactForm() {
         type="submit"
         data-no-grid
         disabled={status === 'submitting'}
-        className="mt-1 inline-flex items-center justify-center px-7 py-3.5 rounded-sm bg-accent text-white font-body text-sm font-medium transition-all duration-250 hover:bg-accent-dark disabled:opacity-60 disabled:cursor-not-allowed"
+        className="mt-1 inline-flex items-center justify-center rounded-full bg-text-primary px-7 py-3.5 font-body text-sm text-bg transition-all duration-250 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send enquiry'}
       </button>

@@ -1,7 +1,9 @@
 // ── app/contact/page.tsx — Contact ──
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import PageHero from '@/components/sections/PageHero'
 import ContactForm from '@/components/contact/ContactForm'
+import IntentContactForm from '@/components/contact/IntentContactForm'
 import BookCall from '@/components/ui/BookCall'
 import Reveal from '@/components/ui/Reveal'
 import Magnetic from '@/components/ui/Magnetic'
@@ -26,7 +28,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Start with a call."
-        lead="The best first step is a conversation. Book one, or send an enquiry and we’ll come back to you within a business day."
+        lead="The best first step is a conversation. Book one, or send an enquiry and we will come back to you within a business day."
       />
 
       <section id="book" className="bg-bg scroll-mt-24">
@@ -88,7 +90,9 @@ export default function ContactPage() {
                 <div data-no-grid className="rounded-lg border border-border bg-surface p-7 md:p-10">
                   <p className="eyebrow mb-6">Project enquiry</p>
                   <h2 className="t-h3 text-text-primary mb-8">Or send a few lines.</h2>
-                  <ContactForm />
+                  <Suspense fallback={<ContactForm />}>
+                    <IntentContactForm />
+                  </Suspense>
                 </div>
               </Reveal>
             </div>

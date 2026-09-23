@@ -7,6 +7,7 @@ import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
+import { copy } from '@/lib/copy'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -122,6 +123,28 @@ export default function AboutPage() {
                 <p className="font-body text-base md:text-lg text-dark-text-secondary leading-relaxed measure-lg">
                   Based in Paphos, Cyprus. Working with founders and agencies across Europe.
                 </p>
+              </RevealItem>
+            </RevealGroup>
+          </div>
+        </div>
+      </section>
+
+      {/* Team · founder placeholder left for the studio to fill in */}
+      <section className="bg-bg border-b border-border">
+        <div className="container-wide section">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <p className="eyebrow mb-7">{copy.about.team.eyebrow}</p>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <h2 className="t-h1 display-balance max-w-xs">{copy.about.team.title}</h2>
+              </Reveal>
+            </div>
+            <RevealGroup className="lg:col-span-7 lg:col-start-6 flex flex-col" stagger={0.1}>
+              <RevealItem className="flex flex-col gap-2 border-t border-b border-border py-8 sm:flex-row sm:items-baseline sm:justify-between">
+                <p className="t-h3 text-text-primary">{copy.about.team.founderName}</p>
+                <p className="font-body text-base text-text-secondary">{copy.about.team.founderRole}</p>
               </RevealItem>
             </RevealGroup>
           </div>

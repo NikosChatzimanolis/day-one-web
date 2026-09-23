@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendDayOneEmail, CONTACT_TO } from '@/lib/email'
 import { buildContactAutoReply } from '@/lib/email-templates'
+import { isContactIntent } from '@/lib/site'
+import { copy } from '@/lib/copy'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -9,7 +11,8 @@ interface ContactBody {
   name: unknown
   email: unknown
   message: unknown
-  company?: unknown // honeypot — must stay empty
+  intent?: unknown // one of contactIntents; optional for older clients
+  company?: unknown // honeypot: must stay empty
 }
 
 function validateBody(body: ContactBody): string | null {
@@ -24,6 +27,9 @@ function validateBody(body: ContactBody): string | null {
   }
   if (body.message.length > 2000) {
     return 'Message must be under 2000 characters.'
+  }
+  if (body.intent !== undefined && body.intent !== '' && !isContactIntent(body.intent)) {
+    return 'Please choose what the enquiry is about.'
   }
   return null
 }
@@ -46,16 +52,18 @@ export async function POST(req: NextRequest) {
     const name = (body.name as string).trim()
     const email = (body.email as string).trim()
     const message = (body.message as string).trim()
+    const intentLabel = isContactIntent(body.intent) ? copy.contact.intents[body.intent] : 'General'
 
     const { error } = await sendDayOneEmail({
       form: 'contact',
       replyTo: email,
-      subject: `New enquiry from ${name} — Day One`,
+      subject: `${intentLabel} enquiry from ${name} | Day One`,
       text: `
 New enquiry from Day One website
 ---------------------------------
 Name:    ${name}
 Email:   ${email}
+About:   ${intentLabel}
 
 Message:
 ${message}
@@ -87,7 +95,7 @@ Sent via dayone-web.com
   <div class="container">
     <div class="header">
       <h1>Day One</h1>
-      <p>New website enquiry</p>
+      <p>New website enquiry: ${intentLabel}</p>
     </div>
     <div class="body">
       <div class="field">
@@ -99,13 +107,17 @@ Sent via dayone-web.com
         <div class="value"><a href="mailto:${email}" style="color: #C04C2A;">${email}</a></div>
       </div>
       <div class="field">
+        <div class="label">About</div>
+        <div class="value">${intentLabel}</div>
+      </div>
+      <div class="field">
         <div class="label">Message</div>
         <div class="message-box">${message.replace(/\n/g, '<br/>')}</div>
       </div>
-      <a href="mailto:${email}?subject=Re: Your enquiry — Day One" class="reply-cta">Reply to ${name}</a>
+      <a href="mailto:${email}?subject=Re: Your enquiry | Day One" class="reply-cta">Reply to ${name}</a>
     </div>
     <div class="footer">
-      Sent via dayone-web.com — Day One Studio, Cyprus
+      Sent via dayone-web.com · Day One Web Studio, Cyprus
     </div>
   </div>
 </body>
@@ -126,7 +138,7 @@ Sent via dayone-web.com
       form: 'contact',
       to: email,
       replyTo: CONTACT_TO,
-      subject: 'We got your message — Day One',
+      subject: 'We got your message | Day One',
       text: autoReply.text,
       html: autoReply.html,
     })
