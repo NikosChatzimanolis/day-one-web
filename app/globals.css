@@ -353,3 +353,11 @@ a { color: inherit; text-decoration: none; }
   * { background: white !important; color: black !important; }
 }
 
+
+/* ─────────────────────────────────────────
+   Below-the-fold mockups
+   Pure HTML/CSS product visuals are cheap to ship but not free to lay out.
+   content-visibility skips their layout and paint until they approach the
+   viewport; the intrinsic size keeps the scrollbar honest meanwhile.
+───────────────────────────────────────── */
+.lazy-block { content-visibility: auto; contain-intrinsic-size: auto 420px; }

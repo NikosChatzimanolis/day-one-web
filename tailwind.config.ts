@@ -36,6 +36,7 @@ const config: Config = {
         display: ['var(--font-jost)', 'system-ui', 'sans-serif'],
         body: ['var(--font-jost)', 'system-ui', 'sans-serif'],
         script: ['var(--font-script)', 'cursive'],
+        cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
       },
       fontSize: {
         '2xs': ['0.625rem', { lineHeight: '1rem' }],

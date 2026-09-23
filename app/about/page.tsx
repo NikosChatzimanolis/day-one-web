@@ -128,7 +128,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CtaSection heading="If that sounds like the partner you want, let’s talk." />
+      <CtaSection line1="If that sounds like the partner you want," line2="let’s talk." />
     </>
   )
 }

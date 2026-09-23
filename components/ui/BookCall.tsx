@@ -6,9 +6,10 @@
 import { Button } from '@/components/ui/Button'
 import Magnetic from '@/components/ui/Magnetic'
 import { site, bookCallHref } from '@/lib/site'
+import { copy } from '@/lib/copy'
 
 interface BookCallProps {
-  variant?: 'primary' | 'outline' | 'outline-dark'
+  variant?: 'primary' | 'outline' | 'outline-dark' | 'cream'
   size?: 'md' | 'lg'
   className?: string
   label?: string
@@ -21,8 +22,8 @@ export default function BookCall({
   variant = 'primary',
   size = 'lg',
   className,
-  label = 'Book a call',
-  arrow = true,
+  label = copy.nav.bookCall,
+  arrow = false,
   magnetic = true,
 }: BookCallProps) {
   const usesCalendar = Boolean(site.bookingUrl)

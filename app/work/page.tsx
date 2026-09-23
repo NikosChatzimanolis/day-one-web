@@ -303,8 +303,8 @@ export default function WorkPage() {
       </section>
 
       <CtaSection
-        heading="Your build could be the next one here."
-        sub="Tell us what you need to exist. We’ll tell you how we’d build it."
+        line1="Your build could be the next one here."
+        sub="Tell us what you need to exist. We will tell you how we would build it."
       />
     </>
   )

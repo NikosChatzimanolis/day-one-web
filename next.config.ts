@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // /services and /white-label were folded into /partner in the 2026-09
+  // redesign. Permanent redirects keep old links, search results and the
+  // cold-pitch emails that pointed at /white-label working.
+  async redirects() {
+    return [
+      { source: '/services', destination: '/partner', permanent: true },
+      { source: '/white-label', destination: '/partner', permanent: true },
+    ]
+  },
 }
 
 export default nextConfig

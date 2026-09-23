@@ -1,4 +1,6 @@
 // ── components/layout/Navbar.tsx ──
+// Fixed header: logotype left, seven text links, outlined "Book a call" pill.
+// No chips, no shadows (reference). Mobile collapses to a drawer.
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -8,6 +10,7 @@ import { motion, useReducedMotion, AnimatePresence, type Variants } from 'framer
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { nav } from '@/lib/site'
+import { copy } from '@/lib/copy'
 import Logo from '@/components/ui/Logo'
 import BookCall from '@/components/ui/BookCall'
 
@@ -38,10 +41,10 @@ export default function Navbar() {
   // Close drawer on route change
   useEffect(() => { setIsOpen(false) }, [pathname])
 
-  // The hamburger is mobile-only (desktop shows inline links) — close the drawer
-  // if the viewport grows past the breakpoint while it's open.
+  // The hamburger is mobile-only (desktop shows inline links). Close the
+  // drawer if the viewport grows past the breakpoint while it is open.
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setIsOpen(false) }
+    const onResize = () => { if (window.innerWidth >= 1024) setIsOpen(false) }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -53,47 +56,43 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 bg-transparent">
+      <header className="fixed inset-x-0 top-0 z-50 bg-bg/90 backdrop-blur-sm">
         <div className="container-wide">
-          <div className="flex items-center justify-between gap-3 py-3">
-            {/* parchment chip only behind the logo */}
-            <Link
-              href="/"
-              aria-label="Day One — home"
-              className="inline-flex items-center rounded-full bg-bg border border-border shadow-sm px-4 py-2 hover:opacity-90 transition-opacity duration-250"
-            >
+          <div className="flex items-center justify-between gap-6 py-4">
+            <Link href="/" aria-label={copy.nav.home} className="transition-opacity duration-250 hover:opacity-80">
               <Logo variant="primary" size="sm" showTagline={false} />
             </Link>
 
-            {/* parchment chip only behind the nav links */}
-            <nav className="hidden md:flex items-center gap-6 rounded-full bg-bg border border-border shadow-sm px-6 py-2.5" aria-label="Main">
-              {nav.slice(1).map((item) => {
-                const active = isActive(pathname, item.href)
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={active ? 'page' : undefined}
-                    className={cn(
-                      'text-[13px] font-body tracking-wide transition-colors duration-250',
-                      item.highlight
-                        ? 'text-rust font-medium hover:text-accent-dark'
-                        : active
-                          ? 'text-accent'
-                          : 'text-text-primary hover:text-accent'
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              })}
-            </nav>
+            <div className="hidden items-center gap-7 lg:flex">
+              <nav className="flex items-center gap-7" aria-label="Main">
+                {nav.map((item) => {
+                  const active = isActive(pathname, item.href)
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'font-body text-[13px] tracking-wide transition-colors duration-250',
+                        item.highlight
+                          ? 'text-rust font-medium hover:text-accent-dark'
+                          : active
+                            ? 'text-accent'
+                            : 'text-text-primary hover:text-accent'
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </nav>
+              <BookCall variant="outline" size="md" magnetic={false} />
+            </div>
 
-            {/* parchment chip behind the mobile menu button */}
             <button
-              className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-bg border border-border shadow-sm text-text-primary hover:text-accent transition-colors duration-250"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent lg:hidden"
               onClick={() => setIsOpen(true)}
-              aria-label="Open menu"
+              aria-label={copy.nav.menuOpen}
             >
               <Menu size={22} strokeWidth={1.5} />
             </button>
@@ -113,30 +112,30 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             />
             <motion.div
-              className="fixed top-0 right-0 bottom-0 z-[70] w-[82vw] max-w-[360px] bg-bg flex flex-col"
+              className="fixed bottom-0 right-0 top-0 z-[70] flex w-[82vw] max-w-[360px] flex-col bg-bg"
               variants={reduce ? undefined : drawerVariants}
               initial="closed"
               animate="open"
               exit="closed"
             >
-              <div className="flex items-center justify-between px-6 h-[72px] border-b border-border">
+              <div className="flex h-[72px] items-center justify-between border-b border-border px-6">
                 <Logo variant="primary" size="sm" showTagline={false} />
                 <button
-                  className="flex items-center justify-center w-10 h-10 -mr-2 text-text-secondary hover:text-text-primary transition-colors"
+                  className="-mr-2 flex h-10 w-10 items-center justify-center text-text-secondary transition-colors hover:text-text-primary"
                   onClick={() => setIsOpen(false)}
-                  aria-label="Close menu"
+                  aria-label={copy.nav.menuClose}
                 >
                   <X size={22} strokeWidth={1.5} />
                 </button>
               </div>
 
-              <nav className="flex flex-col px-6 py-8 gap-1" aria-label="Mobile">
+              <nav className="flex flex-col gap-1 px-6 py-8" aria-label="Mobile">
                 {nav.map((item, i) => (
                   <motion.div key={item.href} custom={i} variants={reduce ? undefined : drawerItem} initial="closed" animate="open">
                     <Link
                       href={item.href}
                       className={cn(
-                        'flex items-center py-3.5 font-display text-2xl font-light border-b border-border/60 transition-colors',
+                        'flex items-center border-b border-border/60 py-3.5 font-display text-2xl font-light transition-colors',
                         item.highlight
                           ? 'text-rust'
                           : isActive(pathname, item.href)

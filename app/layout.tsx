@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer'
 import CookieConsent from '@/components/layout/CookieConsent'
 import { JsonLd } from './jsonld'
 import { site } from '@/lib/site'
+import { copy } from '@/lib/copy'
 
 const alexBrush = Alex_Brush({
   subsets: ['latin'],
@@ -24,37 +25,36 @@ const jost = Jost({
   display: 'swap',
 })
 
-// Astrala Advisory's own brand serif — used ONLY inside the Astrala case-study
-// brand mockup so it reads as their real system, not Day One's. preload:false
-// keeps it off every other route (it's only needed on /work).
+// Cormorant Garamond: the italic emphasis line in the closing CTA band and the
+// Astrala wordmark. preload:false keeps it out of the critical path; it loads
+// when the first band using it renders (below the fold on every page).
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['500', '600'],
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
   preload: false,
 })
 
-const siteTitle = 'Day One — A technical partner that ships like a founder'
-const siteDescription =
-  'Day One builds the systems funded startups and scale-ups run on. One team, from build to scale to maintain. We stay past launch.'
+const siteTitle = copy.meta.home.title
+const siteDescription = copy.meta.home.description
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: siteTitle,
-    template: '%s — Day One',
+    template: '%s | Day One',
   },
   description: siteDescription,
   keywords: [
-    'technical partner for startups',
+    'technical partner',
+    'embedded development team',
+    'white-label development for agencies',
     'custom software development',
-    'web platforms',
-    'product engineering studio',
-    'startup development partner',
-    'scale-up engineering',
-    'Next.js development studio',
+    'construction operations software',
+    'attendance and leave platform',
+    'document signing service',
     'Cyprus software studio',
   ],
   authors: [{ name: 'Day One Web Studio', url: site.url }],
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Day One — A technical partner that ships like a founder',
+        alt: siteTitle,
       },
     ],
   },
@@ -107,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             telephone: site.phoneHref,
             address: { '@type': 'PostalAddress', addressLocality: 'Paphos', addressCountry: 'CY' },
             founder: { '@type': 'Person', name: 'Nikolaos Chatzimanolis' },
-            serviceType: ['Custom Software Development', 'Web Platforms', 'Product Engineering', 'Growth Partnership'],
+            serviceType: ['Embedded Development Teams', 'White-label Engineering', 'Custom Software Development', 'Software Products', 'Security and GDPR Review'],
           }}
         />
         <ReactiveGrid />
