@@ -41,6 +41,10 @@ export interface NavbarProps {
 }
 
 export default function Navbar({ locale, items, bookCall, labels }: NavbarProps) {
+  // Greek and Russian labels run long: keep the inline bar for 1280px and up
+  // there, 1024px and up for English.
+  const wide = locale !== 'en'
+  const desktopMin = wide ? 1280 : 1024
   const reduce = useReducedMotion()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
@@ -59,10 +63,10 @@ export default function Navbar({ locale, items, bookCall, labels }: NavbarProps)
   // The hamburger is mobile-only (desktop shows inline links). Close the
   // drawer if the viewport grows past the breakpoint while it is open.
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 1024) setIsOpen(false) }
+    const onResize = () => { if (window.innerWidth >= desktopMin) setIsOpen(false) }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [])
+  }, [desktopMin])
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -108,8 +112,8 @@ export default function Navbar({ locale, items, bookCall, labels }: NavbarProps)
               <Logo variant="primary" size="md" />
             </Link>
 
-            <div className="hidden items-center gap-8 lg:flex">
-              <nav className="flex items-center gap-8" aria-label="Main">
+            <div className={cn('hidden items-center', wide ? 'gap-6 xl:flex' : 'gap-8 lg:flex')}>
+              <nav className={cn('flex items-center', wide ? 'gap-6' : 'gap-8')} aria-label="Main">
                 {items.map((item) => {
                   const active = isActive(pathname, item.href)
                   return (
@@ -118,7 +122,7 @@ export default function Navbar({ locale, items, bookCall, labels }: NavbarProps)
                       href={item.href}
                       aria-current={active ? 'page' : undefined}
                       className={cn(
-                        'font-body text-[15px] tracking-wide transition-colors duration-250',
+                        'whitespace-nowrap font-body text-[15px] tracking-wide transition-colors duration-250',
                         active ? 'text-accent' : 'text-text-primary hover:text-accent'
                       )}
                     >
@@ -132,7 +136,7 @@ export default function Navbar({ locale, items, bookCall, labels }: NavbarProps)
             </div>
 
             <button
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent lg:hidden"
+              className={cn('inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-primary transition-colors duration-250 hover:text-accent', wide ? 'xl:hidden' : 'lg:hidden')}
               onClick={() => setIsOpen(true)}
               aria-label={labels.menuOpen}
             >
