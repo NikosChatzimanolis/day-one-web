@@ -29,9 +29,7 @@ export default function HeroCollage() {
 
         {/* phone, overlapping the panel's lower-left corner */}
         <Reveal delay={0.4} y={28} className="absolute bottom-0 left-[-6%] w-[34%]">
-          <div className="rounded-[1.7rem] outline outline-[6px] outline-bg">
-            <PhoneShot src={shots.attendanceClock} priority className="w-full" />
-          </div>
+          <PhoneShot src={shots.attendanceClock} priority className="w-full outline outline-[6px] outline-bg" />
         </Reveal>
       </Magnetic>
     </div>
