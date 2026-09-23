@@ -1,14 +1,15 @@
 // ── components/products/AppShot.tsx ──
 // Real screenshots of the products, framed to match the CSS panels. Sources
 // are demo / seed instances only (fictional data): the CY-Construction demo
-// tenant and the attendance app's seed database. Regenerate the files in
-// public/products when either UI changes.
+// tenant and the attendance app's seed database. When re-shooting, save
+// under a NEW filename (-v3, ...): next/image and the Vercel image CDN cache
+// by URL, so a changed file at the same path keeps serving the old pixels.
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export const shots = {
   cyDashboard: '/products/cy-construction-dashboard-v2.jpg',
-  attendanceClock: '/products/attendance-clock.png',
+  attendanceClock: '/products/attendance-clock-v2.png',
 } as const
 
 interface ShotProps {
