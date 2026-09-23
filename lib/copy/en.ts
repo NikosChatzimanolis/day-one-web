@@ -371,14 +371,6 @@ export const en = {
     },
   },
 
-  about: {
-    team: {
-      eyebrow: 'Team',
-      title: 'The people you will work with.',
-      founderName: '{{FOUNDER_NAME}}',
-      founderRole: 'Lead Developer',
-    },
-  },
 
   work: {
     more: {

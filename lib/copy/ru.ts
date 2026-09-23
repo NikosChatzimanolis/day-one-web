@@ -367,14 +367,6 @@ export const ru = {
     },
   },
 
-  about: {
-    team: {
-      eyebrow: 'Команда',
-      title: 'Люди, с которыми вы будете работать.',
-      founderName: '{{FOUNDER_NAME}}',
-      founderRole: 'Lead Developer',
-    },
-  },
 
   work: {
     more: {

@@ -367,14 +367,6 @@ export const el = {
     },
   },
 
-  about: {
-    team: {
-      eyebrow: 'Ομάδα',
-      title: 'Οι άνθρωποι με τους οποίους θα δουλέψετε.',
-      founderName: '{{FOUNDER_NAME}}',
-      founderRole: 'Lead Developer',
-    },
-  },
 
   work: {
     more: {
