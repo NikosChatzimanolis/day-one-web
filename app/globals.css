@@ -233,6 +233,19 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 1024px) { .container-wide { padding-inline: 3rem; } }
 @media (min-width: 1280px) { .container-wide { padding-inline: 4rem; } }
 
+/* Wider frame for the chrome and the landing hero: the header, the hero and
+   the footer sit closer to the viewport edges than the reading content, which
+   keeps its 1240px measure. */
+.container-hero {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 640px)  { .container-hero { padding-inline: 2rem; } }
+@media (min-width: 1024px) { .container-hero { padding-inline: 3rem; } }
+@media (min-width: 1280px) { .container-hero { padding-inline: 3.5rem; } }
+
 .container-narrow {
   width: 100%;
   max-width: 880px;

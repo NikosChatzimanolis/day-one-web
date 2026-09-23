@@ -57,7 +57,7 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 bg-bg/90 backdrop-blur-sm">
-        <div className="container-wide">
+        <div className="container-hero">
           <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
             <Link href="/" aria-label={copy.nav.home} className="transition-opacity duration-250 hover:opacity-80">
               <Logo variant="primary" size="md" />

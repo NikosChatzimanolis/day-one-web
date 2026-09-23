@@ -15,7 +15,7 @@ export default function HomeHero() {
   const tl = copy.cta.timeline
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="container-wide section-hero-tight">
+      <div className="container-hero section-hero-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-6">
             <p className="eyebrow mb-6">{t.eyebrow}</p>

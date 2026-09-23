@@ -18,7 +18,7 @@ export default function Footer() {
   const t = copy.footer
   return (
     <footer className="border-t border-border bg-bg" aria-label="Site footer">
-      <div className="container-wide flex flex-col gap-8 py-10 md:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+      <div className="container-hero flex flex-col gap-8 py-10 md:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <Link href="/" aria-label={copy.nav.home} className="inline-flex transition-opacity duration-250 hover:opacity-80">
           <Logo variant="primary" size="md" />
         </Link>
