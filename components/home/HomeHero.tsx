@@ -1,12 +1,13 @@
 // ── components/home/HomeHero.tsx ──
-// Editorial hero: copy on the left, the ghosted Day ONE lockup top-right and
-// the Build / Scale / Maintain timeline level with the buttons, as in the
-// reference. Rendered without an entrance animation so the h1 paints as the
-// LCP element the moment HTML arrives.
+// Editorial hero: a large two-line headline (Jost light over the Cormorant
+// italic, the same pairing as the closing band), the copy and CTAs on the
+// left, the product collage running off the right edge, and the Build /
+// Scale / Maintain timeline drawing itself on load. The h1 renders without
+// an entrance so it paints as the LCP element the moment HTML arrives.
 import Link from 'next/link'
-import Logo from '@/components/ui/Logo'
 import BookCall from '@/components/ui/BookCall'
 import Timeline from '@/components/sections/Timeline'
+import HeroCollage from '@/components/home/HeroCollage'
 import { copy } from '@/lib/copy'
 
 export default function HomeHero() {
@@ -15,14 +16,18 @@ export default function HomeHero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="container-wide section-hero-tight">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-7">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
+          <div className="lg:col-span-8">
             <p className="eyebrow mb-6">{t.eyebrow}</p>
-            <h1 className="display-balance font-display text-[clamp(2.2rem,4.3vw,3.5rem)] font-extralight leading-[1.08] tracking-[-0.01em] text-text-primary">
-              <span className="block">{t.title1}</span>
-              <span className="block">{t.title2}</span>
+            <h1 className="display-balance text-text-primary">
+              <span className="block font-display text-[clamp(2.5rem,4.4vw,4rem)] font-extralight leading-[1.06] tracking-[-0.015em]">
+                {t.title1}
+              </span>
+              <span className="mt-1 block font-cormorant text-[clamp(2.75rem,4.9vw,4.5rem)] font-normal italic leading-[1.02] tracking-[-0.01em]">
+                {t.title2}
+              </span>
             </h1>
-            <p className="measure-lg display-pretty mt-6 font-body text-base leading-relaxed text-text-secondary md:text-lg">
+            <p className="measure-lg display-pretty mt-7 font-body text-base leading-relaxed text-text-secondary md:text-lg">
               {t.sub}
             </p>
             <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
@@ -37,15 +42,15 @@ export default function HomeHero() {
             </div>
           </div>
 
-          <div className="hidden lg:col-span-5 lg:flex lg:flex-col lg:items-end lg:justify-between">
-            <div aria-hidden="true" className="origin-top-right scale-[1.2] select-none opacity-[0.09]">
-              <Logo variant="mono" size="xl" />
-            </div>
-            <Timeline labels={[tl.build, tl.scale, tl.maintain]} tone="light" className="mb-2 w-full max-w-[340px]" />
+          <div className="lg:col-span-4">
+            <HeroCollage />
           </div>
         </div>
 
-        <p className="mt-8 font-body text-sm text-text-tertiary">{t.note}</p>
+        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <p className="font-body text-sm text-text-tertiary">{t.note}</p>
+          <Timeline labels={[tl.build, tl.scale, tl.maintain]} tone="light" animate className="w-full max-w-[340px]" />
+        </div>
       </div>
     </section>
   )

@@ -1,24 +1,27 @@
 // ── components/sections/Timeline.tsx ──
 // The Build → Scale → Maintain line: three rust nodes on a hairline, labels
-// beneath. Lives in the final CTA band only (the hero no longer carries it).
-// Pure markup, no motion.
+// beneath. `animate` draws the rail and pops the nodes on mount (hero);
+// the closing band renders it settled.
 import { cn } from '@/lib/utils'
 
 interface TimelineProps {
   labels: readonly [string, string, string]
   tone?: 'light' | 'dark'
+  animate?: boolean
   className?: string
 }
 
-export default function Timeline({ labels, tone = 'dark', className }: TimelineProps) {
+const delays = ['0.25s', '0.7s', '1.15s']
+
+export default function Timeline({ labels, tone = 'dark', animate = false, className }: TimelineProps) {
   const dark = tone === 'dark'
   const align = ['items-start', 'items-center', 'items-end'] as const
   return (
-    <div className={cn('relative', className)} aria-hidden="true">
+    <div className={cn('relative', animate && 'tl-animate', className)} aria-hidden="true">
       {/* the rail, running through the centre of the nodes */}
       <span
         className={cn(
-          'absolute left-[5px] right-[5px] top-[5px] h-px',
+          'tl-line absolute left-[5px] right-[5px] top-[5px] h-px',
           dark ? 'bg-rust/60' : 'bg-rust/45'
         )}
       />
@@ -27,9 +30,10 @@ export default function Timeline({ labels, tone = 'dark', className }: TimelineP
           <span key={label} className={cn('flex flex-col gap-3', align[i])}>
             <span
               className={cn(
-                'block h-[11px] w-[11px] rounded-full border border-rust',
+                'tl-node block h-[11px] w-[11px] rounded-full border border-rust',
                 dark ? 'bg-dark' : 'bg-bg'
               )}
+              style={animate ? { animationDelay: delays[i] } : undefined}
             />
             <span
               className={cn(
