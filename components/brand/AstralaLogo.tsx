@@ -12,6 +12,10 @@ import { join } from 'node:path'
 import { cn } from '@/lib/utils'
 
 const LOGO = '/partners/astrala-logo.png'
+// Sampled from the wordmark in the logo (median of its opaque pixels), and a
+// deeper blue from the mark for light backgrounds.
+const ASTRALA_CYAN = '#42D9F9'
+const ASTRALA_BLUE = '#1A8FD9'
 
 interface AstralaLogoProps {
   tagline: string
@@ -45,10 +49,8 @@ export default function AstralaLogo({ tagline, tone = 'dark', className }: Astra
       )}
       <span aria-hidden="true" className={cn('mt-6 block h-px w-full', dark ? 'bg-dark-border' : 'bg-border')} />
       <span
-        className={cn(
-          'mt-4 text-center font-body text-[0.625rem] uppercase leading-[1.7] tracking-[0.22em]',
-          dark ? 'text-dark-text-secondary' : 'text-text-tertiary'
-        )}
+        className="mt-4 text-center font-body text-[0.625rem] uppercase leading-[1.7] tracking-[0.22em]"
+        style={{ color: dark ? ASTRALA_CYAN : ASTRALA_BLUE }}
       >
         {tagline}
       </span>
