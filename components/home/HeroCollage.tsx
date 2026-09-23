@@ -13,7 +13,7 @@ import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
 
 export default function HeroCollage() {
   return (
-    <div className="relative hidden min-h-[480px] lg:block" aria-hidden="true">
+    <div className="relative hidden min-h-[540px] lg:block" aria-hidden="true">
       {/* ghosted lockup, top-right, behind the panels */}
       <div className="absolute -top-3 right-0 origin-top-right scale-[1.15] select-none opacity-[0.55]">
         <Logo variant="primary" size="xl" />
@@ -21,14 +21,14 @@ export default function HeroCollage() {
 
       <Magnetic mode="ambient" strength={0.02} maxShift={8} className="absolute inset-0">
         {/* dashboard panel, bleeding off the right edge of the viewport */}
-        <Reveal delay={0.15} y={28} className="absolute left-[4%] top-[22%] w-[178%]">
+        <Reveal delay={0.15} y={28} className="absolute left-0 top-[16%] w-[150%]">
           <ProductFrame variant="bleed" className="aspect-[16/10]">
             <DashboardShot src={shots.cyDashboard} priority />
           </ProductFrame>
         </Reveal>
 
         {/* phone, overlapping the panel's lower-left corner */}
-        <Reveal delay={0.4} y={28} className="absolute bottom-0 left-[-6%] w-[34%]">
+        <Reveal delay={0.4} y={28} className="absolute bottom-0 left-[-8%] w-[32%]">
           <PhoneShot src={shots.attendanceClock} priority className="w-full outline outline-[6px] outline-bg" />
         </Reveal>
       </Magnetic>

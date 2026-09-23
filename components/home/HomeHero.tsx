@@ -17,13 +17,13 @@ export default function HomeHero() {
     <section className="relative overflow-hidden border-b border-border">
       <div className="container-wide section-hero-tight">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-7">
             <p className="eyebrow mb-6">{t.eyebrow}</p>
-            <h1 className="display-balance text-text-primary">
-              <span className="block font-display text-[clamp(2.5rem,4.4vw,4rem)] font-extralight leading-[1.06] tracking-[-0.015em]">
+            <h1 className="display-balance text-text-primary lg:w-[110%] lg:max-w-none">
+              <span className="block font-display text-[clamp(2.4rem,4.1vw,3.75rem)] font-extralight leading-[1.06] tracking-[-0.015em]">
                 {t.title1}
               </span>
-              <span className="mt-1 block font-cormorant text-[clamp(2.75rem,4.9vw,4.5rem)] font-normal italic leading-[1.02] tracking-[-0.01em]">
+              <span className="mt-1 block font-cormorant text-[clamp(2.6rem,4.4vw,4.05rem)] font-normal italic leading-[1.02] tracking-[-0.01em]">
                 {t.title2}
               </span>
             </h1>
@@ -43,7 +43,7 @@ export default function HomeHero() {
             <p className="mt-10 font-body text-sm text-text-tertiary">{t.note}</p>
           </div>
 
-          <div className="flex flex-col lg:col-span-4">
+          <div className="flex flex-col lg:col-span-5">
             <HeroCollage />
             <Timeline
               labels={[tl.build, tl.scale, tl.maintain]}
