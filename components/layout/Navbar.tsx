@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-bg/90 backdrop-blur-sm">
+      <header className="fixed inset-x-0 top-0 z-50 bg-bg">
         <div className="container-hero">
           <div className="flex items-center justify-between gap-6 py-5 lg:py-6">
             <Link href="/" aria-label={copy.nav.home} className="transition-opacity duration-250 hover:opacity-80">
@@ -135,7 +135,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        'flex items-center border-b border-border/60 py-3.5 font-display text-2xl font-light transition-colors',
+                        'flex items-center border-b border-border py-3.5 font-display text-2xl font-light transition-colors',
                         item.highlight
                           ? 'text-rust'
                           : isActive(pathname, item.href)
