@@ -30,11 +30,11 @@ const jost = Jost({
 // Cormorant Garamond: the hero's italic headline line and the closing band.
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  // The italic carries the hero's second headline line on every page, so it
-  // is preloaded; normal weights are only used by the Astrala wordmark
-  // fallback when the logo file is missing.
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
+  // One file only: the 400 italic carries the hero's second headline line
+  // (the mobile LCP element) and the closing band. Every extra face is bytes
+  // ahead of that paint on a slow connection.
+  weight: ['400'],
+  style: ['italic'],
   variable: '--font-cormorant',
   display: 'swap',
   preload: true,

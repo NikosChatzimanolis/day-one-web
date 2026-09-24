@@ -39,10 +39,10 @@ export default function AstralaLogo({ tagline, tone = 'dark', className }: Astra
         />
       ) : (
         <span role="img" aria-label="Astrala Advisory" className="inline-flex flex-col items-center">
-          <span className="font-cormorant text-[clamp(2.4rem,5.2vw,4.25rem)] font-normal uppercase leading-none tracking-[0.26em]">
+          <span className="font-cormorant text-[clamp(2.4rem,5.2vw,4.25rem)] font-normal italic uppercase leading-none tracking-[0.26em]">
             Astrala
           </span>
-          <span className="mt-2 font-cormorant text-[clamp(0.8rem,1.4vw,1.05rem)] font-medium uppercase leading-none tracking-[0.5em]">
+          <span className="mt-2 font-cormorant text-[clamp(0.8rem,1.4vw,1.05rem)] font-normal italic uppercase leading-none tracking-[0.5em]">
             Advisory
           </span>
         </span>
