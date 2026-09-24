@@ -21,14 +21,14 @@ export default function HeroCollage() {
 
       <Magnetic mode="ambient" strength={0.02} maxShift={8} className="absolute inset-0">
         {/* dashboard in a window, running off the right edge of the viewport */}
-        <Reveal delay={0.15} y={28} className="absolute left-[9%] top-[16%] w-[134%]">
+        <Reveal delay={0.05} y={18} className="absolute left-[9%] top-[16%] w-[134%]">
           <WindowFrame>
             <DashboardShot src={shots.cyDashboard} priority bare />
           </WindowFrame>
         </Reveal>
 
         {/* phone, fully visible, in front of the window's left edge */}
-        <Reveal delay={0.4} y={28} className="absolute bottom-[-3%] left-[-2%] w-[30%]">
+        <Reveal delay={0.18} y={18} className="absolute bottom-[-3%] left-[-2%] w-[30%]">
           <PhoneShot src={shots.attendanceClock} priority className="w-full" />
         </Reveal>
       </Magnetic>

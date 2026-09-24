@@ -11,7 +11,7 @@ interface TimelineProps {
   className?: string
 }
 
-const delays = ['0.25s', '0.7s', '1.15s']
+const delays = ['0.15s', '0.4s', '0.65s']
 
 export default function Timeline({ labels, tone = 'dark', animate = false, className }: TimelineProps) {
   const dark = tone === 'dark'

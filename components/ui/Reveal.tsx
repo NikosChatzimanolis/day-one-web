@@ -13,20 +13,21 @@ interface RevealProps {
 }
 
 /**
- * Restrained scroll-entrance. Fades and lifts once, never loops.
- * Respects prefers-reduced-motion.
+ * Restrained scroll-entrance. Fades and lifts once, never loops. Kept short
+ * (0.5s, no blur filter) so the page feels quick; blur on large images was
+ * expensive to composite and made sections feel late. Respects
+ * prefers-reduced-motion.
  */
-export default function Reveal({ children, className, delay = 0, as = 'div', y = 22 }: RevealProps) {
+export default function Reveal({ children, className, delay = 0, as = 'div', y = 14 }: RevealProps) {
   const reduce = useReducedMotion()
   const MotionTag = motion[as]
 
   const variants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : y, filter: reduce ? 'blur(0px)' : 'blur(6px)' },
+    hidden: { opacity: 0, y: reduce ? 0 : y },
     visible: {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
-      transition: { duration: 0.95, delay, ease: [0.22, 0.61, 0.36, 1] },
+      transition: { duration: 0.5, delay: Math.min(delay, 0.2), ease: [0.22, 0.61, 0.36, 1] },
     },
   }
 
@@ -36,7 +37,7 @@ export default function Reveal({ children, className, delay = 0, as = 'div', y =
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-90px' }}
+      viewport={{ once: true, margin: '-40px' }}
     >
       {children}
     </MotionTag>
@@ -47,7 +48,7 @@ export default function Reveal({ children, className, delay = 0, as = 'div', y =
 export function RevealGroup({
   children,
   className,
-  stagger = 0.1,
+  stagger = 0.06,
 }: {
   children: React.ReactNode
   className?: string
@@ -56,7 +57,7 @@ export function RevealGroup({
   const reduce = useReducedMotion()
   const variants: Variants = {
     hidden: {},
-    visible: { transition: { staggerChildren: reduce ? 0 : stagger } },
+    visible: { transition: { staggerChildren: reduce ? 0 : Math.min(stagger, 0.06) } },
   }
   return (
     <motion.div
@@ -64,7 +65,7 @@ export function RevealGroup({
       variants={variants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-90px' }}
+      viewport={{ once: true, margin: '-40px' }}
     >
       {children}
     </motion.div>
@@ -74,7 +75,7 @@ export function RevealGroup({
 export function RevealItem({
   children,
   className,
-  y = 22,
+  y = 14,
   as = 'div',
 }: {
   children: React.ReactNode
@@ -85,8 +86,8 @@ export function RevealItem({
   const reduce = useReducedMotion()
   const MotionTag = motion[as]
   const variants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : y, filter: reduce ? 'blur(0px)' : 'blur(6px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: [0.22, 0.61, 0.36, 1] } },
+    hidden: { opacity: 0, y: reduce ? 0 : y },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1] } },
   }
   return (
     <MotionTag className={className} variants={variants}>
