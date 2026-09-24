@@ -1,6 +1,6 @@
 # Changes: 2026-09 homepage and positioning redesign
 
-Branch `redesign/partner-products`, eleven commits on top of `2d7e97a`. Nothing is pushed.
+Branch `redesign/partner-products`, merged fast-forward into `main` and pushed on 2026-09-24 (`2d7e97a` → `bbfcfb0`), which deploys to production on Vercel.
 Gates: `npx tsc --noEmit` clean, `npx next build` exit 0. There is no ESLint config in this repo.
 
 ## Routes added
