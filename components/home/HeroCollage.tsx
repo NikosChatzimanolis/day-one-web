@@ -4,7 +4,10 @@
 // its lower-left corner, and the Day ONE lockup in the header colours behind. Real
 // screenshots of the products (demo / seed data), so it is the studio's own
 // material, not a stock image. Drifts a few px toward the cursor (ambient
-// magnetic) and fades up on mount; static under reduced motion.
+// magnetic) and fades up on mount; static under reduced motion. The images
+// are not marked priority: the collage is hidden below lg, so a preload would
+// cost phones bandwidth for pixels they never show; on desktop they are in
+// the first viewport and load immediately anyway.
 import Logo from '@/components/ui/Logo'
 import Magnetic from '@/components/ui/Magnetic'
 import Reveal from '@/components/ui/Reveal'
@@ -23,13 +26,13 @@ export default function HeroCollage() {
         {/* dashboard in a window, running off the right edge of the viewport */}
         <Reveal delay={0.05} y={18} className="absolute left-[9%] top-[16%] w-[134%]">
           <WindowFrame>
-            <DashboardShot src={shots.cyDashboard} priority bare />
+            <DashboardShot src={shots.cyDashboard} bare />
           </WindowFrame>
         </Reveal>
 
         {/* phone, fully visible, in front of the window's left edge */}
         <Reveal delay={0.18} y={18} className="absolute bottom-[-3%] left-[-2%] w-[30%]">
-          <PhoneShot src={shots.attendanceClock} priority className="w-full" />
+          <PhoneShot src={shots.attendanceClock} className="w-full" />
         </Reveal>
       </Magnetic>
     </div>

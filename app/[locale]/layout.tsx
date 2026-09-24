@@ -27,16 +27,17 @@ const jost = Jost({
   display: 'swap',
 })
 
-// Cormorant Garamond: the italic emphasis line in the closing CTA band and the
-// Astrala wordmark. preload:false keeps it out of the critical path; it loads
-// when the first band using it renders (below the fold on every page).
+// Cormorant Garamond: the hero's italic headline line and the closing band.
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  // The italic carries the hero's second headline line on every page, so it
+  // is preloaded; normal weights are only used by the Astrala wordmark
+  // fallback when the logo file is missing.
+  weight: ['400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
-  preload: false,
+  preload: true,
 })
 
 const keywords = [
