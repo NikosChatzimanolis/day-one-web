@@ -31,6 +31,7 @@ const config: Config = {
         'dark-raised': 'var(--color-dark-raised)',
         'dark-border': 'var(--color-dark-border)',
         'ink-hover': 'var(--color-ink-hover)',
+        steer: 'var(--color-steer)',
       },
       fontFamily: {
         serif: ['var(--font-jost)', 'system-ui', 'sans-serif'],

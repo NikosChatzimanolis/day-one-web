@@ -2,17 +2,20 @@
 // Real screenshots of the products, framed to match the CSS panels. Sources
 // are demo / seed instances only (fictional data): the CY-Construction demo
 // tenant, the attendance app's seed database and Steer's local demo
-// workspace. When re-shooting, save under a NEW filename (-v3, ...):
-// next/image and the Vercel image CDN cache by URL, so a changed file at the
-// same path keeps serving the old pixels.
+// workspace (Steer's dark theme, 1440 x 900 at 2x). When re-shooting, save
+// under a NEW filename (-v3, ...): next/image and the Vercel image CDN cache
+// by URL, so a changed file at the same path keeps serving the old pixels.
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export const shots = {
   cyDashboard: '/products/cy-construction-dashboard-v2.jpg',
   attendanceClock: '/products/attendance-clock-v2.png',
-  steerOverview: '/products/steer-overview-v1.png',
-  steerPlan: '/products/steer-plan-v1.png',
+  steerOverview: '/products/steer-overview-v2.png',
+  steerPlan: '/products/steer-plan-v2.png',
+  steerChat: '/products/steer-chat-v2.png',
+  steerCampaigns: '/products/steer-campaigns-v2.png',
+  steerLog: '/products/steer-log-v2.png',
 } as const
 
 interface ShotProps {
@@ -25,10 +28,13 @@ interface ShotProps {
 }
 
 /** Desktop app screen: fills its frame, anchored top-left so the bleed crop
- *  runs off the right and bottom. Decorative (the copy carries the meaning). */
+ *  runs off the right and bottom. Decorative (the copy carries the meaning;
+ *  the Steer tour labels its wrapper instead). Inside a Steer stage
+ *  (ProductFrame tone="steer") the card takes a dark blue edge and glow via
+ *  [data-shot] in globals.css. */
 export function DashboardShot({ src, sizes = '(min-width: 1024px) 820px, 100vw', priority = false, className, bare = false }: ShotProps) {
   return (
-    <div className={cn('relative h-full w-full overflow-hidden bg-card', !bare && 'rounded-md border border-line', className)}>
+    <div data-shot className={cn('relative h-full w-full overflow-hidden bg-card', !bare && 'rounded-md border border-line', className)}>
       <Image src={src} alt="" fill sizes={sizes} priority={priority} className="object-cover object-left-top" />
     </div>
   )

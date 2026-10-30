@@ -198,6 +198,43 @@ a { color: inherit; text-decoration: none; }
 .forge-dark .eyebrow { color: var(--color-rust); }
 
 /* ─────────────────────────────────────────
+   Steer: the one product with its own colour. Its screenshots are dark
+   (#111416, brand blue #2D5CF0), so they sit in a blue stage instead of the
+   stone panel, and the screenshot tour is a near-black band. Used only on
+   Steer surfaces; every other product keeps the house palette.
+───────────────────────────────────────── */
+:root {
+  --color-steer: #2D5CF0;
+  --color-steer-ink: #111416;
+  --color-steer-deep: #1A2A6C;
+  --color-steer-soft: #8FA9FF;
+}
+/* Pair with .section-dark (cursor + grid already treat that as dark). */
+.steer-dark { background-color: var(--color-steer-ink); }
+.steer-dark h1,
+.steer-dark h2,
+.steer-dark h3,
+.steer-dark h4 { color: #F2F4F8; }
+.steer-dark p { color: #A9B2C3; }
+.steer-dark .eyebrow { color: var(--color-steer-soft); }
+
+/* ProductFrame tone="steer": near black into deep blue, a soft blue glow
+   along the top, and a blue-edged screenshot card with its own glow. */
+.steer-stage {
+  background-color: var(--color-steer-ink);
+  background-image:
+    radial-gradient(ellipse 75% 55% at 30% 0%, rgba(45, 92, 240, 0.42), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(45, 92, 240, 0.22), transparent 70%),
+    linear-gradient(140deg, #111416 0%, #152150 58%, #1A2A6C 100%);
+  border-color: rgba(143, 169, 255, 0.22);
+}
+.steer-stage [data-shot] {
+  border-color: rgba(143, 169, 255, 0.18);
+  background-color: var(--color-steer-ink);
+  box-shadow: 0 0 0 1px rgba(45, 92, 240, 0.12), 0 24px 80px -16px rgba(45, 92, 240, 0.6);
+}
+
+/* ─────────────────────────────────────────
    Quiet animated mesh (used sparingly)
 ───────────────────────────────────────── */
 @keyframes meshDrift {
