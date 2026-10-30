@@ -8,6 +8,7 @@ import SigningMock from '@/components/products/SigningMock'
 import { getCopy, type Locale } from '@/lib/copy'
 import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
 import { pageMetadata } from '@/lib/copy/metadata'
+import { steerSignupUrl } from '@/lib/site'
 
 type PageProps = { params: Promise<{ locale: Locale }> }
 
@@ -48,6 +49,16 @@ export default async function ProductsPage({ params }: PageProps) {
             mock={<SigningMock />}
             learnMore={c.common.learnMore}
             headingLevel="h2"
+          />
+          <ProductRow
+            product={t.steer}
+            href={localeHref('/products/steer')}
+            mock={<DashboardShot src={shots.steerOverview} />}
+            learnMore={c.common.learnMore}
+            headingLevel="h2"
+            variant="bleed"
+            siteHref={steerSignupUrl}
+            siteLabel={t.common.openSteer}
           />
         </div>
       </section>
