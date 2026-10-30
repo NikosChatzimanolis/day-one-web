@@ -1,7 +1,9 @@
 // ── components/products/ProductPage.tsx ──
 // Shared layout for /products/*: split hero (copy left, mockup right), the
 // feature rows, who it is for, the demo band, and the closing CTA. Content
-// comes entirely from the copy dictionary so the three pages stay parallel.
+// comes entirely from the copy dictionary so the product pages stay parallel.
+// A product with its own site (Steer) passes siteHref + siteLabel and gets an
+// outline button to it next to each "Request a demo".
 import { Button } from '@/components/ui/Button'
 import BookCall from '@/components/ui/BookCall'
 import CtaSection from '@/components/sections/CtaSection'
@@ -10,17 +12,29 @@ import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import type { ProductCopy } from '@/lib/copy'
 import { t, localeHref } from '@/lib/copy/request'
 import { demoHref } from '@/lib/site'
+import { cn } from '@/lib/utils'
 
 interface ProductPageProps {
   product: ProductCopy
   mock: React.ReactNode
   frameVariant?: 'bleed' | 'center' | 'fill'
+  /** External site of the product (opens in a new tab). Needs siteLabel. */
+  siteHref?: string
+  siteLabel?: string
 }
 
-export default function ProductPage({ product, mock, frameVariant = 'center' }: ProductPageProps) {
+export default function ProductPage({ product, mock, frameVariant = 'center', siteHref, siteLabel }: ProductPageProps) {
   const c = t()
   const p = c.products.common
   const demo = localeHref(demoHref)
+  const siteButton =
+    siteHref && siteLabel ? (
+      <Button href={siteHref} external variant="outline" size="lg">
+        {siteLabel}
+      </Button>
+    ) : null
+  // Three pills do not fit the hero column on one line, so they may wrap.
+  const ctaRow = cn('mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center', siteButton && 'sm:flex-wrap')
   return (
     <>
       {/* ── Hero · rendered without the entrance so the h1 is the LCP ── */}
@@ -35,10 +49,11 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
                 {product.lead}
               </p>
               {product.meta && <p className="mt-6 font-body text-sm text-text-tertiary">{product.meta}</p>}
-              <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <div className={ctaRow}>
                 <Button href={demo} size="lg">
                   {p.requestDemo}
                 </Button>
+                {siteButton}
                 <BookCall variant="outline" size="lg" magnetic={false} />
               </div>
             </div>
@@ -105,10 +120,11 @@ export default function ProductPage({ product, mock, frameVariant = 'center' }: 
             <p className="eyebrow mb-7">{p.demoEyebrow}</p>
             <h2 className="t-h1 display-balance">{p.demoTitle}</h2>
             <p className="t-lead measure-lg display-pretty mt-7 text-text-secondary">{p.demoBody}</p>
-            <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <div className={ctaRow}>
               <Button href={demo} size="lg" arrow>
                 {p.requestDemo}
               </Button>
+              {siteButton}
               <BookCall variant="outline" size="lg" magnetic={false} />
             </div>
           </Reveal>

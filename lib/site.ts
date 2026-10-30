@@ -53,3 +53,8 @@ export function isContactIntent(value: unknown): value is ContactIntent {
 }
 
 export const demoHref = '/contact?intent=demo'
+
+// Steer runs on its own domain. Its product page and the products index send
+// agencies straight to the signup page next to the demo request.
+export const steerUrl = 'https://steer-dayone.com'
+export const steerSignupUrl = `${steerUrl}/signup`
