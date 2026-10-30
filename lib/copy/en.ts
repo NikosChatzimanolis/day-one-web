@@ -310,6 +310,42 @@ export const en = {
         'Account managers who want their week back',
         'Businesses that run their own Google Ads and want a second pair of eyes',
       ],
+      tour: {
+        eyebrow: 'Inside Steer',
+        title: 'What your team sees every day.',
+        steps: {
+          overview: {
+            label: 'Overview',
+            title: 'Every account at a glance',
+            body: 'Spend, conversions, cost per conversion and pacing for each project, with the client’s goals beside them.',
+            alt: 'Steer project overview: cards for spend, conversions and cost per conversion, a performance chart, the client’s goals and the campaign list.',
+          },
+          plan: {
+            label: 'Change plans',
+            title: 'Every change, with the reason',
+            body: 'What changes, why, the expected effect, and the before and after. Approve all of it, some of it, or none.',
+            alt: 'A Steer change plan waiting for approval, listing each change with its reason, the expected effect and the before and after values.',
+          },
+          chat: {
+            label: 'Ask Steer',
+            title: 'Ask about any account',
+            body: 'Ask in plain language and get the answer from the account’s own numbers, from search terms to pacing.',
+            alt: 'The Ask Steer panel open beside a project, answering a question about wasted search terms with figures from the account.',
+          },
+          campaigns: {
+            label: 'Campaigns',
+            title: 'Campaigns down to the search term',
+            body: 'Budgets, spend, conversions and cost per conversion for each campaign, ad group and keyword, with the search terms behind them.',
+            alt: 'A campaign page in Steer with budget, spend, conversions and cost per conversion, broken down by ad group, keyword and search term.',
+          },
+          log: {
+            label: 'Log',
+            title: 'Every change on record',
+            body: 'Every change Steer or your team made, with who, when and why. Any change can be rolled back for seven days.',
+            alt: 'The Steer change log, listing each change with who made it, when and why.',
+          },
+        },
+      },
     },
   },
 
