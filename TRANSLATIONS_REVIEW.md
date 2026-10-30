@@ -5,7 +5,7 @@ EN is the source. EL and RU are drafts awaiting review. Product and company name
 (Day One, CY-Construction, Astrala Advisory, Astrala Nexus, Steer, Google Ads, Meta Ads)
 stay untranslated on purpose.
 
-Keys: 243
+Keys: 265
 
 | Key | EN | EL | RU |
 |---|---|---|---|
@@ -176,6 +176,28 @@ Keys: 243
 | `products.steer.whoFor[0]` | Agencies running Google Ads for many clients from one workspace | Agencies που τρέχουν Google Ads για πολλούς πελάτες από έναν χώρο εργασίας | Агентства, которые ведут Google Ads для многих клиентов в одном рабочем пространстве |
 | `products.steer.whoFor[1]` | Account managers who want their week back | Account managers που θέλουν να πάρουν πίσω την εβδομάδα τους | Аккаунт-менеджеры, которые хотят вернуть себе свою неделю |
 | `products.steer.whoFor[2]` | Businesses that run their own Google Ads and want a second pair of eyes | Επιχειρήσεις που τρέχουν μόνες τους τα Google Ads τους και θέλουν ένα δεύτερο ζευγάρι μάτια | Компании, которые сами ведут свои Google Ads и хотят свежий взгляд со стороны |
+| `products.steer.tour.eyebrow` | Inside Steer | Μέσα στο Steer | Внутри Steer |
+| `products.steer.tour.title` | What your team sees every day. | Αυτό που βλέπει η ομάδα σας κάθε μέρα. | Что ваша команда видит каждый день. |
+| `products.steer.tour.steps.overview.label` | Overview | Επισκόπηση | Обзор |
+| `products.steer.tour.steps.overview.title` | Every account at a glance | Κάθε λογαριασμός με μια ματιά | Каждый аккаунт с первого взгляда |
+| `products.steer.tour.steps.overview.body` | Spend, conversions, cost per conversion and pacing for each project, with the client’s goals beside them. | Δαπάνη, μετατροπές, κόστος ανά μετατροπή και ρυθμός δαπάνης για κάθε project, με τους στόχους του πελάτη δίπλα τους. | Расходы, конверсии, цена конверсии и темп расходования бюджета по каждому проекту, рядом с целями клиента. |
+| `products.steer.tour.steps.overview.alt` | Steer project overview: cards for spend, conversions and cost per conversion, a performance chart, the client’s goals and the campaign list. | Επισκόπηση project στο Steer: κάρτες με δαπάνη, μετατροπές και κόστος ανά μετατροπή, γράφημα απόδοσης, οι στόχοι του πελάτη και η λίστα καμπανιών. | Обзор проекта в Steer: карточки с расходами, конверсиями и ценой конверсии, график эффективности, цели клиента и список кампаний. |
+| `products.steer.tour.steps.plan.label` | Change plans | Σχέδια αλλαγών | Планы изменений |
+| `products.steer.tour.steps.plan.title` | Every change, with the reason | Κάθε αλλαγή, με τον λόγο της | Каждое изменение с причиной |
+| `products.steer.tour.steps.plan.body` | What changes, why, the expected effect, and the before and after. Approve all of it, some of it, or none. | Τι αλλάζει, γιατί, το αναμενόμενο αποτέλεσμα, και το πριν και μετά. Εγκρίνετε όλες τις αλλαγές, μερικές ή καμία. | Что меняется, почему, ожидаемый эффект, а также состояние до и после. Одобрите всё, часть или ничего. |
+| `products.steer.tour.steps.plan.alt` | A Steer change plan waiting for approval, listing each change with its reason, the expected effect and the before and after values. | Σχέδιο αλλαγών του Steer που περιμένει έγκριση, με κάθε αλλαγή, τον λόγο της, το αναμενόμενο αποτέλεσμα και τις τιμές πριν και μετά. | План изменений в Steer, ожидающий одобрения: каждое изменение с причиной, ожидаемым эффектом и значениями до и после. |
+| `products.steer.tour.steps.chat.label` | Ask Steer | Ask Steer | Ask Steer |
+| `products.steer.tour.steps.chat.title` | Ask about any account | Ρωτήστε για οποιονδήποτε λογαριασμό | Спросите о любом аккаунте |
+| `products.steer.tour.steps.chat.body` | Ask in plain language and get the answer from the account’s own numbers, from search terms to pacing. | Ρωτάτε σε απλά λόγια και παίρνετε την απάντηση από τα νούμερα του ίδιου του λογαριασμού, από τους όρους αναζήτησης μέχρι τον ρυθμό δαπάνης. | Спрашивайте простыми словами и получайте ответ по цифрам самого аккаунта, от поисковых запросов до темпа расходования бюджета. |
+| `products.steer.tour.steps.chat.alt` | The Ask Steer panel open beside a project, answering a question about wasted search terms with figures from the account. | Το πάνελ Ask Steer ανοιχτό δίπλα σε ένα project, με απάντηση σε ερώτηση για όρους αναζήτησης που σπαταλούν προϋπολογισμό, με στοιχεία από τον λογαριασμό. | Панель Ask Steer, открытая рядом с проектом, отвечает на вопрос о поисковых запросах, которые впустую расходуют бюджет, с цифрами из аккаунта. |
+| `products.steer.tour.steps.campaigns.label` | Campaigns | Καμπάνιες | Кампании |
+| `products.steer.tour.steps.campaigns.title` | Campaigns down to the search term | Καμπάνιες μέχρι τον όρο αναζήτησης | Кампании вплоть до поискового запроса |
+| `products.steer.tour.steps.campaigns.body` | Budgets, spend, conversions and cost per conversion for each campaign, ad group and keyword, with the search terms behind them. | Προϋπολογισμοί, δαπάνη, μετατροπές και κόστος ανά μετατροπή για κάθε καμπάνια, ομάδα διαφημίσεων και λέξη-κλειδί, με τους όρους αναζήτησης πίσω τους. | Бюджеты, расходы, конверсии и цена конверсии по каждой кампании, группе объявлений и ключевому слову, вместе с поисковыми запросами за ними. |
+| `products.steer.tour.steps.campaigns.alt` | A campaign page in Steer with budget, spend, conversions and cost per conversion, broken down by ad group, keyword and search term. | Σελίδα καμπάνιας στο Steer με προϋπολογισμό, δαπάνη, μετατροπές και κόστος ανά μετατροπή, ανά ομάδα διαφημίσεων, λέξη-κλειδί και όρο αναζήτησης. | Страница кампании в Steer: бюджет, расходы, конверсии и цена конверсии по группам объявлений, ключевым словам и поисковым запросам. |
+| `products.steer.tour.steps.log.label` | Log | Ιστορικό | Журнал |
+| `products.steer.tour.steps.log.title` | Every change on record | Κάθε αλλαγή καταγεγραμμένη | Каждое изменение записано |
+| `products.steer.tour.steps.log.body` | Every change Steer or your team made, with who, when and why. Any change can be rolled back for seven days. | Κάθε αλλαγή που έκανε το Steer ή η ομάδα σας, με το ποιος, πότε και γιατί. Κάθε αλλαγή μπορεί να αναιρεθεί για επτά ημέρες. | Каждое изменение, внесённое Steer или вашей командой: кто, когда и почему. Любое изменение можно откатить в течение семи дней. |
+| `products.steer.tour.steps.log.alt` | The Steer change log, listing each change with who made it, when and why. | Το ιστορικό αλλαγών του Steer, με κάθε αλλαγή, ποιος την έκανε, πότε και γιατί. | Журнал изменений Steer: каждое изменение, кто его внёс, когда и почему. |
 | `partner.hero.eyebrow` | Partner | Συνεργασία | Партнёрство |
 | `partner.hero.title` | Your engineering team. Or the team behind yours. | Η ομάδα μηχανικών σας. Ή η ομάδα πίσω από τη δική σας. | Ваша инженерная команда. Или команда за спиной вашей. |
 | `partner.hero.lead` | Four ways to work with Day One. Pick the one that fits, or start with a call and we will tell you which one we would choose for you. | Τέσσερις τρόποι να δουλέψετε με την Day One. Διαλέξτε αυτόν που ταιριάζει, ή ξεκινήστε με μια κλήση και θα σας πούμε ποιον θα διαλέγαμε εμείς για εσάς. | Четыре формата работы с Day One. Выберите подходящий или начните со звонка, и мы скажем, какой выбрали бы для вас. |

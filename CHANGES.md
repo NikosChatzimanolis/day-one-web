@@ -2,11 +2,13 @@
 
 Branch `feature/steer-product`, not merged, built from `docs/superpowers/plans/2026-10-30-steer-product.md` with its five defaults. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0 (49 pages). `npm run lint` cannot run: Next 16 removed `next lint` and the repo has no ESLint config.
 
-- **Route** `/products/steer` (EN, EL, RU): the shared product page with the change plan screenshot in a bleed frame; in the sitemap at 0.8.
+- **Route** `/products/steer` (EN, EL, RU): the shared product page with the change plan screenshot in a bleed frame, then the screenshot tour; in the sitemap at 0.8.
 - **Open Steer**: `ProductPage`, `ProductRow` and `ProductText` take optional `siteHref` and `siteLabel`. The Steer page shows an outline pill to `steer-dayone.com/signup` beside each Request a demo; the Steer row on `/products` shows it as a second link beside Learn more. Other products render as before.
 - **Homepage**: Steer is row 3 of the products band, the mirror of row 1.
-- **Copy**: `meta.steer`, `products.steer` and `products.common.openSteer` in all three locales. No AI wording, no pricing, no client results; Meta Ads appears only as "Meta Ads next" in the meta line.
-- **Screenshots**: `public/products/steer-overview-v1.png` and `steer-plan-v1.png` are referenced from `shots` and still need to be added before the preview.
+- **Steer colour**: `ProductFrame` takes `tone?: 'default' | 'steer'` (`ProductRow` and `ProductPage` pass it through). `steer` swaps the stone panel for `.steer-stage` in `globals.css`: near black `#111416` into deep blue `#1A2A6C` with a soft `#2D5CF0` glow, and the screenshot card inside gets a blue edge and glow (`[data-shot]` on `DashboardShot`). Used for every Steer screenshot: the product page hero, the tour, the `/products` row and homepage row 3. On the Steer page `tone="steer"` also turns the What it does numbers and the Who it is for bullets Steer blue (`text-steer` / `bg-steer`, a new Tailwind colour from `--color-steer`). Other products keep `tone="default"` and render as before.
+- **Screenshot tour**: `ProductPage` takes an optional `tour` (`{ eyebrow, title, steps: { src, label, title, body, alt }[] }`), rendered by the new `components/products/ProductTour.tsx` between the hero and What it does. A full-bleed `#111416` band (`.section-dark.steer-dark`: light text, `#8FA9FF` eyebrows), then one large uncropped screenshot per step in the Steer stage, alternating right and left on desktop, text first when stacked. Each image's alt text sits on a `role="img"` wrapper because the frame is `aria-hidden`. Steer's five steps: Overview, Change plans, Ask Steer, Campaigns, Log.
+- **Copy**: `meta.steer`, `products.steer` (with `products.steer.tour`) and `products.common.openSteer` in all three locales. No AI wording, no pricing, no client results; Meta Ads appears only as "Meta Ads next" in the meta line.
+- **Screenshots**: Steer's dark theme, 2880 x 1800 PNG (1440 x 900 at 2x), from the local demo workspace (fictional clients). `shots` references `public/products/steer-overview-v2.png`, `steer-plan-v2.png`, `steer-chat-v2.png`, `steer-campaigns-v2.png` and `steer-log-v2.png`. The earlier light `steer-overview-v1.png` and `steer-plan-v1.png` are no longer referenced.
 
 # Changes: 2026-09 homepage and positioning redesign
 
