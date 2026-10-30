@@ -4,7 +4,8 @@
 // phone and the signing card side by side, then Steer as the mirror of row 1
 // (its overview bleeding on the left, the text on the right; text first when
 // stacked). All four products get the same text treatment (ProductText);
-// only the visuals take the shape their UI needs.
+// only the visuals take the shape their UI needs. Steer's dark screenshot
+// sits in its own blue stage (tone="steer").
 import Reveal from '@/components/ui/Reveal'
 import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
@@ -61,7 +62,7 @@ export default function ProductsShowcase() {
             <ProductText product={p.steer} href={localeHref('/products/steer')} learnMore={h.learnMore} />
           </Reveal>
           <Reveal delay={0.1} className="lg:order-1 lg:col-span-8">
-            <ProductFrame variant="bleed" lazy className="aspect-[4/3] md:aspect-[16/10]">
+            <ProductFrame variant="bleed" tone="steer" lazy className="aspect-[4/3] md:aspect-[16/10]">
               <DashboardShot src={shots.steerOverview} />
             </ProductFrame>
           </Reveal>

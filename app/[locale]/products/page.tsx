@@ -57,6 +57,7 @@ export default async function ProductsPage({ params }: PageProps) {
             learnMore={c.common.learnMore}
             headingLevel="h2"
             variant="bleed"
+            tone="steer"
             siteHref={steerSignupUrl}
             siteLabel={t.common.openSteer}
           />
