@@ -18,11 +18,25 @@ export default async function SteerPage({ params }: PageProps) {
   const { locale } = await params
   setRequestLocale(locale)
   const products = getCopy(locale).products
+  const { eyebrow, title, steps } = products.steer.tour
+  const tour = {
+    eyebrow,
+    title,
+    steps: [
+      { src: shots.steerOverview, ...steps.overview },
+      { src: shots.steerPlan, ...steps.plan },
+      { src: shots.steerChat, ...steps.chat },
+      { src: shots.steerCampaigns, ...steps.campaigns },
+      { src: shots.steerLog, ...steps.log },
+    ],
+  }
   return (
     <ProductPage
       product={products.steer}
       mock={<DashboardShot src={shots.steerPlan} priority />}
       frameVariant="bleed"
+      tone="steer"
+      tour={tour}
       siteHref={steerSignupUrl}
       siteLabel={products.common.openSteer}
     />

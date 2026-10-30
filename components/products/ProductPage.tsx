@@ -3,11 +3,15 @@
 // feature rows, who it is for, the demo band, and the closing CTA. Content
 // comes entirely from the copy dictionary so the product pages stay parallel.
 // A product with its own site (Steer) passes siteHref + siteLabel and gets an
-// outline button to it next to each "Request a demo".
+// outline button to it next to each "Request a demo". Steer also passes
+// tone="steer" (its coloured stage in the hero, blue feature numbers and
+// bullets) and a `tour`, a dark screenshot band between the hero and the
+// feature rows. Without them the page renders as before.
 import { Button } from '@/components/ui/Button'
 import BookCall from '@/components/ui/BookCall'
 import CtaSection from '@/components/sections/CtaSection'
-import ProductFrame from '@/components/products/ProductFrame'
+import ProductFrame, { type FrameTone } from '@/components/products/ProductFrame'
+import ProductTour, { type Tour } from '@/components/products/ProductTour'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import type { ProductCopy } from '@/lib/copy'
 import { t, localeHref } from '@/lib/copy/request'
@@ -21,9 +25,21 @@ interface ProductPageProps {
   /** External site of the product (opens in a new tab). Needs siteLabel. */
   siteHref?: string
   siteLabel?: string
+  /** Hero frame tone and the page's accent colour ("steer": Steer blue). */
+  tone?: FrameTone
+  /** Screenshot tour rendered after the hero (Steer). */
+  tour?: Tour
 }
 
-export default function ProductPage({ product, mock, frameVariant = 'center', siteHref, siteLabel }: ProductPageProps) {
+export default function ProductPage({
+  product,
+  mock,
+  frameVariant = 'center',
+  siteHref,
+  siteLabel,
+  tone = 'default',
+  tour,
+}: ProductPageProps) {
   const c = t()
   const p = c.products.common
   const demo = localeHref(demoHref)
@@ -35,6 +51,8 @@ export default function ProductPage({ product, mock, frameVariant = 'center', si
     ) : null
   // Three pills do not fit the hero column on one line, so they may wrap.
   const ctaRow = cn('mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center', siteButton && 'sm:flex-wrap')
+  const accentText = tone === 'steer' ? 'text-steer' : 'text-rust'
+  const accentBg = tone === 'steer' ? 'bg-steer' : 'bg-rust'
   return (
     <>
       {/* ── Hero · rendered without the entrance so the h1 is the LCP ── */}
@@ -58,11 +76,15 @@ export default function ProductPage({ product, mock, frameVariant = 'center', si
               </div>
             </div>
             <div className="lg:col-span-7">
-              <ProductFrame variant={frameVariant} className="aspect-[4/3] md:aspect-[3/2]">{mock}</ProductFrame>
+              <ProductFrame variant={frameVariant} tone={tone} className="aspect-[4/3] md:aspect-[3/2]">
+                {mock}
+              </ProductFrame>
             </div>
           </div>
         </div>
       </section>
+
+      {tour && <ProductTour tour={tour} />}
 
       {/* ── What it does · hairline rows ───────────────────── */}
       <section className="border-b border-border bg-bg">
@@ -78,7 +100,7 @@ export default function ProductPage({ product, mock, frameVariant = 'center', si
                   i === product.features.length - 1 ? 'border-b' : ''
                 }`}
               >
-                <span className="t-index text-rust md:col-span-1">{String(i + 1).padStart(2, '0')}</span>
+                <span className={`t-index ${accentText} md:col-span-1`}>{String(i + 1).padStart(2, '0')}</span>
                 <h2 className="t-h3 text-text-primary md:col-span-4">{f.title}</h2>
                 <p className="measure-lg font-body text-base leading-relaxed text-text-secondary md:col-span-6 md:col-start-7 md:text-lg">
                   {f.body}
@@ -104,7 +126,7 @@ export default function ProductPage({ product, mock, frameVariant = 'center', si
                     i === product.whoFor.length - 1 ? 'border-b' : ''
                   }`}
                 >
-                  <span aria-hidden="true" className="mt-[0.55rem] block h-1.5 w-1.5 shrink-0 rounded-full bg-rust" />
+                  <span aria-hidden="true" className={`mt-[0.55rem] block h-1.5 w-1.5 shrink-0 rounded-full ${accentBg}`} />
                   <p className="font-body text-lg leading-relaxed text-text-primary md:text-xl">{line}</p>
                 </RevealItem>
               ))}
