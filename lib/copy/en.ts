@@ -4,7 +4,8 @@
 // team block, Work stubs, nav, footer, CTA band). `el.ts` and `ru.ts` mirror
 // this shape exactly (`satisfies Copy`), so a missing translation is a type
 // error. Copy rules: no em-dashes, product and company names untranslated
-// (Day One, CY-Construction, Astrala Advisory, Astrala Nexus).
+// (Day One, CY-Construction, Astrala Advisory, Astrala Nexus, Steer, Google
+// Ads, Meta Ads).
 
 export const en = {
   meta: {

@@ -1,3 +1,13 @@
+# Changes: 2026-10 Steer as the fourth product
+
+Branch `feature/steer-product`, not merged, built from `docs/superpowers/plans/2026-10-30-steer-product.md` with its five defaults. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0 (49 pages). `npm run lint` cannot run: Next 16 removed `next lint` and the repo has no ESLint config.
+
+- **Route** `/products/steer` (EN, EL, RU): the shared product page with the change plan screenshot in a bleed frame; in the sitemap at 0.8.
+- **Open Steer**: `ProductPage`, `ProductRow` and `ProductText` take optional `siteHref` and `siteLabel`. The Steer page shows an outline pill to `steer-dayone.com/signup` beside each Request a demo; the Steer row on `/products` shows it as a second link beside Learn more. Other products render as before.
+- **Homepage**: Steer is row 3 of the products band, the mirror of row 1.
+- **Copy**: `meta.steer`, `products.steer` and `products.common.openSteer` in all three locales. No AI wording, no pricing, no client results; Meta Ads appears only as "Meta Ads next" in the meta line.
+- **Screenshots**: `public/products/steer-overview-v1.png` and `steer-plan-v1.png` are referenced from `shots` and still need to be added before the preview.
+
 # Changes: 2026-09 homepage and positioning redesign
 
 Branch `redesign/partner-products`, merged fast-forward into `main` and pushed on 2026-09-24 (`2d7e97a` → `bbfcfb0`), which deploys to production on Vercel.
