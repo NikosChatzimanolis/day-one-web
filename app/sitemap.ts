@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/products/construction-erp', priority: 0.8, freq: 'monthly' as const },
     { path: '/products/attendance', priority: 0.8, freq: 'monthly' as const },
     { path: '/products/document-signing', priority: 0.8, freq: 'monthly' as const },
+    { path: '/products/steer', priority: 0.8, freq: 'monthly' as const },
     { path: '/work', priority: 0.9, freq: 'monthly' as const },
     { path: '/astrala', priority: 0.8, freq: 'monthly' as const },
     { path: '/security', priority: 0.8, freq: 'monthly' as const },
