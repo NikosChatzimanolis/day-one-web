@@ -1,9 +1,10 @@
 // ── components/home/ProductsShowcase.tsx ──
 // PRODUCTS as one dense band, composed like the reference: the heading and
-// CY-Construction beside a full-bleed dashboard, then the attendance phone
-// and the signing card side by side underneath. All three products get the
-// same text treatment (ProductText); only the visuals take the shape their
-// UI needs.
+// the construction ERP beside a full-bleed dashboard, then the attendance
+// phone and the signing card side by side, then Steer as the mirror of row 1
+// (its overview bleeding on the left, the text on the right; text first when
+// stacked). All four products get the same text treatment (ProductText);
+// only the visuals take the shape their UI needs.
 import Reveal from '@/components/ui/Reveal'
 import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
@@ -51,6 +52,18 @@ export default function ProductsShowcase() {
               <SigningMock compact />
             </ProductFrame>
             <ProductText product={p.documentSigning} href={localeHref('/products/document-signing')} learnMore={h.learnMore} />
+          </Reveal>
+        </div>
+
+        {/* row 3 · Steer, mirror of row 1: overview left, text right */}
+        <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <Reveal delay={0.05} className="lg:order-2 lg:col-span-4 lg:self-end">
+            <ProductText product={p.steer} href={localeHref('/products/steer')} learnMore={h.learnMore} />
+          </Reveal>
+          <Reveal delay={0.1} className="lg:order-1 lg:col-span-8">
+            <ProductFrame variant="bleed" lazy className="aspect-[4/3] md:aspect-[16/10]">
+              <DashboardShot src={shots.steerOverview} />
+            </ProductFrame>
           </Reveal>
         </div>
       </div>
