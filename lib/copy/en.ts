@@ -38,6 +38,11 @@ export const en = {
       description:
         'Legally timestamped e-signatures, embeddable in any workflow. Generated from your templates, verified, and delivered onward.',
     },
+    steer: {
+      title: 'Steer: Google Ads operator for agencies',
+      description:
+        'Steer checks each Google Ads account you run every hour, writes up every change with its reason and the before and after, makes the changes you approve, and sends client reports with your logo.',
+    },
     astrala: {
       title: 'Astrala Advisory partnership',
       description:
@@ -170,6 +175,7 @@ export const en = {
       demoTitle: 'See it in action.',
       demoBody: 'A short walkthrough, then a plain conversation about whether it fits how you work.',
       requestDemo: 'Request a demo',
+      openSteer: 'Open Steer',
     },
     cyConstruction: {
       name: 'Construction ERP platform',
@@ -269,6 +275,39 @@ export const en = {
         'Products that need signatures inside their own flow',
         'Operations teams replacing paper and email sign-offs',
         'Businesses that need a legally timestamped record of who signed what, and when',
+      ],
+    },
+    steer: {
+      name: 'Steer',
+      tagline: 'Every Google Ads account you run, checked every hour. You approve, Steer does the work.',
+      meta: 'Google Ads · Agencies and in-house teams · Meta Ads next',
+      lead: 'Steer runs the weekly Google Ads routine for every account you manage. It reads the numbers every hour, writes up each change with its reason and the before and after, makes the changes you approve, and sends client reports on schedule.',
+      features: [
+        {
+          title: 'Every account, every hour',
+          body: 'Search terms, budgets, bids, ads and keywords, synced hourly and checked against each client’s goal.',
+        },
+        {
+          title: 'Each change, explained',
+          body: 'Every plan shows what changes, why, the expected effect, and the before and after. Any change can be rolled back for seven days.',
+        },
+        {
+          title: 'You stay in control',
+          body: 'Suggest mode holds every change for one-click approval. Autopilot runs only the categories you trust, with budget caps, quiet hours and a kill switch per client.',
+        },
+        {
+          title: 'Goals in plain language',
+          body: 'Set each client’s goal in a chat inside the project, such as “reservations under €6 each”. Steer measures every change against it.',
+        },
+        {
+          title: 'Reports that send themselves',
+          body: 'Daily, weekly and monthly client reports with your agency’s logo, as PDF and by email.',
+        },
+      ],
+      whoFor: [
+        'Agencies running Google Ads for many clients from one workspace',
+        'Account managers who want their week back',
+        'Businesses that run their own Google Ads and want a second pair of eyes',
       ],
     },
   },
