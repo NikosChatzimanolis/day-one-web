@@ -1,16 +1,15 @@
 // ── components/home/ProductsShowcase.tsx ──
 // PRODUCTS as one dense band, composed like the reference: the heading and
 // the construction ERP beside a full-bleed dashboard, then the attendance
-// phone and the signing card side by side, then Steer as the mirror of row 1
-// (its overview bleeding on the left, the text on the right; text first when
-// stacked). All four products get the same text treatment (ProductText);
-// only the visuals take the shape their UI needs. Steer's dark screenshot
-// sits in its own blue stage (tone="steer").
+// phone on the same grid (text left, phone centred in a wide panel), then
+// Steer as the mirror of row 1 (its overview bleeding on the left, the text
+// on the right; text first when stacked). All three products get the same
+// text treatment (ProductText); only the visuals take the shape their UI
+// needs. Steer's dark screenshot sits in its own blue stage (tone="steer").
 import Reveal from '@/components/ui/Reveal'
 import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
 import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
-import SigningMock from '@/components/products/SigningMock'
 import { t, localeHref } from '@/lib/copy/request'
 
 export default function ProductsShowcase() {
@@ -40,19 +39,15 @@ export default function ProductsShowcase() {
           </Reveal>
         </div>
 
-        {/* row 2 · two panels */}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <Reveal delay={0.05} className="grid items-center gap-6 sm:grid-cols-2">
-            <ProductFrame variant="center" lazy className="aspect-[5/6]">
-              <PhoneShot src={shots.attendanceClock} />
-            </ProductFrame>
+        {/* row 2 · attendance on row 1's grid: text left, phone right */}
+        <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <Reveal delay={0.05} className="lg:col-span-4 lg:self-end">
             <ProductText product={p.attendance} href={localeHref('/products/attendance')} learnMore={h.learnMore} />
           </Reveal>
-          <Reveal delay={0.1} className="grid items-center gap-6 sm:grid-cols-2">
-            <ProductFrame variant="center" lazy className="aspect-[5/6]">
-              <SigningMock compact />
+          <Reveal delay={0.1} className="lg:col-span-8">
+            <ProductFrame variant="center" lazy className="aspect-[4/3] md:aspect-[16/10]">
+              <PhoneShot src={shots.attendanceClock} />
             </ProductFrame>
-            <ProductText product={p.documentSigning} href={localeHref('/products/document-signing')} learnMore={h.learnMore} />
           </Reveal>
         </div>
 

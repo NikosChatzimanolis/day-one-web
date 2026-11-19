@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
       { source: '/:locale(el|ru)/services', destination: '/:locale/partner', permanent: true },
       { source: '/:locale(el|ru)/white-label', destination: '/:locale/partner', permanent: true },
       { source: '/:locale(el|ru)/products/cy-construction', destination: '/:locale/products/construction-erp', permanent: true },
+      // A de-listed product page sends old links to the products index.
+      // Temporary on purpose: browsers cache a permanent redirect, which
+      // would block the page when it is listed again.
+      { source: '/products/document-signing', destination: '/products', permanent: false },
+      { source: '/:locale(el|ru)/products/document-signing', destination: '/:locale/products', permanent: false },
     ]
   },
 }

@@ -47,7 +47,6 @@ const keywords = [
   'custom software development',
   'construction operations software',
   'attendance and leave platform',
-  'document signing service',
   'Cyprus software studio',
 ]
 

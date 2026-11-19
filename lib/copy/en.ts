@@ -22,7 +22,7 @@ export const en = {
     products: {
       title: 'Products',
       description:
-        'Ready software we license and support: a construction ERP platform, an attendance and leave platform, and a document signing service. Built, maintained and improved by the same team.',
+        'Ready software we license and support: a construction ERP platform, an attendance and leave platform, and Steer, a Google Ads operator for agencies. Built, maintained and improved by the same team.',
     },
     cyConstruction: {
       title: 'Construction ERP platform',
@@ -33,11 +33,6 @@ export const en = {
       title: 'Attendance and leave platform',
       description:
         'Location and office Wi-Fi validated clock-ins, leave balances and manager reports. Installs as a phone app.',
-    },
-    documentSigning: {
-      title: 'Document signing service',
-      description:
-        'Legally timestamped e-signatures, embeddable in any workflow. Generated from your templates, verified, and delivered onward.',
     },
     steer: {
       title: 'Steer: Google Ads operator for agencies',
@@ -243,39 +238,6 @@ export const en = {
         'Offices and practices with staff who work on site',
         'Managers who currently reconcile attendance by hand',
         'Teams that want a phone app without an app store rollout',
-      ],
-    },
-    documentSigning: {
-      name: 'Document signing service',
-      tagline: 'Legally timestamped e-signatures, embeddable in any workflow.',
-      meta: '',
-      lead: 'A signing service your own software calls. Documents are generated from your templates, sent for signature, verified and stored with their evidence, and passed on to the systems that need them.',
-      features: [
-        {
-          title: 'Generated from your templates',
-          body: 'Documents are rendered from your own templates with the data your system already holds.',
-        },
-        {
-          title: 'Signed in the browser',
-          body: 'Signers confirm their identity and sign in the browser. The signature is stamped onto the document itself.',
-        },
-        {
-          title: 'Timestamped and verifiable',
-          body: 'Every signed document is timestamped and checksum-verified, with the evidence kept alongside it.',
-        },
-        {
-          title: 'Embedded in your workflow',
-          body: 'An API and webhooks, so signing happens inside your product or process, not in a separate tool.',
-        },
-        {
-          title: 'Onward to your systems',
-          body: 'Signed documents flow on to the people and systems that need them.',
-        },
-      ],
-      whoFor: [
-        'Products that need signatures inside their own flow',
-        'Operations teams replacing paper and email sign-offs',
-        'Businesses that need a legally timestamped record of who signed what, and when',
       ],
     },
     steer: {
