@@ -1,3 +1,14 @@
+# Changes: 2026-11-19 document signing service de-listed
+
+The site no longer mentions the signing product anywhere, in EN, EL or RU. It is parked, not gone: the tag `signing-listed` (`9ea1ccd`) is the site as it was with the product listed, and the whole de-listing is the single commit `ed910f5`. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0, and a search of the built pages and JS for signing words (EN, EL, RU) finds nothing.
+
+- **Removed**: the `/products/document-signing` page (EN, EL, RU), `components/products/SigningMock.tsx`, its row on `/products`, its panel on the homepage products band, the sitemap entry, the `document signing service` keyword in `app/[locale]/layout.tsx`, and `meta.documentSigning` and `products.documentSigning` in `lib/copy/{en,el,ru}.ts`.
+- **Homepage band**: row 2 was the attendance and signing panels side by side. Attendance now has row 2 to itself on row 1's grid (text left, its phone centred in a wide stone panel); row 3 (Steer) is unchanged.
+- **Products meta description** (EN, EL, RU) names Steer where the signing service was (it already omitted Steer).
+- **Old links**: `/products/document-signing`, `/el/...` and `/ru/...` redirect to the products index with a temporary 307, so a permanent redirect cached in browsers cannot block the page when it comes back.
+
+**To list it again:** `git revert ed910f5` on main (brings back the page, mock, rows, sitemap, keyword and copy, and drops the redirects), then `node scripts/translations-review.mts` and restore the README line. If other work has touched the same files since, resolve the conflicts against `git show signing-listed:<path>`. The homepage band goes back to two panels in row 2, so look at it before pushing.
+
 # Changes: 2026-10 Steer as the fourth product
 
 Branch `feature/steer-product`, not merged, built from `docs/superpowers/plans/2026-10-30-steer-product.md` with its five defaults. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0 (49 pages). `npm run lint` cannot run: Next 16 removed `next lint` and the repo has no ESLint config.
