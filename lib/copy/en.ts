@@ -285,6 +285,9 @@ export const en = {
         clinic: 'Demo: clinic',
         barber: 'Demo: barber',
         note: 'Opens in a new tab and asks for the microphone. Appointments made in the demo are not real.',
+        clinicBody: 'Book a visit with a doctor, through GESY or privately.',
+        barberBody: 'Book a haircut, a beard trim or both.',
+        start: 'Start the call',
       },
       price: {
         eyebrow: 'Price',
@@ -293,6 +296,15 @@ export const en = {
         perMonth: 'a month',
         setup: 'One-off set-up: €290',
         note: 'The final price depends on how many calls the assistant answers. We tell you before we start.',
+        includesTitle: 'Included',
+        includes: [
+          'Your own assistant, set up with your hours and services',
+          'Appointments booked into your Google Calendar',
+          'Five languages, recognised from the caller’s first words',
+          'A notice for every booking and every message',
+          'A live view of your calls',
+        ],
+        cta: 'Try the demo',
       },
       steps: {
         eyebrow: 'Next steps',

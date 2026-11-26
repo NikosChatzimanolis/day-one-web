@@ -5,7 +5,7 @@ EN is the source. EL and RU are drafts awaiting review. Product and company name
 (Day One, CY-Construction, Astrala Advisory, Astrala Nexus, Steer, Google Ads, Meta Ads)
 stay untranslated on purpose.
 
-Keys: 298
+Keys: 308
 
 | Key | EN | EL | RU |
 |---|---|---|---|
@@ -166,12 +166,22 @@ Keys: 298
 | `products.phoneAssistant.demo.clinic` | Demo: clinic | Δοκιμή: ιατρείο | Демо: клиника |
 | `products.phoneAssistant.demo.barber` | Demo: barber | Δοκιμή: κουρείο | Демо: барбершоп |
 | `products.phoneAssistant.demo.note` | Opens in a new tab and asks for the microphone. Appointments made in the demo are not real. | Ανοίγει σε νέα καρτέλα και ζητά πρόσβαση στο μικρόφωνο. Τα ραντεβού της δοκιμής δεν είναι πραγματικά. | Открывается в новой вкладке и запрашивает доступ к микрофону. Записи, сделанные в демо, не настоящие. |
+| `products.phoneAssistant.demo.clinicBody` | Book a visit with a doctor, through GESY or privately. | Κλείστε επίσκεψη σε γιατρό, με ΓεΣΥ ή ιδιωτικά. | Запишитесь к врачу, по системе ГЕСИ или частно. |
+| `products.phoneAssistant.demo.barberBody` | Book a haircut, a beard trim or both. | Κλείστε κούρεμα, γένια ή και τα δύο. | Запишитесь на стрижку, бороду или и то и другое. |
+| `products.phoneAssistant.demo.start` | Start the call | Ξεκινήστε την κλήση | Начать звонок |
 | `products.phoneAssistant.price.eyebrow` | Price | Τιμή | Цена |
 | `products.phoneAssistant.price.from` | from | από | от |
 | `products.phoneAssistant.price.amount` | €99 | €99 | €99 |
 | `products.phoneAssistant.price.perMonth` | a month | τον μήνα | в месяц |
 | `products.phoneAssistant.price.setup` | One-off set-up: €290 | Εφάπαξ εγκατάσταση: €290 | Разовая настройка: €290 |
 | `products.phoneAssistant.price.note` | The final price depends on how many calls the assistant answers. We tell you before we start. | Η τελική τιμή εξαρτάται από το πόσες κλήσεις απαντά η βοηθός. Σας τη λέμε πριν ξεκινήσουμε. | Итоговая цена зависит от того, на сколько звонков отвечает ассистент. Мы называем её до начала работы. |
+| `products.phoneAssistant.price.includesTitle` | Included | Περιλαμβάνει | Входит |
+| `products.phoneAssistant.price.includes[0]` | Your own assistant, set up with your hours and services | Τη δική σας βοηθό, στημένη με τις ώρες και τις υπηρεσίες σας | Ваш собственный ассистент, настроенный под ваши часы и услуги |
+| `products.phoneAssistant.price.includes[1]` | Appointments booked into your Google Calendar | Ραντεβού απευθείας στο Google Calendar σας | Запись прямо в ваш Google Calendar |
+| `products.phoneAssistant.price.includes[2]` | Five languages, recognised from the caller’s first words | Πέντε γλώσσες, που αναγνωρίζει από τα πρώτα λόγια | Пять языков, язык определяется по первым словам |
+| `products.phoneAssistant.price.includes[3]` | A notice for every booking and every message | Ειδοποίηση για κάθε ραντεβού και κάθε μήνυμα | Уведомление о каждой записи и каждом сообщении |
+| `products.phoneAssistant.price.includes[4]` | A live view of your calls | Ζωντανή προβολή των κλήσεών σας | Просмотр звонков в реальном времени |
+| `products.phoneAssistant.price.cta` | Try the demo | Δοκιμάστε το demo | Попробовать демо |
 | `products.phoneAssistant.steps.eyebrow` | Next steps | Επόμενα βήματα | Следующие шаги |
 | `products.phoneAssistant.steps.items[0].title` | You try the demo | Δοκιμάζετε το demo | Вы пробуете демо |
 | `products.phoneAssistant.steps.items[0].body` | Two minutes, nothing to install. | Δύο λεπτά, χωρίς καμία εγκατάσταση. | Две минуты, ничего устанавливать не нужно. |
