@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- Share cards for the phone assistant. One file, four pictures:
+       #el-og  #en-og  #ru-og   1200 x 630, the picture a link unfolds into in WhatsApp, email and social
+       #el-card  #en-card       1080 x 1350, a picture to attach to a message by hand
+     Rendered to public/share/ by scripts/share-cards/render.sh (headless Chrome). Placeholder data only. -->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700&display=block" rel="stylesheet">
+<style>
+  :root { --bg:#F7F4EE; --surface:#ECE7DE; --ink:#242320; --soft:#625D55; --rust:#A64B32; --line:#D8D0C4; --cream:#F7F4EE; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:var(--bg); }
+  body { font-family:"Jost","Manrope",sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  body.greek, body.cyr { font-family:"Manrope","Jost",sans-serif; }
+
+  .logo { display:inline-flex; align-items:flex-end; line-height:1; }
+  .logo .day { font-family:"Alex Brush",cursive; color:var(--rust); font-size:calc(var(--u) * 5.2); line-height:.9; }
+  .logo .bar { width:1.5px; align-self:stretch; background:rgba(166,75,50,.3); margin:0 calc(var(--u) * .9) calc(var(--u) * .35); }
+  .logo .one { font-family:"Jost",sans-serif; font-weight:200; letter-spacing:.12em; font-size:calc(var(--u) * 2.2); padding-bottom:calc(var(--u) * .2); }
+  .logo .studio { display:block; font-family:"Jost",sans-serif; font-weight:300; letter-spacing:.25em; font-size:calc(var(--u) * .62); color:#8F8A80; margin-top:calc(var(--u) * .3); }
+
+  .eyebrow { color:var(--rust); font-weight:500; letter-spacing:.2em; text-transform:uppercase; }
+  .title { font-weight:300; letter-spacing:-.012em; line-height:1.08; text-wrap:balance; }
+  body.greek .title, body.cyr .title { font-weight:400; letter-spacing:-.02em; }
+  .sub { color:var(--soft); line-height:1.4; }
+  .pill { display:inline-flex; align-items:baseline; gap:.45em; background:var(--ink); color:var(--cream); border-radius:999px; white-space:nowrap; }
+  .pill b { font-weight:500; }
+  .domain { color:var(--soft); letter-spacing:.02em; white-space:nowrap; line-height:1.4; }
+  .domain b { display:block; color:var(--ink); font-weight:500; }
+
+  /* the phone on a live call (same drawing as the site's PhoneAssistantMock) */
+  .stage { background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .phone { --w:300px; width:var(--w); aspect-ratio:387/782; background:#242320; border-radius:calc(var(--w) * .12); padding:calc(var(--w) * .017); position:relative; flex:none; }
+  .screen { height:100%; border-radius:calc(var(--w) * .105); background:#2B2A26; color:#F7F4EE; display:flex; flex-direction:column; overflow:hidden;
+            padding:calc(var(--w) * .15) calc(var(--w) * .085) calc(var(--w) * .075); font-size:calc(var(--w) * .05); line-height:1.2; position:relative; }
+  .island { position:absolute; left:50%; top:calc(var(--w) * .035); width:27%; height:calc(var(--w) * .062); transform:translateX(-50%); border-radius:99px; background:#242320; }
+  .call { align-self:center; color:#D8D0C4; font-size:calc(var(--w) * .046); display:flex; align-items:center; gap:calc(var(--w) * .02); }
+  .call i { width:calc(var(--w) * .022); height:calc(var(--w) * .022); border-radius:50%; background:#D98A70; display:block; }
+  .num { align-self:center; font-family:"Jost",sans-serif; font-weight:300; font-size:calc(var(--w) * .105); margin-top:calc(var(--w) * .04); line-height:1; }
+  .time { align-self:center; color:#A8A198; font-size:calc(var(--w) * .048); margin-top:calc(var(--w) * .024); }
+  .bars { display:flex; align-items:center; justify-content:center; gap:calc(var(--w) * .021); height:calc(var(--w) * .3); margin-top:calc(var(--w) * .09); }
+  .bars span { display:block; width:calc(var(--w) * .023); border-radius:99px; background:#F7F4EE; opacity:.85; }
+  .bars span:nth-child(3n+2) { background:#D98A70; opacity:1; }
+  .steps { display:flex; flex-direction:column; gap:calc(var(--w) * .046); margin-top:calc(var(--w) * .1); }
+  .steps div { display:flex; align-items:center; gap:calc(var(--w) * .032); }
+  .tick { width:calc(var(--w) * .074); height:calc(var(--w) * .074); border-radius:50%; background:rgba(247,244,238,.15); flex:none; display:flex; align-items:center; justify-content:center; }
+  .tick svg { width:58%; height:58%; }
+  .booked { margin-top:auto; background:#F7F4EE; color:#242320; border-radius:calc(var(--w) * .05); padding:calc(var(--w) * .044); display:flex; align-items:center; gap:calc(var(--w) * .036); }
+  .cal { width:calc(var(--w) * .13); height:calc(var(--w) * .13); border-radius:50%; background:#A64B32; flex:none; display:flex; align-items:center; justify-content:center; }
+  .cal svg { width:54%; height:54%; }
+  .booked b { display:block; font-weight:600; font-size:calc(var(--w) * .052); line-height:1.1; }
+  .booked small { display:block; color:#625D55; font-size:calc(var(--w) * .043); line-height:1.15; margin-top:calc(var(--w) * .014); }
+
+  /* ── 1200 x 630: the link preview ── */
+  body.og { width:1200px; height:630px; overflow:hidden; --u:16px; }
+  body.og .wrap { display:grid; grid-template-columns:1fr 430px; height:100%; }
+  body.og .text { padding:52px 40px 50px 64px; display:flex; flex-direction:column; }
+  body.og .eyebrow { font-size:15px; margin-top:54px; }
+  body.og .title { font-size:57px; margin-top:16px; }
+  body.greek.og .title { font-size:47px; }
+  body.cyr.og .title { font-size:45px; }
+  body.og .sub { font-size:23px; margin-top:18px; max-width:600px; }
+  body.og .foot { margin-top:auto; display:flex; align-items:center; gap:28px; }
+  body.og .pill { font-size:22px; padding:12px 26px; }
+  body.og .domain { font-size:20px; }
+  body.og .stage { margin:28px 28px 28px 0; border-radius:26px; }
+  body.og .phone { --w:252px; }
+  body.og .points, body.og .contact { display:none; }
+
+  /* ── 1080 x 1350: the picture to attach ── */
+  body.card { width:1080px; height:1350px; overflow:hidden; --u:19px; }
+  body.card .wrap { height:100%; padding:64px 72px 60px; display:flex; flex-direction:column; }
+  body.card .text { display:contents; }
+  body.card .eyebrow { font-size:19px; margin-top:44px; }
+  body.card .title { font-size:66px; margin-top:16px; }
+  body.greek.card .title { font-size:56px; }
+  body.card .sub { display:none; }
+  body.card .mid { display:grid; grid-template-columns:392px 1fr; gap:48px; margin-top:44px; align-items:center; }
+  body.card .stage { border-radius:30px; padding:34px 0; }
+  body.card .phone { --w:300px; }
+  body.card .points { display:flex; flex-direction:column; gap:30px; font-size:28px; line-height:1.3; }
+  body.card .points div { display:grid; grid-template-columns:40px 1fr; gap:16px; align-items:start; }
+  body.card .points .tick { width:40px; height:40px; background:rgba(166,75,50,.12); margin-top:-2px; }
+  body.card .foot { margin-top:auto; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--line); padding-top:34px; }
+  body.card .pill { font-size:30px; padding:16px 34px; }
+  body.card .domain { font-size:25px; text-align:right; line-height:1.45; }
+  body.card .setup { color:var(--soft); font-size:23px; margin-top:16px; }
+  body.og .setup { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="text">
+    <span class="logo"><span class="day">Day</span><span class="bar"></span><span><span class="one">ONE</span><span class="studio">WEB STUDIO</span></span></span>
+    <p class="eyebrow" data-t="eyebrow"></p>
+    <h1 class="title" data-t="title"></h1>
+    <p class="sub" data-t="sub"></p>
+    <div class="mid og-skip">
+      <div class="stage" id="stage"></div>
+      <div class="points" id="points"></div>
+    </div>
+    <div class="foot">
+      <div><span class="pill"><span data-t="from"></span> <b>€99</b> <span data-t="per"></span></span><p class="setup" data-t="setup"></p></div>
+      <p class="domain"><b data-t="cta"></b>dayone-web.com</p>
+    </div>
+  </div>
+  <div class="stage og-only" id="stage-og"></div>
+</div>
+<script>
+const T = {
+  el: { eyebrow:"Ψηφιακή βοηθός τηλεφώνου", title:"Απαντά στο τηλέφωνο όταν εσείς δεν μπορείτε.", sub:"Κλείνει το ραντεβού στο ημερολόγιό σας και σας ενημερώνει αμέσως.",
+        from:"από", per:"τον μήνα", setup:"Εφάπαξ εγκατάσταση €290", cta:"Δοκιμάστε τη σε 2 λεπτά",
+        call:"Κλήση σε εξέλιξη", steps:["Θέλει ραντεβού","Πρότεινε 9:00 ή 10:20","Κλείστηκε Παρασκευή 10:20"], when:"Παρ 27 Νοε · 10:20", who:"Άννα, στο ημερολόγιό σας",
+        points:["Απαντά στις κλήσεις που δεν προλαβαίνετε, όλο το εικοσιτετράωρο","Κλείνει το ραντεβού απευθείας στο ημερολόγιό σας","Μιλά ελληνικά, αγγλικά, ρωσικά, γερμανικά και ουγγρικά","Σας ενημερώνει αμέσως για κάθε κλήση"] },
+  en: { eyebrow:"Phone assistant", title:"It answers the phone when you can’t.", sub:"It books the appointment in your calendar and tells you straight away.",
+        from:"from", per:"a month", setup:"One-off set-up €290", cta:"Try it in 2 minutes",
+        call:"Call in progress", steps:["Wants an appointment","Offered 9:00 or 10:20","Booked Friday 10:20"], when:"Fri 27 Nov · 10:20", who:"Anna, in your calendar",
+        points:["Answers the calls you can’t take, at any hour","Books the appointment straight into your calendar","Speaks Greek, English, Russian, German and Hungarian","Tells you at once about every call"] },
+  ru: { eyebrow:"Телефонный ассистент", title:"Отвечает на звонок, когда вы не можете.", sub:"Записывает клиента в ваш календарь и сразу сообщает вам.",
+        from:"от", per:"в месяц", setup:"Разовая настройка €290", cta:"Попробуйте за 2 минуты",
+        call:"Идёт звонок", steps:["Хочет записаться","Предложено 9:00 или 10:20","Записан на пятницу, 10:20"], when:"Пт 27 ноя · 10:20", who:"Анна, в вашем календаре",
+        points:[] },
+};
+const [lang, format] = (location.hash.slice(1) || "el-og").split("-");
+const t = T[lang];
+document.body.className = format + (lang === "el" ? " greek" : lang === "ru" ? " cyr" : "");
+document.documentElement.lang = lang;
+for (const n of document.querySelectorAll("[data-t]")) n.textContent = t[n.dataset.t] + (n.dataset.t === "cta" ? "" : "");
+const tick = '<svg viewBox="0 0 24 24" fill="none" stroke="#D98A70" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const heights = [26,44,34,62,48,80,58,100,70,90,54,76,42,58,30];
+const phone = `<div class="phone"><div class="screen"><span class="island"></span>
+  <span class="call"><i></i>${t.call}</span><span class="num">99 12 34 56</span><span class="time">0:42</span>
+  <div class="bars">${heights.map(h => `<span style="height:${h}%"></span>`).join("")}</div>
+  <div class="steps">${t.steps.map(s => `<div><span class="tick">${tick}</span>${s}</div>`).join("")}</div>
+  <div class="booked"><span class="cal"><svg viewBox="0 0 24 24" fill="none" stroke="#F7F4EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17M9 15l2.2 2.2L15.5 13"/></svg></span>
+  <span><b>${t.when}</b><small>${t.who}</small></span></div></div></div>`;
+if (format === "og") { document.getElementById("stage-og").innerHTML = phone; document.querySelector(".og-skip").remove(); }
+else { document.getElementById("stage").innerHTML = phone; document.querySelector(".og-only").remove();
+  document.getElementById("points").innerHTML = t.points.map(p => `<div><span class="tick">${tick.replace("#D98A70", "#A64B32")}</span><span>${p}</span></div>`).join(""); }
+</script>
+</body>
+</html>
