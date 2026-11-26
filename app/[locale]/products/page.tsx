@@ -4,10 +4,11 @@ import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import ProductRow from '@/components/products/ProductRow'
 import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
+import PhoneAssistantMock from '@/components/products/PhoneAssistantMock'
 import { getCopy, type Locale } from '@/lib/copy'
 import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
 import { pageMetadata } from '@/lib/copy/metadata'
-import { steerSignupUrl } from '@/lib/site'
+import { assistantDemos, steerSignupUrl } from '@/lib/site'
 
 type PageProps = { params: Promise<{ locale: Locale }> }
 
@@ -52,6 +53,15 @@ export default async function ProductsPage({ params }: PageProps) {
             tone="steer"
             siteHref={steerSignupUrl}
             siteLabel={t.common.openSteer}
+          />
+          <ProductRow
+            product={t.phoneAssistant}
+            href={localeHref('/products/phone-assistant')}
+            mock={<PhoneAssistantMock />}
+            learnMore={c.common.learnMore}
+            headingLevel="h2"
+            siteHref={assistantDemos.clinic}
+            siteLabel={t.common.tryDemo}
           />
         </div>
       </section>

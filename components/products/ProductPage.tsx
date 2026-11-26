@@ -6,7 +6,9 @@
 // outline button to it next to each "Request a demo". Steer also passes
 // tone="steer" (its coloured stage in the hero, blue feature numbers and
 // bullets) and a `tour`, a dark screenshot band between the hero and the
-// feature rows. Without them the page renders as before.
+// feature rows. Without them the page renders as before. The phone
+// assistant passes `extra`: its own bands (demos, price, steps, questions)
+// between "who it is for" and the demo band, and an in-page siteHref.
 import { Button } from '@/components/ui/Button'
 import BookCall from '@/components/ui/BookCall'
 import CtaSection from '@/components/sections/CtaSection'
@@ -29,6 +31,8 @@ interface ProductPageProps {
   tone?: FrameTone
   /** Screenshot tour rendered after the hero (Steer). */
   tour?: Tour
+  /** Product-specific bands rendered before the demo band (phone assistant). */
+  extra?: React.ReactNode
 }
 
 export default function ProductPage({
@@ -39,13 +43,14 @@ export default function ProductPage({
   siteLabel,
   tone = 'default',
   tour,
+  extra,
 }: ProductPageProps) {
   const c = t()
   const p = c.products.common
   const demo = localeHref(demoHref)
   const siteButton =
     siteHref && siteLabel ? (
-      <Button href={siteHref} external variant="outline" size="lg">
+      <Button href={siteHref} external={!siteHref.startsWith('#')} variant="outline" size="lg">
         {siteLabel}
       </Button>
     ) : null
@@ -134,6 +139,8 @@ export default function ProductPage({
           </div>
         </div>
       </section>
+
+      {extra}
 
       {/* ── Demo band ─────────────────────────────────────── */}
       <section className="border-b border-border bg-bg">

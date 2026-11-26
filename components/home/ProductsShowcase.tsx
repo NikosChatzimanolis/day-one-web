@@ -6,10 +6,13 @@
 // on the right; text first when stacked). All three products get the same
 // text treatment (ProductText); only the visuals take the shape their UI
 // needs. Steer's dark screenshot sits in its own blue stage (tone="steer").
+// Row 4 is the phone assistant on row 2's grid (text left, its phone mock
+// centred in the stone panel).
 import Reveal from '@/components/ui/Reveal'
 import ProductFrame from '@/components/products/ProductFrame'
 import ProductText from '@/components/products/ProductText'
 import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
+import PhoneAssistantMock from '@/components/products/PhoneAssistantMock'
 import { t, localeHref } from '@/lib/copy/request'
 
 export default function ProductsShowcase() {
@@ -59,6 +62,18 @@ export default function ProductsShowcase() {
           <Reveal delay={0.1} className="lg:order-1 lg:col-span-8">
             <ProductFrame variant="bleed" tone="steer" lazy className="aspect-[4/3] md:aspect-[16/10]">
               <DashboardShot src={shots.steerOverview} />
+            </ProductFrame>
+          </Reveal>
+        </div>
+
+        {/* row 4 · phone assistant on row 2's grid: text left, phone right */}
+        <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <Reveal delay={0.05} className="lg:col-span-4 lg:self-end">
+            <ProductText product={p.phoneAssistant} href={localeHref('/products/phone-assistant')} learnMore={h.learnMore} />
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-8">
+            <ProductFrame variant="center" lazy className="aspect-[4/3] md:aspect-[16/10]">
+              <PhoneAssistantMock />
             </ProductFrame>
           </Reveal>
         </div>

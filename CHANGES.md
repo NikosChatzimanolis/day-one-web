@@ -1,3 +1,16 @@
+# Changes: 2026-11-26 phone assistant as a product
+
+Branch `feature/phone-assistant`, built on `delist/document-signing` (so merging it also publishes the signing de-list). Not merged. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.
+
+- **New page** `/products/phone-assistant` (EN, EL, RU) on the shared `ProductPage`, with a CSS phone mock of a live call (`PhoneAssistantMock`, placeholder data) and its own bands from `PhoneAssistantExtras`: the two demos, the price beside the next steps, and the common questions.
+- **`ProductPage`** takes an optional `extra` (bands rendered before the demo band). A `siteHref` that starts with `#` is an in-page link, so the hero's "Try the demo" jumps to the demos.
+- **Demos** open on `https://assistant.dayone-web.com` (the assistant's own app, a second Vercel project under this domain). The two links are in `lib/site.ts` (`assistantDemos`).
+- **Price** on the page: from €99 a month, one-off set-up €290 (`products.phoneAssistant.price` in the three copy files).
+- **Listed** as the fourth row on `/products` (with a "Try the demo" link) and as row 4 of the homepage products band, on row 2's grid. Sitemap entry at priority 0.8. The products meta description names it.
+- **Wording**: "digital assistant" throughout, in line with the site rule. Russian and Greek written alongside English; `TRANSLATIONS_REVIEW.md` regenerated.
+
+**Open:** no native review of the Russian; the mock is English on every locale like the other mocks; the page says callers keep their own number, which depends on call forwarding that has not been tested on a live line yet.
+
 # Changes: 2026-11-19 document signing service de-listed
 
 The site no longer mentions the signing product anywhere, in EN, EL or RU. It is parked, not gone: the tag `signing-listed` (`9ea1ccd`) is the site as it was with the product listed, and the whole de-listing is the single commit `ed910f5`. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0, and a search of the built pages and JS for signing words (EN, EL, RU) finds nothing.

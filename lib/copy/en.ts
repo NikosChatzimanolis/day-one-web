@@ -22,7 +22,7 @@ export const en = {
     products: {
       title: 'Products',
       description:
-        'Ready software we license and support: a construction ERP platform, an attendance and leave platform, and Steer, a Google Ads operator for agencies. Built, maintained and improved by the same team.',
+        'Ready software we license and support: a construction ERP platform, an attendance and leave platform, Steer, a Google Ads operator for agencies, and a phone assistant that books appointments. Built, maintained and improved by the same team.',
     },
     cyConstruction: {
       title: 'Construction ERP platform',
@@ -33,6 +33,11 @@ export const en = {
       title: 'Attendance and leave platform',
       description:
         'Location and office Wi-Fi validated clock-ins, leave balances and manager reports. Installs as a phone app.',
+    },
+    phoneAssistant: {
+      title: 'Phone assistant: answers calls and books appointments',
+      description:
+        'A digital assistant that answers the phone when you can’t, books appointments into your calendar in five languages and tells you straight away. Try the demo in two minutes.',
     },
     steer: {
       title: 'Steer: Google Ads operator for agencies',
@@ -172,6 +177,7 @@ export const en = {
       demoBody: 'A short walkthrough, then a plain conversation about whether it fits how you work.',
       requestDemo: 'Request a demo',
       openSteer: 'Open Steer',
+      tryDemo: 'Try the demo',
     },
     cyConstruction: {
       name: 'Construction ERP platform',
@@ -239,6 +245,74 @@ export const en = {
         'Managers who currently reconcile attendance by hand',
         'Teams that want a phone app without an app store rollout',
       ],
+    },
+    phoneAssistant: {
+      name: 'Phone assistant',
+      tagline: 'It answers the phone when you can’t, and books the appointment.',
+      meta: 'Greek, English, Russian, German, Hungarian · Books into Google Calendar',
+      lead: 'A digital assistant for clinics, barbers and any business that runs on appointments. It talks to the caller, offers free times, books the appointment in your calendar and tells you straight away.',
+      features: [
+        {
+          title: 'Answers when you can’t',
+          body: 'Calls you miss while you are with a customer, or after hours, are answered at any hour.',
+        },
+        {
+          title: 'Books into your calendar',
+          body: 'It offers only times that are free in your Google Calendar, reads the booking back to the caller and saves it.',
+        },
+        {
+          title: 'Speaks the caller’s language',
+          body: 'Greek, English, Russian, German and Hungarian. It works out the language from the caller’s first words and carries on in it.',
+        },
+        {
+          title: 'You know at once',
+          body: 'A notice for every booking and every message a caller leaves, and a live view of each call as it happens.',
+        },
+        {
+          title: 'Careful where it matters',
+          body: 'It never pretends to be a person and never gives advice. Urgent calls are flagged to you immediately.',
+        },
+      ],
+      whoFor: [
+        'Clinics and practices that miss calls while with a patient',
+        'Barbers, salons and studios that work by appointment',
+        'Any small business where the phone rings while hands are busy',
+      ],
+      demo: {
+        eyebrow: 'Try it',
+        title: 'Talk to it now.',
+        body: 'Two minutes, from your phone or computer. Speak as a customer who is calling.',
+        clinic: 'Demo: clinic',
+        barber: 'Demo: barber',
+        note: 'Opens in a new tab and asks for the microphone. Appointments made in the demo are not real.',
+      },
+      price: {
+        eyebrow: 'Price',
+        from: 'from',
+        amount: '€99',
+        perMonth: 'a month',
+        setup: 'One-off set-up: €290',
+        note: 'The final price depends on how many calls the assistant answers. We tell you before we start.',
+      },
+      steps: {
+        eyebrow: 'Next steps',
+        items: [
+          { title: 'You try the demo', body: 'Two minutes, nothing to install.' },
+          { title: 'We talk for ten minutes', body: 'You tell us how your phone works today and what you want the assistant to do.' },
+          { title: 'We set it up for you', body: 'With your hours, your services and the way you want it to speak.' },
+          { title: 'It starts answering', body: 'And you can see every call whenever you like.' },
+        ],
+      },
+      faq: {
+        eyebrow: 'Common questions',
+        items: [
+          { q: 'Do I change my phone number?', a: 'No. Your customers call the same number as always.' },
+          { q: 'What if I want to answer myself?', a: 'Your phone rings first. The assistant answers only when you don’t pick up.' },
+          { q: 'What if it doesn’t understand the caller?', a: 'It takes their name and number and leaves you a message so you can call them back.' },
+          { q: 'Does it pretend to be a person?', a: 'Never. If asked, it says it is a digital assistant.' },
+          { q: 'Does it give patients advice?', a: 'No. It gives no medical information, and in an emergency it points the caller to 112.' },
+        ],
+      },
     },
     steer: {
       name: 'Steer',

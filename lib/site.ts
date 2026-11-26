@@ -58,3 +58,12 @@ export const demoHref = '/contact?intent=demo'
 // agencies straight to the signup page next to the demo request.
 export const steerUrl = 'https://steer-dayone.com'
 export const steerSignupUrl = `${steerUrl}/signup`
+
+// The phone assistant runs on its own address under the Day One domain. Its
+// product page opens the two demo calls there (the codes are public demo
+// link codes, not secrets).
+export const assistantUrl = 'https://assistant.dayone-web.com'
+export const assistantDemos = {
+  clinic: `${assistantUrl}/call?p=doctor&k=58902235643e5f0630ea`,
+  barber: `${assistantUrl}/call?p=barber&k=13c5f789346a52e03cfc`,
+} as const
