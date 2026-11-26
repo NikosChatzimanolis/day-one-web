@@ -5,7 +5,7 @@ EN is the source. EL and RU are drafts awaiting review. Product and company name
 (Day One, CY-Construction, Astrala Advisory, Astrala Nexus, Steer, Google Ads, Meta Ads)
 stay untranslated on purpose.
 
-Keys: 308
+Keys: 318
 
 | Key | EN | EL | RU |
 |---|---|---|---|
@@ -160,6 +160,16 @@ Keys: 308
 | `products.phoneAssistant.whoFor[0]` | Clinics and practices that miss calls while with a patient | Ιατρεία που χάνουν κλήσεις όσο εξετάζουν ασθενή | Клиники и кабинеты, где звонки теряются во время приёма |
 | `products.phoneAssistant.whoFor[1]` | Barbers, salons and studios that work by appointment | Κουρεία, κομμωτήρια και studios που δουλεύουν με ραντεβού | Барбершопы, салоны и студии, работающие по записи |
 | `products.phoneAssistant.whoFor[2]` | Any small business where the phone rings while hands are busy | Κάθε μικρή επιχείρηση όπου το τηλέφωνο χτυπά με τα χέρια απασχολημένα | Любой малый бизнес, где телефон звонит, когда руки заняты |
+| `products.phoneAssistant.hero.badge` | Answering calls at any hour | Απαντά όλο το εικοσιτετράωρο | Отвечает в любое время суток |
+| `products.phoneAssistant.hero.line1` | It answers the phone | Απαντά στο τηλέφωνο | Отвечает на звонок, |
+| `products.phoneAssistant.hero.line2` | when you can’t. | όταν εσείς δεν μπορείτε. | когда вы не можете. |
+| `products.phoneAssistant.hero.lead` | It talks to the caller, finds a free time and books the appointment in your calendar. You get a notice the moment it is done. | Μιλά με τον πελάτη, βρίσκει ελεύθερη ώρα και κλείνει το ραντεβού στο ημερολόγιό σας. Εσείς ενημερώνεστε τη στιγμή που γίνεται. | Говорит с позвонившим, находит свободное время и вносит запись в ваш календарь. Вы получаете уведомление в тот же момент. |
+| `products.phoneAssistant.hero.speaks` | Speaks | Μιλά | Говорит |
+| `products.phoneAssistant.hero.langs[0]` | Greek | Ελληνικά | Греческий |
+| `products.phoneAssistant.hero.langs[1]` | English | Αγγλικά | Английский |
+| `products.phoneAssistant.hero.langs[2]` | Russian | Ρωσικά | Русский |
+| `products.phoneAssistant.hero.langs[3]` | German | Γερμανικά | Немецкий |
+| `products.phoneAssistant.hero.langs[4]` | Hungarian | Ουγγρικά | Венгерский |
 | `products.phoneAssistant.demo.eyebrow` | Try it | Δοκιμάστε τη | Попробуйте |
 | `products.phoneAssistant.demo.title` | Talk to it now. | Μιλήστε της τώρα. | Поговорите с ним сейчас. |
 | `products.phoneAssistant.demo.body` | Two minutes, from your phone or computer. Speak as a customer who is calling. | Δύο λεπτά, από το κινητό ή τον υπολογιστή σας. Μιλήστε σαν πελάτης που καλεί. | Две минуты, с телефона или компьютера. Говорите как клиент, который звонит. |

@@ -33,6 +33,8 @@ interface ProductPageProps {
   tour?: Tour
   /** Product-specific bands rendered before the demo band (phone assistant). */
   extra?: React.ReactNode
+  /** The hero's text column, when a product writes its own (phone assistant). */
+  hero?: React.ReactNode
 }
 
 export default function ProductPage({
@@ -44,6 +46,7 @@ export default function ProductPage({
   tone = 'default',
   tour,
   extra,
+  hero,
 }: ProductPageProps) {
   const c = t()
   const p = c.products.common
@@ -65,20 +68,24 @@ export default function ProductPage({
         <div className="container-wide section-hero">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-10">
             <div className="lg:col-span-5">
-              <p className="eyebrow mb-7">{c.nav.products}</p>
-              <h1 className="t-h1 display-balance">{product.name}</h1>
-              <p className="t-lead display-pretty mt-7 text-text-primary">{product.tagline}</p>
-              <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed text-text-secondary md:text-lg">
-                {product.lead}
-              </p>
-              {product.meta && <p className="mt-6 font-body text-sm text-text-tertiary">{product.meta}</p>}
-              <div className={ctaRow}>
-                <Button href={demo} size="lg">
-                  {p.requestDemo}
-                </Button>
-                {siteButton}
-                <BookCall variant="outline" size="lg" magnetic={false} />
-              </div>
+              {hero ?? (
+                <>
+                  <p className="eyebrow mb-7">{c.nav.products}</p>
+                  <h1 className="t-h1 display-balance">{product.name}</h1>
+                  <p className="t-lead display-pretty mt-7 text-text-primary">{product.tagline}</p>
+                  <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed text-text-secondary md:text-lg">
+                    {product.lead}
+                  </p>
+                  {product.meta && <p className="mt-6 font-body text-sm text-text-tertiary">{product.meta}</p>}
+                  <div className={ctaRow}>
+                    <Button href={demo} size="lg">
+                      {p.requestDemo}
+                    </Button>
+                    {siteButton}
+                    <BookCall variant="outline" size="lg" magnetic={false} />
+                  </div>
+                </>
+              )}
             </div>
             <div className="lg:col-span-7">
               <ProductFrame variant={frameVariant} tone={tone} className="aspect-[4/3] md:aspect-[3/2]">

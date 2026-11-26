@@ -1,7 +1,8 @@
 // ── app/products/phone-assistant/page.tsx ──
 import type { Metadata } from 'next'
 import ProductPage from '@/components/products/ProductPage'
-import PhoneAssistantMock from '@/components/products/PhoneAssistantMock'
+import PhoneAssistantHero from '@/components/products/PhoneAssistantHero'
+import PhoneAssistantStage from '@/components/products/PhoneAssistantStage'
 import PhoneAssistantExtras from '@/components/products/PhoneAssistantExtras'
 import { getCopy, localizePath, type Locale } from '@/lib/copy'
 import { setRequestLocale } from '@/lib/copy/request'
@@ -42,7 +43,9 @@ export default async function PhoneAssistantPage({ params }: PageProps) {
   return (
     <ProductPage
       product={products.phoneAssistant}
-      mock={<PhoneAssistantMock />}
+      hero={<PhoneAssistantHero />}
+      mock={<PhoneAssistantStage />}
+      frameVariant="fill"
       siteHref="#demo"
       siteLabel={products.common.tryDemo}
       extra={<PhoneAssistantExtras />}

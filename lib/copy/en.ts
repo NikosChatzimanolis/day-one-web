@@ -278,6 +278,14 @@ export const en = {
         'Barbers, salons and studios that work by appointment',
         'Any small business where the phone rings while hands are busy',
       ],
+      hero: {
+        badge: 'Answering calls at any hour',
+        line1: 'It answers the phone',
+        line2: 'when you can’t.',
+        lead: 'It talks to the caller, finds a free time and books the appointment in your calendar. You get a notice the moment it is done.',
+        speaks: 'Speaks',
+        langs: ['Greek', 'English', 'Russian', 'German', 'Hungarian'],
+      },
       demo: {
         eyebrow: 'Try it',
         title: 'Talk to it now.',
