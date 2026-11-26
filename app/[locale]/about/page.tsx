@@ -4,6 +4,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import { Button } from '@/components/ui/Button'
 import CtaSection from '@/components/sections/CtaSection'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import TextReveal from '@/components/ui/TextReveal'
@@ -97,6 +98,16 @@ export default async function AboutPage({ params }: PageProps) {
               hit the same problems our clients hit, and we solve them for ourselves first.
             </p>
           </Reveal>
+          <Reveal delay={0.14}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href={localeHref('/forge')} size="lg" arrow>
+                See Forge
+              </Button>
+              <Button href={localeHref('/products')} variant="outline" size="lg">
+                All products
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -115,12 +126,16 @@ export default async function AboutPage({ params }: PageProps) {
 
             <RevealGroup className="lg:col-span-7 lg:col-start-6 flex flex-col" stagger={0.1}>
               {principles.map((p, i) => (
-                <RevealItem
-                  key={p.title}
-                  className={`py-8 md:py-10 border-t border-dark-border ${i === principles.length - 1 ? 'border-b' : ''}`}
-                >
-                  <h3 className="t-h3 text-dark-text mb-3">{p.title}</h3>
-                  <p className="font-body text-base md:text-lg text-dark-text-secondary leading-relaxed measure-lg">{p.body}</p>
+                <RevealItem key={p.title} className="mb-4 last:mb-0">
+                  <div className="grid grid-cols-[2.75rem_1fr] gap-x-5 rounded-2xl border border-dark-border bg-dark-raised p-7 md:p-8">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-rust font-display text-lg tabular-nums text-rust">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="t-h3 text-dark-text mb-3">{p.title}</h3>
+                      <p className="font-body text-base md:text-lg text-dark-text-secondary leading-relaxed measure-lg">{p.body}</p>
+                    </div>
+                  </div>
                 </RevealItem>
               ))}
 

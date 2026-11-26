@@ -1,3 +1,13 @@
+# Changes: 2026-11-26 Partner, Work and About with cards, paths and buttons
+
+On Nico's word, the same treatment the phone assistant page got. Copy unchanged. Live on main. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.
+
+- **Inner-page hero** (`PageHero`): a plain-text title with two parts is set like the homepage headline, the first part in Jost and the second in the rust Cormorant italic ("Real systems. / Live and in use."). One-part titles are unchanged.
+- **Partner**: the four models are cards with an icon each; "How an engagement starts" is a numbered path; the stack chips are filled and in full ink.
+- **Work**: the three Forge case blocks are cards; Forge's meta line is chips; each delivered build's measured result sits in a rust-edged callout; "View live" is a button.
+- **About**: the three principles are numbered cards on the dark band; "Our own products" ends with buttons to Forge and to all products.
+- **Share cards**: a Russian portrait card (`public/share/phone-assistant-ru-card-v1.jpg`).
+
 # Changes: 2026-11-26 text that reads, product chips and buttons, a designed topic picker
 
 On Nico's word (the thin grey text was hard to see, the product blocks read flat, the contact form opened the system menu). Live on main. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.

@@ -7,11 +7,16 @@ import PageHero from '@/components/sections/PageHero'
 import CtaSection from '@/components/sections/CtaSection'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import BookCall from '@/components/ui/BookCall'
+import { Handshake, Layers, Repeat, Users } from 'lucide-react'
 import { getCopy, type Locale } from '@/lib/copy'
 import { setRequestLocale, t, localeHref } from '@/lib/copy/request'
 import { pageMetadata } from '@/lib/copy/metadata'
 
 type PageProps = { params: Promise<{ locale: Locale }> }
+
+// One icon per partnership model, in the order of the copy: embedded teams,
+// white-label engineering, referral and revenue share, monthly retainers.
+const modelIcons = [Users, Layers, Handshake, Repeat]
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params
@@ -31,21 +36,25 @@ export default async function PartnerPage({ params }: PageProps) {
           <Reveal>
             <p className="eyebrow mb-12">{t.modelsEyebrow}</p>
           </Reveal>
-          <RevealGroup
-            className="grid border-t border-border sm:grid-cols-2 lg:grid-cols-4"
-            stagger={0.08}
-          >
-            {t.models.map((m, i) => (
-              <RevealItem
-                key={m.title}
-                className="border-b border-border py-9 sm:pr-8 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
-              >
-                <span className="t-index text-rust">{String(i + 1).padStart(2, '0')}</span>
-                <h2 className="t-h3 mt-5 text-text-primary">{m.title}</h2>
-                <p className="mt-4 font-body text-base leading-relaxed text-text-primary">{m.line1}</p>
-                <p className="mt-3 font-body text-base leading-relaxed text-text-secondary">{m.line2}</p>
-              </RevealItem>
-            ))}
+          <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+            {t.models.map((m, i) => {
+              const Icon = modelIcons[i % modelIcons.length]
+              return (
+                <RevealItem key={m.title} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all duration-250 ease-out-expo hover:-translate-y-1 hover:border-rust">
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-rust">
+                        <Icon size={22} strokeWidth={1.5} />
+                      </span>
+                      <span className="font-display text-lg tabular-nums text-text-tertiary">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <h2 className="t-h3 mt-8 text-text-primary">{m.title}</h2>
+                    <p className="mt-4 font-body text-base leading-relaxed text-text-primary">{m.line1}</p>
+                    <p className="mt-3 font-body text-base leading-relaxed text-text-secondary">{m.line2}</p>
+                  </div>
+                </RevealItem>
+              )
+            })}
           </RevealGroup>
         </div>
       </section>
@@ -58,15 +67,15 @@ export default async function PartnerPage({ params }: PageProps) {
           </Reveal>
           <RevealGroup className="grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8" stagger={0.08}>
             {t.steps.map((s, i) => (
-              <RevealItem key={s.title} className="relative border-t border-border-strong pt-6">
-                <span
-                  aria-hidden="true"
-                  className="absolute -top-[6px] left-0 block h-[11px] w-[11px] rounded-full border border-rust bg-surface"
-                />
-                <p className="font-body text-xs uppercase tracking-label text-text-tertiary">
-                  {String(i + 1).padStart(2, '0')}
-                </p>
-                <h2 className="t-h3 mt-3 text-text-primary">{s.title}</h2>
+              <RevealItem key={s.title} className="relative">
+                {/* the path between the steps (on one row from lg up) */}
+                {i < t.steps.length - 1 && (
+                  <span aria-hidden="true" className="absolute left-12 right-[-2rem] top-[1.375rem] hidden h-px bg-border-strong lg:block" />
+                )}
+                <span className="relative flex h-11 w-11 items-center justify-center rounded-full border border-rust bg-surface font-display text-lg tabular-nums text-rust">
+                  {i + 1}
+                </span>
+                <h2 className="t-h3 mt-6 text-text-primary">{s.title}</h2>
                 <p className="mt-3 font-body text-base leading-relaxed text-text-secondary">{s.body}</p>
               </RevealItem>
             ))}
@@ -118,7 +127,7 @@ export default async function PartnerPage({ params }: PageProps) {
                 <RevealItem
                   key={item}
                   as="span"
-                  className="inline-flex items-center rounded-full border border-border-strong px-4 py-2 font-body text-sm text-text-secondary"
+                  className="inline-flex items-center rounded-full border border-border-strong bg-card px-4 py-2 font-body text-sm text-text-primary"
                 >
                   {item}
                 </RevealItem>

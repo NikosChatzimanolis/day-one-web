@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- Share cards for the phone assistant. One file, four pictures:
        #el-og  #en-og  #ru-og   1200 x 630, the picture a link unfolds into in WhatsApp, email and social
-       #el-card  #en-card       1080 x 1350, a picture to attach to a message by hand
+       #el-card  #en-card  #ru-card   1080 x 1350, a picture to attach to a message by hand
      Rendered to public/share/ by scripts/share-cards/render.sh (headless Chrome). Placeholder data only. -->
 <html>
 <head>
@@ -76,6 +76,8 @@
   body.card .eyebrow { font-size:19px; margin-top:44px; }
   body.card .title { font-size:66px; margin-top:16px; }
   body.greek.card .title { font-size:56px; }
+  body.cyr.card .title { font-size:54px; }
+  body.cyr.card .points { font-size:26px; }
   body.card .sub { display:none; }
   body.card .mid { display:grid; grid-template-columns:392px 1fr; gap:48px; margin-top:44px; align-items:center; }
   body.card .stage { border-radius:30px; padding:34px 0; }
@@ -121,7 +123,7 @@ const T = {
   ru: { eyebrow:"Телефонный ассистент", title:"Отвечает на звонок, когда вы не можете.", sub:"Записывает клиента в ваш календарь и сразу сообщает вам.",
         from:"от", per:"в месяц", setup:"Разовая настройка €290", cta:"Попробуйте за 2 минуты",
         call:"Идёт звонок", steps:["Хочет записаться","Предложено 9:00 или 10:20","Записан на пятницу, 10:20"], when:"Пт 27 ноя · 10:20", who:"Анна, в вашем календаре",
-        points:[] },
+        points:["Отвечает на звонки, которые вы не успеваете принять, в любое время суток","Записывает клиента прямо в ваш календарь","Говорит на греческом, английском, русском, немецком и венгерском","Сразу сообщает вам о каждом звонке"] },
 };
 const [lang, format] = (location.hash.slice(1) || "el-og").split("-");
 const t = T[lang];

@@ -16,5 +16,5 @@ shot() { # name  width  height
   echo "$(basename "$OUT/phone-assistant-$1-$V.jpg") $(($(stat -f%z "$OUT/phone-assistant-$1-$V.jpg") / 1024)) KB"
 }
 for l in el en ru; do shot "$l-og" 1200 630; done
-for l in el en; do shot "$l-card" 1080 1350; done
+for l in el en ru; do shot "$l-card" 1080 1350; done
 rm -rf "$TMP"

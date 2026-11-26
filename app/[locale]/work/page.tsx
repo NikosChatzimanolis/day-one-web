@@ -10,6 +10,7 @@ import BookCall from '@/components/ui/BookCall'
 import { Button } from '@/components/ui/Button'
 import ForgeMock from '@/components/forge/ForgeMock'
 import SiteShot from '@/components/work/SiteShot'
+import { MetaChips } from '@/components/products/ProductText'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import Link from 'next/link'
 import { getCopy, type Locale } from '@/lib/copy'
@@ -30,16 +31,14 @@ interface Block {
 
 function CaseBlocks({ blocks, dark }: { blocks: Block[]; dark?: boolean }) {
   return (
-    <div
-      className={cn(
-        'mt-14 grid sm:grid-cols-3 border-t divide-y sm:divide-y-0 sm:divide-x',
-        dark ? 'border-dark-border divide-dark-border' : 'border-border divide-border'
-      )}
-    >
+    <div className="mt-14 grid gap-5 sm:grid-cols-3">
       {blocks.map((b) => (
-        <div key={b.label} className="py-8 sm:py-9 sm:px-8 first:sm:pl-0 last:sm:pr-0">
+        <div
+          key={b.label}
+          className={cn('rounded-2xl border p-7', dark ? 'border-dark-border bg-dark-raised' : 'border-border bg-card')}
+        >
           <p className="eyebrow mb-4">{b.label}</p>
-          <p className={cn('font-body text-base leading-relaxed', dark ? 'text-[#A39E96]' : 'text-text-secondary')}>
+          <p className={cn('font-body text-base leading-relaxed', dark ? 'text-dark-text-secondary' : 'text-text-primary')}>
             {b.body}
           </p>
         </div>
@@ -48,6 +47,25 @@ function CaseBlocks({ blocks, dark }: { blocks: Block[]; dark?: boolean }) {
   )
 }
 
+/** The one measured result of a build, set apart so it is not read as small print. */
+function Result({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-5 rounded-lg border-l-2 border-rust bg-[var(--color-accent-soft)] px-4 py-3 font-body text-sm leading-relaxed text-text-primary">
+      {children}
+    </p>
+  )
+}
+
+/** "View live" as a button at the foot of a work card. */
+function LiveLink({ href }: { href: string }) {
+  return (
+    <div className="mt-auto pt-7">
+      <Button href={href} external variant="outline" size="md">
+        View live <span aria-hidden="true">↗</span>
+      </Button>
+    </div>
+  )
+}
 const forgeBlocks: Block[] = [
   {
     label: 'The need',
@@ -100,9 +118,7 @@ export default async function WorkPage({ params }: PageProps) {
                 </p>
               </Reveal>
               <Reveal delay={0.16}>
-                <p className="mt-7 font-body text-sm text-text-tertiary tracking-wide">
-                  Product · PWA · Live in early access
-                </p>
+                <MetaChips meta="Product · PWA · Live in early access" className="mt-7" />
               </Reveal>
             </div>
             <Reveal delay={0.1}>
@@ -149,19 +165,11 @@ export default async function WorkPage({ params }: PageProps) {
                   A clean, fast site for a private-transfer company in Kavala. Built to be read on
                   a phone, trusted at a glance, and booked against.
                 </p>
-                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                <Result>
                   Page one on Google before the season started: average position 7.5 with a 4.4%
                   click-through rate across its first four months.
-                </p>
-                <a
-                  href="https://delbeteristransfer.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-                >
-                  View live
-                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
-                </a>
+                </Result>
+                <LiveLink href="https://delbeteristransfer.com" />
               </article>
             </RevealItem>
 
@@ -179,19 +187,11 @@ export default async function WorkPage({ params }: PageProps) {
                   A warm, appetite-first site for a Cyprus restaurant. Easy to find, easy to read
                   on a phone, and ready before the first guest arrives.
                 </p>
-                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                <Result>
                   An audience from zero: 564 visitors and 1,298 page views in one recent week, with
                   no previous website to build on.
-                </p>
-                <a
-                  href="https://tapinakia.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-                >
-                  View live
-                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
-                </a>
+                </Result>
+                <LiveLink href="https://tapinakia.com" />
               </article>
             </RevealItem>
 
@@ -209,18 +209,10 @@ export default async function WorkPage({ params }: PageProps) {
                   We take technical work off their plate when they need capacity. Our services reach
                   clients through Astrala, and their services reach clients through us.
                 </p>
-                <p className="mt-4 font-body text-sm leading-relaxed text-text-tertiary">
+                <Result>
                   External engineering team · Services offered through each other
-                </p>
-                <a
-                  href="https://astralaadvisory.eu.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-auto inline-flex items-center gap-1 pt-6 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-                >
-                  View live
-                  <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">↗</span>
-                </a>
+                </Result>
+                <LiveLink href="https://astralaadvisory.eu.com" />
               </article>
             </RevealItem>
           </RevealGroup>
