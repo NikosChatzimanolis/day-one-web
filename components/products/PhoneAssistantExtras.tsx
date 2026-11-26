@@ -66,7 +66,7 @@ export default function PhoneAssistantExtras() {
                 <p className="eyebrow">{x.price.eyebrow}</p>
                 <p className="mt-8 font-body text-base text-dark-text-secondary">{x.price.from}</p>
                 <p className="mt-1 flex items-baseline gap-3">
-                  <span className="font-display text-[clamp(4rem,9vw,6.25rem)] font-extralight leading-[0.9] tracking-[-0.02em] tabular-nums text-dark-text">
+                  <span className="font-display text-[clamp(4rem,9vw,6.25rem)] font-light leading-[0.9] tracking-[-0.02em] tabular-nums text-dark-text">
                     {x.price.amount}
                   </span>
                   <span className="font-body text-lg text-dark-text-secondary">{x.price.perMonth}</span>

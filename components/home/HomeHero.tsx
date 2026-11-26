@@ -21,7 +21,7 @@ export default function HomeHero() {
           <div className="lg:col-span-6">
             <p className="eyebrow mb-6">{h.eyebrow}</p>
             <h1 className="text-text-primary lg:w-[108%] lg:max-w-none">
-              <span className="block font-display text-[clamp(2.6rem,4.6vw,4.4rem)] font-extralight leading-[1.04] tracking-[-0.015em]">
+              <span className="block font-display text-[clamp(2.6rem,4.6vw,4.4rem)] font-light leading-[1.04] tracking-[-0.015em]">
                 {h.title1}
               </span>
               <span className="mt-1 block font-cormorant text-[clamp(2.9rem,5.1vw,4.9rem)] font-normal italic leading-[1.02] tracking-[-0.01em]">

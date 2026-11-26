@@ -89,31 +89,28 @@ export default function ContactForm({ labels, defaultIntent }: ContactFormProps)
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div>
-        <label htmlFor="intent" className={labelClass}>
-          {labels.intentLabel}
-        </label>
-        <select
-          id="intent"
-          name="intent"
-          required
-          defaultValue={defaultIntent ?? ''}
-          className={cn(inputBase, 'appearance-none bg-[length:12px_12px] bg-[position:right_1rem_center] bg-no-repeat pr-10')}
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%236E6657' stroke-width='1.2'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E\")",
-          }}
-        >
-          <option value="" disabled>
-            {labels.chooseOne}
-          </option>
+      {/* The topic as four options you can see and press. Real radio buttons underneath, so the keyboard,
+          screen readers and the form's own reset all work without extra code. */}
+      <fieldset>
+        <legend className={labelClass}>{labels.intentLabel}</legend>
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           {contactIntents.map((intent) => (
-            <option key={intent} value={intent}>
-              {labels.intents[intent]}
-            </option>
+            <label
+              key={intent}
+              className="group flex cursor-pointer items-center gap-3 rounded-lg border border-border-strong bg-bg px-4 py-3.5 transition-colors duration-200 hover:border-text-primary has-[:checked]:border-text-primary has-[:checked]:bg-card has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
+            >
+              <input type="radio" name="intent" value={intent} required defaultChecked={defaultIntent === intent} className="sr-only" />
+              <span
+                aria-hidden="true"
+                className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border border-border-strong bg-card transition-colors duration-200 group-has-[:checked]:border-rust"
+              >
+                <span className="h-2 w-2 scale-0 rounded-full bg-rust transition-transform duration-200 group-has-[:checked]:scale-100" />
+              </span>
+              <span className="font-body text-sm text-text-primary">{labels.intents[intent]}</span>
+            </label>
           ))}
-        </select>
-      </div>
+        </div>
+      </fieldset>
 
       <div>
         <label htmlFor="name" className={labelClass}>

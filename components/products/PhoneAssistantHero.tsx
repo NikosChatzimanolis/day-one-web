@@ -24,7 +24,7 @@ export default function PhoneAssistantHero() {
 
       <p className="eyebrow mb-5">{x.name}</p>
       <h1 className="text-text-primary">
-        <span className="display-balance block font-display text-[clamp(2.4rem,4.2vw,3.9rem)] font-extralight leading-[1.05] tracking-[-0.015em]">
+        <span className="display-balance block font-display text-[clamp(2.4rem,4.2vw,3.9rem)] font-light leading-[1.05] tracking-[-0.015em]">
           {h.line1}
         </span>
         <span className="display-balance mt-1 block font-cormorant text-[clamp(2.7rem,4.7vw,4.4rem)] font-normal italic leading-[1.04] tracking-[-0.01em] text-rust">

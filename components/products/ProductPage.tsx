@@ -14,6 +14,7 @@ import BookCall from '@/components/ui/BookCall'
 import CtaSection from '@/components/sections/CtaSection'
 import ProductFrame, { type FrameTone } from '@/components/products/ProductFrame'
 import ProductTour, { type Tour } from '@/components/products/ProductTour'
+import { MetaChips } from '@/components/products/ProductText'
 import Reveal, { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import type { ProductCopy } from '@/lib/copy'
 import { t, localeHref } from '@/lib/copy/request'
@@ -76,7 +77,7 @@ export default function ProductPage({
                   <p className="measure-lg display-pretty mt-5 font-body text-base leading-relaxed text-text-secondary md:text-lg">
                     {product.lead}
                   </p>
-                  {product.meta && <p className="mt-6 font-body text-sm text-text-tertiary">{product.meta}</p>}
+                  {product.meta && <MetaChips meta={product.meta} className="mt-7" />}
                   <div className={ctaRow}>
                     <Button href={demo} size="lg">
                       {p.requestDemo}

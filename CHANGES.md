@@ -1,3 +1,11 @@
+# Changes: 2026-11-26 text that reads, product chips and buttons, a designed topic picker
+
+On Nico's word (the thin grey text was hard to see, the product blocks read flat, the contact form opened the system menu). Live on main. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.
+
+- **Type, site-wide** (`app/globals.css`): body weight 300 to 400; headings (`h1`-`h6`, `.t-display`, `.t-h1`, `.t-h2`, `.t-index`) 200 to 300; `.t-h3` and `.t-lead` 300 to 400; eyebrows 300 to 500 and a touch larger. Secondary text `#625D55` to `#46423B`, tertiary `#746E65` to `#5F5A52`. The three hand-set `font-extralight` headlines are `font-light`.
+- **Product blocks** (`ProductText`, used on the homepage band and `/products`): a larger name, the one-line description in full ink, the meta line as chips (`MetaChips`, split on " · "), and the links as buttons (ink "Learn more", outline for a product's own site or demo). The shared product hero in `ProductPage` shows its meta as the same chips.
+- **Contact form topic**: the system `<select>` is replaced by four options you can see and press (real radio buttons underneath, so keyboard, screen readers and the form reset work as before; `?intent=` still pre-selects one).
+
 # Changes: 2026-11-26 phone assistant as a product
 
 Branch `feature/phone-assistant`, built on `delist/document-signing`, merged to main on 2026-11-26 on Nico's word (this also published the signing de-list). Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.

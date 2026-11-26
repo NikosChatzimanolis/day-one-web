@@ -1,9 +1,12 @@
 // ── components/products/ProductText.tsx ──
 // The identical text treatment every product gets, wherever it appears:
-// name, two-line description, meta line, link. Keeps the products at equal
-// weight even when their visuals take different shapes. A product with its
-// own site (Steer) can add a second link to it, opening in a new tab.
+// name, one line on what it does (in full ink, so it reads), the meta as
+// chips, and its links as buttons. Keeps the products at equal weight even
+// when their visuals take different shapes. A product with its own site or
+// demo (Steer, the phone assistant) adds a second button to it, opening in a
+// new tab.
 import Link from 'next/link'
+import { Button } from '@/components/ui/Button'
 import type { ProductCopy } from '@/lib/copy'
 
 interface ProductTextProps {
@@ -15,6 +18,21 @@ interface ProductTextProps {
   /** External site of the product. Needs siteLabel. */
   siteHref?: string
   siteLabel?: string
+}
+
+/** A meta line ("Web + mobile · English, Greek") as its parts. */
+export const metaParts = (meta: string) => meta.split(' · ').map((s) => s.trim().replace(/\.$/, '')).filter(Boolean)
+
+export function MetaChips({ meta, className }: { meta: string; className?: string }) {
+  return (
+    <ul className={`flex flex-wrap gap-2 ${className ?? ''}`}>
+      {metaParts(meta).map((part) => (
+        <li key={part} className="rounded-full border border-border-strong bg-card px-3 py-1 font-body text-[13px] leading-snug text-text-primary">
+          {part}
+        </li>
+      ))}
+    </ul>
+  )
 }
 
 export default function ProductText({
@@ -29,31 +47,23 @@ export default function ProductText({
   const Heading = headingLevel
   return (
     <div className={className}>
-      <Heading className="t-h3 text-text-primary">
+      <Heading className="font-display text-[clamp(1.6rem,2.3vw,2.1rem)] font-normal leading-[1.15] text-text-primary">
         <Link href={href} className="transition-colors duration-250 hover:text-accent">
           {product.name}
         </Link>
       </Heading>
-      <p className="measure mt-3 font-body text-base leading-relaxed text-text-secondary">{product.tagline}</p>
-      {product.meta && <p className="mt-3 font-body text-sm text-text-tertiary">{product.meta}</p>}
-      <Link
-        href={href}
-        className="group mt-5 inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-      >
-        {learnMore}
-        <span aria-hidden="true" className="transition-transform duration-250 group-hover:translate-x-0.5">→</span>
-      </Link>
-      {siteHref && siteLabel && (
-        <a
-          href={siteHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group ml-6 mt-5 inline-flex items-center gap-1.5 font-body text-sm text-accent transition-colors duration-250 hover:text-accent-dark"
-        >
-          {siteLabel}
-          <span aria-hidden="true" className="transition-transform duration-250 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
-        </a>
-      )}
+      <p className="measure mt-3 font-body text-lg leading-relaxed text-text-primary">{product.tagline}</p>
+      {product.meta && <MetaChips meta={product.meta} className="mt-5" />}
+      <div className="mt-7 flex flex-wrap items-center gap-3">
+        <Button href={href} size="md" arrow>
+          {learnMore}
+        </Button>
+        {siteHref && siteLabel && (
+          <Button href={siteHref} external variant="outline" size="md">
+            {siteLabel} <span aria-hidden="true">↗</span>
+          </Button>
+        )}
+      </div>
     </div>
   )
 }

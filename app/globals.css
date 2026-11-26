@@ -19,8 +19,8 @@
 
   /* Ink — warm neutral ramp (reference body grey for secondary) */
   --color-text: #242320;
-  --color-text-secondary: #625D55;
-  --color-text-tertiary: #746E65;
+  --color-text-secondary: #46423B;
+  --color-text-tertiary: #5F5A52;
 
   /* Two-rust system */
   --color-accent: #A64B32;        /* links, eyebrows, active nav, script logo */
@@ -74,7 +74,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -83,7 +83,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--color-text);
@@ -116,28 +116,28 @@ a { color: inherit; text-decoration: none; }
    up to Jost 300 for functional text. Colour comes from context, so
    one scale serves both light and dark sections. */
 .t-display {
-  font-family: var(--font-display); font-weight: 200;
+  font-family: var(--font-display); font-weight: 300;
   font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.05; letter-spacing: -0.01em;
 }
 .t-h1 {
-  font-family: var(--font-display); font-weight: 200;
+  font-family: var(--font-display); font-weight: 300;
   font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.1; letter-spacing: -0.01em;
 }
 .t-h2 {
-  font-family: var(--font-display); font-weight: 200;
+  font-family: var(--font-display); font-weight: 300;
   font-size: clamp(1.875rem, 4.5vw, 3.25rem); line-height: 1.1; letter-spacing: -0.01em;
 }
 .t-h3 {
-  font-family: var(--font-display); font-weight: 300;
+  font-family: var(--font-display); font-weight: 400;
   font-size: clamp(1.4rem, 2vw, 1.75rem); line-height: 1.25; letter-spacing: 0;
 }
 .t-lead {
-  font-family: var(--font-body); font-weight: 300;
+  font-family: var(--font-body); font-weight: 400;
   font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.55;
 }
 /* Oversized brand numerals (ghosted index in editorial lists) */
 .t-index {
-  font-family: var(--font-display); font-weight: 200;
+  font-family: var(--font-display); font-weight: 300;
   font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1; letter-spacing: 0.04em;
 }
 
@@ -158,8 +158,8 @@ a { color: inherit; text-decoration: none; }
 ───────────────────────────────────────── */
 .eyebrow {
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 300;
+  font-size: 0.78rem;
+  font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -167,8 +167,8 @@ a { color: inherit; text-decoration: none; }
 
 .eyebrow-muted {
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 300;
+  font-size: 0.78rem;
+  font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-text-tertiary);
