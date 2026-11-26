@@ -1,65 +1,80 @@
 // ── components/products/PhoneAssistantMock.tsx ──
-// Phone assistant: a phone on a live call. The caller's and the assistant's
-// turns as bubbles, then the booking confirmation. Placeholder data only.
-import { Check, PhoneCall } from 'lucide-react'
+// Phone assistant: a phone on a live voice call. It is a call, not a chat,
+// so there are no message bubbles: the caller's number and the call clock,
+// the voice bars moving while the assistant speaks, what it has done so far
+// as three ticked steps, and the booking as a calendar card at the bottom.
+// Placeholder data only. Sits in the shared device frame (PhoneFrame), so
+// every size inside is in cqw and scales with the phone. The type is large
+// for a phone screen on purpose: the mock is shown small (the homepage hero)
+// and has to read there.
+import { CalendarCheck, Check, PhoneCall } from 'lucide-react'
+import { PhoneFrame } from '@/components/products/AppShot'
 
-const turns: { who: 'caller' | 'assistant'; text: string }[] = [
-  { who: 'caller', text: 'Hello, I need an appointment tomorrow morning.' },
-  { who: 'assistant', text: 'Tomorrow I have 9:00 or 10:20. Which suits you?' },
-  { who: 'caller', text: '10:20, please.' },
-  { who: 'assistant', text: 'Under which name shall I book it?' },
-  { who: 'caller', text: 'Anna.' },
-]
+// Resting heights of the voice bars (percent of the row), loud in the middle.
+const bars = [26, 44, 34, 62, 48, 80, 58, 100, 70, 90, 54, 76, 42, 58, 30]
 
-export default function PhoneAssistantMock() {
+const steps = ['Wants an appointment', 'Offered 9:00 or 10:20', 'Booked Friday 10:20']
+
+export default function PhoneAssistantMock({ className = 'h-full' }: { className?: string }) {
   return (
-    <div
-      className="flex h-full max-h-[520px] flex-col overflow-hidden rounded-[1.6rem] border border-border-strong bg-card text-[10px] leading-snug sm:text-[11px]"
-      style={{ aspectRatio: '9 / 19' }}
-    >
-      {/* status bar */}
-      <div className="flex items-center justify-between px-4 pt-3 leading-none text-text-tertiary">
-        <span className="tabular-nums">9:41</span>
-        <span className="flex gap-0.5">
-          <span className="block h-1 w-1 rounded-full bg-text-tertiary" />
-          <span className="block h-1 w-1 rounded-full bg-text-tertiary" />
-          <span className="block h-1 w-1 rounded-full bg-text-tertiary" />
-        </span>
-      </div>
-
-      {/* call header */}
-      <div className="mx-4 mt-3 flex items-center justify-between border-b border-line pb-2 leading-none">
-        <span className="inline-flex items-center gap-1.5 text-text-primary">
-          <PhoneCall size={10} strokeWidth={1.6} className="text-rust" />
+    <PhoneFrame dark className={className}>
+      <div className="absolute inset-0 flex flex-col text-[#F7F4EE]" style={{ padding: '9cqw 8cqw 7cqw', fontSize: '5cqw', lineHeight: 1.2 }}>
+        {/* who is calling, and for how long */}
+        <span className="inline-flex items-center self-center text-[#D8D0C4]" style={{ gap: '2cqw', fontSize: '4.6cqw' }}>
+          <PhoneCall className="text-[#D98A70]" style={{ width: '5cqw', height: '5cqw' }} strokeWidth={1.8} />
           Call in progress
         </span>
-        <span className="tabular-nums text-text-tertiary">0:42</span>
-      </div>
-
-      {/* conversation */}
-      <div className="flex flex-1 flex-col justify-end gap-1.5 px-3 py-3">
-        {turns.map((t) => (
-          <span
-            key={t.text}
-            className={
-              t.who === 'caller'
-                ? 'max-w-[82%] self-end rounded-xl rounded-br-sm bg-text-primary px-2.5 py-1.5 text-card'
-                : 'max-w-[82%] self-start rounded-xl rounded-bl-sm border border-line bg-bg px-2.5 py-1.5 text-text-primary'
-            }
-          >
-            {t.text}
-          </span>
-        ))}
-      </div>
-
-      {/* booked */}
-      <div className="mx-3 mb-3 rounded-lg bg-rust px-3 py-2 text-bg">
-        <span className="flex items-center gap-1.5 font-medium leading-none">
-          <Check size={11} strokeWidth={2} />
-          Booked · Fri 10:20
+        <span className="self-center font-display tabular-nums" style={{ marginTop: '4cqw', fontSize: '10.5cqw', lineHeight: 1 }}>
+          99 12 34 56
         </span>
-        <span className="mt-1 block leading-none opacity-80">Anna · added to your calendar</span>
+        <span className="self-center tabular-nums text-[#A8A198]" style={{ marginTop: '2.4cqw', fontSize: '4.8cqw' }}>
+          0:42
+        </span>
+
+        {/* the assistant's voice */}
+        <div className="flex items-center justify-center" style={{ height: '30cqw', gap: '2.1cqw', marginTop: '9cqw' }}>
+          {bars.map((h, i) => (
+            <span
+              key={i}
+              className="voice-bar block rounded-full"
+              style={{
+                width: '2.3cqw',
+                height: `${h}%`,
+                backgroundColor: i % 3 === 1 ? '#D98A70' : '#F7F4EE',
+                opacity: i % 3 === 1 ? 1 : 0.85,
+                animationDelay: `${(i * 0.08).toFixed(2)}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* what it has done so far */}
+        <div className="flex flex-col" style={{ gap: '4.6cqw', marginTop: '10cqw' }}>
+          {steps.map((s) => (
+            <span key={s} className="flex items-center" style={{ gap: '3.2cqw' }}>
+              <span className="flex shrink-0 items-center justify-center rounded-full bg-[#F7F4EE]/15" style={{ width: '7.4cqw', height: '7.4cqw' }}>
+                <Check className="text-[#D98A70]" style={{ width: '4.4cqw', height: '4.4cqw' }} strokeWidth={2.6} />
+              </span>
+              {s}
+            </span>
+          ))}
+        </div>
+
+        {/* the result: it is in the calendar */}
+        <div className="mt-auto flex items-center bg-[#F7F4EE] text-[#242320]" style={{ gap: '3.6cqw', padding: '4.4cqw', borderRadius: '5cqw' }}>
+          <span className="flex shrink-0 items-center justify-center rounded-full bg-[#A64B32]" style={{ width: '13cqw', height: '13cqw' }}>
+            <CalendarCheck className="text-[#F7F4EE]" style={{ width: '7cqw', height: '7cqw' }} strokeWidth={1.8} />
+          </span>
+          <span className="flex min-w-0 flex-col" style={{ gap: '1.4cqw' }}>
+            <span className="font-medium" style={{ fontSize: '5.2cqw', lineHeight: 1.1 }}>
+              Fri 27 Nov · 10:20
+            </span>
+            <span className="text-[#625D55]" style={{ fontSize: '4.3cqw', lineHeight: 1.15 }}>
+              Anna, in your calendar
+            </span>
+          </span>
+        </div>
       </div>
-    </div>
+    </PhoneFrame>
   )
 }

@@ -1,8 +1,10 @@
 # Changes: 2026-11-26 phone assistant as a product
 
-Branch `feature/phone-assistant`, built on `delist/document-signing` (so merging it also publishes the signing de-list). Not merged. Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.
+Branch `feature/phone-assistant`, built on `delist/document-signing`, merged to main on 2026-11-26 on Nico's word (this also published the signing de-list). Gates: `npx tsc --noEmit` clean, `npm run build` exit 0.
 
-- **New page** `/products/phone-assistant` (EN, EL, RU) on the shared `ProductPage`, with a CSS phone mock of a live call (`PhoneAssistantMock`, placeholder data) and its own bands from `PhoneAssistantExtras`: the two demos, the price beside the next steps, and the common questions.
+- **New page** `/products/phone-assistant` (EN, EL, RU) on the shared `ProductPage`, with the phone mock of a live call (`PhoneAssistantMock`, placeholder data) and its own bands from `PhoneAssistantExtras`: the two demos, the price beside the next steps, and the common questions.
+- **Homepage hero**: the phone in front of the dashboard window is now the phone assistant on a live call (it was the attendance clock-in screen, which keeps its own row in the products band).
+- **The visual is a voice call, not a chat**: `PhoneAssistantMock` draws a dark call screen (caller's number, call clock, voice bars that move while the assistant speaks, three ticked steps, the booking as a calendar card), no message bubbles. It sits in the shared device frame: `PhoneFrame` was split out of `PhoneShot` in `AppShot.tsx` (same markup, plus a `dark` option), and `.voice-bar` / `@keyframes voiceBar` in `globals.css` are off under reduced motion.
 - **`ProductPage`** takes an optional `extra` (bands rendered before the demo band). A `siteHref` that starts with `#` is an in-page link, so the hero's "Try the demo" jumps to the demos.
 - **Demos** open on `https://assistant.dayone-web.com` (the assistant's own app, a second Vercel project under this domain). The two links are in `lib/site.ts` (`assistantDemos`).
 - **Price** on the page: from €99 a month, one-off set-up €290 (`products.phoneAssistant.price` in the three copy files).

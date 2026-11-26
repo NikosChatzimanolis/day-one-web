@@ -40,10 +40,12 @@ export function DashboardShot({ src, sizes = '(min-width: 1024px) 820px, 100vw',
   )
 }
 
-/** Phone in a device frame: dark bezel, side buttons, status bar with the
- *  island, then the app screen (375 x 726, tab bar at the bottom). Width or
- *  height driven via className; everything inside scales with it (cqw). */
-export function PhoneShot({ src, sizes = '280px', priority = false, className }: ShotProps) {
+/** Phone device frame: dark bezel, side buttons, status bar with the island,
+ *  then whatever screen is passed in. Width or height driven via className;
+ *  everything inside scales with it (cqw). `dark` is for a dark screen (the
+ *  phone assistant's call screen): light status bar on an ink background. */
+export function PhoneFrame({ children, className, dark = false }: { children: React.ReactNode; className?: string; dark?: boolean }) {
+  const ink = dark ? '#F7F4EE' : '#242320'
   return (
     <div
       className={cn('relative h-full aspect-[387/782] bg-[#242320] p-[1.6%]', className)}
@@ -55,22 +57,25 @@ export function PhoneShot({ src, sizes = '280px', priority = false, className }:
       <span aria-hidden="true" className="absolute -left-[1.1%] top-[27.5%] h-[5.5%] w-[1.1%] rounded-l-[2px] bg-[#242320]" />
       <span aria-hidden="true" className="absolute -right-[1.1%] top-[22%] h-[8.5%] w-[1.1%] rounded-r-[2px] bg-[#242320]" />
 
-      <div className="relative flex h-full w-full flex-col overflow-hidden bg-[#F5F6EF]" style={{ borderRadius: '10.8% / 5.3%' }}>
+      <div
+        className="relative flex h-full w-full flex-col overflow-hidden"
+        style={{ borderRadius: '10.8% / 5.3%', backgroundColor: dark ? '#2B2A26' : '#F5F6EF' }}
+      >
         {/* status bar */}
-        <div className="flex h-[5.7%] shrink-0 items-center justify-between px-[7%] text-[#242320]" style={{ fontSize: '3.6cqw' }}>
+        <div className="flex h-[5.7%] shrink-0 items-center justify-between px-[7%]" style={{ fontSize: '3.6cqw', color: ink }}>
           <span className="font-body font-medium tabular-nums">17:36</span>
           <span className="flex items-center" style={{ gap: '1.6cqw' }}>
             <span className="flex items-end" style={{ gap: '0.6cqw' }}>
-              <span className="block bg-[#242320]" style={{ width: '0.9cqw', height: '1.4cqw', borderRadius: '0.3cqw' }} />
-              <span className="block bg-[#242320]" style={{ width: '0.9cqw', height: '2cqw', borderRadius: '0.3cqw' }} />
-              <span className="block bg-[#242320]" style={{ width: '0.9cqw', height: '2.6cqw', borderRadius: '0.3cqw' }} />
-              <span className="block bg-[#242320]" style={{ width: '0.9cqw', height: '3.2cqw', borderRadius: '0.3cqw' }} />
+              <span className="block" style={{ width: '0.9cqw', height: '1.4cqw', borderRadius: '0.3cqw', backgroundColor: ink }} />
+              <span className="block" style={{ width: '0.9cqw', height: '2cqw', borderRadius: '0.3cqw', backgroundColor: ink }} />
+              <span className="block" style={{ width: '0.9cqw', height: '2.6cqw', borderRadius: '0.3cqw', backgroundColor: ink }} />
+              <span className="block" style={{ width: '0.9cqw', height: '3.2cqw', borderRadius: '0.3cqw', backgroundColor: ink }} />
             </span>
             <span
-              className="relative block border border-[#242320]"
-              style={{ width: '6.4cqw', height: '3.1cqw', borderRadius: '0.9cqw', padding: '0.5cqw' }}
+              className="relative block border"
+              style={{ width: '6.4cqw', height: '3.1cqw', borderRadius: '0.9cqw', padding: '0.5cqw', borderColor: ink }}
             >
-              <span className="block h-full w-[78%] bg-[#242320]" style={{ borderRadius: '0.4cqw' }} />
+              <span className="block h-full w-[78%]" style={{ borderRadius: '0.4cqw', backgroundColor: ink }} />
             </span>
           </span>
         </div>
@@ -80,10 +85,17 @@ export function PhoneShot({ src, sizes = '280px', priority = false, className }:
           className="absolute left-1/2 top-[1.5%] h-[3.3%] w-[27%] -translate-x-1/2 rounded-full bg-[#242320]"
         />
         {/* screen */}
-        <div className="relative min-h-0 flex-1">
-          <Image src={src} alt="" fill sizes={sizes} priority={priority} className="object-cover object-top" />
-        </div>
+        <div className="relative min-h-0 flex-1">{children}</div>
       </div>
     </div>
+  )
+}
+
+/** Phone with an app screenshot as its screen (375 x 726, tab bar at the bottom). */
+export function PhoneShot({ src, sizes = '280px', priority = false, className }: ShotProps) {
+  return (
+    <PhoneFrame className={className}>
+      <Image src={src} alt="" fill sizes={sizes} priority={priority} className="object-cover object-top" />
+    </PhoneFrame>
   )
 }

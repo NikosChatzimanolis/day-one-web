@@ -1,9 +1,10 @@
 // ── components/home/HeroCollage.tsx ──
 // The hero's focal element: the CY-Construction dashboard as a panel that
-// runs off the right edge of the viewport, the attendance phone overlapping
-// its lower-left corner, and the Day ONE lockup in the header colours behind. Real
-// screenshots of the products (demo / seed data), so it is the studio's own
-// material, not a stock image. Drifts a few px toward the cursor (ambient
+// runs off the right edge of the viewport, the phone assistant on a live call
+// overlapping its lower-left corner (a drawn call screen with moving voice
+// bars, placeholder data), and the Day ONE lockup in the header colours
+// behind. The dashboard is a real screenshot (demo / seed data), so it is the
+// studio's own material, not a stock image. Drifts a few px toward the cursor (ambient
 // magnetic) and fades up on mount; static under reduced motion. The images
 // are not marked priority: the collage is hidden below lg, so a preload would
 // cost phones bandwidth for pixels they never show; on desktop they are in
@@ -12,7 +13,8 @@ import Logo from '@/components/ui/Logo'
 import Magnetic from '@/components/ui/Magnetic'
 import Reveal from '@/components/ui/Reveal'
 import WindowFrame from '@/components/products/WindowFrame'
-import { DashboardShot, PhoneShot, shots } from '@/components/products/AppShot'
+import { DashboardShot, shots } from '@/components/products/AppShot'
+import PhoneAssistantMock from '@/components/products/PhoneAssistantMock'
 
 export default function HeroCollage() {
   return (
@@ -32,7 +34,7 @@ export default function HeroCollage() {
 
         {/* phone, fully visible, in front of the window's left edge */}
         <Reveal delay={0.18} y={18} className="absolute bottom-[-3%] left-[-2%] w-[30%]">
-          <PhoneShot src={shots.attendanceClock} className="w-full" />
+          <PhoneAssistantMock className="w-full" />
         </Reveal>
       </Magnetic>
     </div>
