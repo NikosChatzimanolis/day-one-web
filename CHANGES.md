@@ -8,7 +8,7 @@ Branch `feature/phone-assistant`, built on `delist/document-signing`, merged to 
 - **`ProductPage`** takes an optional `extra` (bands rendered before the demo band). A `siteHref` that starts with `#` is an in-page link, so the hero's "Try the demo" jumps to the demos.
 - **Demos** open on `https://assistant.dayone-web.com` (the assistant's own app, a second Vercel project under this domain). The two links are in `lib/site.ts` (`assistantDemos`).
 - **Price** on the page: from €99 a month, one-off set-up €290 (`products.phoneAssistant.price` in the three copy files).
-- **Listed** as the fourth row on `/products` (with a "Try the demo" link) and as row 4 of the homepage products band, on row 2's grid. Sitemap entry at priority 0.8. The products meta description names it.
+- **Listed first**: the first row on `/products` (with a "Try the demo" link) and row 1 of the homepage products band, beside the band's heading. The construction ERP follows as the mirrored row 2 (dashboard left), then attendance, then Steer. Sitemap entry at priority 0.8. The products meta description names it.
 - **Wording**: "digital assistant" throughout, in line with the site rule. Russian and Greek written alongside English; `TRANSLATIONS_REVIEW.md` regenerated.
 
 **Open:** no native review of the Russian; the mock is English on every locale like the other mocks; the page says callers keep their own number, which depends on call forwarding that has not been tested on a live line yet.

@@ -28,13 +28,22 @@ export default async function ProductsPage({ params }: PageProps) {
       <section className="border-b border-border bg-bg">
         <div className="container-wide section-sm divide-y divide-border">
           <ProductRow
+            product={t.phoneAssistant}
+            href={localeHref('/products/phone-assistant')}
+            mock={<PhoneAssistantMock />}
+            learnMore={c.common.learnMore}
+            headingLevel="h2"
+            siteHref={assistantDemos.clinic}
+            siteLabel={t.common.tryDemo}
+            lazy={false}
+          />
+          <ProductRow
             product={t.cyConstruction}
             href={localeHref('/products/construction-erp')}
-            mock={<DashboardShot src={shots.cyDashboard} priority />}
+            mock={<DashboardShot src={shots.cyDashboard} />}
             learnMore={c.common.learnMore}
             headingLevel="h2"
             variant="bleed"
-            lazy={false}
           />
           <ProductRow
             product={t.attendance}
@@ -53,15 +62,6 @@ export default async function ProductsPage({ params }: PageProps) {
             tone="steer"
             siteHref={steerSignupUrl}
             siteLabel={t.common.openSteer}
-          />
-          <ProductRow
-            product={t.phoneAssistant}
-            href={localeHref('/products/phone-assistant')}
-            mock={<PhoneAssistantMock />}
-            learnMore={c.common.learnMore}
-            headingLevel="h2"
-            siteHref={assistantDemos.clinic}
-            siteLabel={t.common.tryDemo}
           />
         </div>
       </section>
